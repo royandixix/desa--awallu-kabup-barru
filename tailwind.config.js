@@ -3,19 +3,17 @@ import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-    ],
-
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
-        },
+  content: [
+    './resources/views/**/*.blade.php', // include semua blade
+    './resources/js/**/*.js',           // kalau ada JS dengan class tailwind
+    './resources/js/**/*.vue',          // kalau ada Vue
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+      },
     },
-
-    plugins: [forms],
+  },
+  plugins: [forms],
 };
