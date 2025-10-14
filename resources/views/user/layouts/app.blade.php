@@ -78,6 +78,10 @@
         @yield('content')
         @yield('sambutan')
         @yield('visimisi')
+        @yield('foto_bersama_warga')
+        @yield('administrasipenduduk')
+        
+
     </main>
 
     {{-- FOOTER --}}

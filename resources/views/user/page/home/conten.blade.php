@@ -156,3 +156,11 @@
 @section('visimisi')
     @include('user.page.home.visimisi')
 @endsection
+
+@section('administrasipenduduk')
+    @include('user.page.home.administrasipenduduk')
+@endsection
+
+@section('foto_bersama_warga')
+    @include('user.page.home.foto_bersama_warga')
+@endsection
