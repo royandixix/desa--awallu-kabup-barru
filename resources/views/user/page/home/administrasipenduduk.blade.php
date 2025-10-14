@@ -1,188 +1,169 @@
-<!-- 🌿 HERO SECTION FULLSCREEN BERSIH -->
-<div class="relative min-h-screen w-full bg-white flex flex-col lg:flex-row items-start justify-start overflow-hidden">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrasi Penduduk - Desa Batupute</title>
 
-    <!-- 🧭 KIRI: TEKS & DATA + Teks di samping vektor -->
-    <div class="w-full lg:w-1/2 flex flex-col space-y-10 lg:space-y-12 p-6 lg:p-16 relative">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
-        <!-- Judul -->
-<div id="animated-banner"
-     class="opacity-0 translate-y-10 transition-all duration-1000 space-y-3 text-center lg:text-left">
-    
-    <!-- Teks besar tapi normal weight -->
-    <p class="text-3xl sm:text-4xl lg:text-5xl text-gray-900 tracking-tight leading-tight">
-        Ilustrasi vektor ini menampilkan warga Desa Batupute dengan gaya modern dan ramah, sebagai visualisasi
-        komunitas yang hidup dan hangat.
-    </p>
+  <!-- Heroicons CDN -->
+  <script src="https://unpkg.com/heroicons@2.0.18/dist/heroicons.min.js"></script>
 
-    <!-- Teks deskripsi -->
-    <p class="text-base sm:text-lg text-gray-600 max-w-lg mx-auto lg:mx-0">
-        Kenangan indah dan semangat kebersamaan komunitas
-    </p>
-
-    <!-- Garis -->
-    <div class="w-24 h-1 bg-green-500 rounded-full mx-auto lg:mx-0"></div>
-</div>
-
-
-        <!-- Administrasi Card -->
-        <div id="admin-section" class="opacity-0 translate-y-10 transition-all duration-1000 relative">
-            <div class="bg-white shadow-xl rounded-2xl p-6 sm:p-8 border border-gray-100">
-                <h2 class="text-2xl font-semibold text-green-700 mb-4 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-600" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" />
-                    </svg>
-                    Administrasi Penduduk
-                </h2>
-                <p class="text-gray-700 text-base sm:text-lg mb-6">
-                    Data administrasi penduduk Desa Batupute yang telah terdata secara resmi.
-                </p>
-
-                <dl class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <!-- Jumlah Penduduk -->
-                    <div class="flex items-center space-x-4 group">
-                        <div
-                            class="p-4 bg-green-50 rounded-full group-hover:scale-110 transition-transform duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <dt class="text-base sm:text-lg font-semibold text-gray-900">Jumlah Penduduk</dt>
-                            <dd class="mt-1 text-2xl sm:text-3xl font-bold text-green-700">3.394</dd>
-                        </div>
-                    </div>
-
-                    <!-- Laki-laki -->
-                    <div class="flex items-center space-x-4 group">
-                        <div
-                            class="p-4 bg-green-50 rounded-full group-hover:scale-110 transition-transform duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <dt class="text-base sm:text-lg font-semibold text-gray-900">Laki-laki</dt>
-                            <dd class="mt-1 text-2xl sm:text-3xl font-bold text-green-700">1.676</dd>
-                        </div>
-                    </div>
-
-                    <!-- Perempuan -->
-                    <div class="flex items-center space-x-4 group">
-                        <div
-                            class="p-4 bg-green-50 rounded-full group-hover:scale-110 transition-transform duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <dt class="text-base sm:text-lg font-semibold text-gray-900">Perempuan</dt>
-                            <dd class="mt-1 text-2xl sm:text-3xl font-bold text-green-700">1.718</dd>
-                        </div>
-                    </div>
-
-                    <!-- Kepala Keluarga -->
-                    <div class="flex items-center space-x-4 group">
-                        <div
-                            class="p-4 bg-green-50 rounded-full group-hover:scale-110 transition-transform duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                        </div>
-                        <div>
-                            <dt class="text-base sm:text-lg font-semibold text-gray-900">Kepala Keluarga</dt>
-                            <dd class="mt-1 text-2xl sm:text-3xl font-bold text-green-700">995</dd>
-                        </div>
-                    </div>
-                </dl>
-            </div>
-
-            <!-- Teks Penjelasan di samping Card -->
-            <div
-                class="flex items-start text-gray-700 text-base sm:text-lg mt-4 lg:mt-0 opacity-0 translate-y-10 transition-all duration-1000">
-                <p>
-                    Data administrasi ini memberikan informasi jumlah penduduk, laki-laki & perempuan, serta kepala
-                    keluarga yang tercatat resmi di Desa Batupute.
-                </p>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- 🎨 KANAN: Vektor + teks di samping kiri vektor -->
-    <div class="w-full lg:w-1/2 flex flex-col items-start justify-start p-6 lg:p-16 relative">
-
-        <div class="flex items-start space-x-6 lg:space-x-8">
-
-            <!-- Vektor -->
-            <img id="vector-image" src="{{ asset('img/user/vektor/undraw_avatars_xsfb.png') }}"
-                alt="Vektor Desa Batupute"
-                class="w-full max-w-md lg:max-w-lg h-auto opacity-0 scale-95 transition-all duration-1000 drop-shadow-lg">
-
-            <!-- Teks Penjelasan di samping Vektor -->
-            <div class="text-gray-700 text-base sm:text-lg opacity-0 translate-y-10 transition-all duration-1000">
-                <p>
-                    Ilustrasi vektor ini menampilkan warga Desa Batupute dengan gaya modern dan ramah, sebagai
-                    visualisasi komunitas yang hidup dan hangat.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ✨ STYLE & ANIMASI -->
-<style>
-    .fade-in-up {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+     
+      color: #111827;
+      overflow-x: hidden;
     }
 
-    .fade-in-scale {
-        opacity: 1 !important;
-        transform: scale(1) !important;
+    h1 {
+      font-family: 'Poppins', sans-serif;
     }
-</style>
 
-<!-- ⚙️ ANIMASI SCROLL -->
-<script>
+    /* Animasi Fade + Slide */
+    .fade-slide-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-slide-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stat-card {
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-6px) scale(1.05);
+      
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .icon-hover:hover {
+      transform: scale(1.3);
+      transition: transform 0.3s;
+    }
+  </style>
+</head>
+<body class="pt-20 bg-white">
+
+  <section class="w-full py-20">
+    <div class="max-w-6xl mx-auto px-6 lg:px-10 flex flex-col items-center text-center">
+
+      <!-- Judul -->
+      <h1 class="fade-slide-up text-5xl sm:text-6xl tracking-wide" style="transition-delay: 0s;">Administrasi Penduduk</h1>
+      <p class="fade-slide-up text-gray-700 mb-12 max-w-2xl text-lg" style="transition-delay: 0.2s;">
+        Berikut ini adalah data administrasi penduduk Desa Batupute yang terdata
+      </p>
+
+      <!-- Konten -->
+      <div class="fade-slide-up flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20" style="transition-delay: 0.4s;">
+
+        <!-- Ilustrasi -->
+        <div class="w-full lg:w-1/2 flex justify-center items-center fade-slide-up">
+          <img 
+            src="{{ asset('img/user/vektor/undraw_mobile-payments_uate.png') }}" 
+            alt="Ilustrasi Statistik Penduduk" 
+            class="w-full max-w-md rounded-2xl shadow-xl transform transition duration-700 hover:scale-105"
+            style="transition-delay: 0.2s;"
+          >
+        </div>
+
+        <!-- Statistik -->
+        <div class="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-8 text-left">
+
+          <!-- Jumlah Penduduk -->
+          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <div>
+              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">3394</p>
+              <p class="text-gray-700 font-medium">Jumlah Penduduk</p>
+            </div>
+          </div>
+
+          <!-- Laki-laki -->
+          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M12 12a4 4 0 100-8 4 4 0 000 8z" />
+            </svg>
+            <div>
+              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">1676</p>
+              <p class="text-gray-700 font-medium">Laki-laki</p>
+            </div>
+          </div>
+
+          <!-- Perempuan -->
+          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-pink-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M12 12a4 4 0 100-8 4 4 0 000 8z" />
+            </svg>
+            <div>
+              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">1718</p>
+              <p class="text-gray-700 font-medium">Perempuan</p>
+            </div>
+          </div>
+
+          <!-- Kepala Keluarga -->
+          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-yellow-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7m-9 0v12" />
+            </svg>
+            <div>
+              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">995</p>
+              <p class="text-gray-700 font-medium">Kepala Keluarga</p>
+            </div>
+          </div>
+
+          <!-- Penduduk Sementara -->
+          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-purple-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">56</p>
+              <p class="text-gray-700 font-medium">Penduduk Sementara</p>
+            </div>
+          </div>
+
+          <!-- Mutasi Penduduk -->
+          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-red-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v6h6M20 20v-6h-6M4 14l16-4" />
+            </svg>
+            <div>
+              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">67</p>
+              <p class="text-gray-700 font-medium">Mutasi Penduduk</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Link -->
+      <div class="mt-12">
+        <a href="#" class="text-blue-700 font-semibold hover:underline transition">Lihat Selengkapnya →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animasi Scroll Fade + Slide -->
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const banner = document.getElementById('animated-banner');
-        const admin = document.getElementById('admin-section');
-        const vector = document.getElementById('vector-image');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add(entry.target === vector ? 'fade-in-scale' :
-                        'fade-in-up');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.2
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('show');
         });
+      }, { threshold: 0.1 });
 
-        observer.observe(banner);
-        observer.observe(admin);
-        observer.observe(vector);
-
-        // Animate semua teks penjelasan
-        document.querySelectorAll('.opacity-0.translate-y-10').forEach(el => {
-            if (![banner, admin, vector].includes(el)) {
-                observer.observe(el);
-            }
-        });
+      document.querySelectorAll('.fade-slide-up').forEach(el => observer.observe(el));
     });
-</script>
+  </script>
+</body>
+</html>

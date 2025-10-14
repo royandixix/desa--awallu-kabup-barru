@@ -101,6 +101,9 @@
     <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="/assets/vendor/php-email-form/validate.js"></script>
     <script src="/assets/js/main.js"></script>
+    <!-- Heroicons CDN -->
+<script src="https://unpkg.com/heroicons@2.0.18/dist/heroicons.min.js"></script>
+
 
     <!-- Animasi Scroll -->
     <script>
