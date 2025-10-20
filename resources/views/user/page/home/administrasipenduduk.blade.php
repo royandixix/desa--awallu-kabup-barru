@@ -9,137 +9,134 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- Heroicons CDN -->
-  <script src="https://unpkg.com/heroicons@2.0.18/dist/heroicons.min.js"></script>
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
   <style>
     body {
       font-family: 'Inter', sans-serif;
-     
-      color: #111827;
-      overflow-x: hidden;
+      background: radial-gradient(circle at 30% 20%, #f0f9ff 0%, #ffffff 100%);
+      scroll-behavior: smooth;
     }
 
-    h1 {
-      font-family: 'Poppins', sans-serif;
-    }
-
-    /* Animasi Fade + Slide */
-    .fade-slide-up {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease-out;
-    }
-    .fade-slide-up.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    /* Card styling */
     .stat-card {
-      transition: all 0.3s ease;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
     }
     .stat-card:hover {
-      transform: translateY(-6px) scale(1.05);
-      
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 30px 45px -12px rgba(0, 0, 0, 0.12);
     }
 
-    .icon-hover:hover {
-      transform: scale(1.3);
-      transition: transform 0.3s;
+    /* Floating effect */
+    .floating {
+      animation: floating 4s ease-in-out infinite;
+    }
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Icon animation */
+    .icon-hover {
+      transition: transform 0.4s ease, color 0.4s ease;
+    }
+    .stat-card:hover .icon-hover {
+      transform: rotate(12deg) scale(1.2);
+    }
+
+    .counter {
+      font-variant-numeric: tabular-nums;
+      display: inline-block;
+      min-width: 70px;
+      background: linear-gradient(135deg, #0ea5e9, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Gradient text */
+    .gradient-title {
+      background: linear-gradient(90deg, #2563eb, #16a34a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   </style>
 </head>
-<body class="pt-20 bg-white">
+
+<body class="pt-20">
 
   <section class="w-full py-20">
     <div class="max-w-6xl mx-auto px-6 lg:px-10 flex flex-col items-center text-center">
 
       <!-- Judul -->
-      <h1 class="fade-slide-up text-5xl sm:text-6xl tracking-wide" style="transition-delay: 0s;">Administrasi Penduduk</h1>
-      <p class="fade-slide-up text-gray-700 mb-12 max-w-2xl text-lg" style="transition-delay: 0.2s;">
-        Berikut ini adalah data administrasi penduduk Desa Batupute yang terdata
+      <h1 data-aos="fade-up" class="text-5xl sm:text-6xl tracking-tight gradient-title mb-4">
+        Administrasi Penduduk
+      </h1>
+
+      <p data-aos="fade-up" data-aos-delay="200" class="text-gray-700 mb-14 max-w-2xl text-lg">
+        Data administrasi penduduk Desa Batupute yang selalu diperbarui untuk transparansi dan kemajuan desa.
       </p>
 
       <!-- Konten -->
-      <div class="fade-slide-up flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20" style="transition-delay: 0.4s;">
+      <div class="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
 
         <!-- Ilustrasi -->
-        <div class="w-full lg:w-1/2 flex justify-center items-center fade-slide-up">
+        <div data-aos="zoom-in" class="w-full lg:w-1/2 flex justify-center items-center">
           <img 
             src="{{ asset('img/user/vektor/undraw_mobile-payments_uate.png') }}" 
             alt="Ilustrasi Statistik Penduduk" 
-            class="w-full max-w-md rounded-2xl shadow-xl transform transition duration-700 hover:scale-105"
-            style="transition-delay: 0.2s;"
+            class="w-full max-w-md rounded-3xl shadow-2xl floating"
           >
         </div>
 
         <!-- Statistik -->
         <div class="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-8 text-left">
 
-          <!-- Jumlah Penduduk -->
-          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <!-- Card 1 -->
+          <div data-aos="fade-up" class="stat-card flex items-center space-x-4 p-6 rounded-2xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-emerald-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
             <div>
-              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">3394</p>
+              <p class="text-4xl font-extrabold counter" data-target="3394">0</p>
               <p class="text-gray-700 font-medium">Jumlah Penduduk</p>
             </div>
           </div>
 
-          <!-- Laki-laki -->
-          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
+          <!-- Card 2 -->
+          <div data-aos="fade-up" data-aos-delay="100" class="stat-card flex items-center space-x-4 p-6 rounded-2xl">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M12 12a4 4 0 100-8 4 4 0 000 8z" />
             </svg>
             <div>
-              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">1676</p>
+              <p class="text-4xl font-extrabold counter" data-target="1676">0</p>
               <p class="text-gray-700 font-medium">Laki-laki</p>
             </div>
           </div>
 
-          <!-- Perempuan -->
-          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
+          <!-- Card 3 -->
+          <div data-aos="fade-up" data-aos-delay="200" class="stat-card flex items-center space-x-4 p-6 rounded-2xl">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-pink-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A4 4 0 018 16h8a4 4 0 012.879 1.804M12 12a4 4 0 100-8 4 4 0 000 8z" />
             </svg>
             <div>
-              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">1718</p>
+              <p class="text-4xl font-extrabold counter" data-target="1718">0</p>
               <p class="text-gray-700 font-medium">Perempuan</p>
             </div>
           </div>
 
-          <!-- Kepala Keluarga -->
-          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
+          <!-- Card 4 -->
+          <div data-aos="fade-up" data-aos-delay="300" class="stat-card flex items-center space-x-4 p-6 rounded-2xl">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-yellow-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7m-9 0v12" />
             </svg>
             <div>
-              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">995</p>
+              <p class="text-4xl font-extrabold counter" data-target="995">0</p>
               <p class="text-gray-700 font-medium">Kepala Keluarga</p>
-            </div>
-          </div>
-
-          <!-- Penduduk Sementara -->
-          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-purple-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <div>
-              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">56</p>
-              <p class="text-gray-700 font-medium">Penduduk Sementara</p>
-            </div>
-          </div>
-
-          <!-- Mutasi Penduduk -->
-          <div class="stat-card flex items-center space-x-4 p-6 bg-white rounded-2xl shadow hover:shadow-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-red-500 icon-hover" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v6h6M20 20v-6h-6M4 14l16-4" />
-            </svg>
-            <div>
-              <p class="text-3xl sm:text-4xl font-extrabold text-gray-900">67</p>
-              <p class="text-gray-700 font-medium">Mutasi Penduduk</p>
             </div>
           </div>
 
@@ -147,23 +144,45 @@
       </div>
 
       <!-- Link -->
-      <div class="mt-12">
-        <a href="#" class="text-blue-700 font-semibold hover:underline transition">Lihat Selengkapnya →</a>
+      <div data-aos="fade-up" data-aos-delay="600" class="mt-14">
+        <a href="#" class="text-blue-700 font-semibold hover:underline hover:text-blue-800 transition">Lihat Selengkapnya →</a>
       </div>
     </div>
   </section>
 
-  <!-- Animasi Scroll Fade + Slide -->
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('show');
-        });
-      }, { threshold: 0.1 });
+    AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
 
-      document.querySelectorAll('.fade-slide-up').forEach(el => observer.observe(el));
-    });
+    // Counter animation
+    function animateCounter(el) {
+      const target = +el.getAttribute('data-target');
+      const duration = 1800;
+      const startTime = performance.now();
+
+      function easeOutQuad(t) { return t * (2 - t); }
+
+      function update(currentTime) {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const eased = easeOutQuad(progress);
+        el.textContent = Math.floor(eased * target).toLocaleString('id-ID');
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const counters = document.querySelectorAll('.counter');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
   </script>
 </body>
 </html>

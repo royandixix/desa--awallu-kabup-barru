@@ -80,6 +80,9 @@
         @yield('visimisi')
         @yield('foto_bersama_warga')
         @yield('administrasipenduduk')
+        @yield('menelusuri_keindahan')
+        @yield('layanan_kami')
+        @yield('struktur_organisasi')
         
 
     </main>
