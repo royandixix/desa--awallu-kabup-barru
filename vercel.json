@@ -6,14 +6,14 @@
       "use": "@vercel/php"
     },
     {
-      "src": "public/**",
+      "src": "public/**/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "public/index.php"
+      "dest": "/public/index.php"
     }
   ]
 }
