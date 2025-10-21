@@ -7,17 +7,16 @@
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
-    /* === ANIMASI MASUK (fade, slide & zoom smooth) === */
+    /* ===== Animasi Scroll Masuk ===== */
     @keyframes smoothFadeUp {
       0% {
         opacity: 0;
-        transform: translateY(60px) scale(0.9);
-        filter: blur(4px);
+        transform: translateY(50px) scale(0.95);
+        filter: blur(6px);
       }
       100% {
         opacity: 1;
@@ -28,16 +27,14 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(60px) scale(0.9);
-      filter: blur(4px);
-      transition: all 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transform: translateY(50px);
+      transition: all 1s ease;
     }
 
     .reveal.active {
-      animation: smoothFadeUp 1s ease forwards;
+      animation: smoothFadeUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
 
-    /* Delay animasi agar muncul bertahap */
     .reveal:nth-child(1) { animation-delay: 0.1s; }
     .reveal:nth-child(2) { animation-delay: 0.2s; }
     .reveal:nth-child(3) { animation-delay: 0.3s; }
@@ -45,34 +42,61 @@
     .reveal:nth-child(5) { animation-delay: 0.5s; }
     .reveal:nth-child(6) { animation-delay: 0.6s; }
 
-    /* === CARD STYLING === */
+    /* ===== Styling Section ===== */
+    /* ===== Styling Section ===== */
+    body {
+      background-color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      color: #1f2937;
+      scroll-behavior: smooth;
+    }
+
+    /* ===== Card Styling Premium ===== */
     .card {
-      transition: all 0.5s ease;
       position: relative;
       overflow: hidden;
+      border-radius: 0.75rem;
+     
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+      transition: all 0.5s ease;
+      border: 1px solid rgba(255, 255, 255, 0.4);
       cursor: pointer;
-      will-change: transform, box-shadow;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(34,197,94,0.08), rgba(255,255,255,0));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      border-color: #16a34a;
+      transform: translateY(-6px) scale(1.015);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
     }
 
-    /* === ICON ANIMATION === */
+    /* ===== Icon ===== */
     .card-icon {
-      transition: transform 0.4s ease, color 0.3s ease;
-      color: #111111; /* Hitam */
+      color: #111;
+      transition: transform 0.4s ease, color 0.4s ease;
     }
 
     .card:hover .card-icon {
-      transform: scale(1.15) rotate(8deg);
-      color: #16a34a; /* Hijau saat hover */
+      color: #16a34a;
+      transform: scale(1.15) rotate(6deg);
     }
 
-    /* === TEXT HOVER === */
-    .card h3, .card p, .card a {
+    /* ===== Text ===== */
+    .card h3 {
+      color: #1f2937;
       transition: color 0.3s ease;
     }
 
@@ -80,110 +104,101 @@
       color: #15803d;
     }
 
+    .card p {
+      color: #4b5563;
+      line-height: 1.7;
+    }
+
+    /* ===== Link ===== */
+    .card a {
+      color: #16a34a;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .card a:hover {
+      color: #15803d;
+      text-decoration: underline;
+    }
+
+    /* ===== Subtle Active Effect ===== */
     .card:active {
       transform: scale(0.98);
-    }
-
-    /* Global smooth scroll */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Scroll reveal trigger area */
-    body {
-      background-color: #f9fafb;
     }
   </style>
 </head>
 
-<body class="bg-gray-50 text-gray-800 selection:bg-green-200 selection:text-green-900">
+<body class="selection:bg-green-200 selection:text-green-900">
 
-  <main class="max-w-7xl mx-auto px-6 py-20">
+  <main class="max-w-7xl mx-auto px-6 py-24">
 
     <!-- Heading -->
-    <div class="text-center mb-16 reveal">
-      <h2 class="text-4xl mb-3 text-green-700 tracking-tight ">Layanan Kami</h2>
-      <p class="text-lg text-gray-600">
-        Layanan utama yang tersedia di <span class="text-green-600 font-medium">Desa Batupute</span>
+    <div class="text-center mb-20 reveal">
+      <h2 class="text-4xl md:text-5xl  text-gray-800 mb-4 tracking-tight">
+        Layanan Kami
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Layanan utama yang tersedia di <span class="text-green-600 font-medium">Desa Batupute</span>,
+        dirancang untuk mempermudah masyarakat dalam mengurus administrasi dan layanan publik.
       </p>
-
-      <!-- Garis dekoratif -->
-      <div class="mt-4 mx-auto w-24 h-1 bg-green-600 rounded-full"></div>
+      <div class="mt-5 mx-auto w-28 h-1 bg-green-600 rounded-full"></div>
     </div>
 
-    <!-- GRID LAYANAN -->
+    <!-- GRID -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
 
-      <!-- Card 1 -->
-      <div class="reveal card bg-white rounded-2xl shadow-md p-8 border border-gray-200 text-left">
+      <div class="reveal card">
         <div class="flex items-center mb-5">
           <i data-lucide="building" class="card-icon w-10 h-10 mr-3"></i>
           <h3 class="text-2xl font-semibold">Bagian Pemerintahan</h3>
         </div>
-        <p class="text-gray-700 leading-relaxed mb-5">
-          KTP, KK, KIA, akta kelahiran, akta kematian, surat pindah dan pertanahan.
-        </p>
-        <a href="#" class="font-medium text-green-700 hover:underline">Read more →</a>
+        <p>KTP, KK, KIA, akta kelahiran, akta kematian, surat pindah dan pertanahan.</p>
+        <a href="#" class="block mt-5">Read more →</a>
       </div>
 
-      <!-- Card 2 -->
-      <div class="reveal card bg-white rounded-2xl shadow-md p-8 border border-gray-200 text-left">
+      <div class="reveal card">
         <div class="flex items-center mb-5">
           <i data-lucide="users" class="card-icon w-10 h-10 mr-3"></i>
           <h3 class="text-2xl font-semibold">Bagian Pelayanan</h3>
         </div>
-        <p class="text-gray-700 leading-relaxed mb-5">
-          SKTM, <span class="text-green-600 font-medium">Pengantar Nikah</span>, Izin Keramaian, Pengantar BBM, Sket Lain-lain.
-        </p>
-        <a href="#" class="font-medium text-green-700 hover:underline">Read more →</a>
+        <p>SKTM, <span class="text-green-600 font-medium">Pengantar Nikah</span>, Izin Keramaian, Pengantar BBM, dan Sket Lain-lain.</p>
+        <a href="#" class="block mt-5">Read more →</a>
       </div>
 
-      <!-- Card 3 -->
-      <div class="reveal card bg-white rounded-2xl shadow-md p-8 border border-gray-200 text-left">
+      <div class="reveal card">
         <div class="flex items-center mb-5">
           <i data-lucide="heart-handshake" class="card-icon w-10 h-10 mr-3"></i>
           <h3 class="text-2xl font-semibold">Bagian Kesra</h3>
         </div>
-        <p class="text-gray-700 leading-relaxed mb-5">
-          Pengelolaan kegiatan sosial, keagamaan, dan kemasyarakatan di desa.
-        </p>
-        <a href="#" class="font-medium text-green-700 hover:underline">Read more →</a>
+        <p>Pengelolaan kegiatan sosial, keagamaan, dan kemasyarakatan di desa.</p>
+        <a href="#" class="block mt-5">Read more →</a>
       </div>
 
-      <!-- Card 4 -->
-      <div class="reveal card bg-white rounded-2xl shadow-md p-8 border border-gray-200 text-left">
+      <div class="reveal card">
         <div class="flex items-center mb-5">
           <i data-lucide="hand-heart" class="card-icon w-10 h-10 mr-3"></i>
-          <h3 class="text-2xl font-semibold">Informasi & <span class="text-green-700">Bantuan Sosial</span></h3>
+          <h3 class="text-2xl font-semibold">Informasi & Bantuan Sosial</h3>
         </div>
-        <p class="text-gray-700 leading-relaxed mb-5">
-          Informasi dan pengajuan bantuan seperti <span class="text-green-600 font-medium">BLT</span> dan <span class="text-green-600 font-medium">PKH</span>.
-        </p>
-        <a href="#" class="font-medium text-green-700 hover:underline">Read more →</a>
+        <p>Informasi dan pengajuan bantuan seperti <span class="text-green-600 font-medium">BLT</span> dan <span class="text-green-600 font-medium">PKH</span>.</p>
+        <a href="#" class="block mt-5">Read more →</a>
       </div>
 
-      <!-- Card 5 -->
-      <div class="reveal card bg-white rounded-2xl shadow-md p-8 border border-gray-200 text-left">
+      <div class="reveal card">
         <div class="flex items-center mb-5">
           <i data-lucide="stethoscope" class="card-icon w-10 h-10 mr-3"></i>
           <h3 class="text-2xl font-semibold">Pelayanan Kesehatan & Posyandu</h3>
         </div>
-        <p class="text-gray-700 leading-relaxed mb-5">
-          Layanan pemeriksaan kesehatan gratis dan jadwal kegiatan posyandu rutin.
-        </p>
-        <a href="#" class="font-medium text-green-700 hover:underline">Read more →</a>
+        <p>Layanan pemeriksaan kesehatan gratis dan jadwal kegiatan posyandu rutin.</p>
+        <a href="#" class="block mt-5">Read more →</a>
       </div>
 
-      <!-- Card 6 -->
-      <div class="reveal card bg-white rounded-2xl shadow-md p-8 border border-gray-200 text-left">
+      <div class="reveal card">
         <div class="flex items-center mb-5">
           <i data-lucide="megaphone" class="card-icon w-10 h-10 mr-3"></i>
-          <h3 class="text-2xl font-semibold">Layanan Aspirasi & <span class="text-green-700">Pengaduan</span></h3>
+          <h3 class="text-2xl font-semibold">Layanan Aspirasi & Pengaduan</h3>
         </div>
-        <p class="text-gray-700 leading-relaxed mb-5">
-          Sampaikan aspirasi, saran, atau keluhan Anda secara mudah kepada pemerintah desa.
-        </p>
-        <a href="#" class="font-medium text-green-700 hover:underline">Read more →</a>
+        <p>Sampaikan aspirasi, saran, atau keluhan Anda secara mudah kepada pemerintah desa.</p>
+        <a href="#" class="block mt-5">Read more →</a>
       </div>
 
     </div>
@@ -192,23 +207,18 @@
   <script>
     // Efek reveal saat scroll
     const reveals = document.querySelectorAll('.reveal');
-
     function revealOnScroll() {
       const windowHeight = window.innerHeight;
       reveals.forEach(el => {
         const top = el.getBoundingClientRect().top;
-        if (top < windowHeight - 100) {
-          el.classList.add('active');
-        }
+        if (top < windowHeight - 100) el.classList.add('active');
       });
     }
-
     window.addEventListener('scroll', revealOnScroll);
     window.addEventListener('load', () => {
-      lucide.createIcons(); // render icons
+      lucide.createIcons();
       revealOnScroll();
     });
   </script>
-
 </body>
 </html>

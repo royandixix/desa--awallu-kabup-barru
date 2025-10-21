@@ -15,21 +15,20 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at 30% 20%, #f0f9ff 0%, #ffffff 100%);
       scroll-behavior: smooth;
+      background-color: white; /* latar belakang putih polos */
     }
 
-    /* Card styling */
+    /* Card styling tanpa transparansi */
     .stat-card {
-      backdrop-filter: blur(16px);
-      background: rgba(255, 255, 255, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+      background: white;
+      border: 1px solid #e5e7eb; /* abu muda */
+      box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.08);
       transition: all 0.4s ease;
     }
     .stat-card:hover {
       transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 30px 45px -12px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
     }
 
     /* Floating effect */
@@ -69,7 +68,7 @@
 
 <body class="pt-20">
 
-  <section class="w-full py-20">
+  <section class="w-full py-20 bg-white">
     <div class="max-w-6xl mx-auto px-6 lg:px-10 flex flex-col items-center text-center">
 
       <!-- Judul -->
