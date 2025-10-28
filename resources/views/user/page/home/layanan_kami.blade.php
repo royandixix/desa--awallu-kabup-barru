@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Layanan Kami - Desa Batupute</title>
+  <title>Layanan Kami - Desa Lawallu</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -138,7 +138,7 @@
         Layanan Kami
       </h2>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Layanan utama yang tersedia di <span class="text-green-600 font-medium">Desa Batupute</span>,
+        Layanan utama yang tersedia di <span class="text-green-600 font-medium">Desa Lawallu</span>,
         dirancang untuk mempermudah masyarakat dalam mengurus administrasi dan layanan publik.
       </p>
       <div class="mt-5 mx-auto w-28 h-1 bg-green-600 rounded-full"></div>

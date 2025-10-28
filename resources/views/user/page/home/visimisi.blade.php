@@ -24,10 +24,10 @@
       <div class="relative max-w-xl lg:max-w-lg mt-10 lg:mt-0" data-animate>
         <h2 class="text-base font-semibold text-green-600">Visi & Misi</h2>
         <p class="mt-2 text-4xl lg:text-5xl font-semibold tracking-tight text-gray-900 animate-title">
-          Visi dan Misi Kepala Desa Batupute
+          Visi dan Misi Kepala Desa Lawallu
         </p>
         <p class="mt-4 text-lg text-gray-700 animate-fade">
-          Berikut ini adalah visi dan misi yang menjadi pedoman pembangunan dan pelayanan Desa Batupute.
+          Berikut ini adalah visi dan misi yang menjadi pedoman pembangunan dan pelayanan Desa Lawallu.
         </p>
 
         <div class="mt-10 space-y-4 relative">
@@ -57,11 +57,11 @@
   <div class="modal-overlay absolute inset-0 bg-black/30 backdrop-blur-md opacity-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></div>
   <div class="modal-content relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full mx-4 p-6 transform opacity-0 scale-90 translate-y-6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
     <div class="flex justify-between items-center mb-4">
-      <h3 class="text-2xl font-semibold text-green-700">Visi Desa Batupute</h3>
+      <h3 class="text-2xl font-semibold text-green-700">Visi Desa Lawallu</h3>
       <button class="text-gray-500 hover:text-red-500 text-2xl close-modal">&times;</button>
     </div>
     <p class="text-lg leading-relaxed text-gray-700">
-      “Terwujudnya Desa Batupute sebagai desa mandiri yang istiqamah menjalankan amar ma’ruf nahi munkar menuju keridhaan Allah Subhanahu Wa Ta’ala.”
+      “Terwujudnya Desa Lawallu sebagai desa mandiri yang istiqamah menjalankan amar ma’ruf nahi munkar menuju keridhaan Allah Subhanahu Wa Ta’ala.”
     </p>
   </div>
 </div>
@@ -71,11 +71,11 @@
   <div class="modal-overlay absolute inset-0 bg-black/30 backdrop-blur-md opacity-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></div>
   <div class="modal-content relative bg-white rounded-3xl shadow-2xl max-w-3xl w-full mx-4 p-6 transform opacity-0 scale-90 translate-y-6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
     <div class="flex justify-between items-center mb-4">
-      <h3 class="text-2xl font-semibold text-green-700">Misi Desa Batupute</h3>
+      <h3 class="text-2xl font-semibold text-green-700">Misi Desa Lawallu</h3>
       <button class="text-gray-500 hover:text-red-500 text-2xl close-modal">&times;</button>
     </div>
     <ul class="list-decimal pl-5 space-y-3 text-lg leading-relaxed text-gray-700">
-      <li>Mewujudkan penduduk Desa Batupute menjadi insan yang bertaqwa kepada Allah Subhanahu Wa Ta’ala, patuh dan taat terhadap peraturan yang berlaku.</li>
+      <li>Mewujudkan penduduk Desa Lawallu menjadi insan yang bertaqwa kepada Allah Subhanahu Wa Ta’ala, patuh dan taat terhadap peraturan yang berlaku.</li>
       <li>Mewujudkan sumber daya manusia yang mandiri dan optimalisasi sumber daya alam desa.</li>
       <li>Mewujudkan pelayanan prima melalui pemerintahan yang bersih, transparan, akuntabel, dan profesional.</li>
       <li>Mewujudkan perekonomian desa yang mandiri dan memberdayakan masyarakat untuk mengentaskan kemiskinan.</li>

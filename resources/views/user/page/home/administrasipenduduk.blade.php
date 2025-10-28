@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Administrasi Penduduk - Desa Batupute</title>
+  <title>Administrasi Penduduk - Desa Lawallu</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -77,7 +77,7 @@
       </h1>
 
       <p data-aos="fade-up" data-aos-delay="200" class="text-gray-700 mb-14 max-w-2xl text-lg">
-        Data administrasi penduduk Desa Batupute yang selalu diperbarui untuk transparansi dan kemajuan desa.
+        Data administrasi penduduk Desa Lawallu yang selalu diperbarui untuk transparansi dan kemajuan desa.
       </p>
 
       <!-- Konten -->

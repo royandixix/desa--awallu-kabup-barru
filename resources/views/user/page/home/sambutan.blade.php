@@ -14,7 +14,7 @@
 
             <!-- Mobile: gambar muncul setelah judul -->
             <div class="flex justify-center items-start w-full lg:hidden">
-                <img src="{{ asset('img/user/kepaladesa/FotoSambutan.webp') }}" 
+                <img src="{{ asset('img/DESA_LAWALLU/FOTO KEPALA DESA DAN IBU KEPALA DESA/foto kepala desa dan ibu kepala desa.jpg') }}" 
                      alt="Foto Sambutan"
                      class="w-full max-w-sm rounded-xl shadow-2xl ring-1 ring-gray-200 object-cover transform transition-transform duration-500 hover:scale-105 hover:shadow-3xl hover:ring-green-200" />
             </div>
@@ -22,7 +22,7 @@
             <!-- Isi teks sambutan -->
             <p class="text-lg text-gray-800 leading-relaxed fade-up">
                 Assalamu'alaikum Warahmatullahi Wabarakatuh<br>
-                Selamat datang di Website Resmi Desa Batupute. Website ini kami hadirkan sebagai sarana informasi dan komunikasi antara pemerintah desa dan masyarakat. Harapan kami, website ini dapat menjadi media transparansi, pelayanan publik, dan promosi potensi desa. Kami mengajak seluruh warga untuk bersama-sama membangun Desa Batupute agar semakin maju, mandiri, dan sejahtera.
+                Selamat datang di Website Resmi Desa Lawallu. Website ini kami hadirkan sebagai sarana informasi dan komunikasi antara pemerintah desa dan masyarakat. Harapan kami, website ini dapat menjadi media transparansi, pelayanan publik, dan promosi potensi desa. Kami mengajak seluruh warga untuk bersama-sama membangun Desa Lawallu agar semakin maju, mandiri, dan sejahtera.
             </p>
             <p class="text-lg text-gray-800 leading-relaxed font-medium fade-up">Berikut ini adalah beberapa fitur yang ada di website kami:</p>
 
@@ -36,7 +36,7 @@
 
         <!-- Gambar untuk desktop (lg+) -->
         <div class="hidden lg:flex justify-center items-start fade-right order-2 lg:order-2">
-            <img src="{{ asset('img/user/kepaladesa/FotoSambutan.webp') }}" 
+            <img src="{{ asset('img/DESA_LAWALLU/FOTO KEPALA DESA DAN IBU KEPALA DESA/foto kepala desa dan ibu kepala desa.jpg') }}" 
                  alt="Foto Sambutan"
                  class="w-full max-w-xl rounded-xl shadow-2xl ring-1 ring-gray-200 object-cover transform transition-transform duration-500 hover:scale-105 hover:shadow-3xl hover:ring-green-200" />
         </div>

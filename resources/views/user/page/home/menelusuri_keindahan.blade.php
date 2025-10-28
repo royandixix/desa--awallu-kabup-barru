@@ -5,7 +5,7 @@
     <iframe
       class="video-bg"
       src="https://www.youtube.com/embed/b8itw7A3dMI?autoplay=1&mute=1&loop=1&playlist=b8itw7A3dMI&controls=0&showinfo=0&modestbranding=1"
-      title="Video Desa Batupute"
+      title="Video Desa Lawallu"
       frameborder="0"
       allow="autoplay; fullscreen"
       allowfullscreen>
@@ -18,10 +18,10 @@
   <!-- 🔹 Konten -->
   <div class="container position-relative z-3 text-center text-white px-3">
     <h2 class="video-title scroll-animate" data-animation="fade-in" data-delay="0.5s">
-      Menelusuri Keindahan Tersembunyi Desa Batupute
+      Menelusuri Keindahan Tersembunyi Desa Lawallu
     </h2>
     <p class="video-subtitle scroll-animate" data-animation="slide-up" data-delay="0.8s">
-      Desa Batupute menyimpan keindahan yang tak banyak orang tahu — semuanya terekam dalam video berikut.
+      Desa Lawallu menyimpan keindahan yang tak banyak orang tahu — semuanya terekam dalam video berikut.
     </p>
 
     <div class="video-buttons mt-4 scroll-animate" data-animation="fade-in" data-delay="1.1s">
