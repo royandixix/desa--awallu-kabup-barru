@@ -7,20 +7,8 @@ use Illuminate\Support\Facades\Route;
 // 🔹 HALAMAN UTAMA → langsung tampil halaman user tanpa login
 // =======================
 Route::get('/', function () {
-    return redirect()->route('user.home');
-});
-
-Route::get('/user/home', function () {
-    return view('user.page.home.conten');
+    return view('user.page.home.conten'); // langsung ke home
 })->name('user.home');
-
-Route::get('/user/profil', function () {
-    return view('user.page.profil_desa.profil_desa');
-})->name('user.profil');
-
-Route::get('/user/galeri', function () {
-    return view('user.page.home.foto_bersama_warga');
-})->name('user.galeri');
 
 // =======================
 // 🔹 ADMIN ROUTES (masih butuh login & verified)
@@ -30,6 +18,12 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 });
+
+
+Route::get('/user/profil', function () {
+    return view('user.page.profil_desa.profil_desa');
+})->name('user.profil');
+
 
 // =======================
 // 🔹 PROFILE ROUTES (untuk user login saja)

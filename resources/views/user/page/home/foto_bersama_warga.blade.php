@@ -53,6 +53,7 @@
 </style>
 
 <!-- ⚙️ SCRIPT ANIMASI -->
+  <
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const banner = document.getElementById('animated-banner');
