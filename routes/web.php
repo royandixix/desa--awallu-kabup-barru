@@ -22,8 +22,10 @@ Route::prefix('user')->group(function () {
 
     // Galeri
     Route::get('/galeri', function () {
-        return view('user.page.home.foto_bersama_warga');
+        return view('user.page.galeri.galeri'); // langsung ke galeri.blade.php
     })->name('user.galeri');
+
+
 
     // Transparansi
     Route::get('/keuangan', function () {
@@ -82,4 +84,4 @@ Route::middleware('auth')->group(function () {
 // =======================
 // 🔹 LOGIN & AUTH ROUTES
 // =======================
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

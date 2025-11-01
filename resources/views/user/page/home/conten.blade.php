@@ -68,6 +68,8 @@
                 </svg>
               </div>
 
+             
+
               {{-- Judul --}}
               <h3 class="text-white text-2xl font-bold relative z-10 drop-shadow-md tracking-wide">
                 {{ $f['judul'] }}
@@ -109,7 +111,7 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    @
+    
 
     @keyframes fadeLeft {
       0% { opacity: 0; transform: translateX(-60px); }
