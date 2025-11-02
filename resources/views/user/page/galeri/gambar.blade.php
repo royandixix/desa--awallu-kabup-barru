@@ -20,28 +20,27 @@ $totalPages = ceil($total / $perPage);
 @endphp
 
 <section id="galeri" class="bg-gray-50 py-16">
-  {{-- Lebar kontainer dilebarkan sedikit dan padding kiri-kanan dikurangi --}}
   <div class="max-w-[1500px] mx-auto px-3 md:px-6 lg:px-8">
-
-    
 
     @if ($paginated->count() > 0)
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach ($paginated as $item)
           <div class="bg-white shadow-md hover:shadow-xl transition-all duration-400 overflow-hidden group">
-            <div class="relative">
-              <img src="{{ asset('img/user/galeri/' . $item['file']) }}"
-                   alt="{{ $item['title'] }}"
-                   class="w-full h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-in-out">
-            </div>
-            <div class="p-6">
-              <h3 class="text-lg font-semibold text-gray-800 mb-2 group-hover:text-emerald-700 transition-colors">
-                {{ $item['title'] }}
-              </h3>
-              <p class="text-gray-600 text-sm leading-relaxed">
-                {{ Str::limit($item['desc'], 85, '...') }}
-              </p>
-            </div>
+            <a href="{{ route('user.galeri.detail', ['filename' => $item['file']]) }}" class="block">
+              <div class="relative">
+                <img src="{{ asset('img/user/galeri/' . $item['file']) }}"
+                     alt="{{ $item['title'] }}"
+                     class="w-full h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-in-out">
+              </div>
+              <div class="p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-2 group-hover:text-emerald-700 transition-colors">
+                  {{ $item['title'] }}
+                </h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  {{ Str::limit($item['desc'], 85, '...') }}
+                </p>
+              </div>
+            </a>
           </div>
         @endforeach
       </div>
@@ -77,6 +76,7 @@ $totalPages = ceil($total / $perPage);
 
   </div>
 </section>
+
 <script>
   function scrollToGallery() {
     const galeriSection = document.getElementById('galeri');

@@ -45,39 +45,54 @@
                 <a href="{{ route('user.galeri') }}"
                     class="px-2 lg:px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 transition">Galeri</a>
 
-                <!-- 🔻 Dropdown Transparansi -->
+                <!-- Dropdown Transparansi Desktop -->
                 <div class="relative" @mouseenter="dropdownTrans = true" @mouseleave="dropdownTrans = false">
-                    <button
-                        class="flex items-center px-2 lg:px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 transition">
+                    <button @click="dropdownTrans = !dropdownTrans" 
+                            class="flex items-center px-2 lg:px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 transition">
                         <span>Transparansi</span>
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200"
-                            :class="dropdownTrans ? 'rotate-180' : ''" fill="none" stroke="currentColor"
-                            stroke-width="2" viewBox="0 0 24 24">
+                        <svg :class="dropdownTrans ? 'rotate-180' : ''" class="w-4 h-4 ml-1 transition-transform duration-200"
+                             fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <div x-show="dropdownTrans" x-transition
-                        class="absolute top-full left-0 mt-2 w-48 bg-white text-gray-900 rounded-xl shadow-xl overflow-hidden border border-gray-200">
-                        <a href="{{ route('user.keuangan') }}"
-                            class="block px-4 py-3 hover:bg-lime-50 transition">Keuangan</a>
-                        <a href="{{ route('user.pembangunan') }}"
-                            class="block px-4 py-3 hover:bg-lime-50 transition">Pembangunan</a>
+
+                    <!-- Dropdown List -->
+                    <div x-show="dropdownTrans" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-1"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 translate-y-1"
+                         @click.away="dropdownTrans = false"
+                         class="absolute top-full left-0 mt-2 w-64 bg-white text-gray-900 rounded-xl shadow-xl overflow-hidden border border-gray-200 z-50">
+                        <a href="{{ route('user.transparansi.anggaran') }}" class="block px-4 py-3 hover:bg-lime-50 transition">Transparansi Anggaran</a>
+                        <a href="{{ route('user.transparansi.laporan') }}" class="block px-4 py-3 hover:bg-lime-50 transition">Laporan Kegiatan</a>
+                        <a href="{{ route('user.transparansi.dokumen') }}" class="block px-4 py-3 hover:bg-lime-50 transition">Dokumen Perencanaan</a>
+                        <a href="{{ route('user.transparansi.bumdes') }}" class="block px-4 py-3 hover:bg-lime-50 transition">Bumdes dan Kopdes MP</a>
                     </div>
                 </div>
 
-                <!-- 🔻 Dropdown Struktur -->
+                <!-- 🔻 Dropdown Struktur Desktop -->
                 <div class="relative" @mouseenter="dropdownStruktur = true" @mouseleave="dropdownStruktur = false">
-                    <button
+                    <button @click="dropdownStruktur = !dropdownStruktur"
                         class="flex items-center px-2 lg:px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 transition">
                         <span>Struktur</span>
-                        <svg class="w-4 h-4 ml-1 transition-transform duration-200"
-                            :class="dropdownStruktur ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                        <svg :class="dropdownStruktur ? 'rotate-180' : ''"
+                            class="w-4 h-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor"
                             stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <div x-show="dropdownStruktur" x-transition
-                        class="absolute top-full left-0 mt-2 w-56 bg-white text-gray-900 rounded-xl shadow-xl overflow-hidden border border-gray-200">
+                    <div x-show="dropdownStruktur" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 translate-y-1"
+                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 translate-y-0"
+                         x-transition:leave-end="opacity-0 translate-y-1"
+                         @click.away="dropdownStruktur = false"
+                        class="absolute top-full left-0 mt-2 w-56 bg-white text-gray-900 rounded-xl shadow-xl overflow-hidden border border-gray-200 z-50">
                         <a href="{{ route('user.struktur') }}"
                             class="block px-4 py-3 hover:bg-lime-50 transition">Struktur Pemerintahan</a>
                         <a href="{{ route('user.bpd') }}" class="block px-4 py-3 hover:bg-lime-50 transition">BPD</a>
@@ -96,15 +111,18 @@
                     class="px-4 lg:px-5 py-2 rounded-full bg-gradient-to-r from-lime-400 to-emerald-400 text-teal-900 font-semibold hover:scale-105 hover:shadow-lg transition whitespace-nowrap ml-2">
                     Login
                 </a>
-
-
-
             </div>
         </div>
     </div>
 
     <!-- 📱 MOBILE MENU -->
-    <div x-show="open" x-transition
+    <div x-show="open" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-1"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-1"
         class="md:hidden bg-teal-950/98 backdrop-blur-lg border-t border-white/10 shadow-inner">
 
         <div class="px-4 py-4 space-y-1 font-medium text-white max-h-[calc(100vh-4rem)] overflow-y-auto">
@@ -116,34 +134,52 @@
                 class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Galeri</a>
 
             <!-- Dropdown Transparansi Mobile -->
-            <div x-data="{ subOpenTrans: false }">
-                <button @click="subOpenTrans = !subOpenTrans"
+            <div>
+                <button @click="dropdownTrans = !dropdownTrans"
                     class="flex justify-between items-center w-full px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition text-left">
                     <span>Transparansi</span>
-                    <svg class="w-5 h-5 transform transition-transform" :class="subOpenTrans ? 'rotate-180' : ''"
+                    <svg :class="dropdownTrans ? 'rotate-180' : ''" class="w-5 h-5 transform transition-transform duration-200"
                         fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <div x-show="subOpenTrans" x-transition class="pl-4 mt-1 space-y-1">
-                    <a href="{{ route('user.keuangan') }}"
-                        class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Keuangan</a>
-                    <a href="{{ route('user.pembangunan') }}"
-                        class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Pembangunan</a>
+                <div x-show="dropdownTrans" 
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 -translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100 translate-y-0"
+                     x-transition:leave-end="opacity-0 -translate-y-1"
+                     class="pl-4 mt-1 space-y-1">
+                    <a href="{{ route('user.transparansi.anggaran') }}"
+                        class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Transparansi Anggaran</a>
+                    <a href="{{ route('user.transparansi.laporan') }}"
+                        class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Laporan Kegiatan</a>
+                    <a href="{{ route('user.transparansi.dokumen') }}"
+                        class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Dokumen Perencanaan</a>
+                    <a href="{{ route('user.transparansi.bumdes') }}"
+                        class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Bumdes dan Kopdes MP</a>
                 </div>
             </div>
 
             <!-- Dropdown Struktur Mobile -->
-            <div x-data="{ subOpenStruktur: false }">
-                <button @click="subOpenStruktur = !subOpenStruktur"
+            <div>
+                <button @click="dropdownStruktur = !dropdownStruktur"
                     class="flex justify-between items-center w-full px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition text-left">
                     <span>Struktur</span>
-                    <svg class="w-5 h-5 transform transition-transform" :class="subOpenStruktur ? 'rotate-180' : ''"
+                    <svg :class="dropdownStruktur ? 'rotate-180' : ''" class="w-5 h-5 transform transition-transform duration-200"
                         fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <div x-show="subOpenStruktur" x-transition class="pl-4 mt-1 space-y-1">
+                <div x-show="dropdownStruktur" 
+                     x-transition:enter="transition ease-out duration-200"
+                     x-transition:enter-start="opacity-0 -translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-150"
+                     x-transition:leave-start="opacity-100 translate-y-0"
+                     x-transition:leave-end="opacity-0 -translate-y-1"
+                     class="pl-4 mt-1 space-y-1">
                     <a href="{{ route('user.struktur') }}"
                         class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Struktur Pemerintahan</a>
                     <a href="{{ route('user.bpd') }}"
@@ -165,7 +201,6 @@
                     class="block text-center py-2.5 rounded-full bg-gradient-to-r from-lime-400 to-emerald-400 text-teal-900 font-semibold hover:shadow-lg transition">
                     Login
                 </a>
-
             </div>
         </div>
     </div>

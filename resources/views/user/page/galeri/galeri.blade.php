@@ -2,7 +2,7 @@
 
 @section('title', 'Galeri Desa Lawallu')
 
-{{-- Header khusus Galeri --}}
+{{-- Header khusus untuk halaman galeri --}}
 @section('header_galeri')
     @include('user.partials.navbar')
     @include('user.partials.header_galeri')

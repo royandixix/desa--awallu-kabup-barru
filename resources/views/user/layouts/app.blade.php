@@ -95,6 +95,8 @@
         @yield('header_profil_desa')
     @elseif (View::hasSection('header_galeri'))
         @yield('header_galeri')
+    @elseif (View::hasSection('header_detail_gambar'))
+        @yield('header_detail_gambar')
     @else
         @includeIf('user.partials.navbar')
         @includeIf('user.partials.header')
@@ -136,6 +138,7 @@
     {{-- Animasi Scroll & Tombol Ke Atas --}}
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Animasi saat scroll
             const elements = document.querySelectorAll('[data-animate]');
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -143,14 +146,15 @@
                 });
             }, { threshold: 0.2 });
             elements.forEach(el => observer.observe(el));
-        });
 
-        const scrollTopBtn = document.getElementById("scrollTopBtn");
-        window.addEventListener("scroll", () => {
-            scrollTopBtn.classList.toggle("show", window.scrollY > 200);
-        });
-        scrollTopBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            // Tombol scroll ke atas
+            const scrollTopBtn = document.getElementById("scrollTopBtn");
+            window.addEventListener("scroll", () => {
+                scrollTopBtn.classList.toggle("show", window.scrollY > 200);
+            });
+            scrollTopBtn.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
         });
     </script>
 

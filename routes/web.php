@@ -1,75 +1,77 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\GaleriController;
 use Illuminate\Support\Facades\Route;
 
 // =======================
 // 🔹 HALAMAN UTAMA → tampil halaman user tanpa login
 // =======================
-Route::get('/', function () {
-    return view('user.page.home.conten'); // langsung ke home
-})->name('user.home');
+Route::get('/', fn() => view('user.page.home.conten'))->name('user.home');
 
 // =======================
 // 🔹 USER PAGES (akses publik)
 // =======================
-Route::prefix('user')->group(function () {
+Route::prefix('user')->name('user.')->group(function () {
 
-    // Profil Desa
-    Route::get('/profil', function () {
-        return view('user.page.profil_desa.profil_desa');
-    })->name('user.profil');
-
-    // Galeri
-    Route::get('/galeri', function () {
-        return view('user.page.galeri.galeri'); // langsung ke galeri.blade.php
-    })->name('user.galeri');
-
-
-
+    // -----------------------
     // Transparansi
-    Route::get('/keuangan', function () {
-        return view('user.page.home.administrasipenduduk');
-    })->name('user.keuangan');
+    // -----------------------
+    Route::get('/transparansi/anggaran', fn() => view('user.page.transparansi.anggaran'))
+        ->name('transparansi.anggaran');
+    Route::get('/transparansi/laporan', fn() => view('user.page.transparansi.laporan'))
+        ->name('transparansi.laporan');
+    Route::get('/transparansi/dokumen', fn() => view('user.page.transparansi.dokumen'))
+        ->name('transparansi.dokumen');
+    Route::get('/transparansi/bumdes', fn() => view('user.page.transparansi.bumdes'))
+        ->name('transparansi.bumdes');
 
-    Route::get('/pembangunan', function () {
-        return view('user.page.home.layanan_kami');
-    })->name('user.pembangunan');
+    // -----------------------
+    // Profil Desa
+    // -----------------------
+    Route::get('/profil', fn() => view('user.page.profil_desa.profil_desa'))
+        ->name('profil');
 
+    // -----------------------
+    // Galeri
+    // -----------------------
+    Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri');
+    Route::get('/galeri/{filename}', [GaleriController::class, 'show'])->name('galeri.detail');
+
+    // -----------------------
+    // Keuangan & Pembangunan
+    // -----------------------
+    Route::get('/keuangan', fn() => view('user.page.home.administrasipenduduk'))
+        ->name('keuangan');
+    Route::get('/pembangunan', fn() => view('user.page.home.layanan_kami'))
+        ->name('pembangunan');
+
+    // -----------------------
     // Struktur
-    Route::get('/struktur', function () {
-        return view('user.page.home.struktur_organisasi');
-    })->name('user.struktur');
+    // -----------------------
+    Route::get('/struktur', fn() => view('user.page.home.struktur_organisasi'))
+        ->name('struktur');
+    Route::get('/bpd', fn() => view('user.page.home.visimisi'))
+        ->name('bpd');
+    Route::get('/karangtaruna', fn() => view('user.page.home.menelusuri_keindahan'))
+        ->name('karangtaruna');
 
-    Route::get('/bpd', function () {
-        return view('user.page.home.visimisi');
-    })->name('user.bpd');
-
-    Route::get('/karangtaruna', function () {
-        return view('user.page.home.menelusuri_keindahan');
-    })->name('user.karangtaruna');
-
+    // -----------------------
     // Berita, Pengaduan, Kontak
-    Route::get('/berita', function () {
-        return view('user.page.home.sambutan');
-    })->name('user.berita');
-
-    Route::get('/pengaduan', function () {
-        return view('user.page.home.kontak_saran');
-    })->name('user.pengaduan');
-
-    Route::get('/kontak', function () {
-        return view('user.page.home.kontak_saran');
-    })->name('user.kontak');
+    // -----------------------
+    Route::get('/berita', fn() => view('user.page.home.sambutan'))
+        ->name('berita');
+    Route::get('/pengaduan', fn() => view('user.page.home.kontak_saran'))
+        ->name('pengaduan');
+    Route::get('/kontak', fn() => view('user.page.home.kontak_saran'))
+        ->name('kontak');
 });
 
 // =======================
-// 🔹 ADMIN ROUTES (masih butuh login & verified)
+// 🔹 ADMIN ROUTES (memerlukan login & verified)
 // =======================
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/', fn() => view('admin.dashboard'))->name('admin.dashboard');
 });
 
 // =======================
