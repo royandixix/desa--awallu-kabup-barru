@@ -87,7 +87,6 @@
         }
     </style>
 </head>
-
 <body class="bg-light text-dark antialiased">
 
     {{-- Header & Navbar --}}
@@ -123,6 +122,7 @@
         <i class="bi bi-arrow-up-short"></i>
     </button>
 
+    {{-- Preloader --}}
     <div id="preloader"></div>
 
     {{-- Vendor JS --}}

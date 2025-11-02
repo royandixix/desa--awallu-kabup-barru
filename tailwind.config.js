@@ -3,10 +3,11 @@ import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  prefix: 'tw-', // <-- tambahkan prefix
   content: [
-    './resources/views/**/*.blade.php', // include semua blade
-    './resources/js/**/*.js',           // kalau ada JS dengan class tailwind
-    './resources/js/**/*.vue',          // kalau ada Vue
+    './resources/views/**/*.blade.php',
+    './resources/js/**/*.js',
+    './resources/js/**/*.vue',
   ],
   theme: {
     extend: {
