@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,11 @@
     {{-- Tailwind, Bootstrap, Alpine --}}
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     {{-- Vendor CSS --}}
     <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
@@ -29,7 +34,8 @@
 
     {{-- Global Styles --}}
     <style>
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
             width: 100%;
@@ -87,6 +93,7 @@
         }
     </style>
 </head>
+
 <body class="bg-light text-dark antialiased">
 
     {{-- Header & Navbar --}}
@@ -96,10 +103,14 @@
         @yield('header_galeri')
     @elseif (View::hasSection('header_detail_gambar'))
         @yield('header_detail_gambar')
+    @elseif (View::hasSection('header_transparansi'))
+        @yield('header_transparansi')
     @else
         @includeIf('user.partials.navbar')
         @includeIf('user.partials.header')
     @endif
+
+
 
     {{-- Main Content --}}
     <main class="overflow-x-hidden">
@@ -112,6 +123,7 @@
         @yield('layanan_kami')
         @yield('struktur_organisasi')
         @yield('kontak_saran')
+
     </main>
 
     {{-- Footer --}}
@@ -144,7 +156,9 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
-            }, { threshold: 0.2 });
+            }, {
+                threshold: 0.2
+            });
             elements.forEach(el => observer.observe(el));
 
             // Tombol scroll ke atas
@@ -153,10 +167,16 @@
                 scrollTopBtn.classList.toggle("show", window.scrollY > 200);
             });
             scrollTopBtn.addEventListener("click", () => {
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
             });
+
+
         });
     </script>
 
 </body>
+
 </html>

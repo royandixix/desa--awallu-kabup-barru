@@ -2,6 +2,11 @@
 
 @section('title', 'Laporan Kegiatan')
 
+@section('header_transparansi')
+    @include('user.partials.navbar')
+    @include('user.partials.header_transparansi')
+@endsection
+
 @section('content')
     <section class="py-16">
         <div class="container mx-auto px-6">

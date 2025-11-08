@@ -1,11 +1,10 @@
 @extends('user.layouts.app')
-
-@section('title', 'Dokumen Perencanaan')
-
-@section('header_transparansi')
+@section('title', 'Berita Desa Lawallu')
+@section('header_transparasi')
     @include('user.partials.navbar')
-    @include('user.partials.header_transparansi')
+    @include('user.partials.header_berita')
 @endsection
+
 
 @section('content')
     <div class="bg-gray-50 py-16 text-[18px]" x-data="{ tahun: '2025' }">
@@ -20,31 +19,43 @@
             <!-- DAFTAR DOKUMEN -->
             <section class="mb-20" data-aos="fade-up" data-aos-delay="400">
                 <h2 class="text-3xl text-gray-800 mb-2 text-center">
-                    Dokumen Perencanaan
+                    Transparansi Bumdes dan Kopdes MP
                 </h2>
-                <p class="text-gray-500 mb-8 text-center">
-                    Berikut adalah daftar dokumen APBDes yang dapat diakses untuk transparansi dan informasi publik.
-                    Anda dapat melihat atau mengunduh dokumen sesuai kebutuhan.
+                <p class="text-gray-500 mb-8 text-center max-w-2xl mx-auto">
+                    Berikut adalah daftar dokumen APBDes, BUMDes, dan Kopdes yang dapat diakses untuk transparansi serta
+                    informasi publik.
+                    Anda dapat melihat atau mengunduh dokumen sesuai kebutuhan untuk memastikan keterbukaan dan
+                    akuntabilitas pengelolaan desa.
                 </p>
 
 
+
                 <div class="space-y-6">
-                    @foreach (range(1, 4) as $i)
+                    @php
+                        $laporan = [
+                            ['judul' => 'LAPORAN BULAN JANUARI 2025', 'tanggal' => 'Kamis, 19/06/2025'],
+                            ['judul' => 'LAPORAN BULAN FEBRUARI 2025', 'tanggal' => 'Kamis, 19/06/2025'],
+                            ['judul' => 'LAPORAN BULAN MARET 2025', 'tanggal' => 'Kamis, 19/06/2025'],
+                            ['judul' => 'LAPORAN BULAN APRIL 2025', 'tanggal' => 'Kamis, 19/06/2025'],
+                            ['judul' => 'LAPORAN BULAN MEI 2025', 'tanggal' => 'Kamis, 19/06/2025'],
+                            ['judul' => 'LAPORAN BULAN JUNI 2025', 'tanggal' => 'Jumat, 29/08/2025'],
+                        ];
+                    @endphp
+
+                    @foreach ($laporan as $data)
                         <div
                             class="border-l-4 border-teal-500 bg-white p-6 rounded-lg hover:bg-teal-50 transition-all duration-300 flex flex-col md:flex-row md:items-center md:justify-between shadow-sm">
                             <div>
-                                <h3 class="text-xl text-gray-900">
-                                    APBDes 2025 - {{ $i <= 2 ? 'POKOK' : 'PERUBAHAN' }}
-                                </h3>
+                                <h3 class="text-xl text-gray-900">{{ $data['judul'] }}</h3>
                                 <p class="text-gray-500 text-sm mt-1 flex items-center gap-2">
                                     <i class="bi bi-calendar3 text-teal-600"></i>
-                                    Jumat, 05/09/2025
+                                    {{ $data['tanggal'] }}
                                 </p>
                             </div>
 
                             <div class="flex gap-3 mt-4 md:mt-0">
                                 <button
-                                    @click="showModal = true; modalTitle='APBDes 2025 - {{ $i <= 2 ? 'POKOK' : 'PERUBAHAN' }}'; excelData=[['Item A','1000','Rp1.000'],['Item B','2000','Rp2.000']]"
+                                    @click="showModal = true; modalTitle='{{ $data['judul'] }}'; excelData=[['Item A','1000','Rp1.000'],['Item B','2000','Rp2.000']]"
                                     class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
                                     <i class="bi bi-file-earmark-pdf-fill text-lg"></i>
                                     <span>Lihat</span>
@@ -58,6 +69,7 @@
                         </div>
                     @endforeach
                 </div>
+
 
                 <!-- PAGINATION (HTML BIASA) -->
                 <div class="flex justify-center mt-8 space-x-2">

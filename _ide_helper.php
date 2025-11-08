@@ -211,7 +211,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the path to the application configuration files.
          *
-         * @param string $path
+         * @param string $path 
          * @return string
          * @static
          */

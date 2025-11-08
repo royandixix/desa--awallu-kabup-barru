@@ -65,6 +65,27 @@ Route::prefix('user')->name('user.')->group(function () {
         ->name('pengaduan');
     Route::get('/kontak', fn() => view('user.page.home.kontak_saran'))
         ->name('kontak');
+
+    Route::get('/user/transparansi', function () {
+        return view('user.page.transparansi.transparansi');
+    })->name('transparansi');
+
+      // Transparansi
+    Route::get('/transparansi/anggaran', function () {
+        return view('user.page.transparansi.transparansi', ['halaman' => 'anggaran']);
+    })->name('transparansi.anggaran');
+
+    Route::get('/transparansi/bumdes', function () {
+        return view('user.page.transparansi.transparansi', ['halaman' => 'bumdes']);
+    })->name('transparansi.bumdes');
+
+    Route::get('/transparansi/dokumen', function () {
+        return view('user.page.transparansi.transparansi', ['halaman' => 'dokumen']);
+    })->name('transparansi.dokumen');
+
+    Route::get('/transparansi/laporan', function () {
+        return view('user.page.transparansi.transparansi', ['halaman' => 'laporan']);
+    })->name('transparansi.laporan');
 });
 
 // =======================
