@@ -10,15 +10,15 @@
 
   <!-- 🖼️ BANNER UTAMA -->
   <div id="animated-banner"
-       class="w-full max-w-7xl mt-8 px-4 relative group overflow-hidden rounded-3xl shadow-2xl opacity-0 translate-y-8 transition-all duration-1000">
+       class="w-full max-w-7xl mt-8 px-4 relative group overflow-hidden  shadow-2xl opacity-0 translate-y-8 transition-all duration-1000">
 
     <!-- Gambar -->
     <img src="{{ asset('img/DESA_LAWALLU/FOTO_BERSAMA/WhatsApp Image 2025-10-28 at 09.36.24_79c828f2.jpg') }}"
          alt="Bersama Warga Lawallu"
-         class="w-full h-80 sm:h-96 md:h-[500px] object-cover rounded-3xl transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:brightness-110">
+         class="w-full h-80 sm:h-96 md:h-[500px] object-cover  transition-transform duration-700 ease-in-out group-hover:scale-105 group-hover:brightness-110">
 
     <!-- Gradient Overlay (Desktop) -->
-    <div class="absolute inset-0 hidden sm:block bg-gradient-to-t from-black/60 via-black/20 to-transparent rounded-3xl transition-all duration-700 group-hover:opacity-90"></div>
+    <div class="absolute inset-0 hidden sm:block bg-gradient-to-t from-black/60 via-black/20 to-transparent  transition-all duration-700 group-hover:opacity-90"></div>
 
     <!-- Teks Overlay (Desktop) -->
     <div class="absolute inset-0 hidden sm:flex flex-col justify-end p-8 text-white space-y-3">

@@ -17,14 +17,21 @@ Route::prefix('user')->name('user.')->group(function () {
     // -----------------------
     // Transparansi
     // -----------------------
-    Route::get('/transparansi/anggaran', fn() => view('user.page.transparansi.anggaran'))
-        ->name('transparansi.anggaran');
-    Route::get('/transparansi/laporan', fn() => view('user.page.transparansi.laporan'))
-        ->name('transparansi.laporan');
-    Route::get('/transparansi/dokumen', fn() => view('user.page.transparansi.dokumen'))
-        ->name('transparansi.dokumen');
-    Route::get('/transparansi/bumdes', fn() => view('user.page.transparansi.bumdes'))
-        ->name('transparansi.bumdes');
+    Route::get('/transparansi/anggaran', function () {
+        return view('user.page.transparansi.transparansi', ['halaman' => 'anggaran']);
+    })->name('transparansi.anggaran');
+
+    Route::get('/transparansi/laporan', function () {
+        return view('user.page.transparansi.transparansi', ['halaman' => 'laporan']);
+    })->name('transparansi.laporan');
+
+    Route::get('/transparansi/dokumen', function () {
+        return view('user.page.transparansi.transparansi', ['halaman' => 'dokumen']);
+    })->name('transparansi.dokumen');
+
+    Route::get('/transparansi/bumdes', function () {
+        return view('user.page.transparansi.transparansi', ['halaman' => 'bumdes']);
+    })->name('transparansi.bumdes');
 
     // -----------------------
     // Profil Desa
@@ -49,8 +56,32 @@ Route::prefix('user')->name('user.')->group(function () {
     // -----------------------
     // Struktur
     // -----------------------
-    Route::get('/struktur', fn() => view('user.page.home.struktur_organisasi'))
-        ->name('struktur');
+    Route::prefix('struktur')->name('struktur.')->group(function () {
+
+        Route::get('/', fn() => view('user.page.struktur.struktur'))
+            ->name('index'); // Halaman utama struktur
+
+        Route::get('/pemerintahan-desa', fn() => view('user.page.struktur.pemerintahan_desa'))
+            ->name('pemerintahan_desa');
+
+        Route::get('/bpd', fn() => view('user.page.struktur.bpd'))
+            ->name('bpd');
+
+        Route::get('/pkk', fn() => view('user.page.struktur.pkk'))
+            ->name('pkk');
+
+        Route::get('/lpm', fn() => view('user.page.struktur.lpm'))
+            ->name('lpm');
+
+        Route::get('/karang-taruna', fn() => view('user.page.struktur.karang_taruna'))
+            ->name('karang_taruna');
+
+        Route::get('/posyandu', fn() => view('user.page.struktur.posyandu'))
+            ->name('posyandu');
+    });
+
+
+
     Route::get('/bpd', fn() => view('user.page.home.visimisi'))
         ->name('bpd');
     Route::get('/karangtaruna', fn() => view('user.page.home.menelusuri_keindahan'))
@@ -59,33 +90,29 @@ Route::prefix('user')->name('user.')->group(function () {
     // -----------------------
     // Berita, Pengaduan, Kontak
     // -----------------------
-    Route::get('/berita', fn() => view('user.page.home.sambutan'))
-        ->name('berita');
+    // -----------------------
+    // Berita, Pengaduan, Kontak
+    // -----------------------
+    Route::get('/berita', fn() => view('user.page.berita.berita'))
+        ->name('berita'); // jadi user.berita
+
+    Route::get('/berita/{slug}', function ($slug) {
+        return view('user.page.berita.berita_detail', ['slug' => $slug]);
+    })->name('berita.detail'); // jadi user.berita.detail
+
     Route::get('/pengaduan', fn() => view('user.page.home.kontak_saran'))
         ->name('pengaduan');
+
     Route::get('/kontak', fn() => view('user.page.home.kontak_saran'))
         ->name('kontak');
 
-    Route::get('/user/transparansi', function () {
+
+    // -----------------------
+    // Transparansi umum
+    // -----------------------
+    Route::get('/transparansi', function () {
         return view('user.page.transparansi.transparansi');
     })->name('transparansi');
-
-      // Transparansi
-    Route::get('/transparansi/anggaran', function () {
-        return view('user.page.transparansi.transparansi', ['halaman' => 'anggaran']);
-    })->name('transparansi.anggaran');
-
-    Route::get('/transparansi/bumdes', function () {
-        return view('user.page.transparansi.transparansi', ['halaman' => 'bumdes']);
-    })->name('transparansi.bumdes');
-
-    Route::get('/transparansi/dokumen', function () {
-        return view('user.page.transparansi.transparansi', ['halaman' => 'dokumen']);
-    })->name('transparansi.dokumen');
-
-    Route::get('/transparansi/laporan', function () {
-        return view('user.page.transparansi.transparansi', ['halaman' => 'laporan']);
-    })->name('transparansi.laporan');
 });
 
 // =======================

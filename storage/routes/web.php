@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\GaleriController;
 
 // =======================
 // 🔹 HALAMAN UTAMA → langsung tampil halaman user tanpa login
@@ -11,21 +12,16 @@ Route::get('/', fn() => redirect()->route('user.home'));
 Route::prefix('user')->name('user.')->group(function () {
 
     // Halaman Utama / Profil / Galeri
-    Route::get('/home', fn() => view('user.page.home.conten'))->name('home');
+    Route::get('/home', fn() => view('user.page.home.content'))->name('home');
     Route::get('/profil', fn() => view('user.page.profil_desa.profil_desa'))->name('profil');
     Route::get('/galeri', fn() => view('user.page.home.foto_bersama_warga'))->name('galeri');
-    Route::get('/galeri/{filename}', [App\Http\Controllers\User\GaleriController::class, 'show'])
-        ->name('galeri.detail');
+    Route::get('/galeri/{filename}', [GaleriController::class, 'show'])->name('galeri.detail');
 
-    // Transparansi Dropdown
-    Route::get('/transparansi/anggaran', fn() => view('user.page.transparansi.anggaran'))
-        ->name('transparansi.anggaran');
-    Route::get('/transparansi/laporan', fn() => view('user.page.transparansi.laporan'))
-        ->name('transparansi.laporan');
-    Route::get('/transparansi/dokumen', fn() => view('user.page.transparansi.dokumen'))
-        ->name('transparansi.dokumen');
-    Route::get('/transparansi/bumdes', fn() => view('user.page.transparansi.bumdes'))
-        ->name('transparansi.bumdes');
+    // Transparansi
+    Route::get('/transparansi/anggaran', fn() => view('user.page.transparansi.anggaran'))->name('transparansi.anggaran');
+    Route::get('/transparansi/laporan', fn() => view('user.page.transparansi.laporan'))->name('transparansi.laporan');
+    Route::get('/transparansi/dokumen', fn() => view('user.page.transparansi.dokumen'))->name('transparansi.dokumen');
+    Route::get('/transparansi/bumdes', fn() => view('user.page.transparansi.bumdes'))->name('transparansi.bumdes');
 
     // Menu Lain
     Route::get('/berita', fn() => view('user.page.home.berita'))->name('berita');
@@ -34,8 +30,10 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/keuangan', fn() => view('user.page.home.keuangan'))->name('keuangan');
     Route::get('/kontak', fn() => view('user.page.home.kontak'))->name('kontak');
     Route::get('/pembangunan', fn() => view('user.page.home.pembangunan'))->name('pembangunan');
-    Route::get('/pengaduan', fn() => view('user.page.home.pengaduan'))->name('pengaduan');
     Route::get('/struktur', fn() => view('user.page.home.struktur'))->name('struktur');
+
+    // ✅ Tambahkan route Pengaduan di sini
+    Route::get('/pengaduan', fn() => view('user.page.pengaduan.pengaduan'))->name('pengaduan');
 });
 
 // =======================

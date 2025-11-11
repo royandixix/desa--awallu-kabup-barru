@@ -1,183 +1,112 @@
 @extends('user.layouts.app')
 @section('title', 'Berita Desa Lawallu')
-@section('header_transparasi')
+
+@section('header_berita')
     @include('user.partials.navbar')
     @include('user.partials.header_berita')
 @endsection
 
-
 @section('content')
-    <div class="bg-gray-50 py-16 text-[18px]" x-data="{ tahun: '2025' }">
-        <div class="container mx-auto px-8 max-w-7xl">
+<div class="bg-gray-50 py-16">
+    <div class="container mx-auto px-8 max-w-7xl">
 
-            <!-- LAPORAN TRANSPARANSI ANGGARAN -->
-            <div class="mb-12" data-aos="fade-up" data-aos-delay="200">
-                <!-- Card Transparansi Anggaran -->
+        <!-- GRID BERITA -->
+        <section class="mb-20" data-aos="fade-up" data-aos-delay="200">
+            @php
+                $berita = [
+                    [
+                        'image' => 'img/user/berita/1749805291.webp',
+                        'kategori' => 'Kegiatan Desa',
+                        'judul' => 'Gotong Royong Bersama Masyarakat',
+                        'author' => 'Administrator',
+                        'tanggal' => '2025-06-13 09:01:31',
+                    ],
+                    [
+                        'image' => 'img/user/berita/1750163922.webp',
+                        'kategori' => 'Acara Desa',
+                        'judul' => 'Pelatihan Kewirausahaan untuk Pemuda',
+                        'author' => 'Administrator',
+                        'tanggal' => '2025-06-17 12:38:42',
+                    ],
+                    // ... berita lainnya
+                ];
+            @endphp
 
-            </div>
-
-            <!-- DAFTAR DOKUMEN -->
-            <section class="mb-20" data-aos="fade-up" data-aos-delay="400">
-                <h2 class="text-3xl text-gray-800 mb-2 text-center">
-                    Transparansi Bumdes dan Kopdes MP
-                </h2>
-                <p class="text-gray-500 mb-8 text-center max-w-2xl mx-auto">
-                    Berikut adalah daftar dokumen APBDes, BUMDes, dan Kopdes yang dapat diakses untuk transparansi serta
-                    informasi publik.
-                    Anda dapat melihat atau mengunduh dokumen sesuai kebutuhan untuk memastikan keterbukaan dan
-                    akuntabilitas pengelolaan desa.
-                </p>
-
-
-
-                <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach ($berita as $item)
                     @php
-                        $laporan = [
-                            ['judul' => 'LAPORAN BULAN JANUARI 2025', 'tanggal' => 'Kamis, 19/06/2025'],
-                            ['judul' => 'LAPORAN BULAN FEBRUARI 2025', 'tanggal' => 'Kamis, 19/06/2025'],
-                            ['judul' => 'LAPORAN BULAN MARET 2025', 'tanggal' => 'Kamis, 19/06/2025'],
-                            ['judul' => 'LAPORAN BULAN APRIL 2025', 'tanggal' => 'Kamis, 19/06/2025'],
-                            ['judul' => 'LAPORAN BULAN MEI 2025', 'tanggal' => 'Kamis, 19/06/2025'],
-                            ['judul' => 'LAPORAN BULAN JUNI 2025', 'tanggal' => 'Jumat, 29/08/2025'],
-                        ];
+                        $slug = \Illuminate\Support\Str::slug($item['judul']);
                     @endphp
 
-                    @foreach ($laporan as $data)
-                        <div
-                            class="border-l-4 border-teal-500 bg-white p-6 rounded-lg hover:bg-teal-50 transition-all duration-300 flex flex-col md:flex-row md:items-center md:justify-between shadow-sm">
-                            <div>
-                                <h3 class="text-xl text-gray-900">{{ $data['judul'] }}</h3>
-                                <p class="text-gray-500 text-sm mt-1 flex items-center gap-2">
-                                    <i class="bi bi-calendar3 text-teal-600"></i>
-                                    {{ $data['tanggal'] }}
-                                </p>
-                            </div>
+                    <div class="bg-white overflow-hidden border border-gray-200 hover:border-teal-500 transition-all duration-500 group cursor-pointer">
+                        <!-- GAMBAR -->
+                        <div class="relative overflow-hidden h-72">
+                            <img src="{{ asset($item['image']) }}" alt="{{ $item['judul'] }}"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
 
-                            <div class="flex gap-3 mt-4 md:mt-0">
-                                <button
-                                    @click="showModal = true; modalTitle='{{ $data['judul'] }}'; excelData=[['Item A','1000','Rp1.000'],['Item B','2000','Rp2.000']]"
-                                    class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
-                                    <i class="bi bi-file-earmark-pdf-fill text-lg"></i>
-                                    <span>Lihat</span>
-                                </button>
-                                <button
-                                    class="px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-600 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
-                                    <i class="bi bi-download text-lg"></i>
-                                    <span>Download</span>
-                                </button>
+                            <!-- OVERLAY -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 opacity-90 group-hover:opacity-100 transition-all duration-500">
+                                <span class="inline-block mb-2 px-3 py-1 bg-teal-500/80 text-white text-[11px] uppercase tracking-widest group-hover:bg-teal-600 transition-all">
+                                    {{ $item['kategori'] }}
+                                </span>
+
+                                <!-- JUDUL -->
+                                <a href="{{ route('user.berita.detail', ['slug' => $slug]) }}"
+                                    class="text-white text-2xl font-semibold leading-snug line-clamp-2 transition-colors duration-300 group-hover:text-teal-400">
+                                    {{ $item['judul'] }}
+                                </a>
                             </div>
                         </div>
-                    @endforeach
-                </div>
 
+                        <!-- KONTEN -->
+                        <div class="p-6">
+                            <a href="{{ route('user.berita.detail', ['slug' => $slug]) }}"
+                               class="flex items-center justify-between text-gray-700 border-t border-gray-200 pt-5 group-hover:text-teal-600 transition-colors duration-300">
 
-                <!-- PAGINATION (HTML BIASA) -->
-                <div class="flex justify-center mt-8 space-x-2">
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        &laquo;
-                    </a>
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        1
-                    </a>
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        2
-                    </a>
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        3
-                    </a>
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        &raquo;
-                    </a>
-                </div>
-            </section>
-        </div>
+                                <div class="flex items-center gap-4">
+                                    <i class="bi bi-person-circle text-teal-600 text-3xl group-hover:text-teal-500 transition-colors duration-300"></i>
+                                    <div>
+                                        <p class="font-semibold text-lg text-gray-900 group-hover:text-teal-600 transition-colors duration-300">
+                                            {{ $item['author'] }}
+                                        </p>
+                                        <p class="text-sm text-gray-500 group-hover:text-teal-500 transition-colors duration-300">
+                                            Admin Desa
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-2 text-gray-600 group-hover:text-teal-600 transition-colors duration-300">
+                                    <i class="bi bi-calendar3 text-teal-600 text-xl group-hover:text-teal-500 transition-colors duration-300"></i>
+                                    <span class="text-base font-medium">
+                                        {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
+                                    </span>
+                                </div>
+                            </a> 
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="flex justify-center mt-10 space-x-2">
+                <a href="#" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+                <a href="#" class="px-4 py-2 bg-teal-600 border border-teal-600 text-white font-semibold">1</a>
+                <a href="#" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors">2</a>
+                <a href="#" class="px-4 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </div>
+        </section>
     </div>
+</div>
 
-    <!-- SCRIPT -->
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('budgetChart')?.getContext('2d');
-            if (!ctx) return;
-
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['2023', '2024', '2025'],
-                    datasets: [{
-                            label: 'Pendapatan',
-                            data: [3100000000, 3700000000, 2970729882],
-                            backgroundColor: 'rgba(45, 212, 191, 0.8)',
-                            borderRadius: 10,
-                        },
-                        {
-                            label: 'Pengeluaran',
-                            data: [2700000000, 3200000000, 1848644408],
-                            backgroundColor: 'rgba(244, 114, 182, 0.8)',
-                            borderRadius: 10,
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        tooltip: {
-                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                            cornerRadius: 10,
-                            padding: 12,
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            callbacks: {
-                                label: (ctx) => 'Rp ' + ctx.parsed.y.toLocaleString('id-ID'),
-                            },
-                        },
-                        legend: {
-                            labels: {
-                                color: '#374151',
-                                font: {
-                                    size: 14,
-                                    weight: '500'
-                                },
-                            },
-                        },
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: (v) => 'Rp ' + (v / 1e9).toFixed(1) + ' M',
-                                color: '#6b7280',
-                                font: {
-                                    size: 12
-                                },
-                            },
-                            grid: {
-                                color: 'rgba(229, 231, 235, 0.4)'
-                            },
-                        },
-                        x: {
-                            ticks: {
-                                color: '#374151',
-                                font: {
-                                    size: 13
-                                },
-                            },
-                            grid: {
-                                display: false
-                            },
-                        },
-                    },
-                },
-            });
-        });
-    </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+</script>
 @endsection

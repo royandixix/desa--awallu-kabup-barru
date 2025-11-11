@@ -4,38 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Desa Batupute - Media Informasi')</title>
+    <title>@yield('title', 'Desa Lawallu - Media Informasi')</title>
 
-    {{-- Fonts & Icons --}}
+    {{-- 🪶 Fonts & Icons --}}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-    {{-- Tailwind, Bootstrap, Alpine --}}
+    {{-- 🎨 Tailwind & Bootstrap --}}
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
+    {{-- ⚙️ Alpine.js --}}
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+
+    {{-- ✨ AOS --}}
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    {{-- Vendor CSS --}}
-    <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+    {{-- 🧩 Vendor CSS --}}
     <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-    {{-- Custom CSS --}}
+    {{-- 🎨 Custom CSS --}}
     <link href="/assets/css/main.css" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
 
-    {{-- Laravel Vite --}}
+    {{-- ⚡ Laravel Vite --}}
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- Global Styles --}}
+    {{-- 💅 Global Styles --}}
     <style>
-        html,
-        body {
+        html, body {
             margin: 0;
             padding: 0;
             width: 100%;
@@ -94,10 +94,15 @@
     </style>
 </head>
 
-<body class="bg-light text-dark antialiased">
+<body class="bg-light text-dark antialiased" x-data="{ openModal: false, modalImage: '' }">
 
-    {{-- Header & Navbar --}}
-    @if (View::hasSection('header_profil_desa'))
+    {{-- Navbar --}}
+    @includeIf('user.partials.navbar')
+
+    {{-- Header Dinamis --}}
+    @if (View::hasSection('header_pengaduan'))
+        @yield('header_pengaduan')
+    @elseif (View::hasSection('header_profil_desa'))
         @yield('header_profil_desa')
     @elseif (View::hasSection('header_galeri'))
         @yield('header_galeri')
@@ -105,31 +110,21 @@
         @yield('header_detail_gambar')
     @elseif (View::hasSection('header_transparansi'))
         @yield('header_transparansi')
+    @elseif (View::hasSection('header_berita'))
+        @yield('header_berita')
     @else
-        @includeIf('user.partials.navbar')
         @includeIf('user.partials.header')
     @endif
-
-
 
     {{-- Main Content --}}
     <main class="overflow-x-hidden">
         @yield('content')
-        @yield('sambutan')
-        @yield('visimisi')
-        @yield('foto_bersama_warga')
-        @yield('administrasipenduduk')
-        @yield('menelusuri_keindahan')
-        @yield('layanan_kami')
-        @yield('struktur_organisasi')
-        @yield('kontak_saran')
-
     </main>
 
     {{-- Footer --}}
     @includeIf('user.partials.footer')
 
-    {{-- Tombol Scroll ke Atas --}}
+    {{-- Tombol Scroll Ke Atas --}}
     <button id="scrollTopBtn" title="Kembali ke atas">
         <i class="bi bi-arrow-up-short"></i>
     </button>
@@ -139,26 +134,25 @@
 
     {{-- Vendor JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/vendor/aos/aos.js"></script>
     <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="/assets/vendor/php-email-form/validate.js"></script>
     <script src="/assets/js/main.js"></script>
+
+    {{-- Heroicons --}}
     <script src="https://unpkg.com/heroicons@2.0.18/dist/heroicons.min.js"></script>
 
-    {{-- Animasi Scroll & Tombol Ke Atas --}}
+    {{-- Animasi Scroll + ScrollTop Button --}}
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Animasi saat scroll
+            // Animasi scroll muncul
             const elements = document.querySelectorAll('[data-animate]');
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
-            }, {
-                threshold: 0.2
-            });
+            }, { threshold: 0.2 });
             elements.forEach(el => observer.observe(el));
 
             // Tombol scroll ke atas
@@ -167,16 +161,13 @@
                 scrollTopBtn.classList.toggle("show", window.scrollY > 200);
             });
             scrollTopBtn.addEventListener("click", () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+                window.scrollTo({ top: 0, behavior: "smooth" });
             });
 
-
+            // Inisialisasi AOS
+            AOS.init({ duration: 1000, once: true });
         });
     </script>
 
 </body>
-
 </html>

@@ -1,162 +1,193 @@
 @extends('user.layouts.app')
 
-@section('title', 'Beranda')
+@section('title', 'Galeri Desa Lawallu')
 
 @section('content')
-<section class="bg-gradient-to-br from-green-600 to-green-700 min-h-screen flex flex-col justify-center py-14 sm:py-16 md:py-20 overflow-hidden">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+<div class="bg-white">
+    <section class="">
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
 
-    {{-- Wrapper Teks (kiri) dan Card (kanan) --}}
-    <div class="flex flex-col lg:flex-row items-start justify-between gap-12 sm:gap-16 lg:gap-24">
+            {{-- HEADER SECTION --}}
+            <div class="mb-16 text-left max-w-3xl mx-auto">
+                <h1 class="text-5xl md:text-6xl  text-gray-900 mb-6 leading-tight">
+                    Desa Lawallu, Barru
+                </h1>
+                <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-8">
+                    Desa Lawallu terletak di Kecamatan Soppeng Riaja, Kabupaten Barru, Sulawesi Selatan.
+                    Dikenal dengan semangat gotong royong, budaya kekeluargaan, dan keindahan alamnya,
+                    Desa Lawallu terus berupaya membangun kesejahteraan bersama melalui pelayanan publik yang transparan dan
+                    partisipatif.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#struktur-organisasi"
+                        class="inline-block border-2 border-gray-900 text-gray-900 px-8 py-3  hover:bg-gray-900 hover:text-white transition-all duration-300">
+                        Lihat Struktur Organisasi
+                    </a>
+                    <a href="#kontak-saran"
+                        class="inline-block bg-green-600 text-white px-8 py-3  hover:bg-green-700 transition-all duration-300">
+                        Hubungi Kami
+                    </a>
+                </div>
 
-      {{-- TEKS KIRI --}}
-      <div class="w-full lg:w-1/2 flex flex-col justify-center fade-left">
-        <div class="text-white max-w-xl lg:ml-10">
-          <h2 class="font-semibold text-lg sm:text-xl uppercase tracking-wide mb-4">
-            Informasi Publik Kabupaten Barru
-          </h2>
 
-          <h1 class="text-3xl sm:text-5xl md:text-6xl tracking-tight drop-shadow-xl mb-6">
-            Mewujudkan Pemerintahan yang Terbuka, Responsif, dan Melayani
-          </h1>
-
-          <p class="text-base sm:text-lg md:text-xl drop-shadow-sm leading-relaxed text-gray-100">
-            Melalui komitmen terhadap transparansi dan akuntabilitas, Pemerintah Kabupaten Barru menghadirkan berbagai informasi publik secara terbuka untuk seluruh masyarakat.
-            Akses galeri kegiatan, laporan pembangunan, struktur organisasi, serta berita terbaru dengan mudah dan cepat.
-          </p>
-        </div>
-      </div>
-
-      {{-- CARD KANAN --}}
-      @php
-        $fitur = [
-          [
-            'judul' => 'Galeri',
-            'warna' => 'bg-gradient-to-br from-teal-500 to-teal-600',
-            'ikon' => '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',
-          ],
-          [
-            'judul' => 'Transparansi',
-            'warna' => 'bg-gradient-to-br from-emerald-500 to-teal-600',
-            'ikon' => '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
-          ],
-          [
-            'judul' => 'Berita',
-            'warna' => 'bg-gradient-to-br from-green-500 to-teal-600',
-            'ikon' => '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>',
-          ],
-          [
-            'judul' => 'Struktur Organisasi',
-            'warna' => 'bg-gradient-to-br from-cyan-500 to-teal-600',
-            'ikon' => '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
-          ],
-        ];
-      @endphp
-
-      <div class="w-full lg:w-1/2 flex justify-center lg:justify-end fade-right">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 w-full max-w-[580px]">
-          @foreach ($fitur as $f)
-            <div class="group relative overflow-hidden {{ $f['warna'] }} rounded-3xl shadow-xl p-8 text-center transform transition-all duration-500 hover:scale-105 hover:shadow-2xl flex flex-col items-center justify-center min-h-[220px] border border-white/10">
-              
-              {{-- Efek kilau hover --}}
-              <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-
-              {{-- Ikon --}}
-              <div class="flex items-center justify-center mb-4 relative z-10">
-                <svg class="h-20 w-20 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                  {!! $f['ikon'] !!}
-                </svg>
-              </div>
-
-             
-
-              {{-- Judul --}}
-              <h3 class="text-white text-2xl font-bold relative z-10 drop-shadow-md tracking-wide">
-                {{ $f['judul'] }}
-              </h3>
-
-              {{-- Glow efek di bawah card --}}
-              <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
-          @endforeach
+
+
+            {{-- GALLERY GRID --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                @php
+                    $galleries = [
+                        [
+                            'title' => 'Galeri',
+                            'description' =>
+                                'Aktivitas warga desa dalam berbagai kegiatan sosial dan budaya yang memperkuat solidaritas dan kebersamaan.',
+                            'icon' => 'K',
+                            'image' =>
+                                'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80',
+                        ],
+                        [
+                            'title' => 'Transparansi',
+                            'description' =>
+                                'Semangat kebersamaan warga Desa Lawallu dalam menjaga kebersihan lingkungan dan memperkuat hubungan sosial.',
+                            'icon' => 'G',
+                            'image' =>
+                                'https://images.unsplash.com/photo-1581091012184-5c2f39c5e7b8?auto=format&fit=crop&w=800&q=80',
+                        ],
+                        [
+                            'title' => 'Berita',
+                            'description' =>
+                                'Proses pembangunan sarana dan prasarana umum yang mendukung pertumbuhan ekonomi dan kesejahteraan warga desa.',
+                            'icon' => 'P',
+                            'image' =>
+                                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+                        ],
+                        [
+                            'title' => 'Struktur Organisasi',
+                            'description' =>
+                                'Pusat pelayanan dan kegiatan administrasi Pemerintah Desa Lawallu yang siap melayani masyarakat dengan baik.',
+                            'icon' => '+',
+                            'image' =>
+                                'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80',
+                            'extra' =>
+                                'Struktur organisasi ini menampilkan hierarki dan pembagian tugas dari setiap bagian di Pemerintah Desa Lawallu, agar pelayanan kepada masyarakat lebih terstruktur dan efisien.',
+                        ],
+                    ];
+                @endphp
+
+                @foreach ($galleries as $gallery)
+                    @if ($gallery['title'] === 'Struktur Organisasi')
+                        {{-- Layout dua kolom: Card Struktur Organisasi + Duplikat Header Galeri --}}
+                        <div class="col-span-1 lg:col-span-3 flex flex-col lg:flex-row gap-8 items-start">
+
+                            {{-- Card Gambar Struktur Organisasi --}}
+                            <div
+                                class="lg:w-1/2 group relative bg-white border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-500">
+                                <div class="relative overflow-hidden">
+                                    <img src="{{ $gallery['image'] }}" alt="{{ $gallery['title'] }}"
+                                        class="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                                    </div>
+
+                                    {{-- Icon --}}
+                                    <div
+                                        class="absolute top-6 left-6 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg">
+                                        <span class="text-green-600  text-2xl">{{ $gallery['icon'] }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                                    <h3 class="text-3xl  mb-3">{{ $gallery['title'] }}</h3>
+                                    <p class="text-gray-200 text-base mb-5 line-clamp-3">
+                                        {{ $gallery['description'] }}
+                                    </p>
+                                    <div class="flex gap-2">
+                                        <span
+                                            class="text-xs bg-cyan-500 text-white px-3 py-1 rounded-full font-medium">Dokumentasi</span>
+                                        <span
+                                            class="text-xs bg-green-600 text-white px-3 py-1 rounded-full font-medium">Featured</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Penjelasan tentang Desa Lawallu Barru di samping --}}
+                            <div class="lg:w-1/2 flex flex-col justify-center max-w-3xl mx-auto px-4">
+                                <h1 class="text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 ">
+                                    Tentang <span class="text-green-600">Desa Lawallu</span>
+                                </h1>
+
+                                <p class="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
+                                    <strong class="text-green-700">Desa Lawallu</strong> terletak di Kecamatan Soppeng
+                                    Riaja, Kabupaten Barru, Sulawesi Selatan.
+                                    Dikenal dengan masyarakatnya yang <span class="text-green-600 ">gotong
+                                        royong</span>,
+                                    lingkungan yang <span class="text-green-500 ">asri dan harmonis</span>,
+                                    serta semangat tinggi dalam membangun kesejahteraan bersama.
+                                    Pemerintah Desa Lawallu berkomitmen memberikan <span class="text-green-700 ">pelayanan
+                                        publik yang transparan</span>,
+                                    partisipatif, dan berorientasi pada kemajuan desa yang <span
+                                        class="text-green-600 ">mandiri dan sejahtera.</span>
+                                </p>
+
+
+                            </div>
+
+
+
+
+                        </div>
+                    @else
+                        {{-- Layout default untuk card lain --}}
+                        <div
+                            class="group relative bg-white border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-500">
+                            <div class="relative overflow-hidden">
+                                <img src="{{ $gallery['image'] }}" alt="{{ $gallery['title'] }}"
+                                    class="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                                </div>
+                                <div
+                                    class="absolute top-6 left-6 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="text-green-600  text-2xl">{{ $gallery['icon'] }}</span>
+                                </div>
+                            </div>
+
+                            <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                                <h3 class="text-3xl  mb-3">{{ $gallery['title'] }}</h3>
+                                <p class="text-gray-200 text-base mb-5 line-clamp-3">
+                                    {{ $gallery['description'] }}
+                                </p>
+                                <div class="flex gap-2">
+                                    <span
+                                        class="text-xs bg-cyan-500 text-white px-3 py-1 rounded-full font-medium">Dokumentasi</span>
+                                    <span
+                                        class="text-xs bg-green-600 text-white px-3 py-1 rounded-full font-medium">Featured</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+
+            </div>
         </div>
-      </div>
-    </div>
 
-    {{-- Section Bawah --}}
-    <div class="mt-24 sm:mt-32 md:mt-40 lg:mt-52 pb-16 sm:pb-20 md:pb-24 fade-up">
-      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center gap-8 sm:gap-12">
-        <div class="flex-1 text-left">
-          <h2 class="text-white font-semibold text-lg sm:text-xl uppercase tracking-wide">
-            Informasi Publik Kabupaten Barru
-          </h2>
-
-          <h1 class="mt-4 text-white text-3xl sm:text-5xl md:text-6xl tracking-tight drop-shadow-xl">
-            Mewujudkan Pemerintahan yang Terbuka, Responsif, dan Melayani
-          </h1>
-
-          <p class="mt-5 sm:mt-7 text-white text-base sm:text-lg md:text-xl drop-shadow-sm leading-relaxed">
-            Melalui komitmen terhadap transparansi dan akuntabilitas, Pemerintah Kabupaten Barru menghadirkan berbagai informasi publik secara terbuka untuk seluruh masyarakat.
-            Akses galeri kegiatan, laporan pembangunan, struktur organisasi, serta berita terbaru dengan mudah dan cepat.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {{-- Animasi Fade Scroll --}}
-  <style>
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(40px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    
-
-    @keyframes fadeLeft {
-      0% { opacity: 0; transform: translateX(-60px); }
-      100% { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes fadeRight {
-      0% { opacity: 0; transform: translateX(60px); }
-      100% { opacity: 1; transform: translateX(0); }
-    }
-
-    .fade-up, .fade-left, .fade-right {
-      opacity: 0;
-      transition: all 1s ease-out;
-    }
-
-    .show.fade-up { animation: fadeUp 1.1s ease-out forwards; }
-    .show.fade-left { animation: fadeLeft 1.1s ease-out forwards; }
-    .show.fade-right { animation: fadeRight 1.1s ease-out forwards; }
-  </style>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-
-      document.querySelectorAll('.fade-up, .fade-left, .fade-right')
-        .forEach(el => observer.observe(el));
-    });
-  </script>
-</section>
+        {{-- CUSTOM STYLES --}}
+        <style>
+            .line-clamp-3 {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        </style>
+    </section>
+    @include('user.page.home.sambutan')
+    @include('user.page.home.visimisi')
+    @include('user.page.home.foto_bersama_warga')
+    @include('user.page.home.administrasipenduduk')
+    @include('user.page.home.menelusuri_keindahan')
+    @include('user.page.home.layanan_kami')
+    @include('user.page.home.struktur_organisasi')
+    @include('user.page.home.kontak_saran')
+</div>
 @endsection
-
-{{-- Include Section --}}
-@section('sambutan') @include('user.page.home.sambutan') @endsection
-@section('visimisi') @include('user.page.home.visimisi') @endsection
-@section('administrasipenduduk') @include('user.page.home.administrasipenduduk') @endsection
-@section('foto_bersama_warga') @include('user.page.home.foto_bersama_warga') @endsection
-@section('menelusuri_keindahan') @include('user.page.home.menelusuri_keindahan') @endsection
-@section('layanan_kami') @include('user.page.home.layanan_kami') @endsection
-@section('struktur_organisasi') @include('user.page.home.struktur_organisasi') @endsection
-@section('kontak_saran') @include('user.page.home.kontak_saran') @endsection
