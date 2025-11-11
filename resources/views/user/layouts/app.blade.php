@@ -35,6 +35,7 @@
 
     {{-- 💅 Global Styles --}}
     <style>
+        /* ... CSS Anda yang ada di sini ... */
         html, body {
             margin: 0;
             padding: 0;
@@ -139,9 +140,13 @@
     <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="/assets/vendor/php-email-form/validate.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="{{ asset('js/navbar.js') }}"></script>
 
     {{-- Heroicons --}}
     <script src="https://unpkg.com/heroicons@2.0.18/dist/heroicons.min.js"></script>
+    
+    {{-- 🎯 SCRIPT PERBAIKAN NAVBAR (PENTING) --}}
+    <script src="{{ asset('js/navbar.js') }}"></script> 
 
     {{-- Animasi Scroll + ScrollTop Button --}}
     <script>

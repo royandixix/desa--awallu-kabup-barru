@@ -38,6 +38,7 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', fn() => view('admin.dashboard'))->name('admin.dashboard');
 });
 
+
 // =======================
 // 🔹 PROFILE ROUTES
 // =======================

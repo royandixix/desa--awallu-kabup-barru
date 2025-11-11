@@ -118,9 +118,23 @@ Route::prefix('user')->name('user.')->group(function () {
 // =======================
 // 🔹 ADMIN ROUTES (memerlukan login & verified)
 // =======================
-Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', fn() => view('admin.dashboard'))->name('admin.dashboard');
+// Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+//     Route::get('/', fn() => view('admin.dashboard'))->name('admin.dashboard');
+// });
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Redirect /admin → /admin/dashboard
+    Route::get('/', fn() => redirect()->route('admin.dashboard'));
+
+    // Dashboard
+    Route::get('/dashboard', fn() => view('admin.dashboard'))->name('dashboard');
+
+    // Tambah halaman admin lain kalau perlu
+    // Route::get('/users', fn() => view('admin.pages.users'))->name('users');
 });
+
+
+
+
 
 // =======================
 // 🔹 PROFILE ROUTES (untuk user login saja)
