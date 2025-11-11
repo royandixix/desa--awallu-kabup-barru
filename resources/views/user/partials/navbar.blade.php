@@ -1,3 +1,26 @@
+<style>
+  .dropdown-content-desktop {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+  
+  .dropdown-content-desktop.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .dropdown-btn i {
+    transition: transform 0.3s ease;
+  }
+  
+  .dropdown-btn.active i {
+    transform: rotate(180deg);
+  }
+</style>
+
 <nav id="navbar" class="fixed top-0 inset-x-0 z-50 bg-teal-900/40 backdrop-blur-md border-b border-white/10 transition-all duration-500">
   <div class="w-full mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16 lg:h-20">
@@ -24,30 +47,30 @@
         <a href="{{ route('user.galeri') }}" class="px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 transition">Galeri</a>
 
         <!-- Dropdown Transparansi -->
-        <div class="relative">
+        <div class="relative dropdown-wrapper">
           <button class="dropdown-btn-desktop px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 flex items-center transition">
             Transparansi <i class="bi bi-chevron-down ml-1 text-xs"></i>
           </button>
-          <div class="dropdown-content-desktop hidden absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-md text-gray-900 rounded-xl shadow-xl border border-white/20 transition-all duration-300 z-50">
-            <a href="{{ route('user.transparansi.anggaran') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">Transparansi Anggaran</a>
+          <div class="dropdown-content-desktop absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-md text-gray-900 rounded-xl shadow-xl border border-white/20 z-50">
+            <a href="{{ route('user.transparansi.anggaran') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition rounded-t-xl">Transparansi Anggaran</a>
             <a href="{{ route('user.transparansi.laporan') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">Laporan Kegiatan</a>
             <a href="{{ route('user.transparansi.dokumen') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">Dokumen Perencanaan</a>
-            <a href="{{ route('user.transparansi.bumdes') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">Bumdes dan Kopdes MP</a>
+            <a href="{{ route('user.transparansi.bumdes') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition rounded-b-xl">Bumdes dan Kopdes MP</a>
           </div>
         </div>
 
         <!-- Dropdown Struktur -->
-        <div class="relative">
+        <div class="relative dropdown-wrapper">
           <button class="dropdown-btn-desktop px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 flex items-center transition">
             Struktur <i class="bi bi-chevron-down ml-1 text-xs"></i>
           </button>
-          <div class="dropdown-content-desktop hidden absolute top-full left-0 mt-2 w-52 bg-white/95 backdrop-blur-md text-gray-900 rounded-xl shadow-xl border border-white/20 transition-all duration-300 z-50">
-            <a href="{{ route('user.struktur.index') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">Pemerintah Desa</a>
+          <div class="dropdown-content-desktop absolute top-full left-0 mt-2 w-52 bg-white/95 backdrop-blur-md text-gray-900 rounded-xl shadow-xl border border-white/20 z-50">
+            <a href="{{ route('user.struktur.index') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition rounded-t-xl">Pemerintah Desa</a>
             <a href="{{ route('user.struktur.bpd') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">BPD</a>
             <a href="{{ route('user.struktur.pkk') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">PKK</a>
             <a href="{{ route('user.struktur.lpm') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">LPM</a>
             <a href="{{ route('user.struktur.karang_taruna') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">Karang Taruna</a>
-            <a href="{{ route('user.struktur.posyandu') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">Posyandu</a>
+            <a href="{{ route('user.struktur.posyandu') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition rounded-b-xl">Posyandu</a>
           </div>
         </div>
 
@@ -69,7 +92,7 @@
       <a href="{{ route('user.profil') }}" class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Profil Desa</a>
       <a href="{{ route('user.galeri') }}" class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Galeri</a>
 
-      <!-- Dropdown Transparansi -->
+      <!-- Dropdown Transparansi Mobile -->
       <div>
         <button class="flex justify-between items-center w-full px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition dropdown-btn">
           Transparansi <i class="bi bi-chevron-down transition-transform duration-200"></i>
@@ -84,7 +107,7 @@
         </div>
       </div>
 
-      <!-- Dropdown Struktur -->
+      <!-- Dropdown Struktur Mobile -->
       <div>
         <button class="flex justify-between items-center w-full px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition dropdown-btn">
           Struktur <i class="bi bi-chevron-down transition-transform duration-200"></i>
@@ -111,8 +134,8 @@
   </div>
 </nav>
 
-<!-- SCRIPT -->
 <script>
+// ========== MOBILE MENU TOGGLE ==========
 const toggleBtn = document.getElementById('mobile-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 const menuIcon = document.getElementById('menu-icon');
@@ -123,43 +146,98 @@ if (toggleBtn) {
     mobileMenu.style.maxHeight = isOpen ? '0px' : mobileMenu.scrollHeight + 'px';
     menuIcon.classList.toggle('bi-list');
     menuIcon.classList.toggle('bi-x-lg');
-    document.body.style.overflow = isOpen ? '' : 'hidden';
   });
 }
 
-const dropdownBtns = document.querySelectorAll('.dropdown-btn');
-dropdownBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const content = btn.nextElementSibling;
-    const icon = btn.querySelector('i');
-    const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
-    document.querySelectorAll('.dropdown-content').forEach(c => c.style.maxHeight = '0px');
-    document.querySelectorAll('.dropdown-btn i').forEach(i => i.style.transform = 'rotate(0deg)');
-    if (!isOpen) {
-      content.style.maxHeight = content.scrollHeight + 'px';
-      icon.style.transform = 'rotate(180deg)';
-    }
+// ========== MOBILE DROPDOWN ==========
+function initMobileDropdown() {
+  const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+  dropdownBtns.forEach(btn => {
+    // Hapus event listener lama
+    btn.replaceWith(btn.cloneNode(true));
   });
-});
-
-const desktopBtns = document.querySelectorAll('.dropdown-btn-desktop');
-desktopBtns.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const content = btn.nextElementSibling;
-    document.querySelectorAll('.dropdown-content-desktop').forEach(c => {
-      if (c !== content) c.classList.add('hidden');
+  
+  // Re-query setelah clone
+  document.querySelectorAll('.dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('i');
+      const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+      
+      // Tutup semua dropdown lain
+      document.querySelectorAll('.dropdown-content').forEach(c => {
+        if (c !== content) {
+          c.style.maxHeight = '0px';
+        }
+      });
+      document.querySelectorAll('.dropdown-btn').forEach(b => {
+        if (b !== btn) {
+          b.classList.remove('active');
+        }
+      });
+      
+      // Toggle dropdown yang diklik
+      if (isOpen) {
+        content.style.maxHeight = '0px';
+        btn.classList.remove('active');
+      } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        btn.classList.add('active');
+        // Update mobile menu height
+        setTimeout(() => {
+          mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+        }, 300);
+      }
     });
-    content.classList.toggle('hidden');
   });
-});
+}
 
+// Jalankan saat halaman load
+initMobileDropdown();
+
+// ========== DESKTOP DROPDOWN ==========
+function initDesktopDropdown() {
+  const desktopBtns = document.querySelectorAll('.dropdown-btn-desktop');
+  desktopBtns.forEach(btn => {
+    // Hapus event listener lama jika ada
+    btn.replaceWith(btn.cloneNode(true));
+  });
+  
+  // Re-query setelah clone
+  document.querySelectorAll('.dropdown-btn-desktop').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const content = btn.nextElementSibling;
+      const isOpen = content.classList.contains('show');
+      
+      // Tutup semua dropdown lain
+      document.querySelectorAll('.dropdown-content-desktop').forEach(c => {
+        c.classList.remove('show');
+      });
+      
+      // Toggle dropdown yang diklik
+      if (!isOpen) {
+        content.classList.add('show');
+      }
+    });
+  });
+}
+
+// Jalankan saat halaman load
+initDesktopDropdown();
+
+// Tutup dropdown saat klik di luar
 document.addEventListener('click', (e) => {
-  if (!e.target.closest('.dropdown-btn-desktop')) {
-    document.querySelectorAll('.dropdown-content-desktop').forEach(c => c.classList.add('hidden'));
+  if (!e.target.closest('.dropdown-wrapper')) {
+    document.querySelectorAll('.dropdown-content-desktop').forEach(c => {
+      c.classList.remove('show');
+    });
   }
 });
 
+// ========== NAVBAR SCROLL EFFECT ==========
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
   if (window.scrollY > 50) {
@@ -168,4 +246,28 @@ window.addEventListener('scroll', () => {
     nav.classList.remove('bg-teal-900/70', 'backdrop-blur-xl', 'shadow-lg');
   }
 });
+
+// ========== CLOSE MOBILE MENU ON LINK CLICK ==========
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (mobileMenu) {
+      mobileMenu.style.maxHeight = '0px';
+      if (menuIcon) {
+        menuIcon.classList.remove('bi-x-lg');
+        menuIcon.classList.add('bi-list');
+      }
+    }
+  });
+});
+
+// ========== RE-INIT SAAT DOM READY ==========
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initMobileDropdown();
+    initDesktopDropdown();
+  });
+} else {
+  initMobileDropdown();
+  initDesktopDropdown();
+}
 </script>

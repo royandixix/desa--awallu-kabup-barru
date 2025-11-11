@@ -188,6 +188,6 @@
     @include('user.page.home.menelusuri_keindahan')
     @include('user.page.home.layanan_kami')
     @include('user.page.home.struktur_organisasi')
-    @include('user.page.home.kontak_saran')
+    {{-- @include('user.page.home.kontak_saran') --}}
 </div>
 @endsection
