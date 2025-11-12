@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\GaleriController;
 
 // =======================
-// 🔹 HALAMAN UTAMA
+// 🔹 HALAMAN UTAMA (USER)
 // =======================
 Route::get('/', fn() => redirect()->route('user.home'));
 
@@ -21,23 +21,18 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/transparansi/bumdes', fn() => view('user.page.transparansi.bumdes'))->name('transparansi.bumdes');
 
     Route::get('/berita', fn() => view('user.page.home.berita'))->name('berita');
-   
-
-    // ✅ PERBAIKAN DI SINI
- 
-   Route::get('/pengaduan', fn() => view('user.page.pengaduan.pengaduan'))
-    ->name('pengaduan');
-
+    Route::get('/pengaduan', fn() => view('user.page.pengaduan.pengaduan'))->name('pengaduan');
 });
-
 
 // =======================
 // 🔹 ADMIN ROUTES
 // =======================
-Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', fn() => view('admin.dashboard'))->name('admin.dashboard');
-});
-
+Route::prefix('admin')
+    ->middleware(['auth', 'verified'])
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/dashboard', fn() => view('admin.page.dashboard.index'))->name('dashboard');
+    });
 
 // =======================
 // 🔹 PROFILE ROUTES

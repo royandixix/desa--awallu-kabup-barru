@@ -1,25 +1,41 @@
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
+        <!-- HEADER LOGO -->
         <div class="m-header">
-            <a href="#" class="b-brand text-primary">
-                <img src="assets/images/logo-baru.webp" alt="logo" class="logo-lg">
+            <a href="{{ url('/admin') }}" class="b-brand text-primary d-flex align-items-center">
+                <img src="{{ asset('assets/images/logo-baru.webp') }}" alt="logo" class="logo-lg me-2">
+                <span class="fw-bold text-dark">Desa Lawallu</span>
                 <span class="badge bg-brand-color-2 rounded-pill ms-2 theme-version">v1.0</span>
             </a>
         </div>
 
+        <!-- NAVIGATION -->
         <div class="navbar-content">
             <ul class="pc-navbar">
+
                 <!-- === DASHBOARD === -->
-                <li class="pc-item pc-caption"><label>Dashboard</label></li>
+                <li class="pc-item pc-caption">
+                    <label>Dashboard</label>
+                </li>
                 <li class="pc-item active">
-                    <a href="#" class="pc-link">
+                    <a href="{{ url('/admin') }}" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
                         <span class="pc-mtext">Dashboard</span>
                     </a>
                 </li>
 
-                <!-- === MANAGEMENT WEBSITE === -->
-                <li class="pc-item pc-caption"><label>Manajemen Website</label></li>
+                <!-- === MANAJEMEN WEBSITE === -->
+                <li class="pc-item pc-caption">
+                    <label>Manajemen Website</label>
+                </li>
+
+                <!-- 🏠 Beranda (Menu Baru) -->
+                <li class="pc-item">
+                    <a href="{{ url('/admin/beranda') }}" class="pc-link">
+                        <span class="pc-micon"><i class="ti ti-home-2"></i></span>
+                        <span class="pc-mtext">Beranda</span>
+                    </a>
+                </li>
 
                 <!-- Profil Desa -->
                 <li class="pc-item pc-hasmenu">
@@ -93,17 +109,40 @@
                 </li>
 
                 <!-- === SYSTEM SETTINGS === -->
-                <li class="pc-item pc-caption"><label>System</label></li>
+                <li class="pc-item pc-caption">
+                    <label>System</label>
+                </li>
                 <li class="pc-item">
                     <a href="#" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-settings"></i></span>
                         <span class="pc-mtext">Pengaturan</span>
                     </a>
                 </li>
+
             </ul>
         </div>
     </div>
 </nav>
+
+<style>
+.logo-lg {
+    display: block !important;
+    width: 120px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+.logo-lg:hover {
+    transform: scale(1.05);
+}
+.pc-sidebar .pc-item.active > .pc-link {
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 10px;
+}
+.pc-sidebar .pc-item.active .pc-micon i {
+    color: #10b981;
+}
+</style>
+
 
 <style>
     .logo-lg {

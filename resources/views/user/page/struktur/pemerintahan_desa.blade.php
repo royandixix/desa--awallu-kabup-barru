@@ -1,3 +1,13 @@
+{{-- FILE 1: resources/views/user/struktur.blade.php --}}
+@extends('user.layouts.app')
+
+@section('title', 'struktur Anggaran')
+
+@section('header_struktur')
+    @include('user.partials.navbar')
+    @include('user.partials.header_struktur')
+@endsection
+
 <div class="max-w-7xl mx-auto px-6 sm:px-12 py-20 flex flex-col lg:flex-row items-center gap-12">
 
     {{-- Bagian Penjelasan --}}
@@ -8,7 +18,7 @@
 
         <p class="text-lg sm:text-xl text-gray-700 leading-relaxed mb-6">
             Pemerintah <span class="text-green-700 font-semibold">Desa Lawallu</span> merupakan lembaga yang bertugas mengatur dan mengurus kepentingan masyarakat di tingkat desa.
-            Dengan semangat <span class="text-green-600 font-semibold">gotong royong</span> dan prinsip <span class="text-green-600 font-semibold">transparansi</span>,
+            Dengan semangat <span class="text-green-600 font-semibold">gotong royong</span> dan prinsip <span class="text-green-600 font-semibold">struktur</span>,
             pemerintahan desa berkomitmen memberikan pelayanan terbaik kepada seluruh warga masyarakat.
         </p>
 
