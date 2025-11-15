@@ -15,6 +15,7 @@ var cssbeautify = require("gulp-cssbeautify");
 var fileinclude = require("gulp-file-include");
 var browsersync = require("browser-sync");
 var htmlmin = require("gulp-htmlmin");
+const { main } = require("@popperjs/core");
 
 // =======================================================
 // -----------   Mantis Theme Configuration  -----------
@@ -228,6 +229,10 @@ gulp.task("build-html", function () {
     )
     .pipe(gulp.dest("dist"));
 });
+
+
+
+
 //  [ build html ] end
 
 //  [ build js ] start
@@ -348,10 +353,16 @@ gulp.task("watch-minify", function () {
   gulp.watch("src/html/**/*.html", gulp.series("htmlmin"));
   gulp.watch("src/doc/**/*.html", gulp.series("build"));
 });
-//  [ watch minify ] start
+
+
+
+
+
+
 
 // build in production mode
 gulp.task(
   "build-prod",
   gulp.series("cleandist", "build", "sass", "build-js", "build-html", "imgmin")
 );
+

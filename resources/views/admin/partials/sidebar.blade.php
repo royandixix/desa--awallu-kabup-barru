@@ -31,11 +31,12 @@
 
                 <!-- 🏠 Beranda (Menu Baru) -->
                 <li class="pc-item">
-                    <a href="{{ url('/admin/beranda') }}" class="pc-link">
+                    <a href="{{ route('admin.beranda') }}" class="pc-link">
                         <span class="pc-micon"><i class="ti ti-home-2"></i></span>
                         <span class="pc-mtext">Beranda</span>
                     </a>
                 </li>
+
 
                 <!-- Profil Desa -->
                 <li class="pc-item pc-hasmenu">
@@ -125,22 +126,25 @@
 </nav>
 
 <style>
-.logo-lg {
-    display: block !important;
-    width: 120px;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-.logo-lg:hover {
-    transform: scale(1.05);
-}
-.pc-sidebar .pc-item.active > .pc-link {
-    background: rgba(16, 185, 129, 0.1);
-    border-radius: 10px;
-}
-.pc-sidebar .pc-item.active .pc-micon i {
-    color: #10b981;
-}
+    .logo-lg {
+        display: block !important;
+        width: 120px;
+        height: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .logo-lg:hover {
+        transform: scale(1.05);
+    }
+
+    .pc-sidebar .pc-item.active>.pc-link {
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 10px;
+    }
+
+    .pc-sidebar .pc-item.active .pc-micon i {
+        color: #10b981;
+    }
 </style>
 
 

@@ -101,21 +101,23 @@
     @includeIf('user.partials.navbar')
 
     {{-- Header Dinamis --}}
-    @if (View::hasSection('header_pengaduan'))
-        @yield('header_pengaduan')
-    @elseif (View::hasSection('header_profil_desa'))
-        @yield('header_profil_desa')
-    @elseif (View::hasSection('header_galeri'))
-        @yield('header_galeri')
-    @elseif (View::hasSection('header_detail_gambar'))
-        @yield('header_detail_gambar')
-    @elseif (View::hasSection('header_transparansi'))
-        @yield('header_transparansi')
-    @elseif (View::hasSection('header_berita'))
-        @yield('header_berita')
-    @else
-        @includeIf('user.partials.header')
-    @endif
+    @if (View::hasSection('header_struktur'))
+    @yield('header_struktur')
+@elseif (View::hasSection('header_pengaduan'))
+    @yield('header_pengaduan')
+@elseif (View::hasSection('header_profil_desa'))
+    @yield('header_profil_desa')
+@elseif (View::hasSection('header_galeri'))
+    @yield('header_galeri')
+@elseif (View::hasSection('header_detail_gambar'))
+    @yield('header_detail_gambar')
+@elseif (View::hasSection('header_transparansi'))
+    @yield('header_transparansi')
+@elseif (View::hasSection('header_berita'))
+    @yield('header_berita')
+@else
+    @includeIf('user.partials.header')
+@endif
 
     {{-- Main Content --}}
     <main class="overflow-x-hidden">

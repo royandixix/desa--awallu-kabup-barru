@@ -65,7 +65,7 @@
             Struktur <i class="bi bi-chevron-down ml-1 text-xs"></i>
           </button>
           <div class="dropdown-content-desktop absolute top-full left-0 mt-2 w-52 bg-white/95 backdrop-blur-md text-gray-900 rounded-xl shadow-xl border border-white/20 z-50">
-            <a href="{{ route('user.struktur.index') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition rounded-t-xl">Pemerintah Desa</a>
+            <a href="{{ route('user.struktur.pemerintahan_desa') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition rounded-t-xl">Pemerintah Desa</a>
             <a href="{{ route('user.struktur.bpd') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">BPD</a>
             <a href="{{ route('user.struktur.pkk') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">PKK</a>
             <a href="{{ route('user.struktur.lpm') }}" class="block px-4 py-2.5 hover:bg-lime-100 transition">LPM</a>
@@ -114,7 +114,7 @@
         </button>
         <div class="max-h-0 overflow-hidden transition-all duration-300 dropdown-content">
           <div class="pl-4 mt-1 space-y-1">
-            <a href="{{ route('user.struktur.index') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Pemerintah Desa</a>
+            <a href="{{ route('user.struktur.pemerintahan_desa') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Pemerintah Desa</a>
             <a href="{{ route('user.struktur.bpd') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">BPD</a>
             <a href="{{ route('user.struktur.pkk') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">PKK</a>
             <a href="{{ route('user.struktur.lpm') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">LPM</a>

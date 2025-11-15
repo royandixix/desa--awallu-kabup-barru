@@ -32,7 +32,13 @@ Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::get('/dashboard', fn() => view('admin.page.dashboard.index'))->name('dashboard');
+        Route::get('/beranda', fn() => view('admin.page.beranda.index'))->name('beranda');
+        Route::get('/berita', fn() => view('admin.page.berita.index'))->name('berita');
+        Route::get('/galeri', fn() => view('admin.page.galeri.index'))->name('galeri');
+        // dst...
     });
+
+
 
 // =======================
 // 🔹 PROFILE ROUTES

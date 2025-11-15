@@ -56,29 +56,34 @@ Route::prefix('user')->name('user.')->group(function () {
     // -----------------------
     // Struktur
     // -----------------------
+    // -----------------------
+    // Struktur
+    // -----------------------
     Route::prefix('struktur')->name('struktur.')->group(function () {
 
-        Route::get('/', fn() => view('user.page.struktur.struktur'))
-            ->name('index'); // Halaman utama struktur
+        // Halaman utama Struktur → pakai 'default'
+        Route::get('/', fn() => view('user.page.struktur.struktur', ['halaman' => 'default']))
+            ->name('index');
 
-        Route::get('/pemerintahan-desa', fn() => view('user.page.struktur.pemerintahan_desa'))
+        Route::get('/pemerintahan-desa', fn() => view('user.page.struktur.struktur', ['halaman' => 'pemerintahan_desa']))
             ->name('pemerintahan_desa');
 
-        Route::get('/bpd', fn() => view('user.page.struktur.bpd'))
+        Route::get('/bpd', fn() => view('user.page.struktur.struktur', ['halaman' => 'bpd']))
             ->name('bpd');
 
-        Route::get('/pkk', fn() => view('user.page.struktur.pkk'))
+        Route::get('/pkk', fn() => view('user.page.struktur.struktur', ['halaman' => 'pkk']))
             ->name('pkk');
 
-        Route::get('/lpm', fn() => view('user.page.struktur.lpm'))
+        Route::get('/lpm', fn() => view('user.page.struktur.struktur', ['halaman' => 'lpm']))
             ->name('lpm');
 
-        Route::get('/karang-taruna', fn() => view('user.page.struktur.karang_taruna'))
+        Route::get('/karang-taruna', fn() => view('user.page.struktur.struktur', ['halaman' => 'karang_taruna']))
             ->name('karang_taruna');
 
-        Route::get('/posyandu', fn() => view('user.page.struktur.posyandu'))
+        Route::get('/posyandu', fn() => view('user.page.struktur.struktur', ['halaman' => 'posyandu']))
             ->name('posyandu');
     });
+
 
 
 
@@ -126,10 +131,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', fn() => redirect()->route('admin.dashboard'));
 
     // Dashboard
-    Route::get('/dashboard', fn() => view('admin.dashboard'))->name('dashboard');
+    Route::get('/dashboard', fn() => view('admin.page.dashboard.index'))->name('dashboard');
 
-    // Tambah halaman admin lain kalau perlu
-    // Route::get('/users', fn() => view('admin.pages.users'))->name('users');
+    // 🏠 Beranda
+    Route::get('/beranda', fn() => view('admin.page.beranda.index'))->name('beranda');
 });
 
 
