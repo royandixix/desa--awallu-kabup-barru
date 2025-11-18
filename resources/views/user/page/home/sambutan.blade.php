@@ -43,10 +43,7 @@
         <li><span class="text-green-600 ">Pengaduan:</span> Fitur untuk menyampaikan saran dan laporan</li>
       </ul>
 
-      <a href="#galeri" 
-         class="inline-block mt-6 bg-green-600 text-white px-8 py-3  rounded-xl shadow-md hover:bg-green-700 hover:shadow-lg transition-all duration-300">
-        Lihat Galeri Desa →
-      </a>
+      
     </div>
 
     <!-- Gambar Kepala Desa (khusus untuk desktop) -->
@@ -96,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (entry.isIntersecting) {
         entry.target.classList.add("show");
         observer.unobserve(entry.target);
-      }
+      } 
     });
   }, { threshold: 0.2 });
 

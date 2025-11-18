@@ -50,18 +50,15 @@ Route::prefix('user')->name('user.')->group(function () {
     // -----------------------
     Route::get('/keuangan', fn() => view('user.page.home.administrasipenduduk'))
         ->name('keuangan');
+
     Route::get('/pembangunan', fn() => view('user.page.home.layanan_kami'))
         ->name('pembangunan');
 
     // -----------------------
-    // Struktur
-    // -----------------------
-    // -----------------------
-    // Struktur
+    // Struktur Organisasi
     // -----------------------
     Route::prefix('struktur')->name('struktur.')->group(function () {
 
-        // Halaman utama Struktur → pakai 'default'
         Route::get('/', fn() => view('user.page.struktur.struktur', ['halaman' => 'default']))
             ->name('index');
 
@@ -84,36 +81,28 @@ Route::prefix('user')->name('user.')->group(function () {
             ->name('posyandu');
     });
 
-
-
-
-    Route::get('/bpd', fn() => view('user.page.home.visimisi'))
-        ->name('bpd');
-    Route::get('/karangtaruna', fn() => view('user.page.home.menelusuri_keindahan'))
-        ->name('karangtaruna');
+    // -----------------------
+    // Halaman Umum
+    // -----------------------
+    Route::get('/bpd', fn() => view('user.page.home.visimisi'))->name('bpd');
+    Route::get('/karangtaruna', fn() => view('user.page.home.menelusuri_keindahan'))->name('karangtaruna');
 
     // -----------------------
-    // Berita, Pengaduan, Kontak
+    // Berita
     // -----------------------
-    // -----------------------
-    // Berita, Pengaduan, Kontak
-    // -----------------------
-    Route::get('/berita', fn() => view('user.page.berita.berita'))
-        ->name('berita'); // jadi user.berita
-
+    Route::get('/berita', fn() => view('user.page.berita.berita'))->name('berita');
     Route::get('/berita/{slug}', function ($slug) {
         return view('user.page.berita.berita_detail', ['slug' => $slug]);
-    })->name('berita.detail'); // jadi user.berita.detail
-
-    Route::get('/pengaduan', fn() => view('user.page.home.kontak_saran'))
-        ->name('pengaduan');
-
-    Route::get('/kontak', fn() => view('user.page.home.kontak_saran'))
-        ->name('kontak');
-
+    })->name('berita.detail');
 
     // -----------------------
-    // Transparansi umum
+    // Pengaduan & Kontak
+    // -----------------------
+    Route::get('/pengaduan', fn() => view('user.page.home.kontak_saran'))->name('pengaduan');
+    Route::get('/kontak', fn() => view('user.page.home.kontak_saran'))->name('kontak');
+
+    // -----------------------
+    // Transparansi Umum
     // -----------------------
     Route::get('/transparansi', function () {
         return view('user.page.transparansi.transparansi');
@@ -121,28 +110,54 @@ Route::prefix('user')->name('user.')->group(function () {
 });
 
 // =======================
-// 🔹 ADMIN ROUTES (memerlukan login & verified)
+// 🔹 ROUTES LAYANAN (user)
 // =======================
-// Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
-//     Route::get('/', fn() => view('admin.dashboard'))->name('admin.dashboard');
-// });
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Redirect /admin → /admin/dashboard
-    Route::get('/', fn() => redirect()->route('admin.dashboard'));
+Route::prefix('layanan')->name('layanan.')->group(function () {
 
-    // Dashboard
-    Route::get('/dashboard', fn() => view('admin.page.dashboard.index'))->name('dashboard');
+    Route::get('/pemerintahan', fn() => view('user.page.home.layanan_kami.pemerintahan', [
+        'halaman' => 'pemerintahan'
+    ]))->name('pemerintahan');
 
-    // 🏠 Beranda
-    Route::get('/beranda', fn() => view('admin.page.beranda.index'))->name('beranda');
+    Route::get('/pelayanan', fn() => view('user.page.home.layanan_kami.pelayanan', [
+        'halaman' => 'pelayanan'
+    ]))->name('pelayanan');
+
+    Route::get('/kesra', fn() => view('user.page.home.layanan_kami.kesra', [
+        'halaman' => 'kesra'
+    ]))->name('kesra');
+
+    Route::get('/bansos', fn() => view('user.page.home.layanan_kami.bansos', [
+        'halaman' => 'bansos'
+    ]))->name('bansos');
+
+    Route::get('/kesehatan', fn() => view('user.page.home.layanan_kami.kesehatan_posyandu', [
+        'halaman' => 'kesehatan'
+    ]))->name('kesehatan');
+
+    Route::get('/aspirasi', fn() => view('user.page.home.layanan_kami.aspirasi_pengaduan', [
+        'halaman' => 'aspirasi'
+    ]))->name('aspirasi');
+
+    Route::get('/pelayanan_kesehatan_posyandu', fn() => view('user.page.home.layanan_kami.kesehatan_posyandu', [
+        'halaman' => 'kesehatan'
+    ]))->name('pelayanan.kesehatan_posyandu');
 });
 
 
+// =======================
+// 🔹 ADMIN ROUTES
+// =======================
+Route::prefix('admin')->name('admin.')->group(function () {
 
+    Route::get('/', fn() => redirect()->route('admin.dashboard'));
 
+    Route::get('/dashboard', fn() => view('admin.page.dashboard.index'))->name('dashboard');
+
+    Route::get('/beranda', fn() => view('admin.page.beranda.index'))->name('beranda');
+});
 
 // =======================
-// 🔹 PROFILE ROUTES (untuk user login saja)
+// 🔹 PROFILE ROUTES (user login)
 // =======================
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

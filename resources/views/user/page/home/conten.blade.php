@@ -1,6 +1,6 @@
 @extends('user.layouts.app')
 
-@section('title', 'Galeri Desa Lawallu')
+@section('title', 'desa lawallu')
 
 @section('content')
 <div class="bg-white">
@@ -186,7 +186,7 @@
     @include('user.page.home.foto_bersama_warga')
     @include('user.page.home.administrasipenduduk')
     @include('user.page.home.menelusuri_keindahan')
-    @include('user.page.home.layanan_kami')
+    @include('user.page.home.layanan_kami.layanan_kami')
     @include('user.page.home.struktur_organisasi')
     @include('user.page.home.contac')
     {{-- @include('user.page.home.kontak_saran') --}}

@@ -51,6 +51,7 @@
         <div class="pc-content">
             {{-- Pastikan nama section sesuai: "content" (bukan "conten") --}}
             @yield('content')
+            
         </div>
     </div>
 

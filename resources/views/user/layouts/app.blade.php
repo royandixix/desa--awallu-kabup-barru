@@ -36,7 +36,8 @@
     {{-- 💅 Global Styles --}}
     <style>
         /* ... CSS Anda yang ada di sini ... */
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
             width: 100%;
@@ -102,22 +103,27 @@
 
     {{-- Header Dinamis --}}
     @if (View::hasSection('header_struktur'))
-    @yield('header_struktur')
-@elseif (View::hasSection('header_pengaduan'))
-    @yield('header_pengaduan')
-@elseif (View::hasSection('header_profil_desa'))
-    @yield('header_profil_desa')
-@elseif (View::hasSection('header_galeri'))
-    @yield('header_galeri')
-@elseif (View::hasSection('header_detail_gambar'))
-    @yield('header_detail_gambar')
-@elseif (View::hasSection('header_transparansi'))
-    @yield('header_transparansi')
-@elseif (View::hasSection('header_berita'))
-    @yield('header_berita')
-@else
-    @includeIf('user.partials.header')
-@endif
+        @yield('header_struktur')
+    @elseif (View::hasSection('header_pengaduan'))
+        @yield('header_pengaduan')
+    @elseif (View::hasSection('header_profil_desa'))
+        @yield('header_profil_desa')
+    @elseif (View::hasSection('header_galeri'))
+        @yield('header_galeri')
+    @elseif (View::hasSection('header_detail_gambar'))
+        @yield('header_detail_gambar')
+    @elseif (View::hasSection('header_transparansi'))
+        @yield('header_transparansi')
+
+        {{-- 🔥 Tambahkan ini --}}
+    @elseif (View::hasSection('header_layanan'))
+        @yield('header_layanan')
+    @elseif (View::hasSection('header_berita'))
+        @yield('header_berita')
+    @else
+        @includeIf('user.partials.header')
+    @endif
+
 
     {{-- Main Content --}}
     <main class="overflow-x-hidden">
@@ -146,9 +152,9 @@
 
     {{-- Heroicons --}}
     <script src="https://unpkg.com/heroicons@2.0.18/dist/heroicons.min.js"></script>
-    
+
     {{-- 🎯 SCRIPT PERBAIKAN NAVBAR (PENTING) --}}
-    <script src="{{ asset('js/navbar.js') }}"></script> 
+    <script src="{{ asset('js/navbar.js') }}"></script>
 
     {{-- Animasi Scroll + ScrollTop Button --}}
     <script>
@@ -159,7 +165,9 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) entry.target.classList.add('visible');
                 });
-            }, { threshold: 0.2 });
+            }, {
+                threshold: 0.2
+            });
             elements.forEach(el => observer.observe(el));
 
             // Tombol scroll ke atas
@@ -168,13 +176,20 @@
                 scrollTopBtn.classList.toggle("show", window.scrollY > 200);
             });
             scrollTopBtn.addEventListener("click", () => {
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
             });
 
             // Inisialisasi AOS
-            AOS.init({ duration: 1000, once: true });
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
         });
     </script>
 
 </body>
+
 </html>
