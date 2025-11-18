@@ -141,7 +141,17 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
     Route::get('/pelayanan_kesehatan_posyandu', fn() => view('user.page.home.layanan_kami.kesehatan_posyandu', [
         'halaman' => 'kesehatan'
     ]))->name('pelayanan.kesehatan_posyandu');
+
+    // ✅ ROUTE TAMBAHAN YANG WAJIB ADA
+    Route::get('/informasi_bantuan', fn() => view('user.page.home.layanan_kami.informasi_bantuan', [
+        'halaman' => 'informasi_bantuan'
+    ]))->name('informasi_bantuan');
+
+    Route::get('/layanan_aspirasi_pengaduan', fn() => view('user.page.home.layanan_kami.layanan_aspirasi_pengaduan', [
+        'halaman' => 'aspirasi'
+    ]))->name('layanan_aspirasi_pengaduan');
 });
+
 
 
 // =======================

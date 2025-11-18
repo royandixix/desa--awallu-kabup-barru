@@ -134,7 +134,7 @@
                 'icon' => 'hand-heart',
                 'title' => 'Informasi & Bantuan Sosial',
                 'desc' => 'Pengajuan bantuan seperti BLT & PKH.',
-                'link' => '*'
+                'link' => route('layanan.informasi_bantuan')
             ],
             [
                 'icon' => 'stethoscope',
@@ -146,7 +146,7 @@
                 'icon' => 'megaphone',
                 'title' => 'Layanan Aspirasi & Pengaduan',
                 'desc' => 'Sampaikan aspirasi, saran, atau keluhan secara mudah ke pemerintah desa.',
-                'link' => '#',
+                'link' => route('layanan.layanan_aspirasi_pengaduan')
             ],
         ];
     @endphp
