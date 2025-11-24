@@ -45,4 +45,8 @@ class GaleriController extends Controller
 
         return view('user.page.galeri.detail_gambar', compact('filename', 'title', 'desc'));
     }
+
+    public function create() {
+        
+    }
 }
