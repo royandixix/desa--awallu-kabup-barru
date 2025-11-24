@@ -33,7 +33,7 @@
                         <i class="bi bi-house-door"></i> Beranda
                     </a></li>
                     
-                    <li><a href="{{ url('/admin/profil-desa') }}" class="nav-link">
+                    <li><a href="{{ url('/admin/profil_desa') }}" class="nav-link">
                         <i class="bi bi-info-circle"></i> Profil Desa
                     </a></li>
 

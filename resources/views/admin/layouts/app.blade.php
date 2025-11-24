@@ -21,7 +21,7 @@
 
         :root {
             --sidebar-width: 280px;
-            --sidebar-bg: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+            --sidebar-bg: linear-gradient(180deg, #027430 0%, #60bd60 100%);
             --sidebar-color: #fff;
             --sidebar-hover: rgba(255,255,255,0.1);
             --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
