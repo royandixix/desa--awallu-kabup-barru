@@ -12,7 +12,7 @@
 
     <div class="sidebar-content">
         <ul class="sidebar-menu">
-            
+
             <!-- Dashboard -->
             <li class="menu-item">
                 <a href="{{ url('/admin/dashboard') }}" class="nav-link">
@@ -30,12 +30,12 @@
                 </a>
                 <ul class="collapse submenu" id="webMgmt">
                     <li><a href="{{ url('/admin/beranda') }}" class="nav-link">
-                        <i class="bi bi-house-door"></i> Beranda
-                    </a></li>
-                    
+                            <i class="bi bi-house-door"></i> Beranda
+                        </a></li>
+
                     <li><a href="{{ url('/admin/profil_desa') }}" class="nav-link">
-                        <i class="bi bi-info-circle"></i> Profil Desa
-                    </a></li>
+                            <i class="bi bi-info-circle"></i> Profil Desa
+                        </a></li>
 
                     <!-- Galeri Nested -->
                     <li class="has-submenu">
@@ -55,13 +55,28 @@
                             <i class="bi bi-file-earmark-text"></i> Transparansi
                             <i class="bi bi-chevron-down ms-auto submenu-arrow"></i>
                         </a>
+
                         <ul class="collapse submenu" id="transMenu">
-                            <li><a href="{{ url('/admin/transparansi/anggaran') }}" class="nav-link">Anggaran</a></li>
-                            <li><a href="{{ url('/admin/transparansi/laporan') }}" class="nav-link">Laporan</a></li>
-                            <li><a href="{{ url('/admin/transparansi/bumdes') }}" class="nav-link">Bumdes</a></li>
-                            <li><a href="{{ url('/admin/transparansi/dokumen') }}" class="nav-link">Dokumen</a></li>
+
+                            <li>
+                                <a href="{{ route('admin.transparansi.anggaran.index') }}" class="nav-link">Anggaran</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('admin.transparansi.laporan.index') }}" class="nav-link">Laporan</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('admin.transparansi.bumdes.index') }}" class="nav-link">Bumdes</a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('admin.transparansi.dokumen.index') }}" class="nav-link">Dokumen</a>
+                            </li>
+
                         </ul>
                     </li>
+
 
                     <!-- Berita Nested -->
                     <li class="has-submenu">
@@ -76,12 +91,12 @@
                     </li>
 
                     <li><a href="{{ url('/admin/pengaduan') }}" class="nav-link">
-                        <i class="bi bi-megaphone"></i> Pengaduan
-                    </a></li>
-                    
+                            <i class="bi bi-megaphone"></i> Pengaduan
+                        </a></li>
+
                     <li><a href="{{ url('/admin/kontak-saran') }}" class="nav-link">
-                        <i class="bi bi-chat-left-text"></i> Kontak & Saran
-                    </a></li>
+                            <i class="bi bi-chat-left-text"></i> Kontak & Saran
+                        </a></li>
                 </ul>
             </li>
 
@@ -97,8 +112,8 @@
                 </a>
                 <ul class="collapse submenu" id="systemMenu">
                     <li><a href="{{ url('/admin/pengaturan') }}" class="nav-link">
-                        <i class="bi bi-sliders"></i> Pengaturan
-                    </a></li>
+                            <i class="bi bi-sliders"></i> Pengaturan
+                        </a></li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
@@ -139,14 +154,14 @@
         flex-direction: column;
         z-index: 1040;
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+        box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
     }
 
     /* Sidebar Header */
     .sidebar-header {
         padding: 1.5rem;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-        background: rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.1);
     }
 
     .sidebar-brand {
@@ -183,7 +198,7 @@
     }
 
     .sidebar-content::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.2);
+        background: rgba(255, 255, 255, 0.2);
         border-radius: 10px;
     }
 
@@ -203,7 +218,7 @@
         align-items: center;
         gap: 0.85rem;
         padding: 0.85rem 1.5rem;
-        color: rgba(255,255,255,0.85);
+        color: rgba(255, 255, 255, 0.85);
         text-decoration: none;
         transition: all 0.2s ease;
         cursor: pointer;
@@ -225,7 +240,7 @@
     }
 
     .nav-link.active {
-        background: rgba(255,255,255,0.15);
+        background: rgba(255, 255, 255, 0.15);
         color: #fff;
         font-weight: 600;
         border-left: 3px solid #fff;
@@ -246,7 +261,7 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        background: rgba(0,0,0,0.15);
+        background: rgba(0, 0, 0, 0.15);
     }
 
     .submenu .nav-link {
@@ -262,7 +277,7 @@
     /* Menu Divider */
     .menu-divider {
         height: 1px;
-        background: rgba(255,255,255,0.1);
+        background: rgba(255, 255, 255, 0.1);
         margin: 1rem 1.5rem;
     }
 
@@ -282,8 +297,8 @@
     /* Sidebar Footer */
     .sidebar-footer {
         padding: 1rem 1.5rem;
-        border-top: 1px solid rgba(255,255,255,0.1);
-        background: rgba(0,0,0,0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.1);
     }
 
     .user-profile {
@@ -296,7 +311,7 @@
         width: 42px;
         height: 42px;
         border-radius: 10px;
-        background: rgba(255,255,255,0.15);
+        background: rgba(255, 255, 255, 0.15);
         display: flex;
         align-items: center;
         justify-content: center;

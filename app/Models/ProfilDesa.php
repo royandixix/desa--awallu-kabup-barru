@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfilDesa extends Model
 {
-    // Nama tabel sesuai yang di database
     protected $table = 'profil_desa';
 
     protected $fillable = [

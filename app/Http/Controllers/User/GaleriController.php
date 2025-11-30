@@ -4,49 +4,42 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use App\Models\Galeri;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class GaleriController extends Controller
 {
-    // Menampilkan semua gambar galeri
-    public function index()
-    {
-        $path = public_path('img/user/galeri');
-        $files = collect(File::files($path))->map(function ($file) {
-            $name = pathinfo($file, PATHINFO_FILENAME);
-            return [
-                'file' => basename($file),
-                'title' => ucwords(str_replace('_', ' ', $name)),
-                'desc' => 'Dokumentasi kegiatan ' . ucwords(str_replace('_', ' ', $name)) . ' yang dilaksanakan di Desa Lawallu.'
-            ];
-        });
+    protected $path;
 
-        $page = request()->get('page', 1);
+    public function __construct()
+    {
+        $this->path = public_path('uploads/galeri');
+        if (!File::exists($this->path)) {
+            File::makeDirectory($this->path, 0755, true);
+        }
+    }
+
+    public function index(Request $request)
+    {
+        // Ambil semua data galeri dari database
+        $files = Galeri::orderBy('tanggal', 'desc')->get();
+
+        // Pagination manual
+        $page = $request->get('page', 1);
         $perPage = 6;
-        $total = count($files);
-        $paginated = $files->forPage($page, $perPage);
+        $total = $files->count();
+        $paginated = $files->forPage($page, $perPage)->values();
         $totalPages = ceil($total / $perPage);
 
-        return view('user.page.galeri.galeri', compact('paginated', 'page', 'totalPages'));
+        return view('user.page.galeri.galeri', compact(
+            'paginated', 'page', 'perPage', 'totalPages'
+        ));
     }
 
-    // Menampilkan detail gambar
     public function show($filename)
     {
-        $path = public_path('img/user/galeri/' . $filename);
-
-        if (!file_exists($path)) {
-            abort(404, 'Gambar tidak ditemukan.');
-        }
-
-        $title = ucwords(str_replace('_', ' ', pathinfo($filename, PATHINFO_FILENAME)));
-        $desc = 'Dokumentasi kegiatan ' . $title . ' yang dilaksanakan di Desa Lawallu.';
-
-        return view('user.page.galeri.detail_gambar', compact('filename', 'title', 'desc'));
-    }
-
-    public function create() {
-        
+        $galeri = Galeri::where('file', $filename)->firstOrFail();
+        return view('user.page.galeri.detail_gambar', compact('galeri'));
     }
 }
