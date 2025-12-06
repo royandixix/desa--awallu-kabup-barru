@@ -12,6 +12,8 @@ class TransparansiLaporan extends Model
         'judul',
         'deskripsi',
         'tanggal',
-        'file'
+        'file',
     ];
+
+    protected $dates = ['tanggal'];
 }

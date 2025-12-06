@@ -4,6 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\TransparansiAnggaran;
+use App\Models\TransparansiDokumen;
+use App\Models\TransparansiLaporan;
+use App\Models\TransparansiBumdes;
 
 class TransparansiController extends Controller
 {
@@ -11,6 +14,9 @@ class TransparansiController extends Controller
     {
         $anggarans = null;
         $rekap = null;
+        $dokumens = null;
+        $laporans = null;
+        $bumdes = null;
 
         switch ($halaman) {
 
@@ -25,12 +31,18 @@ class TransparansiController extends Controller
                 break;
 
             case 'laporan':
+                // Kirim data laporan agar tidak undefined
+                $laporans = TransparansiLaporan::latest()->paginate(10);
                 break;
 
             case 'dokumen':
+                // Data dokumen dari database
+                $dokumens = TransparansiDokumen::latest()->paginate(10);
                 break;
 
             case 'bumdes':
+                // Kirim data bumdes agar tidak undefined
+                $bumdes = TransparansiBumdes::latest()->paginate(10);
                 break;
 
             default:
@@ -40,7 +52,10 @@ class TransparansiController extends Controller
         return view('user.page.transparansi.transparansi', compact(
             'halaman',
             'anggarans',
-            'rekap'
+            'rekap',
+            'dokumens',
+            'laporans',
+            'bumdes'
         ));
     }
 }

@@ -14,7 +14,7 @@ class AnggaranController extends Controller
     // ==========================
     public function index()
     {
-        $anggarans = TransparansiAnggaran::latest()->get();
+        $anggarans = TransparansiAnggaran::latest()->paginate(10); // Pagination optional
         return view('admin.page.transparansi.anggaran.index', compact('anggarans'));
     }
 
@@ -31,7 +31,7 @@ class AnggaranController extends Controller
     // ==========================
     public function store(Request $request)
     {
-        // Hapus format titik (1.000.000 → 1000000)
+        // Hapus format titik ribuan (1.000.000 → 1000000)
         $request->merge([
             'pemasukan'   => $request->pemasukan ? str_replace('.', '', $request->pemasukan) : null,
             'pengeluaran' => $request->pengeluaran ? str_replace('.', '', $request->pengeluaran) : null,
@@ -44,13 +44,15 @@ class AnggaranController extends Controller
             'tanggal'     => 'nullable|date',
             'pemasukan'   => 'nullable|numeric',
             'pengeluaran' => 'nullable|numeric',
-            'file'        => 'nullable|file|max:10240|mimes:pdf,doc,docx,xlsx,png,jpg,jpeg'
+            'file'        => 'nullable|file|max:20480|mimes:pdf,doc,docx,xlsx,png,jpg,jpeg,webp'
+        ], [
+            'file.max' => 'Ukuran file maksimal 20 MB',
+            'file.mimes' => 'Format file harus PDF, DOC, DOCX, XLSX, PNG, JPG, JPEG, atau WEBP'
         ]);
 
-        // Upload file
+        // Upload file jika ada
         if ($request->hasFile('file')) {
-            $data['file'] = $request->file('file')
-                ->store('uploads/transparansi_anggaran', 'public');
+            $data['file'] = $request->file('file')->store('uploads/transparansi_anggaran', 'public');
         }
 
         TransparansiAnggaran::create($data);
@@ -72,7 +74,7 @@ class AnggaranController extends Controller
     // ==========================
     public function update(Request $request, TransparansiAnggaran $anggaran)
     {
-        // Hapus format titik ribuan
+        // Hapus titik ribuan
         $request->merge([
             'pemasukan'   => $request->pemasukan ? str_replace('.', '', $request->pemasukan) : $anggaran->pemasukan,
             'pengeluaran' => $request->pengeluaran ? str_replace('.', '', $request->pengeluaran) : $anggaran->pengeluaran,
@@ -85,10 +87,13 @@ class AnggaranController extends Controller
             'tanggal'     => 'nullable|date',
             'pemasukan'   => 'nullable|numeric',
             'pengeluaran' => 'nullable|numeric',
-            'file'        => 'nullable|file|max:10240|mimes:pdf,doc,docx,xlsx,png,jpg,jpeg'
+            'file'        => 'nullable|file|max:20480|mimes:pdf,doc,docx,xlsx,png,jpg,jpeg,webp'
+        ], [
+            'file.max' => 'Ukuran file maksimal 20 MB',
+            'file.mimes' => 'Format file harus PDF, DOC, DOCX, XLSX, PNG, JPG, JPEG, atau WEBP'
         ]);
 
-        // HANYA UPDATE INPUT YANG DIISI
+        // Hanya update field yang diisi
         foreach ($data as $key => $value) {
             if ($value !== null) {
                 $anggaran->$key = $value;
@@ -97,18 +102,13 @@ class AnggaranController extends Controller
 
         // Upload file baru jika ada
         if ($request->hasFile('file')) {
-
             // Hapus file lama
             if ($anggaran->file && Storage::disk('public')->exists($anggaran->file)) {
                 Storage::disk('public')->delete($anggaran->file);
             }
-
-            // Simpan file baru
-            $anggaran->file = $request->file('file')
-                ->store('uploads/transparansi_anggaran', 'public');
+            $anggaran->file = $request->file('file')->store('uploads/transparansi_anggaran', 'public');
         }
 
-        // Simpan perubahan
         $anggaran->save();
 
         return redirect()->route('admin.transparansi.anggaran.index')

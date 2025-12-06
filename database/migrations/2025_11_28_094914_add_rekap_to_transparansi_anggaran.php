@@ -19,4 +19,6 @@ return new class extends Migration {
             $table->dropColumn(['pemasukan', 'pengeluaran']);
         });
     }
+
+
 };

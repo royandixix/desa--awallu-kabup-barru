@@ -13,12 +13,15 @@ class TransparansiAnggaran extends Model
         'jenis',
         'tahun',
         'tanggal',
+        'pemasukan',    // ✅ WAJIB ADA
+        'pengeluaran',  // ✅ WAJIB ADA
         'file'
     ];
 
-    // ✅ Tambahkan cast
     protected $casts = [
         'tanggal' => 'date',
         'tahun' => 'integer',
+        'pemasukan' => 'integer',    // ✅ TAMBAHKAN
+        'pengeluaran' => 'integer',  // ✅ TAMBAHKAN
     ];
 }

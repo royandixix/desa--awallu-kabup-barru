@@ -1,41 +1,43 @@
 @extends('user.layouts.app')
-@section('title', 'struktural bpd')
-@section('header_struktural')
-    @include('user.partials.navbar')
-    @include('user.partials.header_struktur')
+
+@section('title', 'Struktural BPD')
+
+{{-- Header khusus BPD --}}
+@section('header_struktur')
+    @include('user.partials.header_struktur', ['halaman' => 'bpd'])
 @endsection
 
 @section('content')
-<div class="bg-gray-50 py-16 text-[18px]" x-data="{ tahun: '2025' }">
+<!-- Tambahkan ID agar tombol scroll bisa target -->
+<section id="bpd-section" class="bg-gray-50 py-16 text-[18px]">
     <div class="container mx-auto px-8 max-w-7xl">
 
         <!-- TITLE -->
-        <h2 class="text-3xl text-gray-800 mb-2 text-center">Dokumen Perencanaan</h2>
+        <h2 class="text-3xl text-gray-800 mb-2 text-center font-extrabold">Struktural BPD Desa</h2>
         <p class="text-gray-500 mb-10 text-center">
-            Berikut adalah daftar dokumen APBDes yang dapat diakses untuk transparansi publik.
+            Berikut adalah foto anggota BPD Desa.
         </p>
 
-        <!-- GAMBAR STRUKTUR -->
-        <img src="{{ asset('img/user/struktural/struktural_pemerintahan_desa.png') }}"
-             alt="Struktur Pemerintahan Desa"
-             class="w-full h-auto mb-14" />
+        <!-- GAMBAR BPD BESAR UTUH -->
+        @php
+            $firstBpd = $bpds->first();
+        @endphp
 
-       
+        @if($firstBpd && $firstBpd->foto && \Illuminate\Support\Facades\Storage::disk('public')->exists($firstBpd->foto))
+            <img 
+                src="{{ asset('storage/' . $firstBpd->foto) }}" 
+                alt="Foto BPD"
+                class="w-full h-auto mb-14 rounded-none"
+            />
+        @else
+            <p class="text-center text-gray-500 mb-14">Belum ada foto anggota BPD.</p>
+        @endif
 
-        
-
-       
-
-        <!-- PAGINATION -->
-        <div class="flex justify-center mt-10 space-x-2">
-            <a class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">&laquo;</a>
-            <a class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">1</a>
-            <a class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">2</a>
-            <a class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">3</a>
-            <a class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">&raquo;</a>
+        <!-- PAGINATION DINAMIS -->
+        <div class="flex justify-center mt-10">
+            {{ $bpds->links() }} <!-- Laravel 12 otomatis menggunakan Tailwind -->
         </div>
 
     </div>
-</div>
+</section>
 @endsection
-

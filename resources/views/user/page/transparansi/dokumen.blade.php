@@ -14,7 +14,6 @@
             <!-- LAPORAN TRANSPARANSI ANGGARAN -->
             <div class="mb-12" data-aos="fade-up" data-aos-delay="200">
                 <!-- Card Transparansi Anggaran -->
-
             </div>
 
             <!-- DAFTAR DOKUMEN -->
@@ -27,55 +26,48 @@
                     Anda dapat melihat atau mengunduh dokumen sesuai kebutuhan.
                 </p>
 
-
                 <div class="space-y-6">
-                    @foreach (range(1, 4) as $i)
+                    @forelse($dokumens as $dokumen)
                         <div
                             class="border-l-4 border-teal-500 bg-white p-6 rounded-lg hover:bg-teal-50 transition-all duration-300 flex flex-col md:flex-row md:items-center md:justify-between shadow-sm">
                             <div>
                                 <h3 class="text-xl text-gray-900">
-                                    APBDes 2025 - {{ $i <= 2 ? 'POKOK' : 'PERUBAHAN' }}
+                                    {{ $dokumen->judul }} - {{ $dokumen->jenis }}
                                 </h3>
                                 <p class="text-gray-500 text-sm mt-1 flex items-center gap-2">
                                     <i class="bi bi-calendar3 text-teal-600"></i>
-                                    Jumat, 05/09/2025
+                                    {{ $dokumen->tanggal ? \Carbon\Carbon::parse($dokumen->tanggal)->isoFormat('dddd, DD/MM/YYYY') : '-' }}
                                 </p>
                             </div>
 
                             <div class="flex gap-3 mt-4 md:mt-0">
-                                <button
-                                    @click="showModal = true; modalTitle='APBDes 2025 - {{ $i <= 2 ? 'POKOK' : 'PERUBAHAN' }}'; excelData=[['Item A','1000','Rp1.000'],['Item B','2000','Rp2.000']]"
-                                    class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
-                                    <i class="bi bi-file-earmark-pdf-fill text-lg"></i>
-                                    <span>Lihat</span>
-                                </button>
-                                <button
-                                    class="px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-600 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
-                                    <i class="bi bi-download text-lg"></i>
-                                    <span>Download</span>
-                                </button>
+                                @if($dokumen->file)
+                                    @php $ext = pathinfo($dokumen->file, PATHINFO_EXTENSION); @endphp
+
+                                    <a href="{{ asset('storage/' . $dokumen->file) }}" target="_blank"
+                                       class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
+                                        <i class="bi bi-file-earmark-pdf-fill text-lg"></i>
+                                        <span>Lihat</span>
+                                    </a>
+
+                                    <a href="{{ asset('storage/' . $dokumen->file) }}" download
+                                       class="px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-600 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
+                                        <i class="bi bi-download text-lg"></i>
+                                        <span>Download</span>
+                                    </a>
+                                @else
+                                    <span class="text-gray-400">Tidak ada file</span>
+                                @endif
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <p class="text-center text-gray-500">Belum ada dokumen yang tersedia.</p>
+                    @endforelse
                 </div>
 
                 <!-- PAGINATION (HTML BIASA) -->
                 <div class="flex justify-center mt-8 space-x-2">
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        &laquo;
-                    </a>
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        1
-                    </a>
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        2
-                    </a>
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        3
-                    </a>
-                    <a href="#" class="px-3 py-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
-                        &raquo;
-                    </a>
+                    {{ $dokumens->links('pagination::tailwind') }}
                 </div>
             </section>
         </div>
@@ -144,24 +136,16 @@
                             ticks: {
                                 callback: (v) => 'Rp ' + (v / 1e9).toFixed(1) + ' M',
                                 color: '#6b7280',
-                                font: {
-                                    size: 12
-                                },
+                                font: { size: 12 },
                             },
-                            grid: {
-                                color: 'rgba(229, 231, 235, 0.4)'
-                            },
+                            grid: { color: 'rgba(229, 231, 235, 0.4)' },
                         },
                         x: {
                             ticks: {
                                 color: '#374151',
-                                font: {
-                                    size: 13
-                                },
+                                font: { size: 13 },
                             },
-                            grid: {
-                                display: false
-                            },
+                            grid: { display: false },
                         },
                     },
                 },

@@ -54,7 +54,7 @@
             <input type="text" 
                    class="form-control rupiah @error('pemasukan') is-invalid @enderror"
                    name="pemasukan"
-                   value="{{ old('pemasukan', number_format($anggaran->pemasukan, 0, ',', '.')) }}">
+                   value="{{ old('pemasukan', number_format($anggaran->pemasukan ?? 0, 0, ',', '.')) }}">
             @error('pemasukan') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
@@ -64,18 +64,8 @@
             <input type="text" 
                    class="form-control rupiah @error('pengeluaran') is-invalid @enderror"
                    name="pengeluaran"
-                   value="{{ old('pengeluaran', number_format($anggaran->pengeluaran, 0, ',', '.')) }}">
+                   value="{{ old('pengeluaran', number_format($anggaran->pengeluaran ?? 0, 0, ',', '.')) }}">
             @error('pengeluaran') <div class="invalid-feedback">{{ $message }}</div> @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="form-label">Pengeluaran</label>
-            <input type="text"
-            class="form-label" name="rupiah @error('penggeluaran') is-valid @enderror" 
-            value="{{ old('penggekuaran') <div class="invalid-feedback"> {{ message }} }}" @enderror>
-            
-                
-        
         </div>
 
         {{-- File --}}

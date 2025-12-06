@@ -97,7 +97,7 @@
 
                 <a href="{{ route('user.berita') }}"
                     class="px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 transition">Berita</a>
-                <a href="{{ route('user.pengaduan') }}"
+                <a href="{{ route('user.pengaduan.index') }}"
                     class="px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 transition flex items-center gap-1">
                     Pengaduan
                 </a>
@@ -167,7 +167,7 @@
 
             <a href="{{ route('user.berita') }}"
                 class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Berita</a>
-            <a href="{{ route('user.pengaduan') }}"
+            <a href="{{ route('user.pengaduan.index') }}"
                 class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition flex items-center gap-2">
                 Pengaduan
             </a>

@@ -16,10 +16,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
     @stack('styles')
 
@@ -44,8 +45,8 @@
         html,
         body {
             width: 100%;
-            max-width: 100%;
-            overflow-x: hidden; /* mencegah scroll horizontal */
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         body {
@@ -59,6 +60,7 @@
             min-height: 100vh;
             position: relative;
             width: 100%;
+            overflow-x: hidden;
         }
 
         .main-content {
@@ -68,13 +70,16 @@
             display: flex;
             flex-direction: column;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: calc(100% - var(--sidebar-width));
+            max-width: calc(100vw - var(--sidebar-width));
         }
 
         .content-wrapper {
             flex: 1;
             padding: 2rem;
             width: 100%;
-            overflow-x: hidden; /* pastikan konten tidak melebar */
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         .sidebar-overlay {
@@ -93,24 +98,73 @@
             display: block;
         }
 
-        table img {
+        /* Fix untuk tabel */
+        table {
+            width: 100% !important;
             max-width: 100%;
+        }
+
+        table img {
+            max-width: 100px;
             height: auto;
         }
 
-        /* responsive adjustments */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Fix untuk card */
+        .card {
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .card-body {
+            overflow-x: auto;
+        }
+
+        /* Responsive Breakpoints */
         @media (max-width: 991.98px) {
             .main-content {
                 margin-left: 0;
+                width: 100%;
+                max-width: 100vw;
             }
 
             .content-wrapper {
-                padding: 1.5rem;
+                padding: 1rem;
             }
 
-            /* tabel lebar otomatis */
+            /* Force table scroll on mobile */
             .table-responsive {
+                display: block;
+                width: 100%;
                 overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            table {
+                min-width: 600px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-wrapper {
+                padding: 0.75rem;
+            }
+
+            .card-body {
+                padding: 1rem !important;
+            }
+
+            h2, h3, h4 {
+                font-size: 1.25rem;
+            }
+
+            .btn {
+                font-size: 0.875rem;
+                padding: 0.5rem 0.75rem;
             }
         }
 
@@ -156,11 +210,17 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- jQuery & DataTables JS -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         // Sidebar Toggle
@@ -180,8 +240,7 @@
         // Close sidebar when clicking outside on mobile
         document.addEventListener('click', (e) => {
             if (window.innerWidth < 992) {
-                if (!sidebar.contains(e.target) && !toggleBtn?.contains(e.target) && sidebar.classList.contains(
-                        'show')) {
+                if (!sidebar.contains(e.target) && !toggleBtn?.contains(e.target) && sidebar.classList.contains('show')) {
                     toggleSidebar();
                 }
             }
@@ -193,7 +252,6 @@
             if (link.getAttribute('href') === currentPath) {
                 link.classList.add('active');
 
-                // Open parent collapse if exists
                 const collapse = link.closest('.collapse');
                 if (collapse) {
                     collapse.classList.add('show');
@@ -202,8 +260,7 @@
                 }
             }
         });
-
-        
+     
     </script>
 
     @stack('scripts')

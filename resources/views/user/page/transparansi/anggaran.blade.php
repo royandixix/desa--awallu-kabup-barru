@@ -19,8 +19,8 @@
             @if($rekap && $rekap->count())
                 @foreach ($rekap as $item)
                     '{{ $item->tahun }}': {
-                        pemasukan: {{ $item->pemasukan }},
-                        pengeluaran: {{ $item->pengeluaran }}
+                        pemasukan: {{ (int) ($item->pemasukan ?? 0) }},
+                        pengeluaran: {{ (int) ($item->pengeluaran ?? 0) }}
                     },
                 @endforeach
             @endif
@@ -132,20 +132,26 @@
 
         </div>
 
-        {{-- ===================================================== --}}
         {{-- SECTION 2 - GRAFIK --}}
-        {{-- ===================================================== --}}
-        <section class="mb-24" data-aos="fade-up" data-aos-delay="300">
-            <h2 class="text-3xl text-black mb-6">2. Grafik Transparansi Anggaran</h2>
+<section class="mb-24" data-aos="fade-up" data-aos-delay="300">
+    <h2 class="text-3xl text-black mb-4">2. Grafik Transparansi Anggaran</h2>
 
-            <div class="max-w-5xl">
-                <canvas id="budgetChart" class="w-full" style="height:420px"></canvas>
-            </div>
-        </section>
+    <p class="text-gray-700 mb-6">
+        Pada bagian ini, disajikan Grafik Transparansi Anggaran yang memberikan gambaran menyeluruh
+        mengenai tingkat keterbukaan informasi keuangan dalam periode tertentu. Grafik ini dirancang
+        untuk membantu masyarakat, pemangku kepentingan, serta pihak terkait dalam memahami bagaimana
+        anggaran direncanakan, dialokasikan, dan direalisasikan.
+    </p>
 
-        {{-- ===================================================== --}}
-        {{-- SECTION 3 - DOKUMEN DARI DATABASE --}}
-        {{-- ===================================================== --}}
+    <div class="bg-white p-6 rounded-lg shadow-sm">
+        <div class="max-w-5xl mx-auto">
+            <canvas id="budgetChart" style="height:420px; width:100%;"></canvas>
+        </div>
+    </div>
+</section>
+
+
+        {{-- SECTION 3 - DOKUMEN --}}
         <section class="mb-20" data-aos="fade-up" data-aos-delay="400">
             <h2 class="text-3xl text-gray-800 mb-2 text-left">
                 3. Daftar Dokumen Transparansi
@@ -156,11 +162,9 @@
             </p>
 
             <div class="space-y-6">
-
                 @forelse ($anggarans as $item)
-                    @php
-                        $ext = pathinfo($item->file, PATHINFO_EXTENSION);
-                    @endphp
+                    @php $ext = pathinfo($item->file, PATHINFO_EXTENSION); @endphp
+
                     <div class="border-l-4 border-teal-500 bg-white p-6 rounded-lg shadow-sm hover:bg-teal-50
                         flex flex-col md:flex-row md:items-center md:justify-between transition">
 
@@ -177,7 +181,6 @@
 
                         <div class="flex gap-3 mt-4 md:mt-0">
 
-                            {{-- Modal Preview PDF --}}
                             <button
                                 @click="previewFile('{{ asset('storage/'.$item->file) }}', '{{ $item->judul }} ({{ $item->jenis }})', '{{ $ext }}')"
                                 class="px-4 py-2 border border-red-500 text-red-500 rounded-lg
@@ -186,7 +189,6 @@
                                 Lihat
                             </button>
 
-                            {{-- Download --}}
                             <a href="{{ asset('storage/'.$item->file) }}" download
                                 class="px-4 py-2 border border-green-600 text-green-600 rounded-lg
                                     hover:bg-green-600 hover:text-white transition flex items-center gap-2">
@@ -200,37 +202,22 @@
                 @empty
                     <p class="text-gray-500">Belum ada dokumen anggaran yang tersedia.</p>
                 @endforelse
-
             </div>
 
         </section>
 
     </div>
 
-    {{-- Modal PDF - Enhanced Version --}}
+    {{-- MODAL PDF --}}
     <div 
         x-show="showModal"
         x-cloak
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
+        x-transition
         @click.self="showModal = false"
         class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-sm p-4"
     >
-        <div 
-            x-transition:enter="transition ease-out duration-300 transform"
-            x-transition:enter-start="opacity-0 scale-95"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-200 transform"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-95"
-            class="bg-white w-full max-w-6xl rounded-2xl shadow-2xl overflow-hidden"
-            style="max-height: 90vh;"
-        >
-            <!-- Header dengan gradient -->
+        <div class="bg-white w-full max-w-6xl rounded-2xl shadow-2xl overflow-hidden" style="max-height: 90vh;">
+
             <div class="flex justify-between items-center px-6 py-4 bg-gradient-to-r from-teal-600 to-teal-500 text-white">
                 <div class="flex items-center gap-3">
                     <i class="bi bi-file-earmark-pdf-fill text-2xl"></i>
@@ -239,68 +226,38 @@
                         <p class="text-xs text-teal-100">Dokumen Transparansi Anggaran</p>
                     </div>
                 </div>
-                <button 
-                    @click="showModal = false" 
-                    class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-all duration-200"
-                    title="Tutup"
-                >
+
+                <button @click="showModal = false" class="text-white hover:bg-white hover:bg-opacity-20 rounded-full p-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
 
-            <!-- Body: PDF iframe dengan loading -->
             <div class="relative bg-gray-100" style="height: calc(90vh - 160px);">
-                <!-- Loading Spinner -->
-                <div class="absolute inset-0 flex items-center justify-center bg-gray-50">
-                    <div class="text-center">
-                        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-teal-500 border-t-transparent mb-4"></div>
-                        <p class="text-gray-600 font-medium">Memuat dokumen...</p>
-                    </div>
-                </div>
-                
-                <!-- PDF Viewer -->
-                <iframe 
-                    :src="modalPdfUrl + '#toolbar=1&navpanes=1&scrollbar=1'" 
-                    class="w-full h-full relative z-10"
-                    frameborder="0"
-                    loading="lazy"
-                ></iframe>
+                <iframe :src="modalPdfUrl + '#toolbar=1&navpanes=1&scrollbar=1'" class="w-full h-full relative z-10" frameborder="0"></iframe>
             </div>
 
-            <!-- Footer dengan action buttons -->
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 px-6 py-4 bg-gray-50 border-t border-gray-200">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-3 px-6 py-4 bg-gray-50 border-t">
                 <div class="flex items-center gap-2 text-sm text-gray-600">
                     <i class="bi bi-info-circle"></i>
                     <span>Gunakan zoom browser untuk memperbesar/memperkecil</span>
                 </div>
-                
+
                 <div class="flex gap-3">
-                    <a 
-                        :href="modalPdfUrl" 
-                        target="_blank" 
-                        class="px-5 py-2.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg"
-                    >
+                    <a :href="modalPdfUrl" target="_blank" class="px-5 py-2.5 bg-teal-600 text-white rounded-lg flex items-center gap-2">
                         <i class="bi bi-box-arrow-up-right"></i>
-                        <span>Buka Tab Baru</span>
+                        Buka Tab Baru
                     </a>
-                    
-                    <a 
-                        :href="modalPdfUrl" 
-                        download 
-                        class="px-5 py-2.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg"
-                    >
+
+                    <a :href="modalPdfUrl" download class="px-5 py-2.5 bg-green-600 text-white rounded-lg flex items-center gap-2">
                         <i class="bi bi-download"></i>
-                        <span>Download</span>
+                        Download
                     </a>
-                    
-                    <button 
-                        @click="showModal = false" 
-                        class="px-5 py-2.5 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-all duration-200 flex items-center gap-2"
-                    >
+
+                    <button @click="showModal = false" class="px-5 py-2.5 border-2 border-gray-300 text-gray-700 rounded-lg flex items-center gap-2">
                         <i class="bi bi-x-lg"></i>
-                        <span>Tutup</span>
+                        Tutup
                     </button>
                 </div>
             </div>
@@ -310,57 +267,72 @@
 </div>
 
 {{-- SCRIPTS --}}
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
 <script>
     AOS.init({ duration: 800, once: true });
 
     document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('budgetChart');
+        if (!ctx) return;
 
-        const ctx = document.getElementById('budgetChart').getContext('2d');
+        const chartData = {
+            labels: [
+                @foreach ($rekap as $r)
+                    '{{ $r->tahun }}',
+                @endforeach
+            ],
+            pemasukan: [
+                @foreach ($rekap as $r)
+                    {{ (int) ($r->pemasukan ?? 0) }},
+                @endforeach
+            ],
+            pengeluaran: [
+                @foreach ($rekap as $r)
+                    {{ (int) ($r->pengeluaran ?? 0) }},
+                @endforeach
+            ]
+        };
 
-        new Chart(ctx, {
+        const budgetChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [
-                    @foreach ($rekap as $r)
-                        '{{ $r->tahun }}',
-                    @endforeach
-                ],
+                labels: chartData.labels,
                 datasets: [
                     {
                         label: 'Pendapatan',
-                        data: [
-                            @foreach ($rekap as $r)
-                                {{ $r->pemasukan }},
-                            @endforeach
-                        ],
+                        data: chartData.pemasukan,
                         backgroundColor: 'rgba(45, 212, 191, 0.8)',
-                        borderRadius: 10,
+                        borderColor: 'rgba(45, 212, 191, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8,
                     },
                     {
                         label: 'Pengeluaran',
-                        data: [
-                            @foreach ($rekap as $r)
-                                {{ $r->pengeluaran }},
-                            @endforeach
-                        ],
+                        data: chartData.pengeluaran,
                         backgroundColor: 'rgba(244, 114, 182, 0.8)',
-                        borderRadius: 10,
+                        borderColor: 'rgba(244, 114, 182, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8,
                     }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                scales: {
+                    y: { beginAtZero: true }
+                }
             }
         });
-
     });
 </script>
 
-<style>[x-cloak]{ display:none!important }</style>
+<style>
+    [x-cloak] { display: none !important; }
+    #budgetChart { max-width: 100%; height: 420px !important; }
+</style>
 
 @endsection

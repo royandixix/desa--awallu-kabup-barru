@@ -94,8 +94,8 @@
 
                                             @if ($extension === 'pdf')
                                                 <a href="{{ asset('storage/' . $item->file) }}" target="_blank"
-                                                    class="btn btn-info btn-sm">
-                                                    Lihat PDF
+                                                    class="btn btn-danger btn-sm">
+                                                    <i class="fas fa-file-pdf"></i>
                                                 </a>
                                             @else
                                                 <span class="text-muted">Tidak dapat pratinjau</span>

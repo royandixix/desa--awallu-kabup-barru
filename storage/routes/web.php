@@ -2,67 +2,190 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\User\GaleriController;
+
+// USER Controllers
+use App\Http\Controllers\User\GaleriController as UserGaleriController;
+use App\Http\Controllers\User\ProfilDesaController;
 use App\Http\Controllers\User\TransparansiController;
+use App\Http\Controllers\User\BeritaController as UserBeritaController;
+use App\Http\Controllers\User\PemerintahanDesaController;
+use App\Http\Controllers\User\BpdUserController;
+use App\Http\Controllers\User\KarangTarunaController as UserKarangTaruna;
 
-// Root
-Route::get('/', fn() => redirect()->route('user.home'))->name('root');
+// ADMIN Controllers
+use App\Http\Controllers\Admin\ProfilDesaController as AdminProfilDesaController;
+use App\Http\Controllers\Admin\GaleriController as AdminGaleriController;
+use App\Http\Controllers\Admin\Transparansi\AnggaranController as AdminAnggaranController;
+use App\Http\Controllers\Admin\Transparansi\LaporanController as AdminLaporanController;
+use App\Http\Controllers\Admin\Transparansi\DokumenController as AdminDokumenController;
+use App\Http\Controllers\Admin\Transparansi\BumdesController as AdminBumdesController;
+use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
 
-// =======================
-// USER ROUTES (PUBLIC)
-// =======================
+// STRUKTUR ADMIN
+use App\Http\Controllers\Admin\Struktur\PemerintahanDesaStrukturalController;
+use App\Http\Controllers\Admin\Struktur\PemerintahanDesaAnggotaController;
+use App\Http\Controllers\Admin\Struktur\BpdController;
+use App\Http\Controllers\Admin\Struktur\PkkController;
+use App\Http\Controllers\Admin\Struktur\LpmController;
+use App\Http\Controllers\Admin\Struktur\KarangTarunaController;
+use App\Http\Controllers\Admin\Struktur\PosyanduController;
+
+/*
+|--------------------------------------------------------------------------
+| HALAMAN UTAMA USER
+|--------------------------------------------------------------------------
+*/
+Route::get('/', fn() => redirect()->route('user.home'));
+Route::get('/home', fn() => view('user.page.home.content'))->name('user.home');
+
+/*
+|--------------------------------------------------------------------------
+| USER ROUTES
+|--------------------------------------------------------------------------
+*/
 Route::prefix('user')->name('user.')->group(function () {
 
-    // Home User
-    Route::get('/home', fn() => view('user.page.home.conten'))->name('home');
-
-    // Profil
-    Route::get('/profil', fn() => view('user.page.profil_desa.profil_desa'))->name('profil');
+    // Profil & Transparansi
+    Route::get('/transparansi/{halaman?}', [TransparansiController::class, 'index'])->name('transparansi');
+    Route::get('/profil', [ProfilDesaController::class, 'index'])->name('profil');
 
     // Galeri
-    Route::get('/galeri', fn() => view('user.page.home.foto_bersama_warga'))->name('galeri');
-    Route::get('/galeri/{filename}', [GaleriController::class, 'show'])->name('galeri.detail');
+    Route::get('/galeri', [UserGaleriController::class, 'index'])->name('galeri');
+    Route::get('/galeri/{filename}', [UserGaleriController::class, 'show'])->name('galeri.detail');
 
-    // Layanan
-    Route::get('/layanan', fn() => view('user.page.home.layanan_kami.layanan_kami'))->name('layanan');
-    Route::get('/layanan/pemerintahan', fn() => view('user.page.home.layanan_kami.pemerintahan'))->name('layanan.pemerintahan');
-    Route::get('/layanan/pelayanan', fn() => view('user.page.home.layanan_kami.pelayanan'))->name('layanan.pelayanan');
-    Route::get('/layanan/kesra', fn() => view('user.page.home.layanan_kami.kesra'))->name('layanan.kesra');
-    Route::get('/layanan/informasi-bantuan', fn() => view('user.page.home.layanan_kami.informasi_bantuan'))->name('layanan.informasi_bantuan');
-    Route::get('/layanan/kesehatan-posyandu', fn() => view('user.page.home.layanan_kami.kesehatan_posyandu'))->name('layanan.kesehatan_posyandu');
-    Route::get('/layanan/aspirasi-pengaduan', fn() => view('user.page.home.layanan_kami.aspirasi_pengaduan'))->name('layanan.aspirasi_pengaduan');
+    // Halaman statis
+    Route::get('/keuangan', fn() => view('user.page.home.administrasipenduduk'))->name('keuangan');
+    Route::get('/pembangunan', fn() => view('user.page.home.layanan_kami'))->name('pembangunan');
 
-    // Transparansi
-    Route::prefix('transparansi')->name('transparansi.')->group(function () {
-        Route::get('/', [TransparansiController::class, 'index'])->name('index');
-        Route::get('/anggaran', [TransparansiController::class, 'index'])->name('anggaran');
-        Route::get('/laporan', [TransparansiController::class, 'index'])->name('laporan');
-        Route::get('/dokumen', [TransparansiController::class, 'index'])->name('dokumen');
-        Route::get('/bumdes', [TransparansiController::class, 'index'])->name('bumdes');
+    // Struktur Desa
+    Route::prefix('struktur')->name('struktur.')->group(function () {
+        Route::get('/', fn() => view('user.page.struktur.struktur', ['halaman' => 'default']))->name('index');
+        Route::get('/pemerintahan-desa', [PemerintahanDesaController::class, 'index'])->name('pemerintahan_desa');
+        Route::get('/bpd', [BpdUserController::class, 'index'])->name('bpd');
+        Route::get('/pkk', fn() => view('user.page.struktur.struktur', ['halaman' => 'pkk']))->name('pkk');
+        Route::get('/lpm', fn() => view('user.page.struktur.struktur', ['halaman' => 'lpm']))->name('lpm');
+
+        // Karang Taruna -> gunakan controller agar dinamis
+        Route::get('/karang-taruna', [UserKarangTaruna::class, 'index'])->name('karang_taruna');
+
+        Route::get('/posyandu', fn() => view('user.page.struktur.struktur', ['halaman' => 'posyandu']))->name('posyandu');
     });
 
     // Berita
-    Route::get('/berita', fn() => view('user.page.home.berita'))->name('berita');
+    Route::get('/berita', [UserBeritaController::class, 'index'])->name('berita');
+    Route::get('/berita/{slug}', [UserBeritaController::class, 'detail'])->name('berita.detail');
 
-    // Pengaduan
-    Route::get('/pengaduan', fn() => view('user.page.pengaduan.pengaduan'))->name('pengaduan');
+    // Kontak / pengaduan
+    Route::get('/pengaduan', fn() => view('user.page.home.kontak_saran'))->name('pengaduan');
+    Route::get('/kontak', fn() => view('user.page.home.kontak_saran'))->name('kontak');
 });
 
-// =======================
-// ADMIN ROUTES
-// =======================
+/*
+|--------------------------------------------------------------------------
+| LAYANAN USER
+|--------------------------------------------------------------------------
+*/
+Route::prefix('layanan')->name('layanan.')->group(function () {
+    Route::get('/pemerintahan', fn() => view('user.page.home.layanan_kami.pemerintahan'))->name('pemerintahan');
+    Route::get('/pelayanan', fn() => view('user.page.home.layanan_kami.pelayanan'))->name('pelayanan');
+    Route::get('/kesra', fn() => view('user.page.home.layanan_kami.kesra'))->name('kesra');
+    Route::get('/bansos', fn() => view('user.page.home.layanan_kami.bansos'))->name('bansos');
+    Route::get('/kesehatan', fn() => view('user.page.home.layanan_kami.kesehatan_posyandu'))->name('kesehatan');
+    Route::get('/aspirasi', fn() => view('user.page.home.layanan_kami.aspirasi_pengaduan'))->name('aspirasi');
+});
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN ROUTES
+|--------------------------------------------------------------------------
+*/
 Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::get('/', fn() => redirect()->route('admin.dashboard'));
     Route::get('/dashboard', fn() => view('admin.page.dashboard.index'))->name('dashboard');
-    Route::get('/beranda', fn() => view('admin.page.beranda.index'))->name('beranda');
-    Route::get('/berita', fn() => view('admin.page.berita.index'))->name('berita');
-    Route::get('/galeri', fn() => view('admin.page.galeri.index'))->name('galeri');
-    Route::get('/transparansi/anggaran', fn() => view('admin.page.transparansi.anggaran.index'))->name('transparansi.anggaran');
-    Route::get('/transparansi/anggaran/create', fn() => view('admin.page.transparansi.anggaran.create'))->name('transparansi.anggaran.create');
+
+    Route::resource('profil_desa', AdminProfilDesaController::class);
+    Route::resource('galeri', AdminGaleriController::class);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Transparansi
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('transparansi')->name('transparansi.')->group(function () {
+        Route::resource('anggaran', AdminAnggaranController::class);
+        Route::resource('laporan', AdminLaporanController::class);
+        Route::resource('dokumen', AdminDokumenController::class);
+        Route::resource('bumdes', AdminBumdesController::class);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Struktur Desa (Admin)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('struktur')->name('struktur.')->group(function () {
+
+        // Pemerintahan Desa
+        Route::prefix('pemerintahan_desa')->name('pemerintahan_desa.')->group(function () {
+            Route::resource('struktural', PemerintahanDesaStrukturalController::class);
+            Route::resource('anggota', PemerintahanDesaAnggotaController::class);
+        });
+
+        // Struktur Lainnya
+        Route::resource('bpd', BpdController::class);
+        Route::resource('pkk', PkkController::class);
+        Route::resource('lpm', LpmController::class);
+
+        // Karang Taruna
+        Route::resource('karang_taruna', KarangTarunaController::class);
+
+        // Posyandu
+        Route::resource('posyandu', PosyanduController::class);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin BPD CRUD (Manual)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('struktur/bpd')->name('struktur.bpd.')->group(function () {
+        Route::get('/', [BpdController::class, 'index'])->name('index');
+        Route::get('/create', [BpdController::class, 'create'])->name('create');
+        Route::post('/store', [BpdController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [BpdController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [BpdController::class, 'update'])->name('update');
+        Route::delete('/{id}', [BpdController::class, 'destroy'])->name('destroy');
+    });
+
+    // Berita Admin
+    Route::resource('berita', AdminBeritaController::class)
+        ->parameters(['berita' => 'berita']);
 });
 
-// =======================
-// PROFILE
-// =======================
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+/*
+|--------------------------------------------------------------------------
+| FILE VIEWER PUBLIC FILES
+|--------------------------------------------------------------------------
+*/
+Route::get('/view-file/{filename}', function ($filename) {
+    $path = storage_path('app/public/uploads/transparansi_anggaran/' . $filename);
+    if (!file_exists($path)) abort(404);
+    return response()->file($path, [
+        'Content-Type' => mime_content_type($path),
+        'Content-Disposition' => 'inline; filename="' . $filename . '"'
+    ]);
+})->name('view.file');
+
+/*
+|--------------------------------------------------------------------------
+| PROFILE AUTH USER
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
