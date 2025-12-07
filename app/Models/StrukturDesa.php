@@ -12,6 +12,6 @@ class StrukturDesa extends Model
         'kategori',
         'nama',
         'jabatan',
-        'foto',
+        'foto'
     ];
 }

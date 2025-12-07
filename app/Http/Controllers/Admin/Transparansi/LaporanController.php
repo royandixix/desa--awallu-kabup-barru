@@ -3,104 +3,118 @@
 namespace App\Http\Controllers\Admin\Transparansi;
 
 use App\Http\Controllers\Controller;
-use App\Models\TransparansiLaporan;
+use App\Models\LaporanKegiatan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class LaporanController extends Controller
 {
-    // ==========================
-    // INDEX
-    // ==========================
     public function index()
     {
-        $laporan = TransparansiLaporan::latest()->paginate(10); // Pagination opsional
+        $laporan = LaporanKegiatan::latest()->paginate(10);
         return view('admin.page.transparansi.laporan.index', compact('laporan'));
     }
 
-    // ==========================
-    // CREATE
-    // ==========================
     public function create()
     {
         return view('admin.page.transparansi.laporan.create');
     }
 
-    // ==========================
-    // STORE
-    // ==========================
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'tanggal' => 'nullable|date',
-            'file' => 'nullable|file|mimes:pdf,png,jpg,jpeg,webp|max:20480',
+        $validated = $request->validate([
+            'judul'     => 'required|string|max:255',
+            'lokasi'    => 'required|string|max:255',
+            'anggaran'  => 'nullable|string', // ubah jadi string dulu
+            'tanggal'   => 'required|date',
+            'foto'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'file_path' => 'nullable|mimes:pdf,doc,docx|max:4096',
         ], [
-            'file.max' => 'Ukuran file maksimal 20 MB',
-            'file.mimes' => 'Format file harus PDF, PNG, JPG, JPEG, atau WEBP'
+            'judul.required'     => 'Judul wajib diisi.',
+            'lokasi.required'    => 'Lokasi wajib diisi.',
+            'tanggal.required'   => 'Tanggal wajib diisi.',
+            'tanggal.date'       => 'Tanggal tidak valid.',
+            'foto.image'         => 'Foto harus berupa gambar.',
+            'foto.mimes'         => 'Foto harus berekstensi: jpg, jpeg, png, webp.',
+            'foto.max'           => 'Ukuran foto maksimal 2MB.',
+            'file_path.mimes'    => 'File harus berekstensi: pdf, doc, docx.',
+            'file_path.max'      => 'Ukuran file maksimal 4MB.',
         ]);
 
-        if ($request->hasFile('file')) {
-            $data['file'] = $request->file('file')->store('laporan', 'public');
+        // Konversi anggaran dari format Rupiah ke angka murni
+        if (!empty($validated['anggaran'])) {
+            $validated['anggaran'] = preg_replace('/[^\d]/', '', $validated['anggaran']);
         }
 
-        TransparansiLaporan::create($data);
+        // Upload foto
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')->store('laporan/foto', 'public');
+        }
 
-        return redirect()->route('admin.transparansi.laporan.index')
-                         ->with('success', 'Laporan berhasil ditambahkan!');
+        // Upload file PDF/DOC
+        if ($request->hasFile('file_path')) {
+            $validated['file_path'] = $request->file('file_path')->store('laporan/file', 'public');
+        }
+
+        LaporanKegiatan::create($validated);
+
+        return redirect()
+            ->route('admin.transparansi.laporan.index')
+            ->with('success', 'Data laporan berhasil ditambahkan!');
     }
 
-    // ==========================
-    // EDIT
-    // ==========================
-    public function edit(TransparansiLaporan $laporan)
+    public function edit($id)
     {
+        $laporan = LaporanKegiatan::findOrFail($id);
         return view('admin.page.transparansi.laporan.edit', compact('laporan'));
     }
 
-    // ==========================
-    // UPDATE
-    // ==========================
-    public function update(Request $request, TransparansiLaporan $laporan)
+    public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'tanggal' => 'nullable|date',
-            'file' => 'nullable|file|mimes:pdf,png,jpg,jpeg,webp|max:20480',
+        $laporan = LaporanKegiatan::findOrFail($id);
+
+        $validated = $request->validate([
+            'judul'     => 'required|string|max:255',
+            'lokasi'    => 'required|string|max:255',
+            'anggaran'  => 'nullable|string',
+            'tanggal'   => 'required|date',
+            'foto'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'file_path' => 'nullable|mimes:pdf,doc,docx|max:4096',
         ], [
-            'file.max' => 'Ukuran file maksimal 20 MB',
-            'file.mimes' => 'Format file harus PDF, PNG, JPG, JPEG, atau WEBP'
+            'judul.required'     => 'Judul wajib diisi.',
+            'lokasi.required'    => 'Lokasi wajib diisi.',
+            'tanggal.required'   => 'Tanggal wajib diisi.',
+            'tanggal.date'       => 'Tanggal tidak valid.',
+            'foto.image'         => 'Foto harus berupa gambar.',
+            'foto.mimes'         => 'Foto harus berekstensi: jpg, jpeg, png, webp.',
+            'foto.max'           => 'Ukuran foto maksimal 2MB.',
+            'file_path.mimes'    => 'File harus berekstensi: pdf, doc, docx.',
+            'file_path.max'      => 'Ukuran file maksimal 4MB.',
         ]);
 
-        if ($request->hasFile('file')) {
-            // Hapus file lama jika ada
-            if ($laporan->file && Storage::disk('public')->exists($laporan->file)) {
-                Storage::disk('public')->delete($laporan->file);
-            }
-
-            $data['file'] = $request->file('file')->store('laporan', 'public');
+        if (!empty($validated['anggaran'])) {
+            $validated['anggaran'] = preg_replace('/[^\d]/', '', $validated['anggaran']);
         }
 
-        $laporan->update($data);
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')->store('laporan/foto', 'public');
+        }
 
-        return redirect()->route('admin.transparansi.laporan.index')
-                         ->with('success', 'Laporan berhasil diupdate!');
+        if ($request->hasFile('file_path')) {
+            $validated['file_path'] = $request->file('file_path')->store('laporan/file', 'public');
+        }
+
+        $laporan->update($validated);
+
+        return redirect()
+            ->route('admin.transparansi.laporan.index')
+            ->with('success', 'Data laporan berhasil diperbarui!');
     }
 
-    // ==========================
-    // DESTROY
-    // ==========================
-    public function destroy(TransparansiLaporan $laporan)
+    public function destroy($id)
     {
-        if ($laporan->file && Storage::disk('public')->exists($laporan->file)) {
-            Storage::disk('public')->delete($laporan->file);
-        }
-
+        $laporan = LaporanKegiatan::findOrFail($id);
         $laporan->delete();
 
-        return redirect()->route('admin.transparansi.laporan.index')
-                         ->with('success', 'Laporan berhasil dihapus!');
+        return back()->with('success', 'Data laporan berhasil dihapus!');
     }
 }

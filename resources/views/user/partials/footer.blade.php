@@ -1,4 +1,5 @@
-<footer data-animate class="bg-gradient-to-br from-green-700 via-green-800 to-green-900 text-white py-14 px-6">
+<footer id="kontak" data-animate
+    class="bg-gradient-to-br from-green-700 via-green-800 to-green-900 text-white py-14 px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 items-start">
 
         <!-- Kolom 1: Desa Lawallu -->
@@ -15,13 +16,16 @@
             </p>
             <!-- Media Sosial -->
             <div class="flex items-center gap-4 mt-auto">
-                <a href="#" class="bg-green-600 hover:bg-yellow-400 text-white hover:text-green-900 p-2 rounded-full transition duration-300">
+                <a href="#"
+                    class="bg-green-600 hover:bg-yellow-400 text-white hover:text-green-900 p-2 rounded-full transition duration-300">
                     <i class="fa-brands fa-facebook-f"></i>
                 </a>
-                <a href="#" class="bg-green-600 hover:bg-yellow-400 text-white hover:text-green-900 p-2 rounded-full transition duration-300">
+                <a href="#"
+                    class="bg-green-600 hover:bg-yellow-400 text-white hover:text-green-900 p-2 rounded-full transition duration-300">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
-                <a href="#" class="bg-green-600 hover:bg-yellow-400 text-white hover:text-green-900 p-2 rounded-full transition duration-300">
+                <a href="#"
+                    class="bg-green-600 hover:bg-yellow-400 text-white hover:text-green-900 p-2 rounded-full transition duration-300">
                     <i class="fa-brands fa-youtube"></i>
                 </a>
             </div>
@@ -43,10 +47,13 @@
         <div class="flex flex-col text-left">
             <h3 class="text-xl font-semibold mb-5 border-b border-yellow-400 inline-block pb-1">Layanan Kami</h3>
             <ul class="space-y-2 text-gray-100 text-base">
-                <li><a href="#" class="hover:text-yellow-300 transition-all duration-300">Bagian Pemerintahan</a></li>
-                <li><a href="#" class="hover:text-yellow-300 transition-all duration-300">Bagian Pelayanan</a></li>
+                <li><a href="#" class="hover:text-yellow-300 transition-all duration-300">Bagian Pemerintahan</a>
+                </li>
+                <li><a href="#" class="hover:text-yellow-300 transition-all duration-300">Bagian Pelayanan</a>
+                </li>
                 <li><a href="#" class="hover:text-yellow-300 transition-all duration-300">Layanan Kesra</a></li>
-                <li><a href="#" class="hover:text-yellow-300 transition-all duration-300">Pelayanan Kesehatan & Posyandu</a></li>
+                <li><a href="#" class="hover:text-yellow-300 transition-all duration-300">Pelayanan Kesehatan &
+                        Posyandu</a></li>
             </ul>
         </div>
 
@@ -68,39 +75,42 @@
     </div>
 
     <!-- Garis bawah -->
-    <div class="border-t border-green-600 mt-12 pt-5 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-300 gap-3">
+    <div
+        class="border-t border-green-600 mt-12 pt-5 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-300 gap-3">
         <p>© 2025 KKN TEMATIK UNIVERSITAS DIPA MAKASSAR — All Rights Reserved</p>
         <p>Kunjungan Hari Ini: <span class="font-semibold text-white">17</span></p>
     </div>
 </footer>
 
-<!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/a2b5d6b2cd.js" crossorigin="anonymous"></script>
 
 <!-- Animasi scroll global (pakai data-animate) -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const elements = document.querySelectorAll('[data-animate]');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.2 });
+    document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll('[data-animate]');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
 
-  elements.forEach(el => observer.observe(el));
-});
+        elements.forEach(el => observer.observe(el));
+    });
 </script>
 
 <style>
-[data-animate] {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.9s ease-out;
-}
-[data-animate].visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+    [data-animate] {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.9s ease-out;
+    }
+
+    [data-animate].visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 </style>

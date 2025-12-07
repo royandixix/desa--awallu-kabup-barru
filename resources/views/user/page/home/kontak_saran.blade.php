@@ -1,87 +1,131 @@
-@extends('user.layouts.app')
-@section('title', 'Berita Desa Lawallu')
-
-@section('header_berita')
-    @include('user.partials.navbar')
-    @include('user.partials.header_berita')
-@endsection
-
-@section('content')
-<section class="min-h-screen bg-gray-50 py-20">
-  <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-10">
-    <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Form Pengaduan</h1>
-    <p class="text-gray-600 text-center mb-8">
-      Silakan isi form di bawah ini untuk menyampaikan saran, masukan, atau pengaduan Anda.
+<!-- 🌿 KONTAK & SARAN SECTION -->
+<!-- ======================== -->
+<div class="mx-auto max-w-7xl px-6 lg:px-8">
+  
+  <!-- === JUDUL === -->
+  <div class="text-center mb-12 mt-20">
+    <h2 class="text-3xl text-gray-800 sm:text-4xl tracking-tight font-bold">
+      Kontak & Saran
+    </h2>
+    <div class="mx-auto mt-3 mb-6 h-1 w-24 bg-green-600 rounded-full"></div>
+    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+      Hubungi kami untuk pertanyaan, saran, atau informasi lebih lanjut tentang Desa Lawallu.
     </p>
+  </div>
 
-    {{-- Alert sukses (dummy, hanya muncul saat klik tombol kirim) --}}
-    <div id="alertSuccess" class="hidden mb-6 p-4 bg-green-100 text-green-700 rounded-lg text-center">
-      Pesan Anda berhasil dikirim (dummy mode, belum tersambung ke backend)
+  <!-- === KONTEN: MAP + FORM === -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+
+    <!-- 🗺️ PETA INTERAKTIF -->
+    <div class="relative overflow-hidden group rounded-2xl shadow-lg">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end justify-center pb-4">
+        <a href="https://goo.gl/maps/qdm9Y9emAJmG7zvQ8" target="_blank"
+           class="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-2 rounded-full shadow-md transition-all duration-300">
+          🗺️ Buka di Google Maps
+        </a>
+      </div>
+
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d997.9833782971821!2d119.64912476948616!3d-4.444431902680951!2m3!1f40!2f0!3f10!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbbc74d2b4b7a8f%3A0xe6f7b3e2721dbd8b!2sDesa%20Lawallu%2C%20Barru!5e0!3m2!1sid!2sid!4v1698235555555"
+        class="w-full h-[500px] grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-500 ease-out"
+        style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
 
-    <form id="pengaduanForm" action="#" method="POST" class="space-y-6">
+    <!-- 💬 FORM KONTAK -->
+    <form action="{{ route('user.kontak.store') }}" method="POST" class="space-y-6" id="contactForm">
       @csrf
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-        <input type="text" name="nama" id="nama" class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500" placeholder="Masukkan nama Anda">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">Nama Lengkap</label>
+          <input type="text" name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama Lengkap"
+            class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200 p-3" required>
+          @error('nama')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+          @enderror
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-2">Email</label>
+          <input type="email" name="email" value="{{ old('email') }}" placeholder="Masukkan Email"
+            class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200 p-3" required>
+          @error('email')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+          @enderror
+        </div>
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700">Email</label>
-        <input type="email" name="email" id="email" class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500" placeholder="Masukkan email Anda">
+        <label class="block text-gray-700 font-medium mb-2">Subjek</label>
+        <input type="text" name="subjek" value="{{ old('subjek') }}" placeholder="Subjek Pesan"
+          class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200 p-3" required>
+        @error('subjek')
+          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-700">Pesan</label>
-        <textarea name="pesan" id="pesan" rows="4" class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-500 focus:border-lime-500" placeholder="Tulis pesan Anda..."></textarea>
+        <label class="block text-gray-700 font-medium mb-2">Pesan</label>
+        <textarea name="pesan" rows="5" placeholder="Tulis pesan Anda..."
+          class="w-full border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200 p-3" required>{{ old('pesan') }}</textarea>
+        @error('pesan')
+          <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+        @enderror
       </div>
 
-      <div class="text-center">
-        <button type="submit" class="px-8 py-3 bg-lime-600 text-white rounded-lg font-semibold hover:bg-lime-700 transition">
-          Kirim Pengaduan
+      <div class="text-right">
+        <button type="submit"
+          class="bg-green-700 hover:bg-green-800 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg active:scale-95">
+          Kirim
         </button>
       </div>
     </form>
+
   </div>
-</section>
+</div>
 
-{{-- Script supaya tombol kirim muncul alert dummy --}}
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- SweetAlert Success Message -->
+@if(session('success'))
 <script>
-    AOS.init({
-        duration: 800,
-        once: true
-    });
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('pengaduanForm');
-  const alertBox = document.getElementById('alertSuccess');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault(); // stop form refresh
-
-    // validasi sederhana
-    const nama = document.getElementById('nama').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const pesan = document.getElementById('pesan').value.trim();
-
-    if (!nama || !email || !pesan) {
-      alert('Semua field wajib diisi!');
-      return;
+  Swal.fire({
+    icon: 'success',
+    title: 'Berhasil!',
+    text: '{{ session('success') }}',
+    showConfirmButton: false,
+    timer: 2500,
+    timerProgressBar: true,
+    toast: true,
+    position: 'top-end',
+    background: '#d4edda',
+    iconColor: '#28a745',
+    customClass: {
+      popup: 'colored-toast'
     }
-
-    // tampilkan alert sukses dummy
-    alertBox.classList.remove('hidden');
-
-    // reset form
-    form.reset();
-
-    // hilangkan alert setelah 3 detik
-    setTimeout(() => {
-      alertBox.classList.add('hidden');
-    }, 3000);
   });
-});
 </script>
-@endsection
+@endif
+
+<!-- SweetAlert Error Message -->
+@if(session('error'))
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Gagal!',
+    text: '{{ session('error') }}',
+    showConfirmButton: true,
+    confirmButtonColor: '#dc3545'
+  });
+</script>
+@endif
+
+<!-- Style untuk SweetAlert Toast -->
+<style>
+  .colored-toast.swal2-icon-success {
+    background-color: #d4edda !important;
+  }
+</style

@@ -11,6 +11,9 @@ use App\Http\Controllers\User\BpdUserController;
 use App\Http\Controllers\User\KarangTarunaController;
 use App\Http\Controllers\User\LpmController as UserLpmController;
 use App\Http\Controllers\User\PosyanduController as UserPosyanduController;
+use App\Http\Controllers\User\LaporanController as UserLaporanController;
+use App\Http\Controllers\User\PengaduanController;
+use App\Http\Controllers\User\KontakSaranController;
 use App\Http\Controllers\Admin\ProfilDesaController as AdminProfilDesaController;
 use App\Http\Controllers\Admin\GaleriController as AdminGaleriController;
 use App\Http\Controllers\Admin\Transparansi\AnggaranController as AdminAnggaranController;
@@ -18,7 +21,8 @@ use App\Http\Controllers\Admin\Transparansi\LaporanController as AdminLaporanCon
 use App\Http\Controllers\Admin\Transparansi\DokumenController as AdminDokumenController;
 use App\Http\Controllers\Admin\Transparansi\BumdesController as AdminBumdesController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
-use App\Http\Controllers\Admin\PengaduanController;
+use App\Http\Controllers\Admin\PengaduanController as AdminPengaduanController;
+use App\Http\Controllers\Admin\KontakSaranController as AdminKontakSaranController;
 use App\Http\Controllers\Admin\Struktur\PemerintahanDesaStrukturalController;
 use App\Http\Controllers\Admin\Struktur\PemerintahanDesaAnggotaController;
 use App\Http\Controllers\Admin\Struktur\BpdController;
@@ -31,20 +35,35 @@ Route::get('/', fn() => redirect()->route('user.home'));
 Route::get('/home', fn() => view('user.page.home.content'))->name('user.home');
 
 Route::prefix('user')->name('user.')->group(function () {
+
+    Route::get('/transparansi/laporan', [UserLaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/transparansi/laporan/{id}', [UserLaporanController::class, 'detail'])->name('laporan.detail');
+
     Route::get('/transparansi/{halaman?}', [TransparansiController::class, 'index'])->name('transparansi');
     Route::get('/profil', [ProfilDesaController::class, 'index'])->name('profil');
+
     Route::get('/galeri', [UserGaleriController::class, 'index'])->name('galeri');
     Route::get('/galeri/{filename}', [UserGaleriController::class, 'show'])->name('galeri.detail');
+
     Route::get('/keuangan', fn() => view('user.page.home.administrasipenduduk'))->name('keuangan');
     Route::get('/pembangunan', fn() => view('user.page.home.layanan_kami'))->name('pembangunan');
+
     Route::get('/berita', [UserBeritaController::class, 'index'])->name('berita');
     Route::get('/berita/{slug}', [UserBeritaController::class, 'detail'])->name('berita.detail');
+
     Route::get('/kontak', fn() => view('user.page.home.kontak_saran'))->name('kontak');
-    Route::get('/pengaduan', [App\Http\Controllers\User\PengaduanController::class, 'index'])->name('pengaduan.index');
-    Route::post('/pengaduan', [App\Http\Controllers\User\PengaduanController::class, 'store'])->name('pengaduan.store');
+    Route::post('/kontak', [KontakSaranController::class, 'store'])->name('kontak.store');
+
+    Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.index');
+
+    Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+
+    Route::get('/transparansi/laporan', [UserLaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/transparansi/laporan/{id}', [UserLaporanController::class, 'detail'])->name('laporan.detail');
 
     Route::prefix('struktur')->name('struktur.')->group(function () {
         Route::get('/', fn() => view('user.page.struktur.struktur', ['halaman' => 'default']))->name('index');
+
         Route::get('/pemerintahan-desa', [PemerintahanDesaController::class, 'index'])->name('pemerintahan_desa');
         Route::get('/bpd', [BpdUserController::class, 'index'])->name('bpd');
         Route::get('/pkk', fn() => view('user.page.struktur.struktur', ['halaman' => 'pkk']))->name('pkk');
@@ -68,29 +87,38 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
     }
 });
 
+Route::prefix('admin')->group(function () {
+    Route::resource('kontak-saran', AdminKontakSaranController::class)->only(['index', 'show', 'destroy']);
+});
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', fn() => redirect()->route('admin.dashboard'));
     Route::get('/dashboard', fn() => view('admin.page.dashboard.index'))->name('dashboard');
+
     Route::resource('profil_desa', AdminProfilDesaController::class);
     Route::resource('galeri', AdminGaleriController::class);
     Route::resource('berita', AdminBeritaController::class)->parameters(['berita' => 'berita']);
+
     Route::prefix('transparansi')->name('transparansi.')->group(function () {
         Route::resource('anggaran', AdminAnggaranController::class);
         Route::resource('laporan', AdminLaporanController::class);
         Route::resource('dokumen', AdminDokumenController::class);
         Route::resource('bumdes', AdminBumdesController::class);
     });
+
     Route::prefix('struktur')->name('struktur.')->group(function () {
         Route::prefix('pemerintahan_desa')->name('pemerintahan_desa.')->group(function () {
             Route::resource('struktural', PemerintahanDesaStrukturalController::class);
             Route::resource('anggota', PemerintahanDesaAnggotaController::class);
         });
+
         Route::resource('bpd', BpdController::class);
         Route::resource('pkk', PkkController::class);
         Route::resource('lpm', LpmController::class);
         Route::resource('karang_taruna', AdminKarangTarunaController::class);
         Route::resource('posyandu', PosyanduController::class);
     });
+
     Route::prefix('struktur/bpd')->name('struktur.bpd.')->group(function () {
         Route::get('/', [BpdController::class, 'index'])->name('index');
         Route::get('/create', [BpdController::class, 'create'])->name('create');
@@ -99,10 +127,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/{id}', [BpdController::class, 'update'])->name('update');
         Route::delete('/{id}', [BpdController::class, 'destroy'])->name('destroy');
     });
-    Route::get('pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.index');
-    Route::get('pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
-    Route::post('pengaduan/{id}/status', [PengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
-    Route::delete('pengaduan/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
+
+    Route::get('pengaduan', [AdminPengaduanController::class, 'index'])->name('pengaduan.index');
+    Route::get('pengaduan/{id}', [AdminPengaduanController::class, 'show'])->name('pengaduan.show');
+    Route::post('pengaduan/{id}/status', [AdminPengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
+    Route::delete('pengaduan/{id}', [AdminPengaduanController::class, 'destroy'])->name('pengaduan.destroy');
 });
 
 Route::get('/view-file/{filename}', function ($filename) {
