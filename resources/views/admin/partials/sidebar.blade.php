@@ -48,7 +48,9 @@
                         <polyline points="6 9 12 15 18 9" />
                     </svg>
                 </a>
+
                 <ul class="collapse submenu" id="webMgmt">
+
                     <!-- Beranda -->
                     <li>
                         <a href="{{ url('/admin/beranda') }}" class="nav-link">
@@ -136,6 +138,7 @@
                                 <polyline points="6 9 12 15 18 9" />
                             </svg>
                         </a>
+
                         <ul class="collapse submenu" id="strukturMenu">
                             <!-- Pemerintahan Desa -->
                             <li class="has-submenu">
@@ -152,40 +155,11 @@
                                 </ul>
                             </li>
 
-                            <!-- BPD -->
-                            <li>
-                                <a href="{{ route('admin.struktur.bpd.index') }}" class="nav-link">
-                                    <span>BPD</span>
-                                </a>
-                            </li>
-
-                            <!-- PKK -->
-                            <li>
-                                <a href="{{ route('admin.struktur.pkk.index') }}" class="nav-link">
-                                    <span>PKK</span>
-                                </a>
-                            </li>
-
-                            <!-- LPM -->
-                            <li>
-                                <a href="{{ route('admin.struktur.lpm.index') }}" class="nav-link">
-                                    <span>LPM</span>
-                                </a>
-                            </li>
-
-                            <!-- Karang Taruna -->
-                            <li>
-                                <a href="{{ route('admin.struktur.karang_taruna.index') }}" class="nav-link">
-                                    <span>Karang Taruna</span>
-                                </a>
-                            </li>
-
-                            <!-- Posyandu -->
-                            <li>
-                                <a href="{{ route('admin.struktur.posyandu.index') }}" class="nav-link">
-                                    <span>Posyandu</span>
-                                </a>
-                            </li>
+                            <li><a href="{{ route('admin.struktur.bpd.index') }}" class="nav-link">BPD</a></li>
+                            <li><a href="{{ route('admin.struktur.pkk.index') }}" class="nav-link">PKK</a></li>
+                            <li><a href="{{ route('admin.struktur.lpm.index') }}" class="nav-link">LPM</a></li>
+                            <li><a href="{{ route('admin.struktur.karang_taruna.index') }}" class="nav-link">Karang Taruna</a></li>
+                            <li><a href="{{ route('admin.struktur.posyandu.index') }}" class="nav-link">Posyandu</a></li>
                         </ul>
                     </li>
 
@@ -233,6 +207,42 @@
                             <span>Kontak & Saran</span>
                         </a>
                     </li>
+
+                    <!-- =============================== -->
+                    <!-- HALAMAN DEPAN (TAMBAHAN BARU) -->
+                    <!-- =============================== -->
+                    <li class="has-submenu">
+                        <a href="#homePageMenu" class="nav-link" data-bs-toggle="collapse">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            </svg>
+                            <span>Halaman Depan</span>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </a>
+
+                        <ul class="collapse submenu" id="homePageMenu">
+                            <li><a href="{{ route('admin.home.administrasi.index') }}" class="nav-link">Administrasi Penduduk</a></li>
+
+                            <li><a href="{{ route('admin.home.foto_warga.index') }}" class="nav-link">Foto Bersama Warga</a></li>
+
+                            <li><a href="{{ route('admin.home.keindahan.index') }}" class="nav-link">Menelusuri Keindahan</a></li>
+
+                            <li><a href="{{ route('admin.home.sambutan.index') }}" class="nav-link">Sambutan</a></li>
+
+                            <li><a href="{{ route('admin.home.struktur.index') }}" class="nav-link">Struktur Organisasi</a></li>
+
+                            <li><a href="{{ route('admin.home.visimisi.index') }}" class="nav-link">Visi & Misi</a></li>
+                        </ul>
+                    </li>
+                    <!-- =============================== -->
+                    <!-- END HALAMAN DEPAN -->
+                    <!-- =============================== -->
+
                 </ul>
             </li>
 
@@ -254,6 +264,7 @@
                         <polyline points="6 9 12 15 18 9" />
                     </svg>
                 </a>
+
                 <ul class="collapse submenu" id="systemMenu">
                     <!-- Pengaturan -->
                     <li>
@@ -304,6 +315,7 @@
         </div>
     </div>
 </aside>
+
 <style>
     /* ========================================
        CSS VARIABLES

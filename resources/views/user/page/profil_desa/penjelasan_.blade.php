@@ -27,6 +27,7 @@
       </ul>
 
       @if($profilDesa->koordinat)
+      @else($kordinat->time)
       <p>
         Secara geografis desa berada pada koordinat:
         <strong>{{ $profilDesa->koordinat }}</strong>

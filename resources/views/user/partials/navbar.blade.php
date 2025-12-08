@@ -62,7 +62,8 @@
                     <div
                         class="dropdown-content-desktop absolute top-full left-0 mt-2 w-56 bg-white/95 backdrop-blur-md text-gray-900 rounded-xl shadow-xl border border-white/20 z-50">
                         <a href="{{ route('user.transparansi', ['halaman' => 'anggaran']) }}"
-                            class="block px-4 py-2.5 hover:bg-lime-100 transition rounded-t-xl">Transparansi Anggaran</a>
+                            class="block px-4 py-2.5 hover:bg-lime-100 transition rounded-t-xl">Transparansi
+                            Anggaran</a>
                         <a href="{{ route('user.transparansi', ['halaman' => 'laporan']) }}"
                             class="block px-4 py-2.5 hover:bg-lime-100 transition">Laporan Kegiatan</a>
                         <a href="{{ route('user.transparansi', ['halaman' => 'dokumen']) }}"
@@ -104,8 +105,11 @@
                 <a href="{{ route('user.home') }}#kontak"
                     class="px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 transition scroll-link">Kontak</a>
 
-                <a href="/login"
-                    class="px-4 py-2 rounded-full bg-gradient-to-r from-lime-400 to-emerald-400 text-teal-900 font-semibold hover:scale-105 hover:shadow-lg transition ml-2">Login</a>
+                <a href="{{ route('login') }}"
+                    class="relative z-50 px-4 py-2 rounded-full bg-gradient-to-r from-lime-400 to-emerald-400 text-teal-900 font-semibold hover:scale-105 hover:shadow-lg transition ml-2">
+                    Login
+                </a>
+
             </div>
         </div>
     </div>
@@ -114,9 +118,12 @@
     <div id="mobile-menu"
         class="md:hidden bg-teal-950/70 backdrop-blur-xl border-t border-white/10 shadow-inner max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
         <div class="px-4 py-4 space-y-1 text-white text-base font-medium">
-            <a href="{{ route('user.home') }}" class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Beranda</a>
-            <a href="{{ route('user.profil') }}" class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Profil Desa</a>
-            <a href="{{ route('user.galeri') }}" class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Galeri</a>
+            <a href="{{ route('user.home') }}"
+                class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Beranda</a>
+            <a href="{{ route('user.profil') }}"
+                class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Profil Desa</a>
+            <a href="{{ route('user.galeri') }}"
+                class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Galeri</a>
 
             <!-- Dropdown Transparansi Mobile -->
             <div>
@@ -126,10 +133,14 @@
                 </button>
                 <div class="max-h-0 overflow-hidden transition-all duration-300 dropdown-content">
                     <div class="pl-4 mt-1 space-y-1">
-                        <a href="{{ route('user.transparansi', ['halaman' => 'anggaran']) }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Transparansi Anggaran</a>
-                        <a href="{{ route('user.transparansi', ['halaman' => 'laporan']) }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Laporan Kegiatan</a>
-                        <a href="{{ route('user.transparansi', ['halaman' => 'dokumen']) }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Dokumen Perencanaan</a>
-                        <a href="{{ route('user.transparansi', ['halaman' => 'bumdes']) }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Bumdes dan Kopdes MP</a>
+                        <a href="{{ route('user.transparansi', ['halaman' => 'anggaran']) }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Transparansi Anggaran</a>
+                        <a href="{{ route('user.transparansi', ['halaman' => 'laporan']) }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Laporan Kegiatan</a>
+                        <a href="{{ route('user.transparansi', ['halaman' => 'dokumen']) }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Dokumen Perencanaan</a>
+                        <a href="{{ route('user.transparansi', ['halaman' => 'bumdes']) }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Bumdes dan Kopdes MP</a>
                     </div>
                 </div>
             </div>
@@ -142,22 +153,34 @@
                 </button>
                 <div class="max-h-0 overflow-hidden transition-all duration-300 dropdown-content">
                     <div class="pl-4 mt-1 space-y-1">
-                        <a href="{{ route('user.struktur.pemerintahan_desa') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Pemerintah Desa</a>
-                        <a href="{{ route('user.struktur.bpd') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">BPD</a>
-                        <a href="{{ route('user.struktur.pkk') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">PKK</a>
-                        <a href="{{ route('user.struktur.lpm') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">LPM</a>
-                        <a href="{{ route('user.struktur.karang_taruna') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Karang Taruna</a>
-                        <a href="{{ route('user.struktur.posyandu') }}" class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Posyandu</a>
+                        <a href="{{ route('user.struktur.pemerintahan_desa') }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Pemerintah Desa</a>
+                        <a href="{{ route('user.struktur.bpd') }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">BPD</a>
+                        <a href="{{ route('user.struktur.pkk') }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">PKK</a>
+                        <a href="{{ route('user.struktur.lpm') }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">LPM</a>
+                        <a href="{{ route('user.struktur.karang_taruna') }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Karang Taruna</a>
+                        <a href="{{ route('user.struktur.posyandu') }}"
+                            class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Posyandu</a>
                     </div>
                 </div>
             </div>
 
-            <a href="{{ route('user.berita') }}" class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Berita</a>
-            <a href="{{ route('user.pengaduan.index') }}" class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition flex items-center gap-2">Pengaduan</a>
-            <a href="{{ route('user.home') }}#kontak" class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition scroll-link">Kontak</a>
-            <a href="/login" class="block text-center py-2.5 rounded-full bg-gradient-to-r from-lime-400 to-emerald-400 text-teal-900 font-semibold hover:shadow-lg transition">Login</a>
+            <a href="{{ route('user.berita') }}"
+                class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Berita</a>
+            <a href="{{ route('user.pengaduan.index') }}"
+                class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition flex items-center gap-2">Pengaduan</a>
+            <a href="{{ route('user.home') }}#kontak"
+                class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition scroll-link">Kontak</a>
+            <a href="{{ route('login') }}"
+                class="relative z-50 block text-center py-2.5 rounded-full bg-gradient-to-r from-lime-400 to-emerald-400 text-teal-900 font-semibold hover:shadow-lg transition">
+                Login
+            </a>
+
         </div>
-    </div>
 </nav>
 
 <script>
@@ -180,16 +203,22 @@
                 const content = btn.nextElementSibling;
                 const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
 
-                document.querySelectorAll('.dropdown-content').forEach(c => { if(c!==content) c.style.maxHeight='0px'; });
-                document.querySelectorAll('.dropdown-btn').forEach(b => { if(b!==btn) b.classList.remove('active'); });
+                document.querySelectorAll('.dropdown-content').forEach(c => {
+                    if (c !== content) c.style.maxHeight = '0px';
+                });
+                document.querySelectorAll('.dropdown-btn').forEach(b => {
+                    if (b !== btn) b.classList.remove('active');
+                });
 
-                if(isOpen){
-                    content.style.maxHeight='0px';
+                if (isOpen) {
+                    content.style.maxHeight = '0px';
                     btn.classList.remove('active');
                 } else {
-                    content.style.maxHeight = content.scrollHeight+'px';
+                    content.style.maxHeight = content.scrollHeight + 'px';
                     btn.classList.add('active');
-                    setTimeout(()=>{ mobileMenu.style.maxHeight = mobileMenu.scrollHeight+'px'; },300);
+                    setTimeout(() => {
+                        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+                    }, 300);
                 }
             });
         });
@@ -198,40 +227,43 @@
 
     // ===== DESKTOP DROPDOWN =====
     document.querySelectorAll('.dropdown-btn-desktop').forEach(btn => {
-        btn.addEventListener('click', (e)=>{
-            e.preventDefault(); e.stopPropagation();
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             const wrapper = btn.closest('.dropdown-wrapper');
             const content = wrapper.querySelector('.dropdown-content-desktop');
             const isOpen = content.classList.contains('show');
 
-            document.querySelectorAll('.dropdown-content-desktop').forEach(c=>c.classList.remove('show'));
-            document.querySelectorAll('.dropdown-btn-desktop').forEach(b=>b.classList.remove('active'));
+            document.querySelectorAll('.dropdown-content-desktop').forEach(c => c.classList.remove(
+                'show'));
+            document.querySelectorAll('.dropdown-btn-desktop').forEach(b => b.classList.remove(
+                'active'));
 
-            if(!isOpen){
+            if (!isOpen) {
                 content.classList.add('show');
                 btn.classList.add('active');
             }
         });
     });
 
-    document.addEventListener('click', (e)=>{
-        if(!e.target.closest('.dropdown-wrapper')){
-            document.querySelectorAll('.dropdown-content-desktop').forEach(c=>c.classList.remove('show'));
-            document.querySelectorAll('.dropdown-btn-desktop').forEach(b=>b.classList.remove('active'));
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown-wrapper')) {
+            document.querySelectorAll('.dropdown-content-desktop').forEach(c => c.classList.remove('show'));
+            document.querySelectorAll('.dropdown-btn-desktop').forEach(b => b.classList.remove('active'));
         }
     });
 
     // ===== NAVBAR SCROLL EFFECT =====
-    window.addEventListener('scroll', ()=>{
+    window.addEventListener('scroll', () => {
         const nav = document.getElementById('navbar');
-        if(window.scrollY>50) nav.classList.add('bg-teal-900/70','backdrop-blur-xl','shadow-lg');
-        else nav.classList.remove('bg-teal-900/70','backdrop-blur-xl','shadow-lg');
+        if (window.scrollY > 50) nav.classList.add('bg-teal-900/70', 'backdrop-blur-xl', 'shadow-lg');
+        else nav.classList.remove('bg-teal-900/70', 'backdrop-blur-xl', 'shadow-lg');
     });
 
     // ===== CLOSE MOBILE MENU ON LINK CLICK =====
-    document.querySelectorAll('#mobile-menu a').forEach(link=>{
-        link.addEventListener('click', ()=>{
-            mobileMenu.style.maxHeight='0px';
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.style.maxHeight = '0px';
             menuIcon.classList.remove('bi-x-lg');
             menuIcon.classList.add('bi-list');
         });

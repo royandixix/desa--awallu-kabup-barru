@@ -35,15 +35,8 @@
         }
 
         @keyframes floating {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
@@ -51,39 +44,33 @@
 <body class="pt-20">
     <section class="w-full py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col items-center text-center">
-            <!-- Judul -->
             <h1 data-aos="fade-up" class="text-5xl sm:text-6xl tracking-tight gradient-title mb-4">
                 Administrasi Penduduk
             </h1>
 
             <p data-aos="fade-up" data-aos-delay="200" class="text-gray-700 mb-14 max-w-2xl text-lg">
-                Data administrasi penduduk Desa Lawallu yang selalu diperbarui untuk
-                transparansi dan kemajuan desa.
+                Data administrasi penduduk Desa Lawallu yang selalu diperbarui untuk transparansi dan kemajuan desa.
             </p>
 
-            <!-- Konten: Logo Kiri + Grafik Kanan -->
             <div class="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 w-full">
-                <!-- Logo di kiri -->
+                <!-- Logo -->
                 <div data-aos="zoom-in" class="w-full lg:w-1/3 flex flex-col justify-center items-center">
                     <img src="{{ asset('img/user/logo/barru.webp') }}" alt="Logo Kabupaten Barru"
                         class="w-48 lg:w-56 floating" />
                     <p class="mt-4 text-center text-gray-700">Ini adalah Logo Kabupaten Barru</p>
                 </div>
 
-
-                <!-- Grafik di kanan -->
-<div data-aos="fade-left" class="w-full lg:w-2/3 flex flex-col justify-center items-center">
-    <div class="w-full h-96 lg:h-[450px]"> <!-- pastikan tinggi fleksibel -->
-        <canvas id="populationChart" class="w-full h-full"></canvas>
-    </div>
-    <p class="text-sm text-gray-500 mt-4 text-center">
-        Grafik Statistik Penduduk Desa Lawallu
-    </p>
-</div>
-
+                <!-- Grafik -->
+                <div data-aos="fade-left" class="w-full lg:w-2/3 flex flex-col justify-center items-center">
+                    <div class="w-full h-96 lg:h-[450px]">
+                        <canvas id="populationChart" class="w-full h-full"></canvas>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">
+                        Grafik Statistik Penduduk Desa Lawallu
+                    </p>
+                </div>
             </div>
 
-            <!-- Link -->
             <div data-aos="fade-up" data-aos-delay="600" class="mt-14">
                 <a href="#" class="text-blue-700 font-semibold hover:underline hover:text-blue-800 transition">
                     Lihat Selengkapnya →
@@ -101,11 +88,15 @@
             easing: "ease-out-cubic"
         });
 
+        // Ambil data dari server (dikirim dari controller)
+        const labels = @json($data->pluck('kategori'));
+        const values = @json($data->pluck('jumlah'));
+
         const data = {
-            labels: ["Jumlah Penduduk", "Laki-laki", "Perempuan", "Kepala Keluarga"],
+            labels: labels,
             datasets: [{
                 label: "Jumlah",
-                data: [3394, 1676, 1718, 995],
+                data: values,
                 backgroundColor: [
                     "rgba(34, 197, 94, 0.85)",
                     "rgba(59, 130, 246, 0.85)",
@@ -121,20 +112,13 @@
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: {
-                    display: false
-                },
+                legend: { display: false },
                 tooltip: {
                     backgroundColor: "rgba(15, 23, 42, 0.95)",
                     titleColor: "#fff",
                     bodyColor: "#fff",
-                    titleFont: {
-                        size: 15,
-                        weight: 'bold'
-                    },
-                    bodyFont: {
-                        size: 14
-                    },
+                    titleFont: { size: 15, weight: 'bold' },
+                    bodyFont: { size: 14 },
                     padding: 14,
                     cornerRadius: 10,
                     displayColors: false,
@@ -146,30 +130,19 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: {
-                        color: "rgba(229, 231, 235, 0.5)",
-                        lineWidth: 1
-                    },
+                    grid: { color: "rgba(229, 231, 235, 0.5)", lineWidth: 1 },
                     ticks: {
                         color: "#4b5563",
-                        font: {
-                            size: 13,
-                            weight: '500'
-                        },
+                        font: { size: 13, weight: '500' },
                         padding: 8,
-                        callback: (value) => value.toLocaleString('id-ID')
+                        callback: value => value.toLocaleString('id-ID')
                     }
                 },
                 x: {
-                    grid: {
-                        display: false
-                    },
+                    grid: { display: false },
                     ticks: {
                         color: "#1f2937",
-                        font: {
-                            size: 14,
-                            weight: '600'
-                        },
+                        font: { size: 14, weight: '600' },
                         padding: 8
                     }
                 }

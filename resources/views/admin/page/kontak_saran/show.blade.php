@@ -5,7 +5,6 @@
 @section('content')
 <div class="container-fluid px-3 px-md-4 py-3 py-md-4">
 
-    {{-- Banner --}}
     <div class="row mb-4">
         <div class="col-12">
             <div class="card border-0 shadow-lg overflow-hidden">
@@ -24,7 +23,6 @@
         </div>
     </div>
 
-    {{-- Card Detail --}}
     <div class="row justify-content-center">
         <div class="col-md-8">
 
@@ -58,9 +56,8 @@
                 </div>
             </div>
 
-            {{-- Tombol Kembali --}}
             <div class="text-center">
-                <a href="{{ route('kontak-saran.index') }}" class="btn btn-dark shadow-sm px-4">
+                <a href="{{ route('admin.kontak-saran.index') }}" class="btn btn-dark shadow-sm px-4">
                     <i class="fas fa-arrow-left me-1"></i> Kembali
                 </a>
             </div>

@@ -5,7 +5,6 @@
 @section('content')
 <div class="container-fluid px-3 px-md-4 py-3 py-md-4">
 
-    {{-- Banner --}}
     <div class="row mb-4">
         <div class="col-12">
             <div class="card border-0 shadow-lg overflow-hidden">
@@ -24,7 +23,6 @@
         </div>
     </div>
 
-    {{-- Statistik --}}
     <div class="row mb-4">
         <div class="col-md-4">
             <div class="card shadow-sm hover-shadow">
@@ -36,14 +34,12 @@
         </div>
     </div>
 
-    {{-- Header Table --}}
     <div class="d-flex justify-content-between mb-3">
         <h4 class="fw-bold">
             <i class="fas fa-mail-bulk"></i> Daftar Kontak / Saran
         </h4>
     </div>
 
-    {{-- Table --}}
     <div class="card shadow-sm hover-shadow">
         <div class="card-body p-4">
             <div class="table-responsive">
@@ -67,18 +63,20 @@
                             <td>{{ Str::limit($item->pesan, 50) }}</td>
                             <td>{{ $item->created_at->format('d-m-Y H:i') }}</td>
                             <td class="text-center">
-                                <a href="{{ route('kontak-saran.show', $item->id) }}" 
+
+                                <a href="{{ route('admin.kontak-saran.show', $item->id) }}" 
                                    class="btn btn-dark btn-sm me-1 btn-detail">
                                     <i class="fas fa-eye"></i>
                                 </a>
 
-                                <form action="{{ route('kontak-saran.destroy', $item->id) }}" 
+                                <form action="{{ route('admin.kontak-saran.destroy', $item->id) }}" 
                                       method="POST" class="d-inline">
                                     @csrf @method('DELETE')
                                     <button type="button" class="btn btn-danger btn-sm btn-delete">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
+
                             </td>
                         </tr>
                         @endforeach
@@ -86,7 +84,6 @@
                 </table>
             </div>
 
-            {{-- Pagination Laravel --}}
             <div class="mt-3">
                 {{ $data->links() }}
             </div>
@@ -117,7 +114,6 @@ Swal.fire({
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
-    // DATATABLE
     $('#kontakTable').DataTable({
         responsive: true,
         searching: true,
@@ -128,7 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
         language: { emptyTable: "Belum ada pesan masuk" }
     });
 
-    // DELETE SWEETALERT
     document.querySelectorAll('.btn-delete').forEach(btn => {
         btn.addEventListener('click', function() {
             const form = this.closest('form');
