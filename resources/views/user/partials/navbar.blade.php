@@ -5,21 +5,66 @@
         visibility: hidden;
         transform: translateY(-10px);
         transition: all 0.3s ease;
+        pointer-events: none;
     }
 
     .dropdown-content-desktop.show {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
+        pointer-events: auto;
     }
 
-    /* Icon rotate */
+    /* Icon rotate desktop */
     .dropdown-btn-desktop i {
         transition: transform 0.3s ease;
     }
 
     .dropdown-btn-desktop.active i {
         transform: rotate(180deg);
+    }
+
+    /* Mobile dropdown */
+    .dropdown-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out;
+    }
+
+    .dropdown-content.open {
+        max-height: 500px;
+    }
+
+    /* Icon rotate mobile */
+    .dropdown-btn i {
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown-btn.open i {
+        transform: rotate(180deg);
+    }
+
+    /* Ensure mobile toggle is always clickable */
+    #mobile-toggle {
+        position: relative;
+        z-index: 99999 !important;
+        cursor: pointer !important;
+        -webkit-tap-highlight-color: transparent;
+        pointer-events: auto !important;
+    }
+
+    #menu-icon {
+        pointer-events: none !important;
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+        max-height: 0;
+        transition: max-height 0.5s ease-in-out;
+    }
+
+    #mobile-menu.show {
+        max-height: 1000px;
     }
 </style>
 
@@ -39,7 +84,9 @@
             </a>
 
             <!-- TOGGLE MOBILE -->
-            <button id="mobile-toggle" class="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+            <button type="button" id="mobile-toggle" 
+                class="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+                onclick="window.toggleMobileMenu()"
                 aria-label="Toggle menu">
                 <i id="menu-icon" class="bi bi-list text-2xl"></i>
             </button>
@@ -55,8 +102,9 @@
 
                 <!-- Dropdown Transparansi -->
                 <div class="relative dropdown-wrapper">
-                    <button
-                        class="dropdown-btn-desktop px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 flex items-center transition">
+                    <button type="button"
+                        class="dropdown-btn-desktop px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 flex items-center transition"
+                        onclick="window.toggleDesktopDropdown(this)">
                         Transparansi <i class="bi bi-chevron-down ml-1 text-xs"></i>
                     </button>
                     <div
@@ -75,8 +123,9 @@
 
                 <!-- Dropdown Struktur -->
                 <div class="relative dropdown-wrapper">
-                    <button
-                        class="dropdown-btn-desktop px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 flex items-center transition">
+                    <button type="button"
+                        class="dropdown-btn-desktop px-3 py-2 rounded-lg hover:text-lime-300 hover:bg-white/10 flex items-center transition"
+                        onclick="window.toggleDesktopDropdown(this)">
                         Struktur <i class="bi bi-chevron-down ml-1 text-xs"></i>
                     </button>
                     <div
@@ -109,14 +158,13 @@
                     class="relative z-50 px-4 py-2 rounded-full bg-gradient-to-r from-lime-400 to-emerald-400 text-teal-900 font-semibold hover:scale-105 hover:shadow-lg transition ml-2">
                     Login
                 </a>
-
             </div>
         </div>
     </div>
 
     <!-- MENU MOBILE -->
     <div id="mobile-menu"
-        class="md:hidden bg-teal-950/70 backdrop-blur-xl border-t border-white/10 shadow-inner max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+        class="md:hidden bg-teal-950/70 backdrop-blur-xl border-t border-white/10 shadow-inner overflow-hidden">
         <div class="px-4 py-4 space-y-1 text-white text-base font-medium">
             <a href="{{ route('user.home') }}"
                 class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Beranda</a>
@@ -126,12 +174,13 @@
                 class="block px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition">Galeri</a>
 
             <!-- Dropdown Transparansi Mobile -->
-            <div>
-                <button
-                    class="flex justify-between items-center w-full px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition dropdown-btn">
+            <div class="dropdown-wrapper-mobile">
+                <button type="button"
+                    class="flex justify-between items-center w-full px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition dropdown-btn"
+                    onclick="window.toggleMobileDropdown(this)">
                     Transparansi <i class="bi bi-chevron-down transition-transform duration-200"></i>
                 </button>
-                <div class="max-h-0 overflow-hidden transition-all duration-300 dropdown-content">
+                <div class="dropdown-content">
                     <div class="pl-4 mt-1 space-y-1">
                         <a href="{{ route('user.transparansi', ['halaman' => 'anggaran']) }}"
                             class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Transparansi Anggaran</a>
@@ -146,12 +195,13 @@
             </div>
 
             <!-- Dropdown Struktur Mobile -->
-            <div>
-                <button
-                    class="flex justify-between items-center w-full px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition dropdown-btn">
+            <div class="dropdown-wrapper-mobile">
+                <button type="button"
+                    class="flex justify-between items-center w-full px-4 py-2.5 rounded-lg hover:bg-lime-600/50 transition dropdown-btn"
+                    onclick="window.toggleMobileDropdown(this)">
                     Struktur <i class="bi bi-chevron-down transition-transform duration-200"></i>
                 </button>
-                <div class="max-h-0 overflow-hidden transition-all duration-300 dropdown-content">
+                <div class="dropdown-content">
                     <div class="pl-4 mt-1 space-y-1">
                         <a href="{{ route('user.struktur.pemerintahan_desa') }}"
                             class="block px-4 py-2 rounded-lg hover:bg-lime-600/50 transition">Pemerintah Desa</a>
@@ -179,93 +229,202 @@
                 class="relative z-50 block text-center py-2.5 rounded-full bg-gradient-to-r from-lime-400 to-emerald-400 text-teal-900 font-semibold hover:shadow-lg transition">
                 Login
             </a>
-
         </div>
+    </div>
 </nav>
 
 <script>
-    // ===== MOBILE MENU =====
-    const toggleBtn = document.getElementById('mobile-toggle');
+// ===== GLOBAL FUNCTIONS (SELALU AVAILABLE) =====
+console.log('🚀 NAVBAR SCRIPT LOADED');
+
+// Toggle Mobile Menu
+window.toggleMobileMenu = function() {
+    console.log('🍔 HAMBURGER CLICKED!');
+    
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIcon = document.getElementById('menu-icon');
+    
+    if (!mobileMenu || !menuIcon) {
+        console.error('❌ Elements not found!');
+        return;
+    }
+    
+    const isOpen = mobileMenu.classList.contains('show');
+    
+    console.log('Is Open:', isOpen);
+    
+    if (isOpen) {
+        mobileMenu.classList.remove('show');
+        menuIcon.classList.remove('bi-x-lg');
+        menuIcon.classList.add('bi-list');
+        console.log('❌ Menu CLOSED');
+        
+        // Reset dropdowns
+        document.querySelectorAll('.dropdown-content').forEach(function(c) {
+            c.classList.remove('open');
+        });
+        document.querySelectorAll('.dropdown-btn').forEach(function(b) {
+            b.classList.remove('open');
+        });
+    } else {
+        mobileMenu.classList.add('show');
+        menuIcon.classList.remove('bi-list');
+        menuIcon.classList.add('bi-x-lg');
+        console.log('✅ Menu OPENED');
+    }
+};
 
-    toggleBtn?.addEventListener('click', () => {
-        const isOpen = mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== '0px';
-        mobileMenu.style.maxHeight = isOpen ? '0px' : mobileMenu.scrollHeight + 'px';
-        menuIcon.classList.toggle('bi-list');
-        menuIcon.classList.toggle('bi-x-lg');
+// Toggle Mobile Dropdown
+window.toggleMobileDropdown = function(btn) {
+    console.log('🎯 Mobile Dropdown clicked');
+    
+    const content = btn.nextElementSibling;
+    if (!content) {
+        console.error('❌ Content not found');
+        return;
+    }
+    
+    const isOpen = content.classList.contains('open');
+    
+    // Close all other dropdowns
+    document.querySelectorAll('.dropdown-content').forEach(function(c) {
+        if (c !== content) c.classList.remove('open');
     });
+    document.querySelectorAll('.dropdown-btn').forEach(function(b) {
+        if (b !== btn) b.classList.remove('open');
+    });
+    
+    // Toggle current
+    if (isOpen) {
+        content.classList.remove('open');
+        btn.classList.remove('open');
+        console.log('📤 Dropdown closed');
+    } else {
+        content.classList.add('open');
+        btn.classList.add('open');
+        console.log('📥 Dropdown opened');
+    }
+};
 
-    // ===== MOBILE DROPDOWN =====
-    function initMobileDropdown() {
-        document.querySelectorAll('.dropdown-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const content = btn.nextElementSibling;
-                const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+// Toggle Desktop Dropdown
+window.toggleDesktopDropdown = function(btn) {
+    const wrapper = btn.closest('.dropdown-wrapper');
+    if (!wrapper) return;
+    
+    const content = wrapper.querySelector('.dropdown-content-desktop');
+    if (!content) return;
+    
+    const isOpen = content.classList.contains('show');
+    
+    // Close all dropdowns
+    document.querySelectorAll('.dropdown-content-desktop').forEach(function(c) {
+        c.classList.remove('show');
+    });
+    document.querySelectorAll('.dropdown-btn-desktop').forEach(function(b) {
+        b.classList.remove('active');
+    });
+    
+    // Toggle current
+    if (!isOpen) {
+        content.classList.add('show');
+        btn.classList.add('active');
+    }
+};
 
-                document.querySelectorAll('.dropdown-content').forEach(c => {
-                    if (c !== content) c.style.maxHeight = '0px';
-                });
-                document.querySelectorAll('.dropdown-btn').forEach(b => {
-                    if (b !== btn) b.classList.remove('active');
-                });
-
-                if (isOpen) {
-                    content.style.maxHeight = '0px';
-                    btn.classList.remove('active');
-                } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    btn.classList.add('active');
-                    setTimeout(() => {
-                        mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
-                    }, 300);
-                }
-            });
+// Close desktop dropdown on outside click
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.dropdown-wrapper') && !e.target.closest('.dropdown-btn-desktop')) {
+        document.querySelectorAll('.dropdown-content-desktop').forEach(function(c) {
+            c.classList.remove('show');
+        });
+        document.querySelectorAll('.dropdown-btn-desktop').forEach(function(b) {
+            b.classList.remove('active');
         });
     }
-    initMobileDropdown();
+});
 
-    // ===== DESKTOP DROPDOWN =====
-    document.querySelectorAll('.dropdown-btn-desktop').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const wrapper = btn.closest('.dropdown-wrapper');
-            const content = wrapper.querySelector('.dropdown-content-desktop');
-            const isOpen = content.classList.contains('show');
-
-            document.querySelectorAll('.dropdown-content-desktop').forEach(c => c.classList.remove(
-                'show'));
-            document.querySelectorAll('.dropdown-btn-desktop').forEach(b => b.classList.remove(
-                'active'));
-
-            if (!isOpen) {
-                content.classList.add('show');
-                btn.classList.add('active');
-            }
-        });
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.dropdown-wrapper')) {
-            document.querySelectorAll('.dropdown-content-desktop').forEach(c => c.classList.remove('show'));
-            document.querySelectorAll('.dropdown-btn-desktop').forEach(b => b.classList.remove('active'));
-        }
-    });
-
-    // ===== NAVBAR SCROLL EFFECT =====
-    window.addEventListener('scroll', () => {
-        const nav = document.getElementById('navbar');
-        if (window.scrollY > 50) nav.classList.add('bg-teal-900/70', 'backdrop-blur-xl', 'shadow-lg');
-        else nav.classList.remove('bg-teal-900/70', 'backdrop-blur-xl', 'shadow-lg');
-    });
-
-    // ===== CLOSE MOBILE MENU ON LINK CLICK =====
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.style.maxHeight = '0px';
+// Close mobile menu when link clicked
+document.addEventListener('click', function(e) {
+    if (e.target.closest('#mobile-menu a')) {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        
+        if (mobileMenu) mobileMenu.classList.remove('show');
+        if (menuIcon) {
             menuIcon.classList.remove('bi-x-lg');
             menuIcon.classList.add('bi-list');
+        }
+        
+        document.querySelectorAll('.dropdown-content').forEach(function(c) {
+            c.classList.remove('open');
         });
+        document.querySelectorAll('.dropdown-btn').forEach(function(b) {
+            b.classList.remove('open');
+        });
+    }
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('navbar');
+    if (!navbar) return;
+    
+    if (window.scrollY > 50) {
+        navbar.classList.add('bg-teal-900/70', 'backdrop-blur-xl', 'shadow-lg');
+    } else {
+        navbar.classList.remove('bg-teal-900/70', 'backdrop-blur-xl', 'shadow-lg');
+    }
+});
+
+// Reset on page load
+function resetNavbar() {
+    console.log('🔄 Resetting navbar');
+    
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    
+    if (mobileMenu) mobileMenu.classList.remove('show');
+    if (menuIcon) {
+        menuIcon.classList.remove('bi-x-lg');
+        menuIcon.classList.add('bi-list');
+    }
+    
+    document.querySelectorAll('.dropdown-content').forEach(function(c) {
+        c.classList.remove('open');
     });
+    document.querySelectorAll('.dropdown-btn').forEach(function(b) {
+        b.classList.remove('open');
+    });
+    document.querySelectorAll('.dropdown-content-desktop').forEach(function(c) {
+        c.classList.remove('show');
+    });
+    document.querySelectorAll('.dropdown-btn-desktop').forEach(function(b) {
+        b.classList.remove('active');
+    });
+}
+
+// Run on load
+window.addEventListener('load', resetNavbar);
+
+// Run on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', resetNavbar);
+} else {
+    resetNavbar();
+}
+
+// Run on page show (for back/forward navigation)
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        console.log('🔄 Page from cache');
+        resetNavbar();
+    }
+});
+
+// For Turbolinks/Livewire compatibility
+document.addEventListener('turbolinks:load', resetNavbar);
+document.addEventListener('livewire:load', resetNavbar);
+document.addEventListener('DOMContentLoaded', resetNavbar);
+
+console.log('✅ Navbar initialized!');
 </script>

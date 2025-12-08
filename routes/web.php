@@ -204,6 +204,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+use App\Http\Controllers\User\FotoWargaUserController;
+
+Route::get('/foto-bersama-warga', [FotoWargaUserController::class, 'index'])
+    ->name('user.foto_warga');
+
 Route::get('/view-file/{filename}', function ($filename) {
     $path = storage_path('app/public/uploads/transparansi_anggaran/' . $filename);
     if (!file_exists($path)) abort(404);

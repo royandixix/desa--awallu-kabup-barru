@@ -23,15 +23,13 @@ class FotoWargaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
             'file' => 'required|image|max:2048',
         ]);
 
         $filePath = $request->file('file')->store('foto_warga', 'public');
 
         FotoWarga::create([
-            'judul' => $request->judul,
-            'file_path' => $filePath,
+            'gambar' => $filePath,
         ]);
 
         return redirect()->route('admin.home.foto_warga.index')
@@ -46,17 +44,19 @@ class FotoWargaController extends Controller
     public function update(Request $request, FotoWarga $fotoWarga)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
             'file' => 'nullable|image|max:2048',
         ]);
 
+        // jika upload file baru
         if ($request->hasFile('file')) {
-            Storage::disk('public')->delete($fotoWarga->file_path);
+            // hapus file lama
+            Storage::disk('public')->delete($fotoWarga->gambar);
+
+            // upload file baru
             $filePath = $request->file('file')->store('foto_warga', 'public');
-            $fotoWarga->file_path = $filePath;
+            $fotoWarga->gambar = $filePath;
         }
 
-        $fotoWarga->judul = $request->judul;
         $fotoWarga->save();
 
         return redirect()->route('admin.home.foto_warga.index')
@@ -65,7 +65,10 @@ class FotoWargaController extends Controller
 
     public function destroy(FotoWarga $fotoWarga)
     {
-        Storage::disk('public')->delete($fotoWarga->file_path);
+        // hapus file dari storage
+        Storage::disk('public')->delete($fotoWarga->gambar);
+
+        // hapus dari database
         $fotoWarga->delete();
 
         return redirect()->route('admin.home.foto_warga.index')
