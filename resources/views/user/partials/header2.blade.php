@@ -53,7 +53,7 @@
             <!-- Gambar mobile -->
             <div class="relative shadow-3xl p-2 sm:p-4 flex flex-col items-center justify-center mb-6 lg:hidden"
                 data-animate>
-                <img src="{{ asset('img/user/kantor-bupati-barru_169.jpeg') }}" alt="Desa Lawallu"
+                <img src="{{ asset('img/user/lawalu.jpeg') }}" alt="Desa Lawallu"
                     class="w-full h-auto shadow-xl object-cover" />
             </div>
 
@@ -82,7 +82,7 @@
         <!-- Gambar desktop -->
         <div class="flex-1 w-full lg:max-w-md hidden lg:flex justify-center items-center" data-animate>
             <div class="relative shadow-3xl p-2 sm:p-4 flex flex-col items-center justify-center">
-                <img src="{{ asset('img/user/kantor-bupati-barru_169.jpeg') }}" alt="Desa Lawallu"
+                <img src="{{ asset('img/user/lawalu.jpeg') }}" alt="Desa Lawallu"
                     class="w-full h-auto object-cover shadow-2xl transition-transform duration-500" />
             </div>
         </div>

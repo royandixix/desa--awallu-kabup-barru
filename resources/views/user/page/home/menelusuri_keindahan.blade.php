@@ -4,7 +4,7 @@
   <div class="video-bg-wrapper">
     <iframe
       class="video-bg"
-      src="https://www.youtube.com/embed/b8itw7A3dMI?autoplay=1&mute=1&loop=1&playlist=b8itw7A3dMI&controls=0&showinfo=0&modestbranding=1"
+      src="https://www.youtube.com/embed/xDVhUPlITjQ?autoplay=1&mute=1&loop=1&playlist=xDVhUPlITjQ&controls=0&showinfo=0&modestbranding=1"
       title="Video Desa Lawallu"
       frameborder="0"
       allow="autoplay; fullscreen"
@@ -36,8 +36,6 @@
     </div>
   </div>
 </section>
-
-
 
 <!-- 🔹 Popup Video Modal -->
 <div class="popup-video" id="popupVideo">
@@ -103,7 +101,6 @@
 /* ========= TEXT ========= */
 .video-title {
   font-size: clamp(2.2rem, 5vw, 3.5rem);
-
   color: #fff;
   margin-bottom: 1rem;
   line-height: 1.3;
@@ -221,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
   playBtn.addEventListener("click", (e) => {
     e.preventDefault();
     popup.classList.add("show");
-    iframe.src = "https://www.youtube.com/embed/b8itw7A3dMI?autoplay=1";
+    iframe.src = "https://www.youtube.com/embed/xDVhUPlITjQ?autoplay=1";
   });
 
   // Close modal

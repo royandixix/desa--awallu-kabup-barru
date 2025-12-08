@@ -267,7 +267,7 @@
 
                 <ul class="collapse submenu" id="systemMenu">
                     <!-- Pengaturan -->
-                    <li>
+                    {{-- <li>
                         <a href="{{ url('/admin/pengaturan') }}" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -276,7 +276,7 @@
                             </svg>
                             <span>Pengaturan</span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <!-- Logout -->
                     <li>

@@ -44,36 +44,33 @@
                                 'description' =>
                                     'Aktivitas warga desa dalam berbagai kegiatan sosial dan budaya yang memperkuat solidaritas dan kebersamaan.',
                                 'icon' => 'K',
-                                'image' =>
-                                    'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80',
+                                'image' => asset('img/user/galeri/1749784567.webp'),
                             ],
                             [
                                 'title' => 'Transparansi',
                                 'description' =>
                                     'Semangat kebersamaan warga Desa Lawallu dalam menjaga kebersihan lingkungan dan memperkuat hubungan sosial.',
                                 'icon' => 'G',
-                                'image' =>
-                                    'https://images.unsplash.com/photo-1581091012184-5c2f39c5e7b8?auto=format&fit=crop&w=800&q=80',
+                                'image' => asset('img/user/transparansi/Screenshot 2025-12-09 at 5.22.42 AM.png'),
                             ],
                             [
                                 'title' => 'Berita',
                                 'description' =>
                                     'Proses pembangunan sarana dan prasarana umum yang mendukung pertumbuhan ekonomi dan kesejahteraan warga desa.',
                                 'icon' => 'P',
-                                'image' =>
-                                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+                                'image' => asset('img/user/berita/nWSaOHU1k0p8uuegwfRshZuveN6a6dnLOeb2CeuF.webp'),
                             ],
                             [
                                 'title' => 'Struktur Organisasi',
                                 'description' =>
                                     'Pusat pelayanan dan kegiatan administrasi Pemerintah Desa Lawallu yang siap melayani masyarakat dengan baik.',
                                 'icon' => '+',
-                                'image' =>
-                                    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80',
+                                'image' => asset('img/user/struktural/struktural_pemerintahan_desa.png'),
                                 'extra' =>
                                     'Struktur organisasi ini menampilkan hierarki dan pembagian tugas dari setiap bagian di Pemerintah Desa Lawallu, agar pelayanan kepada masyarakat lebih terstruktur dan efisien.',
                             ],
                         ];
+
                     @endphp
 
                     @foreach ($galleries as $gallery)
