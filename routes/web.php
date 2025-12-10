@@ -1,6 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+// === ROUTE AUTH CONTROLLER (TAMBAHAN MU) ===
+use App\Http\Controllers\Auth\AuthController;
+
+// LOGIN
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+
+// REGISTER
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+
+// LOGOUT
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// ===========================================
+
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\GaleriController as UserGaleriController;
 use App\Http\Controllers\User\ProfilDesaController;
@@ -51,11 +68,14 @@ use App\Http\Controllers\Posyandu\PraLansiaController;
 use App\Http\Controllers\Posyandu\LansiaController;
 use App\Http\Controllers\Posyandu\DashboardController;
 
+
 Route::get('/', fn() => redirect()->route('user.home'));
 Route::get('/home', [AdministrasiPendudukController::class, 'administrasiPenduduk'])->name('user.home');
 
+
 // Dashboard Posyandu
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('/transparansi/laporan', [UserLaporanController::class, 'index'])->name('laporan.index');
     Route::get('/transparansi/laporan/{id}', [UserLaporanController::class, 'detail'])->name('laporan.detail');
@@ -97,6 +117,7 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
         Route::get("/$route", fn() => view($view, ['halaman' => $route]))->name($route);
     }
 });
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/', fn() => redirect()->route('admin.dashboard'));
@@ -148,8 +169,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('pengaduan/{id}', [AdminPengaduanController::class, 'destroy'])->name('pengaduan.destroy');
 });
 
+
 Route::prefix('admin-posyandu')->name('admin_posyandu.')->group(function () {
-    // Perbaikan: panggil controller, bukan view langsung
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/ibu-hamil', [IbuHamilController::class, 'index'])->name('ibu-hamil.index');
@@ -195,7 +216,6 @@ Route::prefix('admin-posyandu')->name('admin_posyandu.')->group(function () {
     Route::delete('/apras/{id}', [ApprasController::class, 'destroy'])->name('apras.destroy');
 });
 
-
 Route::resource('appras', ApprasController::class);
 
 Route::middleware('auth')->group(function () {
@@ -218,4 +238,5 @@ Route::get('/view-file/{filename}', function ($filename) {
     ]);
 })->name('view.file');
 
-require __DIR__ . '/auth.php';
+// === BARIS INI DIHAPUS KARENA MENYEBABKAN ERROR ===
+// require __DIR__ . '/auth.php';
