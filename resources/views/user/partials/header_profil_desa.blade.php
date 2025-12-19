@@ -8,7 +8,7 @@
   <!-- Konten Utama -->
   <div class="relative z-10 text-center px-6 sm:px-10 max-w-3xl" data-aos="fade-up" data-aos-duration="1200">
     <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-lime-300 via-lime-400 to-lime-500">
-        Profil Desa Batupute
+        Profil Desa lawallu 
     </h1>
     <p class="text-lime-100/90 text-base md:text-lg leading-relaxed mb-6">
         Menyajikan informasi umum dan gambaran Desa Batupute secara lengkap dan ringkas.

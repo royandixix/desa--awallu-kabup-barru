@@ -112,6 +112,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('umkm', UmkmAdminController::class);
         });
     });
+
+   
     Route::get('pengaduan', [AdminPengaduanController::class, 'index'])->name('pengaduan.index');
     Route::get('pengaduan/{id}', [AdminPengaduanController::class, 'show'])->name('pengaduan.show');
     Route::post('pengaduan/{id}/status', [AdminPengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
@@ -205,6 +207,8 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('/karang-taruna', [KarangTarunaController::class, 'index'])->name('karang_taruna');
         Route::get('/posyandu', [UserPosyanduController::class, 'index'])->name('posyandu');
     });
+
+   
 });
 
 Route::prefix('layanan')->name('layanan.')->group(function () {
