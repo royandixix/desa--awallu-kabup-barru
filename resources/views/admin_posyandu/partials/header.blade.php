@@ -15,7 +15,7 @@
     </div>
 
     <div class="header-actions">
-        <button class="header-btn search-btn" title="Cari">
+        {{-- <button class="header-btn search-btn" title="Cari">
             <i class="bi bi-search"></i>
         </button>
 
@@ -27,7 +27,7 @@
         <button class="header-btn message-btn" title="Pesan">
             <i class="bi bi-chat-dots"></i>
             <span class="badge pulse">5</span>
-        </button>
+        </button> --}}
 
         <div class="user-dropdown">
             <div class="user-dropdown-avatar"><span>AP</span></div>

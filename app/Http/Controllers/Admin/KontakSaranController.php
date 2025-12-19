@@ -24,4 +24,6 @@ class KontakSaranController extends Controller
         KontakSaran::findOrFail($id)->delete();
         return redirect()->route('admin.kontak_saran.index')->with('success', 'Data berhasil dihapus');
     }
+    
 }
+

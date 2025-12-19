@@ -5,7 +5,6 @@
 @section('content')
     <div class="bg-white">
         <section class="">
-
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
 
                 {{-- HEADER SECTION --}}
@@ -30,10 +29,7 @@
                             Hubungi Kami
                         </a>
                     </div>
-
-
                 </div>
-
 
                 {{-- GALLERY GRID --}}
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -70,12 +66,10 @@
                                     'Struktur organisasi ini menampilkan hierarki dan pembagian tugas dari setiap bagian di Pemerintah Desa Lawallu, agar pelayanan kepada masyarakat lebih terstruktur dan efisien.',
                             ],
                         ];
-
                     @endphp
 
                     @foreach ($galleries as $gallery)
                         @if ($gallery['title'] === 'Struktur Organisasi')
-                            {{-- Layout dua kolom: Card Struktur Organisasi + Duplikat Header Galeri --}}
                             <div class="col-span-1 lg:col-span-3 flex flex-col lg:flex-row gap-8 items-start">
 
                                 {{-- Card Gambar Struktur Organisasi --}}
@@ -109,7 +103,7 @@
                                     </div>
                                 </div>
 
-                                {{-- Penjelasan tentang Desa Lawallu Barru di samping --}}
+                                {{-- Penjelasan Desa Lawallu --}}
                                 <div class="lg:w-1/2 flex flex-col justify-center max-w-3xl mx-auto px-4">
                                     <h1 class="text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 ">
                                         Tentang <span class="text-green-600">Desa Lawallu</span>
@@ -128,16 +122,11 @@
                                         partisipatif, dan berorientasi pada kemajuan desa yang <span
                                             class="text-green-600 ">mandiri dan sejahtera.</span>
                                     </p>
-
-
                                 </div>
-
-
-
 
                             </div>
                         @else
-                            {{-- Layout default untuk card lain --}}
+                            {{-- Layout default card lainnya --}}
                             <div
                                 class="group relative bg-white border border-gray-200 overflow-hidden hover:shadow-2xl transition-all duration-500">
                                 <div class="relative overflow-hidden">
@@ -167,7 +156,6 @@
                             </div>
                         @endif
                     @endforeach
-
                 </div>
             </div>
 
@@ -181,14 +169,22 @@
                 }
             </style>
         </section>
+
         @include('user.page.home.sambutan')
         @include('user.page.home.visimisi')
         @include('user.page.home.foto_bersama_warga')
         @include('user.page.home.administrasipenduduk')
+        @include('user.page.home.struktur_organisasi', ['anggota' => $anggota])
         @include('user.page.home.menelusuri_keindahan')
-        @include('user.page.home.layanan_kami.layanan_kami')
-        @include('user.page.home.struktur_organisasi')
-        {{-- @include('user.page.home.contac') --}}
+       @include('user.page.home.umkm.umkm', ['umkms' => $umkms->take(3)])
+
+{{-- 
+        @include('user.page.home.layanan_kami.layanan_kami') --}}
         @include('user.page.home.kontak_saran')
+
+
+
+
+
     </div>
 @endsection

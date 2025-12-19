@@ -11,4 +11,6 @@ class Pkk extends Model
     protected $fillable = [
         'gambar'
     ];
+
+    
 }

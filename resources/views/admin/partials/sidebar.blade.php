@@ -22,8 +22,9 @@
             <!-- Dashboard -->
             <li class="menu-item">
                 <a href="{{ url('/admin/dashboard') }}" class="nav-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" 
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <rect x="3" y="3" width="7" height="7" />
                         <rect x="14" y="3" width="7" height="7" />
                         <rect x="14" y="14" width="7" height="7" />
@@ -36,22 +37,25 @@
             <!-- Manajemen Website -->
             <li class="menu-item has-submenu">
                 <a href="#webMgmt" class="nav-link" data-bs-toggle="collapse">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" 
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10" />
                         <line x1="2" y1="12" x2="22" y2="12" />
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                     </svg>
                     <span>Manajemen Website</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="submenu-arrow ms-auto">
                         <polyline points="6 9 12 15 18 9" />
                     </svg>
                 </a>
 
                 <ul class="collapse submenu" id="webMgmt">
 
-                    <!-- Beranda -->
+                    {{-- <!-- Beranda -->
                     <li>
                         <a href="{{ url('/admin/beranda') }}" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
@@ -61,13 +65,14 @@
                             </svg>
                             <span>Beranda</span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <!-- Profil Desa -->
                     <li>
                         <a href="{{ url('/admin/profil_desa') }}" class="nav-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10" />
                                 <line x1="12" y1="16" x2="12" y2="12" />
                                 <line x1="12" y1="8" x2="12.01" y2="8" />
@@ -79,15 +84,17 @@
                     <!-- Galeri -->
                     <li class="has-submenu">
                         <a href="#galeriMenu" class="nav-link" data-bs-toggle="collapse">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                                 <circle cx="8.5" cy="8.5" r="1.5" />
                                 <polyline points="21 15 16 10 5 21" />
                             </svg>
                             <span>Galeri</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg>
                         </a>
@@ -100,8 +107,9 @@
                     <!-- Transparansi -->
                     <li class="has-submenu">
                         <a href="#transMenu" class="nav-link" data-bs-toggle="collapse">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                                 <polyline points="14 2 14 8 20 8" />
                                 <line x1="16" y1="13" x2="8" y2="13" />
@@ -109,32 +117,39 @@
                                 <polyline points="10 9 9 9 8 9" />
                             </svg>
                             <span>Transparansi</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg>
                         </a>
                         <ul class="collapse submenu" id="transMenu">
-                            <li><a href="{{ route('admin.transparansi.anggaran.index') }}" class="nav-link">Anggaran</a></li>
-                            <li><a href="{{ route('admin.transparansi.laporan.index') }}" class="nav-link">Laporan</a></li>
-                            <li><a href="{{ route('admin.transparansi.bumdes.index') }}" class="nav-link">Bumdes</a></li>
-                            <li><a href="{{ route('admin.transparansi.dokumen.index') }}" class="nav-link">Dokumen</a></li>
+                            <li><a href="{{ route('admin.transparansi.anggaran.index') }}"
+                                    class="nav-link">Anggaran</a></li>
+                            <li><a href="{{ route('admin.transparansi.laporan.index') }}" class="nav-link">Laporan</a>
+                            </li>
+                            <li><a href="{{ route('admin.transparansi.bumdes.index') }}" class="nav-link">Bumdes</a>
+                            </li>
+                            <li><a href="{{ route('admin.transparansi.dokumen.index') }}" class="nav-link">Dokumen</a>
+                            </li>
                         </ul>
                     </li>
 
                     <!-- Struktur -->
                     <li class="has-submenu">
                         <a href="#strukturMenu" class="nav-link" data-bs-toggle="collapse">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                                 <circle cx="9" cy="7" r="4" />
                                 <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
                                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                             </svg>
                             <span>Struktur</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg>
                         </a>
@@ -144,38 +159,46 @@
                             <li class="has-submenu">
                                 <a href="#pemerintahanDesaMenu" class="nav-link" data-bs-toggle="collapse">
                                     <span>Pemerintahan Desa</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" 
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
                                         <polyline points="6 9 12 15 18 9" />
                                     </svg>
                                 </a>
                                 <ul class="collapse submenu" id="pemerintahanDesaMenu">
-                                    <li><a href="{{ route('admin.struktur.pemerintahan_desa.struktural.index') }}" class="nav-link">Struktural</a></li>
-                                    <li><a href="{{ route('admin.struktur.pemerintahan_desa.anggota.index') }}" class="nav-link">Anggota</a></li>
+                                    <li><a href="{{ route('admin.struktur.pemerintahan_desa.struktural.index') }}"
+                                            class="nav-link">Struktural</a></li>
+                                    <li><a href="{{ route('admin.struktur.pemerintahan_desa.anggota.index') }}"
+                                            class="nav-link">Anggota</a></li>
                                 </ul>
                             </li>
 
                             <li><a href="{{ route('admin.struktur.bpd.index') }}" class="nav-link">BPD</a></li>
                             <li><a href="{{ route('admin.struktur.pkk.index') }}" class="nav-link">PKK</a></li>
                             <li><a href="{{ route('admin.struktur.lpm.index') }}" class="nav-link">LPM</a></li>
-                            <li><a href="{{ route('admin.struktur.karang_taruna.index') }}" class="nav-link">Karang Taruna</a></li>
-                            <li><a href="{{ route('admin.struktur.posyandu.index') }}" class="nav-link">Posyandu</a></li>
+                            <li><a href="{{ route('admin.struktur.karang_taruna.index') }}" class="nav-link">Karang
+                                    Taruna</a></li>
+                            <li><a href="{{ route('admin.struktur.posyandu.index') }}" class="nav-link">Posyandu</a>
+                            </li>
                         </ul>
                     </li>
 
                     <!-- Berita -->
                     <li class="has-submenu">
                         <a href="#beritaMenu" class="nav-link" data-bs-toggle="collapse">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" />
                                 <path d="M18 14h-8" />
                                 <path d="M15 18h-5" />
                                 <path d="M10 6h8v4h-8V6Z" />
                             </svg>
                             <span>Berita</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg>
                         </a>
@@ -188,8 +211,9 @@
                     <!-- Pengaduan -->
                     <li>
                         <a href="{{ url('/admin/pengaduan') }}" class="nav-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
                                 <path d="M12 6v6l4 2" />
                             </svg>
@@ -200,8 +224,9 @@
                     <!-- Kontak & Saran -->
                     <li>
                         <a href="{{ url('/admin/kontak-saran') }}" class="nav-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                             </svg>
                             <span>Kontak & Saran</span>
@@ -213,30 +238,40 @@
                     <!-- =============================== -->
                     <li class="has-submenu">
                         <a href="#homePageMenu" class="nav-link" data-bs-toggle="collapse">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                             </svg>
                             <span>Halaman Depan</span>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" 
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
                                 <polyline points="6 9 12 15 18 9" />
                             </svg>
                         </a>
 
                         <ul class="collapse submenu" id="homePageMenu">
-                            <li><a href="{{ route('admin.home.administrasi.index') }}" class="nav-link">Administrasi Penduduk</a></li>
+                            <li><a href="{{ route('admin.home.administrasi.index') }}" class="nav-link">Administrasi
+                                    Penduduk</a></li>
 
-                            <li><a href="{{ route('admin.home.foto_warga.index') }}" class="nav-link">Foto Bersama Warga</a></li>
+                            <li><a href="{{ route('admin.home.foto_warga.index') }}" class="nav-link">Foto Bersama
+                                    Warga</a></li>
 
-                            <li><a href="{{ route('admin.home.keindahan.index') }}" class="nav-link">Menelusuri Keindahan</a></li>
+                            {{-- <li><a href="{{ route('admin.home.keindahan.index') }}" class="nav-link">Menelusuri
+                                    Keindahan</a></li> --}}
 
-                            <li><a href="{{ route('admin.home.sambutan.index') }}" class="nav-link">Sambutan</a></li>
+                            {{-- <li><a href="{{ route('admin.home.sambutan.index') }}" class="nav-link">Sambutan</a></li> --}}
 
-                            <li><a href="{{ route('admin.home.struktur.index') }}" class="nav-link">Struktur Organisasi</a></li>
+                            {{-- <li><a href="{{ route('admin.home.struktur.index') }}" class="nav-link">Struktur
+                                    Organisasi</a></li> --}}
 
-                            <li><a href="{{ route('admin.home.visimisi.index') }}" class="nav-link">Visi & Misi</a></li>
+                            {{-- <li><a href="{{ route('admin.home.visimisi.index') }}" class="nav-link">Visi & Misi</a> --}}
+                            </li>
+                            <li><a href="{{ route('admin.home.umkm.index') }}" class="nav-link">UMKM</a></li>
+
+
                         </ul>
                     </li>
                     <!-- =============================== -->
@@ -252,15 +287,17 @@
             <!-- System -->
             <li class="menu-item has-submenu">
                 <a href="#systemMenu" class="nav-link" data-bs-toggle="collapse">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" 
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <circle cx="12" cy="12" r="3" />
                         <path d="M12 1v6m0 6v6m-9-9h6m6 0h6" />
                         <path d="m4.93 4.93 4.24 4.24m5.66 5.66 4.24 4.24m-12.73 0 4.24-4.24m5.66-5.66 4.24-4.24" />
                     </svg>
                     <span>System</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" 
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="submenu-arrow ms-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="submenu-arrow ms-auto">
                         <polyline points="6 9 12 15 18 9" />
                     </svg>
                 </a>
@@ -283,8 +320,9 @@
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="nav-link logout-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
                                     <polyline points="16 17 21 12 16 7" />
                                     <line x1="21" y1="12" x2="9" y2="12" />
@@ -302,8 +340,9 @@
     <div class="sidebar-footer">
         <div class="user-profile">
             <div class="user-avatar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" 
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                     <circle cx="12" cy="7" r="4" />
                 </svg>

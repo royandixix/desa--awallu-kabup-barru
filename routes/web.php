@@ -67,6 +67,9 @@ use App\Http\Controllers\Posyandu\WusController;
 use App\Http\Controllers\Posyandu\PraLansiaController;
 use App\Http\Controllers\Posyandu\LansiaController;
 use App\Http\Controllers\Posyandu\DashboardController;
+use App\Http\Controllers\Admin\Home\UmkmAdminController;
+use App\Http\Controllers\Admin\Home\UmkmController;
+
 
 
 Route::get('/', fn() => redirect()->route('user.home'));
@@ -120,6 +123,15 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('home/umkm', [UmkmController::class, 'index'])->name('home.umkm.index');
+    Route::get('home/umkm/create', [UmkmController::class, 'create'])->name('home.umkm.create');
+    Route::post('home/umkm', [UmkmController::class, 'store'])->name('home.umkm.store');
+    Route::get('home/umkm/{umkm}/edit', [UmkmController::class, 'edit'])->name('home.umkm.edit');
+    Route::put('home/umkm/{umkm}', [UmkmController::class, 'update'])->name('home.umkm.update');
+    Route::get('home/umkm/{umkm}', [UmkmController::class, 'show'])->name('home.umkm.show');
+    Route::delete('home/umkm/{umkm}', [UmkmController::class, 'destroy'])->name('home.umkm.destroy'); // <-- ini penting
+
+
     Route::get('/', fn() => redirect()->route('admin.dashboard'));
     Route::get('/dashboard', fn() => view('admin.page.dashboard.index'))->name('dashboard');
     Route::resource('profil_desa', AdminProfilDesaController::class);
@@ -161,6 +173,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/sambutan', [SambutanController::class, 'index'])->name('sambutan.index');
         Route::get('/struktur', [StrukturController::class, 'index'])->name('struktur.index');
         Route::get('/visimisi', [VisimisiController::class, 'index'])->name('visimisi.index');
+        Route::prefix('home')->name('home.')->group(function () {
+            Route::resource('umkm', UmkmAdminController::class);
+        });
     });
 
     Route::get('pengaduan', [AdminPengaduanController::class, 'index'])->name('pengaduan.index');

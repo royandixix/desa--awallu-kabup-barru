@@ -15,6 +15,8 @@ class KontakSaranController extends Controller
             'pesan' => 'required',
         ]);
 
+        
+
         KontakSaran::create($request->only(['nama', 'email', 'pesan']));
 
         return redirect()->back()->with('success', 'Pesan berhasil dikirim!');

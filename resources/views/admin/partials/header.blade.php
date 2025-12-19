@@ -14,22 +14,22 @@
     </div>
 
     <div class="header-actions">
-        {{-- Search --}}
+        {{-- Search
         <button class="header-btn search-btn" title="Search">
             <i class="bi bi-search"></i>
-        </button>
+        </button> --}}
 
-        {{-- Notifications --}}
+        {{-- Notifications
         <button class="header-btn notification-btn" title="Notifications">
             <i class="bi bi-bell"></i>
             <span class="badge pulse">3</span>
-        </button>
+        </button> --}}
 
-        {{-- Messages --}}
+        {{-- Messages
         <button class="header-btn message-btn" title="Messages">
             <i class="bi bi-chat-dots"></i>
             <span class="badge pulse">5</span>
-        </button>
+        </button> --}}
 
         {{-- User Dropdown --}}
         <div class="user-dropdown">

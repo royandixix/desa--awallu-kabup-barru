@@ -11,6 +11,8 @@ use App\Http\Controllers\User\BeritaController as UserBeritaController;
 use App\Http\Controllers\User\PemerintahanDesaController;
 use App\Http\Controllers\User\BpdUserController;
 use App\Http\Controllers\User\KarangTarunaController as UserKarangTaruna;
+use App\Http\Controllers\User\StrukturController;
+use App\Http\Controllers\User\UmkmController;
 
 // ADMIN Controllers
 use App\Http\Controllers\Admin\ProfilDesaController as AdminProfilDesaController;
@@ -20,6 +22,7 @@ use App\Http\Controllers\Admin\Transparansi\LaporanController as AdminLaporanCon
 use App\Http\Controllers\Admin\Transparansi\DokumenController as AdminDokumenController;
 use App\Http\Controllers\Admin\Transparansi\BumdesController as AdminBumdesController;
 use App\Http\Controllers\Admin\BeritaController as AdminBeritaController;
+use App\Http\Controllers\Admin\Home\UmkmAdminController;
 
 // STRUKTUR ADMIN
 use App\Http\Controllers\Admin\Struktur\PemerintahanDesaStrukturalController;
@@ -35,6 +38,7 @@ use App\Http\Controllers\Admin\Struktur\PosyanduController;
 | HALAMAN UTAMA USER
 |--------------------------------------------------------------------------
 */
+
 Route::get('/', fn() => redirect()->route('user.home'));
 Route::get('/home', fn() => view('user.page.home.content'))->name('user.home');
 
@@ -64,12 +68,16 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('/bpd', [BpdUserController::class, 'index'])->name('bpd');
         Route::get('/pkk', fn() => view('user.page.struktur.struktur', ['halaman' => 'pkk']))->name('pkk');
         Route::get('/lpm', fn() => view('user.page.struktur.struktur', ['halaman' => 'lpm']))->name('lpm');
-
-        // Karang Taruna -> gunakan controller agar dinamis
         Route::get('/karang-taruna', [UserKarangTaruna::class, 'index'])->name('karang_taruna');
-
         Route::get('/posyandu', fn() => view('user.page.struktur.struktur', ['halaman' => 'posyandu']))->name('posyandu');
     });
+
+   // Daftar UMKM (bisa optional ?all=1 via query string, bukan parameter)
+Route::get('/umkm', [UmkmController::class, 'index'])->name('umkm.index');
+
+// Detail UMKM
+Route::get('/umkm/{id}', [UmkmController::class, 'show'])->name('umkm.detail');
+
 
     // Berita
     Route::get('/berita', [UserBeritaController::class, 'index'])->name('berita');
@@ -78,6 +86,7 @@ Route::prefix('user')->name('user.')->group(function () {
     // Kontak / pengaduan
     Route::get('/pengaduan', fn() => view('user.page.home.kontak_saran'))->name('pengaduan');
     Route::get('/kontak', fn() => view('user.page.home.kontak_saran'))->name('kontak');
+    Route::get('/struktur-organisasi', [StrukturController::class, 'organisasi'])->name('user.struktur');
 });
 
 /*
@@ -101,15 +110,22 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
 */
 Route::prefix('admin')->name('admin.')->group(function () {
 
+    // Dashboard
     Route::get('/', fn() => redirect()->route('admin.dashboard'));
     Route::get('/dashboard', fn() => view('admin.page.dashboard.index'))->name('dashboard');
 
+    // UMKM ADMIN (sesuai sidebar)
+  
+        Route::resource('umkm', UmkmAdminController::class);
+   
+
+    // CRUD Admin
     Route::resource('profil_desa', AdminProfilDesaController::class);
     Route::resource('galeri', AdminGaleriController::class);
 
     /*
     |--------------------------------------------------------------------------
-    | Transparansi
+    | Transparansi Admin
     |--------------------------------------------------------------------------
     */
     Route::prefix('transparansi')->name('transparansi.')->group(function () {
@@ -121,14 +137,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | Struktur Desa (Admin)
+    | Struktur Desa Admin
     |--------------------------------------------------------------------------
     */
     Route::prefix('struktur')->name('struktur.')->group(function () {
-
         // Pemerintahan Desa
         Route::prefix('pemerintahan_desa')->name('pemerintahan_desa.')->group(function () {
-            Route::resource('struktural', PemerintahanDesaStrukturalController::class);
+        Route::resource('struktural', PemerintahanDesaStrukturalController::class);
             Route::resource('anggota', PemerintahanDesaAnggotaController::class);
         });
 
@@ -136,11 +151,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('bpd', BpdController::class);
         Route::resource('pkk', PkkController::class);
         Route::resource('lpm', LpmController::class);
-
-        // Karang Taruna
         Route::resource('karang_taruna', KarangTarunaController::class);
-
-        // Posyandu
         Route::resource('posyandu', PosyanduController::class);
     });
 
@@ -162,6 +173,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('berita', AdminBeritaController::class)
         ->parameters(['berita' => 'berita']);
 });
+
 
 /*
 |--------------------------------------------------------------------------

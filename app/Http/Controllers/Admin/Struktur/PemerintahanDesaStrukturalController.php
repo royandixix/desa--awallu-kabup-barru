@@ -43,6 +43,8 @@ class PemerintahanDesaStrukturalController extends Controller
         return view('admin.page.struktur.pemerintahan_desa.struktural.edit', compact('bagan'));
     }
 
+
+
     public function update(Request $request, $id)
     {
         $bagan = StrukturDesa::findOrFail($id);
@@ -76,4 +78,6 @@ class PemerintahanDesaStrukturalController extends Controller
 
         return back()->with('success', 'Bagan berhasil dihapus.');
     }
+  
+    
 }
