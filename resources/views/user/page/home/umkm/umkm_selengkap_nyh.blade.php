@@ -1,38 +1,84 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+@extends('user.layouts.app')
+@section('title', 'Semua UMKM Desa')
 
-    <!-- Header -->
-    <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Semua UMKM Desa</h1>
-        <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-            Jelajahi semua produk UMKM yang tersedia di desa kami. Pilih produk favoritmu dan dukung ekonomi lokal!
+{{-- Header UMKM --}}
+@section('header_layanan')
+    @include('user.partials.header_umkm_selengkapnyh')
+@endsection
+
+{{-- Konten --}}
+@section('content')
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header Section -->
+    <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Semua UMKM Desa
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+            Jelajahi semua produk UMKM yang tersedia di Desa Lawallu. Pilih produk favoritmu dan dukung ekonomi lokal!
         </p>
+        
+        <!-- Tombol Kembali -->
+        <button onclick="window.history.back()" 
+            class="inline-flex items-center px-6 py-3 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded-lg shadow-sm transition-all duration-200 hover:shadow-md">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Kembali
+        </button>
     </div>
 
-    <!-- Grid Produk -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-16">
-        @foreach ($umkms as $index => $umkm)
+    <!-- Grid UMKM -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @forelse ($umkms as $umkm)
             <a href="{{ route('user.umkm.detail', ['id' => $umkm->id]) }}"
-                class="pilar-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 opacity-0 translate-y-8 group cursor-pointer border border-gray-100 block"
-                style="animation-delay: {{ $index * 50 }}ms">
-                <div class="relative">
-                    <img src="{{ asset('images/' . $umkm->foto) }}" alt="{{ $umkm->nama_usaha }}"
-                        class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="p-6 bg-gray-50">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900">{{ $umkm->nama_usaha }}</h3>
-                        <p class="text-gray-700 font-semibold mb-4">
-                            Rp{{ number_format($umkm->harga ?? 0, 0, ',', '.') }}
+               class="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-gray-300">
+                
+                <!-- Image Container -->
+                <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                    <img src="{{ $umkm->foto ? asset('storage/'.$umkm->foto) : asset('images/default.png') }}" 
+                         alt="{{ $umkm->nama_usaha ?? 'UMKM Desa' }}"
+                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    
+                    <!-- Overlay on Hover -->
+                    
+                </div>
+
+                <!-- Content Container -->
+                <div class="p-5">
+                    <!-- Nama Usaha -->
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-green-600 transition-colors duration-200">
+                        {{ $umkm->nama_usaha ?? '-' }}
+                    </h3>
+
+                    <!-- Harga -->
+                    @if(isset($umkm->harga))
+                        <p class="text-lg font-semibold text-gray-800 mb-3">
+                            Rp{{ number_format($umkm->harga, 0, ',', '.') }}
                         </p>
-                        <span
-                            class="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-medium">UMKM
-                            Desa</span>
+                    @endif
+
+                    <!-- Badge -->
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            UMKM Desa
+                        </span>
                     </div>
                 </div>
             </a>
-        @endforeach
-    </div>
-
-    <!-- Pagination -->
-    <div class="flex justify-center">
-        {{ $umkms->links() }}
+        @empty
+            <!-- Empty State -->
+            <div class="col-span-full text-center py-20">
+                <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                </svg>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada UMKM tersedia</h3>
+                <p class="text-gray-500">Produk UMKM akan ditampilkan di sini</p>
+            </div>
+        @endforelse
     </div>
 </div>
+@endsection

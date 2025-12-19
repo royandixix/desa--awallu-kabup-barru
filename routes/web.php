@@ -96,6 +96,21 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
     Route::get('/foto_bersama_warga', [FotoBersamaWargaController::class, 'index'])->name('foto_bersama_warga');
 
+    // List UMKM
+  // List UMKM
+    Route::get('/umkm', [\App\Http\Controllers\User\UserUmkmController::class, 'index'])
+        ->name('umkm.index');
+
+    // Halaman UMKM Selengkapnya
+    Route::get('/umkm/selengkap', [\App\Http\Controllers\User\UserUmkmController::class, 'selengkap'])
+        ->name('umkm.umkm_selengkap_nyh');
+
+    // Detail UMKM
+    Route::get('/umkm/{id}', [\App\Http\Controllers\User\UserUmkmController::class, 'show'])
+        ->name('umkm.detail');
+
+
+
     Route::prefix('struktur')->name('struktur.')->group(function () {
         Route::get('/', fn() => view('user.page.struktur.struktur', ['halaman' => 'default']))->name('index');
         Route::get('/pemerintahan-desa', [PemerintahanDesaController::class, 'index'])->name('pemerintahan_desa');

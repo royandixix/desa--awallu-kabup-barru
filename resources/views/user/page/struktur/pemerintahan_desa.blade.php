@@ -12,9 +12,9 @@
     <div class="container mx-auto px-8 max-w-7xl">
 
         <!-- TITLE -->
-        <h2 class="text-3xl text-gray-800 mb-2 text-center font-extrabold">Dokumen Perencanaan</h2>
+        <h2 class="text-3xl text-gray-800 mb-2 text-center font-extrabold">  Berikut adalah struktural pemerintahan desah</h2>
         <p class="text-gray-500 mb-10 text-center">
-            Berikut adalah daftar dokumen APBDes yang dapat diakses untuk transparansi publik.
+          
         </p>
 
         <!-- GAMBAR STRUKTUR -->

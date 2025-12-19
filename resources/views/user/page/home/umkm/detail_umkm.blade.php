@@ -1,30 +1,55 @@
 @extends('user.layouts.app')
+@section('title', $umkm->nama_usaha)
+
+{{-- Optional: Header khusus untuk UMKM --}}
+@section('header_layanan')
+    @include('user.partials.header_umkm') {{-- pastikan kamu punya partial ini --}}
+@endsection
 
 @section('content')
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="bg-gray-50 py-16">
+    <div class="container mx-auto px-8 max-w-7xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[500px]">
 
-  <div class="bg-white shadow-lg rounded-xl overflow-hidden">
-    <img src="{{ asset('images/' . $umkm->foto) }}" alt="{{ $umkm->nama_usaha }}" class="w-full h-96 object-cover">
+            <!-- Left Side: Foto UMKM -->
+            <div class="flex justify-center lg:justify-start" data-aos="fade-right">
+                <div class="relative w-80 h-96 bg-white rounded-2xl shadow-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
+                    <img src="{{ $umkm->foto ? asset('storage/' . $umkm->foto) : asset('images/default.png') }}"
+                        alt="{{ $umkm->nama_usaha }}" class="w-full h-full object-cover">
+                </div>
+            </div>
 
-    <div class="p-8">
-      <h2 class="text-3xl font-bold text-gray-900 mb-4">{{ $umkm->nama_usaha }}</h2>
-      <p class="text-lg text-gray-700 mb-6">{{ $umkm->deskripsi }}</p>
+            <!-- Right Side: Content -->
+            <div data-aos="fade-left">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ $umkm->nama_usaha }}</h1>
+                <p class="text-gray-600 mb-6 text-lg leading-relaxed">{{ $umkm->deskripsi }}</p>
 
-      <div class="space-y-3 text-gray-800">
-        <p><span class="font-semibold">Nama Pengusaha:</span> {{ $umkm->nama_pengusaha }}</p>
-        <p><span class="font-semibold">Jenis Usaha:</span> {{ $umkm->jenis_usaha }}</p>
-        <p><span class="font-semibold">Alamat:</span> {{ $umkm->alamat }}</p>
-        <p><span class="font-semibold">Kontak:</span> {{ $umkm->kontak }}</p>
-        <p><span class="font-semibold">Kode UMKM:</span> {{ $umkm->kode_umkm }}</p>
-      </div>
+                <div class="space-y-3 text-gray-800 mb-6">
+                    <p><span class="font-semibold">Nama Pengusaha:</span> {{ $umkm->nama_pengusaha }}</p>
+                    <p><span class="font-semibold">Jenis Usaha:</span> {{ $umkm->jenis_usaha }}</p>
+                    <p><span class="font-semibold">Alamat:</span> {{ $umkm->alamat }}</p>
+                    <p><span class="font-semibold">Kontak:</span> {{ $umkm->kontak }}</p>
+                    <p><span class="font-semibold">Kode UMKM:</span> {{ $umkm->kode_umkm }}</p>
+                </div>
 
-      <div class="mt-6">
-        <a href="{{ route('umkm.index') }}" class="px-6 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold shadow-lg transition duration-300">
-          Kembali ke Daftar UMKM
-        </a>
-      </div>
+                <!-- Tombol WhatsApp -->
+                <a href="https://wa.me/{{ $umkm->kontak }}" target="_blank"
+                   class="inline-flex items-center px-6 py-3 mb-4 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold shadow-lg transition duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12.04 2C6.48 2 2 6.48 2 12.04c0 2.13.63 4.1 1.71 5.74L2 22l4.44-1.69c1.58 1.05 3.53 1.69 5.6 1.69C17.6 22 22 17.52 22 12.04S17.6 2 12.04 2zm6.57 15.6c-.28.77-1.65 1.44-2.27 1.52-.6.08-1.34.11-2.48-.22-3.02-.83-4.96-3.66-5.12-3.85-.16-.18-1.3-1.66-1.3-3.17 0-1.5.78-2.24 1.05-2.55.28-.31.6-.38.8-.38.2 0 .38 0 .55.01.18.01.4-.07.63.48.23.54.78 1.86.85 1.99.07.13.12.29.02.46-.1.17-.15.28-.3.44-.15.15-.32.34-.46.45-.15.12-.3.27-.12.53.18.27.8 1.33 1.72 2.15 1.18 1.13 2.16 1.5 2.47 1.67.31.17.49.14.67-.09.18-.23.77-.9.97-1.21.2-.31.4-.26.66-.16.26.1 1.63.77 1.91.91.28.14.46.21.53.33.08.12.08.68-.2 1.45z"/>
+                    </svg>
+                    Hubungi via WhatsApp
+                </a>
+
+                <!-- Tombol kembali -->
+                <button onclick="window.history.back()"
+                    class="px-6 py-3 rounded-full bg-gray-500 hover:bg-gray-600 text-white font-semibold shadow-lg transition duration-300">
+                    Kembali
+                </button>
+            </div>
+
+        </div>
     </div>
-  </div>
-
 </div>
+
 @endsection

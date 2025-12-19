@@ -74,6 +74,8 @@ Route::prefix('user')->name('user.')->group(function () {
 
    // Daftar UMKM (bisa optional ?all=1 via query string, bukan parameter)
 Route::get('/umkm', [UmkmController::class, 'index'])->name('umkm.index');
+// Halaman UMKM Selengkapnya
+Route::get('/umkm/selengkap', [UmkmController::class, 'selengkap'])->name('user.umkm.umkm_selengkap_nyh');
 
 // Detail UMKM
 Route::get('/umkm/{id}', [UmkmController::class, 'show'])->name('umkm.detail');

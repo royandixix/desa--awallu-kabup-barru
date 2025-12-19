@@ -71,11 +71,11 @@
                 </div>
             </div>
 
-            <div data-aos="fade-up" data-aos-delay="600" class="mt-14">
+            {{-- <div data-aos="fade-up" data-aos-delay="600" class="mt-14">
                 <a href="#" class="text-blue-700 font-semibold hover:underline hover:text-blue-800 transition">
                     Lihat Selengkapnya →
                 </a>
-            </div>
+            </div> --}}
         </div>
     </section>
 
