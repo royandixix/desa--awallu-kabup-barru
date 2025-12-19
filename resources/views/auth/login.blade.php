@@ -108,6 +108,10 @@
                             required autofocus>
                     </div>
 
+                    <i class="fa fa-registered" aria-hidden="true" class="">
+
+                    </i>
+
                     <!-- Password Input -->
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
@@ -131,11 +135,16 @@
                         Masuk
                     </button>
                     <!-- Link ke Register -->
-                    <div class="mt-4 text-sm text-gray-500">
+                    {{-- <div class="mt-4 text-sm text-gray-500">
                         Belum punya akun?
                         <a href="{{ route('register') }}" class="text-green-600 hover:underline">Daftar di sini</a>
-                    </div>
+                    </div> --}}
                 </form>
+
+                <i class="fa fa-chrome" aria-hidden="true" class=" btn">
+
+                </i>
+                
 
                 <!-- Footer -->
                 <div class="mt-12 pt-8 border-t border-gray-200">
