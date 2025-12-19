@@ -24,25 +24,25 @@
                     Laporan Kegiatan
                     @break
                 @default
-                    Transparansi Desa Batupute
+                    Transparansi Desa Lawallu
             @endswitch
         </h1>
         <p class="text-lime-100/90 text-base md:text-lg leading-relaxed mb-6">
             @switch($halaman)
                 @case('anggaran')
-                    Informasi anggaran Desa Batupute secara detail.
+                    Informasi anggaran Desa Lawallu secara detail.
                     @break
                 @case('bumdes')
                     Informasi mengenai kegiatan Bumdes dan Kopdes MP.
                     @break
                 @case('dokumen')
-                    Konten dokumen perencanaan Desa Batupute.
+                    Konten dokumen perencanaan Desa Lawallu.
                     @break
                 @case('laporan')
-                    Laporan kegiatan yang telah dilaksanakan Desa Batupute.
+                    Laporan kegiatan yang telah dilaksanakan Desa Lawallu.
                     @break
                 @default
-                    Menyajikan data keuangan, program, dan kegiatan Desa Batupute secara terbuka dan akuntabel.
+                    Menyajikan data keuangan, program, dan kegiatan Desa Lawallu secara terbuka dan akuntabel.
             @endswitch
         </p>
 

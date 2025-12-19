@@ -11,7 +11,7 @@
         Profil Desa lawallu 
     </h1>
     <p class="text-lime-100/90 text-base md:text-lg leading-relaxed mb-6">
-        Menyajikan informasi umum dan gambaran Desa Batupute secara lengkap dan ringkas.
+        Menyajikan informasi umum dan gambaran Desa Lawallu secara lengkap dan ringkas.
     </p>
 
     <!-- Tombol CTA -->

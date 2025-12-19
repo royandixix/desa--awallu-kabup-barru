@@ -13,7 +13,7 @@
             <h1 class="text-4xl font-bold text-gray-800 mb-4">Laporan Kegiatan</h1>
             <div class="w-20 h-1 bg-teal-600 mx-auto mb-6"></div>
             <p class="text-gray-600 max-w-3xl mx-auto">
-                Halaman ini menyajikan informasi lengkap mengenai laporan kegiatan yang ada di Desa Batupute.
+                Halaman ini menyajikan informasi lengkap mengenai laporan kegiatan yang ada di Desa Lawallu.
             </p>
         </div>
     </section>
