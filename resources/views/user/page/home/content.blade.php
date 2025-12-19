@@ -20,14 +20,14 @@
                         partisipatif.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="#struktur-organisasi"
+                        {{-- <a href="#struktur-organisasi"
                             class="inline-block border-2 border-gray-900 text-gray-900 px-8 py-3  hover:bg-gray-900 hover:text-white transition-all duration-300">
                             Lihat Struktur Organisasi
                         </a>
                         <a href="#kontak-saran"
                             class="inline-block bg-green-600 text-white px-8 py-3  hover:bg-green-700 transition-all duration-300">
                             Hubungi Kami
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
 
