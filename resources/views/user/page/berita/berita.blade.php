@@ -13,11 +13,7 @@
         <!-- GRID BERITA -->
         <section class="mb-20" data-aos="fade-up" data-aos-delay="200">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                @foreach ($beritas as $item)
-                    @php
-                        $slug = $item->slug;
-                    @endphp
-
+                @forelse ($beritas as $item)
                     <div class="bg-white overflow-hidden border border-gray-200 hover:border-teal-500 transition-all duration-500 group cursor-pointer">
                         <!-- GAMBAR -->
                         <div class="relative overflow-hidden h-80">
@@ -27,11 +23,10 @@
                             <!-- OVERLAY -->
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-8 opacity-90 group-hover:opacity-100 transition-all duration-500">
                                 <span class="inline-block mb-3 px-4 py-1 bg-teal-500/80 text-white text-sm uppercase tracking-widest group-hover:bg-teal-600 transition-all">
-                                    {{ $item->kategori }}
+                                    {{ $item->kategori ?? 'Umum' }}
                                 </span>
 
-                                <!-- JUDUL -->
-                                <a href="{{ route('user.berita.detail', ['slug' => $slug]) }}"
+                                <a href="{{ route('user.berita.detail', ['slug' => $item->slug]) }}"
                                     class="text-white text-3xl font-semibold leading-snug line-clamp-2 transition-colors duration-300 group-hover:text-teal-400">
                                     {{ $item->judul }}
                                 </a>
@@ -41,7 +36,6 @@
                         <!-- INFO -->
                         <div class="p-8 border-t border-gray-200">
                             <div class="flex items-center justify-between text-gray-700">
-                                <!-- Penulis -->
                                 <div class="flex items-center gap-4">
                                     <i class="bi bi-person-circle text-teal-600 text-4xl"></i>
                                     <div class="leading-tight">
@@ -52,7 +46,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Tanggal -->
                                 <div class="flex items-center gap-2 text-gray-600">
                                     <i class="bi bi-calendar3 text-teal-600 text-2xl"></i>
                                     <span class="text-lg font-medium">
@@ -61,9 +54,10 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                @endforeach
+                @empty
+                    <p class="text-center text-gray-500 col-span-3">Belum ada berita.</p>
+                @endforelse
             </div>
 
             <!-- PAGINATION -->

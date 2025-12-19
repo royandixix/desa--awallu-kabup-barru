@@ -71,8 +71,8 @@
                             <td>{{ $item->author ?? '-' }}</td>
                             <td>{{ $item->created_at->format('d/m/Y') }}</td>
                             <td>
-                                @if($item->image)
-                                    <img src="{{ asset('storage/' . $item->image) }}" alt="Gambar Berita" class="img-thumbnail" style="width:80px;height:50px;object-fit:cover;">
+                                @if($item->image && file_exists(public_path($item->image)))
+                                    <img src="{{ asset($item->image) }}" alt="Gambar Berita" class="img-thumbnail" style="width:80px;height:50px;object-fit:cover;">
                                 @else
                                     <span class="text-muted">Tidak ada</span>
                                 @endif
@@ -93,9 +93,9 @@
                             </td>
                         </tr>
                         @empty
-                        {{-- <tr>
+                        <tr>
                             <td colspan="7" class="text-center py-4 text-muted">Belum ada berita</td>
-                        </tr> --}}
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>

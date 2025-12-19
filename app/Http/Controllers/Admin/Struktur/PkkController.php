@@ -30,29 +30,27 @@ class PkkController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'gambar' => 'required|image|mimes:jpg,png,jpeg,webp|max:2048',
-    ]);
+    {
+        $request->validate([
+            'gambar' => 'required|image|mimes:jpg,png,jpeg,webp|max:2048',
+        ]);
 
-    $file = $request->file('gambar');
-    $filename = $file->hashName(); // nama unik otomatis
+        $file = $request->file('gambar');
 
-    // Cek apakah file dengan nama sama sudah ada
-    if (Pkk::where('gambar', $filename)->exists()) {
-        return back()->withErrors(['gambar' => 'Gambar ini sudah ada sebelumnya.']);
+        // Buat nama unik
+        $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+
+        // Pindahkan langsung ke public/pkk supaya sama seperti edit
+        $file->move(public_path('pkk'), $filename);
+
+        Pkk::create([
+            'gambar' => $filename,
+        ]);
+
+        return redirect()->route('admin.struktur.pkk.index')
+            ->with('success', 'Gambar struktur PKK berhasil ditambahkan.');
     }
 
-    // Simpan gambar di folder public/pkk
-    $file->storeAs('pkk', $filename, 'public');
-
-    Pkk::create([
-        'gambar' => $filename,
-    ]);
-
-    return redirect()->route('admin.struktur.pkk.index')
-                     ->with('success', 'Gambar struktur PKK berhasil ditambahkan.');
-}
 
 
     /**
@@ -91,11 +89,11 @@ class PkkController extends Controller
         $pkk->update(['gambar' => $gambar]);
 
         return redirect()->route('admin.struktur.pkk.index')
-                         ->with('success', 'Gambar struktur PKK berhasil diperbarui.');
+            ->with('success', 'Gambar struktur PKK berhasil diperbarui.');
     }
 
 
-    
+
 
 
     /**
@@ -111,6 +109,6 @@ class PkkController extends Controller
         $pkk->delete();
 
         return redirect()->route('admin.struktur.pkk.index')
-                         ->with('success', 'Gambar struktur PKK berhasil dihapus.');
+            ->with('success', 'Gambar struktur PKK berhasil dihapus.');
     }
 }

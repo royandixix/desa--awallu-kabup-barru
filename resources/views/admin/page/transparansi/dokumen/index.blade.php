@@ -63,11 +63,12 @@
                             </td>
                             <td class="text-center">
                                 @if ($item->file)
-                                <a href="{{ asset('uploads/transparansi/' . $item->file) }}" 
-                                   class="btn btn-sm btn-success" 
-                                   target="_blank">
-                                    Lihat
-                                </a>
+                               <a href="{{ asset('storage/' . $item->file) }}" 
+   class="btn btn-sm btn-success" 
+   target="_blank">
+    Lihat
+</a>
+
                                 @else
                                 <span class="text-muted">Tidak ada file</span>
                                 @endif

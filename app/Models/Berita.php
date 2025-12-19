@@ -9,10 +9,14 @@ class Berita extends Model
 {
     use HasFactory;
 
-    // Nama tabel (optional, Laravel otomatis pakai 'beritas')
+    /**
+     * Nama tabel (Laravel otomatis pakai 'beritas')
+     */
     protected $table = 'beritas';
 
-    // Kolom yang bisa diisi massal
+    /**
+     * Kolom yang bisa diisi massal
+     */
     protected $fillable = [
         'judul',
         'slug',
@@ -22,15 +26,36 @@ class Berita extends Model
         'author',
     ];
 
-    // (Optional) Casting data
+    /**
+     * Casting tanggal
+     */
     protected $casts = [
         'created_at' => 'datetime:d F Y',
         'updated_at' => 'datetime:d F Y',
     ];
 
-    // (Optional) Bisa buat accessor untuk menampilkan path image lengkap
+    /**
+     * Accessor untuk URL gambar
+     * Mengembalikan URL publik gambar agar bisa tampil di Blade user/admin
+     */
     public function getImageUrlAttribute()
     {
-        return $this->image ? asset('storage/' . $this->image) : null;
+        return $this->image ? asset($this->image) : null;
+    }
+
+    /**
+     * Optional: Accessor untuk menampilkan tanggal format panjang
+     */
+    public function getFormattedDateAttribute()
+    {
+        return $this->created_at ? $this->created_at->translatedFormat('d F Y') : null;
+    }
+
+    /**
+     * Optional: Scope untuk berita terbaru
+     */
+    public function scopeLatestBerita($query)
+    {
+        return $query->latest('created_at');
     }
 }

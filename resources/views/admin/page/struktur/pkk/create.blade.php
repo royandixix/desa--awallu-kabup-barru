@@ -70,14 +70,19 @@
 @push('scripts')
 <script>
     // Preview gambar sebelum upload
-    document.querySelector('input[name="gambar"]').addEventListener('change', function(event) {
-        let reader = new FileReader();
-        reader.onload = function() {
-            let preview = document.getElementById('previewImage');
-            preview.src = reader.result;
-            preview.classList.remove('d-none');
-        };
-        reader.readAsDataURL(event.target.files[0]);
+    const inputGambar = document.querySelector('input[name="gambar"]');
+    const previewImage = document.getElementById('previewImage');
+
+    inputGambar.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if(file){
+            const reader = new FileReader();
+            reader.onload = function(e){
+                previewImage.src = e.target.result;
+                previewImage.classList.remove('d-none');
+            }
+            reader.readAsDataURL(file);
+        }
     });
 </script>
 @endpush

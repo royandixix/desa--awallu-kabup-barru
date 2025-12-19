@@ -9,9 +9,7 @@ class Galeri extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title', 'desc', 'lokasi', 'kategori', 'tanggal', 'file'
-    ];
+    protected $fillable = ['judul', 'desc', 'lokasi', 'kategori', 'file', 'tanggal'];
 
     // Tambahkan cast agar tanggal otomatis menjadi Carbon
     protected $casts = [

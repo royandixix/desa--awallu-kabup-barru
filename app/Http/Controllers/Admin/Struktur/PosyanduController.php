@@ -14,7 +14,7 @@ class PosyanduController extends Controller
      */
     public function index()
     {
-        $posyandus = Posyandu::latest()->paginate(10); // 10 data per halaman
+        $posyandus = Posyandu::latest()->paginate(10);
         return view('admin.page.struktur.posyandu.index', compact('posyandus'));
     }
 
@@ -33,22 +33,22 @@ class PosyanduController extends Controller
     {
         // Validasi input
         $request->validate([
-            'foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ], [
-            'foto.required' => 'Harap pilih file gambar.',
-            'foto.image' => 'File harus berupa gambar.',
-            'foto.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
-            'foto.max' => 'Ukuran gambar maksimal 2MB.',
+            'gambar.required' => 'Harap pilih file gambar.',
+            'gambar.image' => 'File harus berupa gambar.',
+            'gambar.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2MB.',
         ]);
 
         // Simpan file ke storage
-        $fotoPath = $request->file('foto')->store('posyandu', 'public');
+        $gambarPath = $request->file('gambar')->store('posyandu', 'public');
 
         // Simpan ke database
-        Posyandu::create(['foto' => $fotoPath]);
+        Posyandu::create(['gambar' => $gambarPath]);
 
         return redirect()->route('admin.struktur.posyandu.index')
-            ->with('success', 'Gambar berhasil diunggah.');
+                         ->with('success', 'Gambar berhasil diunggah.');
     }
 
     /**
@@ -66,25 +66,27 @@ class PosyanduController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ], [
-            'foto.image' => 'File harus berupa gambar.',
-            'foto.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
-            'foto.max' => 'Ukuran gambar maksimal 2MB.',
+            'gambar.image' => 'File harus berupa gambar.',
+            'gambar.mimes' => 'Format gambar harus JPG, JPEG, atau PNG.',
+            'gambar.max' => 'Ukuran gambar maksimal 2MB.',
         ]);
 
         $posyandu = Posyandu::findOrFail($id);
 
         // Hapus gambar lama jika ada
-        if ($request->hasFile('foto')) {
-            if ($posyandu->foto) Storage::disk('public')->delete($posyandu->foto);
-            $posyandu->foto = $request->file('foto')->store('posyandu', 'public');
+        if ($request->hasFile('gambar')) {
+            if ($posyandu->gambar) {
+                Storage::disk('public')->delete($posyandu->gambar);
+            }
+            $posyandu->gambar = $request->file('gambar')->store('posyandu', 'public');
         }
 
         $posyandu->save();
 
         return redirect()->route('admin.struktur.posyandu.index')
-            ->with('success', 'Gambar berhasil diperbarui.');
+                         ->with('success', 'Gambar berhasil diperbarui.');
     }
 
     /**
@@ -94,14 +96,13 @@ class PosyanduController extends Controller
     {
         $posyandu = Posyandu::findOrFail($id);
 
-        // Hapus file dari storage
-        if ($posyandu->foto) {
-            Storage::disk('public')->delete($posyandu->foto);
+        if ($posyandu->gambar) {
+            Storage::disk('public')->delete($posyandu->gambar);
         }
 
         $posyandu->delete();
 
         return redirect()->route('admin.struktur.posyandu.index')
-            ->with('success', 'Gambar berhasil dihapus.');
+                         ->with('success', 'Gambar berhasil dihapus.');
     }
 }

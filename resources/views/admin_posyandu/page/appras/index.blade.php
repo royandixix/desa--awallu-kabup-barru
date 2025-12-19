@@ -86,9 +86,9 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr>
+                            {{-- <tr>
                                 <td colspan="6" class="text-center py-4 text-muted">Belum ada data.</td>
-                            </tr>
+                            </tr> --}}
                         @endforelse
                     </tbody>
                 </table>

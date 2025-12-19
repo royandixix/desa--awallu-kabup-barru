@@ -74,8 +74,8 @@
                                 <td>{{ $loop->iteration }}</td>
 
                                 <td>
-                                    <img src="{{ asset('storage/' . $d->foto) }}" 
-                                         width="60" class="rounded shadow-sm">
+                                   <img src="{{ asset('storage/' . $d->foto) }}" width="60" class="rounded shadow-sm">
+
                                 </td>
 
                                 <td>{{ $d->nama }}</td>

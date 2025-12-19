@@ -91,9 +91,9 @@
                             </td>
                         </tr>
                         @empty
-                        <tr>
+                        {{-- <tr>
                             <td colspan="4" class="text-center py-4 text-muted">Belum ada gambar PKK.</td>
-                        </tr>
+                        </tr> --}}
                         @endforelse
                     </tbody>
                 </table>

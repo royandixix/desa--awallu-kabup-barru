@@ -32,7 +32,7 @@
         <!-- Gambar Utama -->
         @if($berita->image_url)
         <div class="overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:scale-105 cursor-pointer">
-            <img src="{{ $berita->image_url }}" alt="Gambar Berita" class="w-full h-96 object-cover">
+            <img src="{{ $berita->image_url }}" alt="{{ $berita->judul }}" class="w-full h-96 object-cover">
         </div>
         @endif
 
@@ -55,7 +55,7 @@
     <aside class="space-y-6">
         <h2 class="text-2xl font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2">Berita Terkait</h2>
 
-        @foreach ($relatedBerita as $item)
+        @forelse ($relatedBerita as $item)
             <div class="flex items-center gap-3 p-2 hover:bg-teal-50 transition-all duration-300 cursor-pointer">
                 <div class="flex-shrink-0 w-16 h-16 overflow-hidden shadow-sm">
                     <img src="{{ $item->image_url }}" alt="{{ $item->judul }}" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300">
@@ -67,7 +67,9 @@
                     <p class="text-gray-500 text-sm mt-1">{{ $item->created_at->translatedFormat('d M Y') }}</p>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <p class="text-gray-500 text-sm">Belum ada berita terkait.</p>
+        @endforelse
     </aside>
 </div>
 @endsection

@@ -85,9 +85,9 @@
                             @forelse($images as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td style="white-space:normal; word-break:break-word;">{{ $item->title }}</td>
+                                    <td style="white-space:normal; word-break:break-word;">{{ $item->judul }}</td>
                                     <td>
-                                        <img src="{{ asset('uploads/galeri/' . $item->file) }}" alt="{{ $item->title }}"
+                                        <img src="{{ asset('uploads/galeri/' . $item->file) }}" alt="{{ $item->judul }}"
                                             class="rounded" style="width: 100px; height: auto; object-fit:cover;">
                                     </td>
                                     <td style="white-space:normal; word-break:break-word;">{{ $item->lokasi ?? '-' }}</td>

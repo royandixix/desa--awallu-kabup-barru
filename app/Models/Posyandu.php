@@ -10,6 +10,6 @@ class Posyandu extends Model
     use HasFactory;
 
     protected $fillable = [
-        'foto', // sesuaikan nama kolom
+        'gambar', // sesuaikan nama kolom
     ];
 }

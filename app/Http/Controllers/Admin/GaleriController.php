@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Galeri;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 
 class GaleriController extends Controller
 {
@@ -38,24 +39,24 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'    => 'required|string|max:255',
+            'judul'    => 'required|string|max:255',
             'desc'     => 'nullable|string',
-            'lokasi'   => 'nullable|string|max:100',
-            'kategori' => 'nullable|string|max:100',
+            'lokasi'   => 'nullable|string|max:255',
+            'kategori' => 'nullable|string|max:255',
             'tanggal'  => 'nullable|date',
             'file'     => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $file = $request->file('file');
-        $filename = time() . '_' . Str::slug($request->title) . '.' . $file->getClientOriginalExtension();
+        $filename = time() . '_' . Str::slug($request->judul) . '.' . $file->getClientOriginalExtension();
         $file->move($this->path, $filename);
 
         Galeri::create([
-            'title'    => $request->title,
+            'judul'    => $request->judul,
             'desc'     => $request->desc,
             'lokasi'   => $request->lokasi,
             'kategori' => $request->kategori,
-            'tanggal'  => $request->tanggal,
+            'tanggal'  => $request->tanggal ? Carbon::parse($request->tanggal) : null,
             'file'     => $filename,
         ]);
 
@@ -73,33 +74,32 @@ class GaleriController extends Controller
     public function update(Request $request, Galeri $galeri)
     {
         $request->validate([
-            'title'    => 'required|string|max:255',
+            'judul'    => 'required|string|max:255',
             'desc'     => 'nullable|string',
-            'lokasi'   => 'nullable|string|max:100',
-            'kategori' => 'nullable|string|max:100',
+            'lokasi'   => 'nullable|string|max:255',
+            'kategori' => 'nullable|string|max:255',
             'tanggal'  => 'nullable|date',
             'file'     => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         if ($request->hasFile('file')) {
-
             if (File::exists($this->path . '/' . $galeri->file)) {
                 File::delete($this->path . '/' . $galeri->file);
             }
 
             $file = $request->file('file');
-            $filename = time() . '_' . Str::slug($request->title) . '.' . $file->getClientOriginalExtension();
+            $filename = time() . '_' . Str::slug($request->judul) . '.' . $file->getClientOriginalExtension();
             $file->move($this->path, $filename);
 
             $galeri->file = $filename;
         }
 
         $galeri->update([
-            'title'    => $request->title,
+            'judul'    => $request->judul,
             'desc'     => $request->desc,
             'lokasi'   => $request->lokasi,
             'kategori' => $request->kategori,
-            'tanggal'  => $request->tanggal,
+            'tanggal'  => $request->tanggal ? Carbon::parse($request->tanggal) : null,
             'file'     => $galeri->file,
         ]);
 

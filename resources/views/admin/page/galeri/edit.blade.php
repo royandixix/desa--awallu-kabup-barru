@@ -27,7 +27,6 @@
                         </div>
                     @endif
 
-                    {{-- SWEETALERT SUKSES SETELAH REDIRECT --}}
                     @if (session('success'))
                         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                         <script>
@@ -43,7 +42,6 @@
                         </script>
                     @endif
 
-                    {{-- FORM EDIT --}}
                     <form id="form-edit" action="{{ route('admin.galeri.update', $galeri->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -65,8 +63,8 @@
                         {{-- Judul --}}
                         <div class="mb-3">
                             <label class="form-label">Judul Gambar</label>
-                            <input type="text" name="title" class="form-control" 
-                                   value="{{ old('title', $galeri->title) }}" required>
+                            <input type="text" name="judul" class="form-control" 
+                                   value="{{ old('judul', $galeri->judul) }}" required>
                         </div>
 
                         {{-- Deskripsi --}}
@@ -108,7 +106,6 @@
 
 </div>
 
-{{-- SWEETALERT KONFIRMASI UPDATE --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.getElementById("form-edit").addEventListener("submit", function(e){
