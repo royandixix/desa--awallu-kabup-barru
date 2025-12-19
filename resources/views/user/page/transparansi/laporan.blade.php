@@ -94,7 +94,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M7 7h10M7 11h10M7 15h7m-4 4h4a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                         </svg>
-                                        Lihat Berkas
+                                            lihat lanjut 
                                     </a>
 
                                     <!-- Download -->
