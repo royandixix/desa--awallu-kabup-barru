@@ -134,11 +134,11 @@
                         class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg shadow-green-500/30">
                         Masuk
                     </button>
-                    <!-- Link ke Register -->
-                    {{-- <div class="mt-4 text-sm text-gray-500">
+                
+                    <div class="mt-4 text-sm text-gray-500">
                         Belum punya akun?
                         <a href="{{ route('register') }}" class="text-green-600 hover:underline">Daftar di sini</a>
-                    </div> --}}
+                    </div>
                 </form>
 
                 <i class="fa fa-chrome" aria-hidden="true" class=" btnlap">
