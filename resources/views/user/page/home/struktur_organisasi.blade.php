@@ -1,7 +1,7 @@
 <div id="struktur-organisasi" class="max-w-7xl mx-auto px-6 py-12">
 
     <!-- Judul -->
-    <div class="mb-12">
+    <div class="mb-12 text-center">
         <h2 class="text-4xl text-teal-600 font-bold mb-2">SOTK</h2>
         <p class="text-gray-700 text-lg">
             Struktur Organisasi dan Tata Kerja Desa Lawallu
@@ -24,6 +24,7 @@
                 data-nama="{{ $d->nama }}"
                 data-jabatan="{{ $d->jabatan }}"
                 data-foto="{{ $d->foto ? asset($d->foto) : asset('img/default-user.png') }}"
+                onclick="openModal(this)"
             >
                 <img src="{{ $d->foto ? asset($d->foto) : asset('img/default-user.png') }}"
                      alt="{{ $d->nama }}"
@@ -44,9 +45,34 @@
 </div>
 
 <!-- MODAL -->
-<div id="modal"
-     class="hidden fixed inset-0 z-50 items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-
+<div id="modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 opacity-0 transition-opacity duration-300">
     <div class="fixed inset-0 bg-black/70" onclick="closeModal()"></div>
 
-    <div id="moda
+    <div class="bg-white rounded-lg overflow-hidden shadow-xl max-w-md w-full z-50 relative">
+        <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onclick="closeModal()">✕</button>
+        <img id="modal-foto" src="" alt="" class="w-full h-80 object-cover">
+        <div class="p-4 text-center">
+            <h3 id="modal-nama" class="font-bold text-xl mb-2"></h3>
+            <p id="modal-jabatan" class="text-gray-700"></p>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT MODAL -->
+<script>
+function openModal(el) {
+    const modal = document.getElementById('modal');
+    document.getElementById('modal-foto').src = el.dataset.foto;
+    document.getElementById('modal-nama').textContent = el.dataset.nama;
+    document.getElementById('modal-jabatan').textContent = el.dataset.jabatan;
+
+    modal.classList.remove('hidden', 'opacity-0');
+    modal.classList.add('flex', 'opacity-100');
+}
+
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.classList.remove('flex', 'opacity-100');
+    modal.classList.add('hidden', 'opacity-0');
+}
+</script>
