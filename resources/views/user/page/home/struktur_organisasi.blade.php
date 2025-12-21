@@ -70,6 +70,8 @@ function openModal(el) {
     modal.classList.add('flex', 'opacity-100');
 }
 
+
+
 function closeModal() {
     const modal = document.getElementById('modal');
     modal.classList.remove('flex', 'opacity-100');
