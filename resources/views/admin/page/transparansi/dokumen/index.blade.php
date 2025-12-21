@@ -23,7 +23,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <p class="text-muted small mb-1">Total Dokumen</p>
-                    <h2 class="fw-bold">{{ $dokumens->count() }}</h2>
+                    <h2 class="fw-bold">{{ $dokumens->total() }}</h2> {{-- gunakan total() untuk paginasi --}}
                 </div>
             </div>
         </div>
@@ -38,8 +38,8 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped mb-0">
-                    <thead class="table-light">
-                        <tr class="text-center">
+                    <thead class="table-light text-center">
+                        <tr>
                             <th style="width: 50px;">No</th>
                             <th>Judul</th>
                             <th>Jenis</th>
@@ -51,29 +51,28 @@
                     </thead>
                     <tbody>
                         @forelse ($dokumens as $item)
-                        <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $item->judul }}</td>
-                            <td class="text-center">
+                        <tr class="text-center">
+                            <td>{{ $loop->iteration + ($dokumens->currentPage() - 1) * $dokumens->perPage() }}</td>
+                            <td class="text-start">{{ $item->judul }}</td>
+                            <td>
                                 <span class="badge bg-info">{{ $item->jenis }}</span>
                             </td>
-                            <td class="text-center">{{ $item->tahun }}</td>
-                            <td class="text-center">
+                            <td>{{ $item->tahun }}</td>
+                            <td>
                                 {{ $item->tanggal ? \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') : '-' }}
                             </td>
-                            <td class="text-center">
+                            <td>
                                 @if ($item->file)
-                               <a href="{{ asset('storage/' . $item->file) }}" 
-   class="btn btn-sm btn-success" 
-   target="_blank">
-    Lihat
-</a>
-
+                                    <a href="{{ asset('uploads/dokumen/' . $item->file) }}" 
+                                       class="btn btn-sm btn-success" 
+                                       target="_blank">
+                                        Lihat
+                                    </a>
                                 @else
-                                <span class="text-muted">Tidak ada file</span>
+                                    <span class="text-muted">Tidak ada file</span>
                                 @endif
                             </td>
-                            <td class="text-center">
+                            <td>
 
                                 {{-- Tombol Edit --}}
                                 <a href="{{ route('admin.transparansi.dokumen.edit', $item->id) }}" 
@@ -82,10 +81,11 @@
                                 </a>
 
                                 {{-- Tombol Hapus --}}
-                                <button class="btn btn-danger btn-sm btnHapus"
-                                    data-id="{{ $item->id }}">
-                                    Hapus
-                                </button>
+                                <form action="{{ route('admin.transparansi.dokumen.destroy', $item->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm btnHapus">Hapus</button>
+                                </form>
 
                             </td>
                         </tr>
@@ -110,7 +110,6 @@
 </div>
 @endsection
 
-
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -120,16 +119,19 @@
 Swal.fire({
     icon: 'success',
     title: 'Berhasil!',
-    text: '{{ session('success') }}'
+    text: '{{ session('success') }}',
+    timer: 2000,
+    showConfirmButton: false
 })
 </script>
 @endif
 
 <script>
-    // Hapus data
+    // Konfirmasi Hapus dengan SweetAlert
     document.querySelectorAll('.btnHapus').forEach(btn => {
-        btn.addEventListener('click', function () {
-            let id = this.dataset.id;
+        btn.addEventListener('click', function (e) {
+            e.preventDefault(); // hentikan submit form default
+            let form = this.closest('form'); // ambil form terdekat
 
             Swal.fire({
                 title: 'Hapus Dokumen?',
@@ -142,7 +144,7 @@ Swal.fire({
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "/admin/transparansi/dokumen/delete/" + id;
+                    form.submit(); // submit form jika dikonfirmasi
                 }
             });
         });

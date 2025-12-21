@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Struktur;
 use App\Http\Controllers\Controller;
 use App\Models\Bpd;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class BpdController extends Controller
 {
@@ -23,15 +22,28 @@ class BpdController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'foto' => 'required|image|max:4096', // max 4MB
+            'foto' => 'required|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
-        $foto = $request->file('foto')->store('struktural/bpd', 'public');
+        $foto = null;
 
-        Bpd::create(['foto' => $foto]);
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
 
-        return redirect()->route('admin.struktur.bpd.index')
-                         ->with('success', 'Foto BPD berhasil ditambahkan.');
+            // simpan ke PUBLIC
+            $file->move(public_path('uploads/struktur/bpd'), $filename);
+
+            $foto = 'uploads/struktur/bpd/' . $filename;
+        }
+
+        Bpd::create([
+            'foto' => $foto,
+        ]);
+
+        return redirect()
+            ->route('admin.struktur.bpd.index')
+            ->with('success', 'Foto BPD berhasil ditambahkan.');
     }
 
     public function edit(Bpd $bpd)
@@ -42,22 +54,37 @@ class BpdController extends Controller
     public function update(Request $request, Bpd $bpd)
     {
         $request->validate([
-            'foto' => 'nullable|image|max:4096',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ]);
 
         if ($request->hasFile('foto')) {
-            if ($bpd->foto) Storage::disk('public')->delete($bpd->foto);
-            $foto = $request->file('foto')->store('struktural/bpd', 'public');
-            $bpd->update(['foto' => $foto]);
+
+            // hapus foto lama
+            if ($bpd->foto && file_exists(public_path($bpd->foto))) {
+                unlink(public_path($bpd->foto));
+            }
+
+            $file = $request->file('foto');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+            $file->move(public_path('uploads/struktur/bpd'), $filename);
+
+            $bpd->update([
+                'foto' => 'uploads/struktur/bpd/' . $filename
+            ]);
         }
 
-        return redirect()->route('admin.struktur.bpd.index')
-                         ->with('success', 'Foto BPD berhasil diperbarui.');
+        return redirect()
+            ->route('admin.struktur.bpd.index')
+            ->with('success', 'Foto BPD berhasil diperbarui.');
     }
 
     public function destroy(Bpd $bpd)
     {
-        if ($bpd->foto) Storage::disk('public')->delete($bpd->foto);
+        if ($bpd->foto && file_exists(public_path($bpd->foto))) {
+            unlink(public_path($bpd->foto));
+        }
+
         $bpd->delete();
 
         return back()->with('success', 'Foto BPD berhasil dihapus.');

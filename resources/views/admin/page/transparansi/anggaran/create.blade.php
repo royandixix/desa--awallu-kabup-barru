@@ -85,10 +85,8 @@
             <label for="file" class="form-label">Upload Dokumen</label>
             <input type="file" id="file" name="file"
                    class="form-control @error('file') is-invalid @enderror"
-                   accept=".pdf,.doc,.docx,.xlsx,.png,.jpg,.jpeg">
-
-            <small class="text-muted d-block">Format: pdf, doc, docx, xlsx, png, jpg • Max: 10MB</small>
-
+                   accept=".pdf,.doc,.docx,.xlsx,.png,.jpg,.jpeg,.webp">
+            <small class="text-muted d-block">Format: pdf, doc, docx, xlsx, png, jpg, jpeg, webp • Max: 20MB</small>
             @error('file')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -101,10 +99,6 @@
 </div>
 @endsection
 
-
-{{-- ============================================================= --}}
-{{-- 💡 SCRIPT WAJIB DIMASUKKAN KE @push('scripts') BUKAN @section --}}
-{{-- ============================================================= --}}
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -120,9 +114,7 @@ Swal.fire({
 @endif
 
 <script>
-// ───────────────────────────────────────────────
-// KONFIRMASI SIMPAN
-// ───────────────────────────────────────────────
+// Konfirmasi Simpan
 document.getElementById('btnSimpan').addEventListener('click', function () {
     Swal.fire({
         title: 'Simpan Data?',
@@ -140,10 +132,7 @@ document.getElementById('btnSimpan').addEventListener('click', function () {
     });
 });
 
-
-// ───────────────────────────────────────────────
-// FORMAT RUPIAH KETIKA MENGETIK
-// ───────────────────────────────────────────────
+// Format Rupiah saat mengetik
 document.querySelectorAll('.rupiah').forEach(input => {
     input.addEventListener('input', function () {
         let angka = this.value.replace(/\D/g, "");
@@ -151,10 +140,7 @@ document.querySelectorAll('.rupiah').forEach(input => {
     });
 });
 
-
-// ───────────────────────────────────────────────
-// FORMAT RUPIAH KETIKA HALAMAN DIMUAT (old value)
-// ───────────────────────────────────────────────
+// Format Rupiah saat halaman dimuat
 document.querySelectorAll('.rupiah').forEach(input => {
     let angka = input.value.replace(/\D/g, "");
     if (angka) {
@@ -162,10 +148,7 @@ document.querySelectorAll('.rupiah').forEach(input => {
     }
 });
 
-
-// ───────────────────────────────────────────────
-// HAPUS TITIK SEBELUM SUBMIT (kirim angka murni)
-// ───────────────────────────────────────────────
+// Hapus titik sebelum submit
 document.getElementById('formTambah').addEventListener('submit', function () {
     document.querySelectorAll('.rupiah').forEach(input => {
         input.value = input.value.replace(/\./g, "");

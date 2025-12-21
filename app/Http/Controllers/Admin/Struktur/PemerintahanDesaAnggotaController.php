@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Struktur;
 use App\Http\Controllers\Controller;
 use App\Models\StrukturDesa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PemerintahanDesaAnggotaController extends Controller
 {
@@ -28,9 +27,13 @@ class PemerintahanDesaAnggotaController extends Controller
             'foto'    => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
-        $foto = $request->hasFile('foto')
-            ? $request->file('foto')->store('struktur', 'public')
-            : null;
+        $foto = null;
+        if ($request->hasFile('foto')) {
+            $file     = $request->file('foto');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $file->move(public_path('uploads/struktur'), $filename);
+            $foto = 'uploads/struktur/' . $filename;
+        }
 
         StrukturDesa::create([
             'kategori' => 'pemerintahan_desa',
@@ -59,11 +62,18 @@ class PemerintahanDesaAnggotaController extends Controller
             'foto'    => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
+        $foto = $item->foto;
+
         if ($request->hasFile('foto')) {
-            if ($item->foto) Storage::disk('public')->delete($item->foto);
-            $foto = $request->file('foto')->store('struktur', 'public');
-        } else {
-            $foto = $item->foto;
+            // Hapus file lama jika ada
+            if ($item->foto && file_exists(public_path($item->foto))) {
+                unlink(public_path($item->foto));
+            }
+
+            $file     = $request->file('foto');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $file->move(public_path('uploads/struktur'), $filename);
+            $foto = 'uploads/struktur/' . $filename;
         }
 
         $item->update([
@@ -80,7 +90,9 @@ class PemerintahanDesaAnggotaController extends Controller
     {
         $item = StrukturDesa::findOrFail($id);
 
-        if ($item->foto) Storage::disk('public')->delete($item->foto);
+        if ($item->foto && file_exists(public_path($item->foto))) {
+            unlink(public_path($item->foto));
+        }
 
         $item->delete();
 

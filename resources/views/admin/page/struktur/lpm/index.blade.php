@@ -30,7 +30,7 @@
             <div class="card shadow-sm hover-shadow">
                 <div class="card-body">
                     <p class="text-muted small mb-1">Total Gambar</p>
-                    <h2 class="fw-bold">{{ $lpms->count() }}</h2>
+                    <h2 class="fw-bold">{{ $lpms->total() }}</h2>
                 </div>
             </div>
         </div>
@@ -61,9 +61,9 @@
                     <tbody>
                         @forelse($lpms as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $loop->iteration + ($lpms->currentPage()-1) * $lpms->perPage() }}</td>
                             <td>
-                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar LPM" class="img-fluid rounded" style="max-height: 120px;">
+                                <img src="{{ asset($item->gambar) }}" alt="Gambar LPM" class="img-fluid rounded" style="max-height: 120px;">
                             </td>
                             <td class="text-center">
                                 <a href="{{ route('admin.struktur.lpm.edit', $item->id) }}" class="btn btn-warning btn-sm me-1 btn-edit">
@@ -86,6 +86,11 @@
                         @endforelse
                     </tbody>
                 </table>
+
+                {{-- Pagination --}}
+                <div class="mt-3">
+                    {{ $lpms->links('vendor.pagination.bootstrap-4') }}
+                </div>
             </div>
         </div>
     </div>

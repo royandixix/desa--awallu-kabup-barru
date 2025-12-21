@@ -28,6 +28,11 @@
             @enderror
         </div>
 
+        {{-- Preview Gambar --}}
+        <div class="mb-3 text-center">
+            <img id="previewImage" src="#" alt="Preview" class="img-fluid rounded shadow-sm d-none" style="max-width: 250px;">
+        </div>
+
         {{-- Tombol --}}
         <div class="mt-4 d-flex gap-2">
             <button type="button" id="btnSimpanLPM" class="btn btn-primary">
@@ -46,6 +51,19 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+{{-- Preview Gambar --}}
+<script>
+document.getElementById('gambar').addEventListener('change', function(event) {
+    let reader = new FileReader();
+    reader.onload = function() {
+        let preview = document.getElementById('previewImage');
+        preview.src = reader.result;
+        preview.classList.remove('d-none');
+    };
+    reader.readAsDataURL(event.target.files[0]);
+});
+</script>
+
 {{-- Sweetalert Success --}}
 @if (session('success'))
 <script>
@@ -59,8 +77,8 @@ Swal.fire({
 </script>
 @endif
 
+{{-- Konfirmasi Simpan --}}
 <script>
-// Konfirmasi Simpan
 document.getElementById('btnSimpanLPM').addEventListener('click', function () {
     Swal.fire({
         title: 'Simpan Gambar?',

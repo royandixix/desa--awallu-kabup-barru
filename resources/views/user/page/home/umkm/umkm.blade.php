@@ -1,100 +1,182 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
     <!-- Header -->
-    <div class="text-center mb-12 opacity-0 translate-y-6" id="header-section">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Beli Dari Desa</h1>
+    <div class="text-center mb-16 opacity-0 translate-y-6" id="header-section">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Dipercaya oleh UMKM Desa di Seluruh Indonesia
+        </h1>
         <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-            Layanan yang disediakan untuk promosi produk UMKM Desa sehingga mampu meningkatkan perekonomian masyarakat
-            Desa.
+            Bergabunglah dengan ribuan UMKM dan pengusaha desa di seluruh negeri.
         </p>
     </div>
 
-    <!-- Grid Produk -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8">
-        @foreach ($umkms as $index => $umkm)
+    <!-- Grid Produk dengan Style Testimoni -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        @forelse ($umkms as $index => $umkm)
             <a href="{{ route('user.umkm.detail', ['id' => $umkm->id]) }}"
-                class="pilar-card overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 opacity-0 translate-y-8 group cursor-pointer block"
+                class="umkm-card group block opacity-0 translate-y-8"
                 style="animation-delay: {{ $index * 100 }}ms">
-                <div class="relative">
-                    <img src="{{ $umkm->foto ? asset('storage/' . $umkm->foto) : asset('images/default.png') }}"
-                        alt="{{ $umkm->nama_usaha }}"
-                        class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="p-6 bg-transparent">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900 truncate">{{ $umkm->nama_usaha }}</h3>
-                        @if (isset($umkm->harga))
-                            <p class="text-gray-700 font-semibold mb-4">
-                                Rp{{ number_format($umkm->harga, 0, ',', '.') }}
-                            </p>
-                        @endif
-                        <span
-                            class="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 font-medium">
-                            UMKM Desa
-                        </span>
+                
+                <div class="h-full rounded-2xl overflow-hidden transition-all duration-500 
+                    {{ $index % 3 == 0 ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white' : 'bg-white border border-gray-200' }}
+                    hover:shadow-2xl hover:-translate-y-2">
+                    
+                    <!-- Image Section -->
+                    <div class="relative overflow-hidden">
+                        <img src="{{ $umkm->foto ? asset($umkm->foto) : asset('images/default.png') }}"
+                            alt="{{ $umkm->nama_usaha }}"
+                            class="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110">
+                        
+                        <!-- Overlay Gradient -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    </div>
+
+                    <!-- Content Section -->
+                    <div class="p-6 relative">
+                        <!-- Quote/Description -->
+                        <div class="mb-6">
+                            @if($umkm->deskripsi)
+                                <p class="{{ $index % 3 == 0 ? 'text-gray-200' : 'text-gray-700' }} text-base leading-relaxed line-clamp-3">
+                                    "{{ Str::limit($umkm->deskripsi, 150) }}"
+                                </p>
+                            @else
+                                <p class="{{ $index % 3 == 0 ? 'text-gray-200' : 'text-gray-700' }} text-base leading-relaxed">
+                                    "Produk berkualitas dari UMKM lokal yang mendukung perekonomian desa."
+                                </p>
+                            @endif
+                        </div>
+
+                        <!-- Business Name & Price -->
+                        <div class="mb-4">
+                            <h3 class="{{ $index % 3 == 0 ? 'text-white' : 'text-gray-900' }} text-xl font-bold mb-2">
+                                {{ $umkm->nama_usaha }}
+                            </h3>
+                            @if (!empty($umkm->harga))
+                                <p class="{{ $index % 3 == 0 ? 'text-green-400' : 'text-green-600' }} text-lg font-semibold">
+                                    Rp{{ number_format($umkm->harga, 0, ',', '.') }}
+                                </p>
+                            @endif
+                        </div>
+
+                        <!-- Owner Info -->
+                        <div class="flex items-center justify-between pt-4 border-t {{ $index % 3 == 0 ? 'border-gray-700' : 'border-gray-200' }}">
+                            <div class="flex items-center gap-3">
+                                @if($umkm->foto_pengusaha)
+                                    <img src="{{ asset($umkm->foto_pengusaha) }}"
+                                        alt="{{ $umkm->nama_pengusaha }}"
+                                        class="w-12 h-12 rounded-full object-cover border-2 {{ $index % 3 == 0 ? 'border-gray-600' : 'border-gray-300' }} shadow-md">
+                                @else
+                                    <div class="w-12 h-12 rounded-full {{ $index % 3 == 0 ? 'bg-gray-700' : 'bg-gray-200' }} flex items-center justify-center">
+                                        <svg class="w-6 h-6 {{ $index % 3 == 0 ? 'text-gray-400' : 'text-gray-500' }}" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                @endif
+                                
+                                <div>
+                                    <p class="{{ $index % 3 == 0 ? 'text-white' : 'text-gray-900' }} font-semibold text-sm">
+                                        {{ $umkm->nama_pengusaha ?? 'Pengusaha Lokal' }}
+                                    </p>
+                                    <p class="{{ $index % 3 == 0 ? 'text-gray-400' : 'text-gray-500' }} text-xs">
+                                        Pemilik, {{ $umkm->nama_usaha }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Badge -->
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
+                                {{ $index % 3 == 0 ? 'bg-green-500/20 text-green-300' : 'bg-green-100 text-green-800' }}">
+                                UMKM
+                            </span>
+                        </div>
                     </div>
                 </div>
             </a>
-        @endforeach
-
-        @if ($umkms->isEmpty())
-            <p class="col-span-1 sm:col-span-2 md:col-span-3 text-center text-gray-500 mt-8">
-                Belum ada UMKM tersedia
-            </p>
-        @endif
+        @empty
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                    <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">Belum Ada UMKM</h3>
+                <p class="text-gray-500">Saat ini belum ada produk UMKM yang tersedia.</p>
+            </div>
+        @endforelse
     </div>
 
-    <!-- Lihat Selengkapnya -->
-    <div class="text-center mt-6">
+    <!-- CTA Button -->
+    <div class="text-center mt-12">
         <a href="{{ route('user.umkm.umkm_selengkap_nyh') }}"
-           class="inline-block px-6 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold shadow-lg transition duration-300">
-           Lihat Selengkapnya
+            class="inline-flex items-center gap-2 px-8 py-4 rounded-full 
+            bg-gray-900 hover:bg-gray-800 text-white font-semibold 
+            shadow-xl hover:shadow-2xl transition-all duration-300 
+            hover:-translate-y-1 group">
+            <span>Lihat Selengkapnya</span>
+            <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
         </a>
     </div>
+
 </div>
 
-<!-- 🌈 STYLE -->
+<!-- STYLES -->
 <style>
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .pilar-card {
+@keyframes fadeInUp {
+    from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(40px);
     }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-    .fade-in-up {
-        animation: fadeInUp 0.8s ease-out forwards;
-    }
+.umkm-card {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Smooth line clamp */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 </style>
 
-<!-- ⚙️ SCRIPT ANIMASI -->
+<!-- SCRIPTS -->
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+document.addEventListener("DOMContentLoaded", () => {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
 
-        const header = document.getElementById('header-section');
-        if (header) observer.observe(header);
+    // Animate header
+    const header = document.getElementById('header-section');
+    if (header) observer.observe(header);
 
-        const pilarCards = document.querySelectorAll('.pilar-card');
-        pilarCards.forEach((card, index) => setTimeout(() => observer.observe(card), index * 100));
+    // Animate cards with stagger effect
+    const umkmCards = document.querySelectorAll('.umkm-card');
+    umkmCards.forEach((card, index) => {
+        setTimeout(() => observer.observe(card), index * 50);
     });
+});
 </script>

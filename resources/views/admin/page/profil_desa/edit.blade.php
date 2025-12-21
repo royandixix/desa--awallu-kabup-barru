@@ -99,7 +99,11 @@
                        value="{{ old('koordinat', $item->koordinat) }}">
             </div>
 
-            <div class="col-md-12 mb-3" id="preview-maps"></div>
+            <div class="col-md-12 mb-3" id="preview-maps">
+                @if($item->koordinat)
+                    <iframe src="{{ $item->koordinat }}" width="100%" height="250" style="border:0;" loading="lazy"></iframe>
+                @endif
+            </div>
 
             {{-- GAMBAR --}}
             <div class="col-md-12 mb-3">
@@ -107,6 +111,7 @@
                 <input type="file" id="gambar_header" name="gambar_header[]" class="form-control" multiple>
             </div>
 
+            {{-- PREVIEW GAMBAR BARU --}}
             <div class="col-md-12" id="preview"></div>
 
             {{-- GAMBAR LAMA --}}
@@ -133,7 +138,6 @@
 {{-- SWEET ALERT --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-{{-- SWEET ALERT SUCCESS --}}
 @if (session('success'))
 <script>
 Swal.fire({
@@ -145,12 +149,8 @@ Swal.fire({
 </script>
 @endif
 
-
 <script>
-
-    // ============================
     // KONFIRMASI SIMPAN
-    // ============================
     document.getElementById('btnSimpan').addEventListener('click', function(){
         Swal.fire({
             title: 'Yakin Simpan Perubahan?',
@@ -168,10 +168,7 @@ Swal.fire({
         })
     });
 
-
-    // ============================
     // PREVIEW GAMBAR BARU
-    // ============================
     document.getElementById('gambar_header').addEventListener('change', function(event) {
         const preview = document.getElementById('preview');
         preview.innerHTML = '';
@@ -185,31 +182,24 @@ Swal.fire({
                 img.style.height = '100px';
                 img.style.objectFit = 'cover';
                 img.style.marginRight = '5px';
+                img.style.marginBottom = '5px';
                 preview.appendChild(img);
             };
             reader.readAsDataURL(file);
         });
     });
 
-
-    // ============================
     // KONVERSI GOOGLE MAPS
-    // ============================
     function convertToEmbed(url) {
-
+        if (!url) return '';
         if (url.includes("google.com/maps/embed")) return url;
-
-        if (url.includes("maps.app.goo.gl")) {
-            return url.replace("maps.app.goo.gl", "www.google.com/maps");
-        }
+        if (url.includes("maps.app.goo.gl")) return url.replace("maps.app.goo.gl", "www.google.com/maps");
 
         const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
         const match = url.match(regex);
-
         if (match) {
             return `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d0!2d${match[2]}!3d${match[1]}`;
         }
-
         return url;
     }
 
@@ -220,15 +210,10 @@ Swal.fire({
         let url = this.value.trim();
         if (url.length > 3) {
             let embedUrl = convertToEmbed(url);
-            previewMaps.innerHTML = `
-                <iframe src="${embedUrl}"
-                    width="100%" height="250" style="border:0;" loading="lazy"></iframe>
-            `;
+            previewMaps.innerHTML = `<iframe src="${embedUrl}" width="100%" height="250" style="border:0;" loading="lazy"></iframe>`;
         } else {
             previewMaps.innerHTML = '';
         }
     });
-
 </script>
-
 @endsection

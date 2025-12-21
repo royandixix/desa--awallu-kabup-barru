@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container py-4">
-
     <h3 class="mb-4">Tambah UMKM Baru</h3>
     <p class="text-muted mb-3">Masukkan informasi UMKM desa.</p>
 
@@ -111,7 +110,7 @@
             <label for="kode_umkm" class="form-label">Kode UMKM</label>
             <input type="text" id="kode_umkm" name="kode_umkm"
                 class="form-control @error('kode_umkm') is-invalid @enderror"
-                value="{{ old('kode_umkm') }}" placeholder="UMKM001">
+                value="{{ old('kode_umkm') }}" placeholder="UMKM001" required>
             @error('kode_umkm')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -120,7 +119,6 @@
         {{-- Tombol --}}
         <button type="button" id="btnSimpan" class="btn btn-primary">Simpan UMKM</button>
         <a href="{{ route('admin.home.umkm.index') }}" class="btn btn-secondary">Batal</a>
-
     </form>
 </div>
 @endsection
@@ -161,11 +159,7 @@ document.getElementById('btnSimpan').addEventListener('click', function() {
 const hargaInput = document.getElementById('harga');
 hargaInput.addEventListener('input', function() {
     let value = this.value.replace(/\D/g,'');
-    if(value){
-        this.value = 'Rp ' + parseInt(value).toLocaleString('id-ID');
-    } else {
-        this.value = '';
-    }
+    this.value = value ? 'Rp ' + parseInt(value).toLocaleString('id-ID') : '';
 });
 
 // Preview Foto UMKM

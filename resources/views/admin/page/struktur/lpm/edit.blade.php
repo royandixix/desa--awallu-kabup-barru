@@ -21,7 +21,7 @@
         <div class="mb-3">
             <label class="form-label fw-semibold d-block">Gambar Saat Ini</label>
             @if($lpm->gambar)
-                <img src="{{ asset('storage/' . $lpm->gambar) }}" class="img-fluid rounded mb-2" style="max-height: 200px;">
+                <img src="{{ asset('uploads/lpm/' . $lpm->gambar) }}" class="img-fluid rounded mb-2" style="max-height: 200px;">
             @else
                 <p class="text-muted">Tidak ada gambar.</p>
             @endif
@@ -35,6 +35,11 @@
             @error('gambar')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
+        </div>
+
+        {{-- Preview Gambar Baru --}}
+        <div class="mb-3 text-center">
+            <img id="previewImage" src="#" alt="Preview" class="img-fluid rounded shadow-sm d-none" style="max-width: 250px;">
         </div>
 
         {{-- Tombol --}}
@@ -55,6 +60,19 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+{{-- Preview Gambar Baru --}}
+<script>
+document.getElementById('gambar').addEventListener('change', function(event) {
+    let reader = new FileReader();
+    reader.onload = function() {
+        let preview = document.getElementById('previewImage');
+        preview.src = reader.result;
+        preview.classList.remove('d-none');
+    };
+    reader.readAsDataURL(event.target.files[0]);
+});
+</script>
+
 {{-- Sweetalert Success --}}
 @if(session('success'))
 <script>
@@ -68,8 +86,8 @@ Swal.fire({
 </script>
 @endif
 
+{{-- Konfirmasi Update --}}
 <script>
-// Konfirmasi Update
 document.getElementById('btnUpdateLPM').addEventListener('click', function() {
     Swal.fire({
         title: 'Update Gambar?',

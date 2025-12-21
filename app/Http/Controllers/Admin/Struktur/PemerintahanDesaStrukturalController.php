@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Struktur;
 use App\Http\Controllers\Controller;
 use App\Models\StrukturDesa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PemerintahanDesaStrukturalController extends Controller
 {
@@ -26,11 +25,17 @@ class PemerintahanDesaStrukturalController extends Controller
             'foto' => 'required|image|max:4096', // Max 4MB
         ]);
 
-        $foto = $request->file('foto')->store('struktur', 'public');
+        $foto = null;
+        if ($request->hasFile('foto')) {
+            $file     = $request->file('foto');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $file->move(public_path('uploads/struktur'), $filename);
+            $foto = 'uploads/struktur/' . $filename;
+        }
 
         StrukturDesa::create([
             'kategori' => 'pemerintahan_desa_bagan',
-            'foto' => $foto,
+            'foto'     => $foto,
         ]);
 
         return redirect()->route('admin.struktur.pemerintahan_desa.struktural.index')
@@ -43,8 +48,6 @@ class PemerintahanDesaStrukturalController extends Controller
         return view('admin.page.struktur.pemerintahan_desa.struktural.edit', compact('bagan'));
     }
 
-
-
     public function update(Request $request, $id)
     {
         $bagan = StrukturDesa::findOrFail($id);
@@ -53,11 +56,18 @@ class PemerintahanDesaStrukturalController extends Controller
             'foto' => 'nullable|image|max:4096',
         ]);
 
+        $foto = $bagan->foto;
+
         if ($request->hasFile('foto')) {
-            if ($bagan->foto) Storage::disk('public')->delete($bagan->foto);
-            $foto = $request->file('foto')->store('struktur', 'public');
-        } else {
-            $foto = $bagan->foto;
+            // Hapus file lama jika ada
+            if ($bagan->foto && file_exists(public_path($bagan->foto))) {
+                unlink(public_path($bagan->foto));
+            }
+
+            $file     = $request->file('foto');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            $file->move(public_path('uploads/struktur'), $filename);
+            $foto = 'uploads/struktur/' . $filename;
         }
 
         $bagan->update([
@@ -72,12 +82,12 @@ class PemerintahanDesaStrukturalController extends Controller
     {
         $bagan = StrukturDesa::findOrFail($id);
 
-        if ($bagan->foto) Storage::disk('public')->delete($bagan->foto);
+        if ($bagan->foto && file_exists(public_path($bagan->foto))) {
+            unlink(public_path($bagan->foto));
+        }
 
         $bagan->delete();
 
         return back()->with('success', 'Bagan berhasil dihapus.');
     }
-  
-    
 }

@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<!-- Tambahkan ID di sini agar tombol scroll berfungsi -->
+<!-- Tambahkan ID agar tombol scroll bisa target -->
 <section id="posyandu-section" class="bg-gray-50 py-16 text-[18px]">
     <div class="container mx-auto px-8 max-w-7xl">
 
@@ -18,14 +18,37 @@
             Berikut adalah gambar-gambar Posyandu yang tersedia.
         </p>
 
-        <!-- GAMBAR STRUKTUR DARI DATABASE -->
+        <!-- GAMBAR POSYANDU BESAR UTUH -->
+        @php
+            $firstPosyandu = $posyandus->first();
+            $firstPath = $firstPosyandu ? public_path('uploads/posyandu/'.$firstPosyandu->gambar) : null;
+        @endphp
+
+        @if($firstPosyandu && $firstPosyandu->gambar && file_exists($firstPath))
+            <img 
+                src="{{ asset('uploads/posyandu/'.$firstPosyandu->gambar) }}" 
+                alt="Foto POSYANDU"
+                class="w-full h-auto mb-14 rounded shadow"
+            />
+        @else
+            <p class="text-center text-gray-500 mb-14">Belum ada foto Posyandu.</p>
+        @endif
+
+        <!-- GRID GAMBAR POSYANDU LAINNYA (opsional) -->
         @if($posyandus->count() > 0)
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($posyandus as $item)
+                    {{-- Lewati foto pertama yang sudah ditampilkan besar --}}
+                    @if($loop->first) @continue @endif
+
+                    @php
+                        $path = public_path('uploads/posyandu/'.$item->gambar);
+                    @endphp
+
                     <div class="bg-white rounded shadow p-3 hover:shadow-lg transition">
-                        @if($item->foto)
-                            <a href="{{ asset('storage/'.$item->foto) }}" target="_blank">
-                                <img src="{{ asset('storage/'.$item->foto) }}" alt="Foto Posyandu"
+                        @if($item->gambar && file_exists($path))
+                            <a href="{{ asset('uploads/posyandu/'.$item->gambar) }}" target="_blank">
+                                <img src="{{ asset('uploads/posyandu/'.$item->gambar) }}" alt="Foto Posyandu"
                                      class="w-full h-64 object-cover rounded mb-2">
                             </a>
                         @else
@@ -41,10 +64,6 @@
             <div class="flex justify-center mt-10">
                 {{ $posyandus->links('vendor.pagination.tailwind') }}
             </div>
-        @else
-            <p class="text-center text-gray-500">
-                Belum ada foto Posyandu yang diunggah.
-            </p>
         @endif
 
     </div>

@@ -5,16 +5,30 @@ namespace App\Http\Controllers\Admin\Transparansi;
 use App\Http\Controllers\Controller;
 use App\Models\TransparansiAnggaran;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class AnggaranController extends Controller
 {
+    protected $path;
+
+    public function __construct()
+    {
+        // Path folder upload langsung di public
+        $this->path = public_path('uploads/transparansi_anggaran');
+
+        // Buat folder jika belum ada
+        if (!File::exists($this->path)) {
+            File::makeDirectory($this->path, 0755, true);
+        }
+    }
+
     // ==========================
     // INDEX
     // ==========================
     public function index()
     {
-        $anggarans = TransparansiAnggaran::latest()->paginate(10); // Pagination optional
+        $anggarans = TransparansiAnggaran::latest()->paginate(10);
         return view('admin.page.transparansi.anggaran.index', compact('anggarans'));
     }
 
@@ -31,9 +45,9 @@ class AnggaranController extends Controller
     // ==========================
     public function store(Request $request)
     {
-        // Hapus format titik ribuan (1.000.000 → 1000000)
+        // Hapus titik ribuan untuk pemasukan & pengeluaran
         $request->merge([
-            'pemasukan'   => $request->pemasukan ? str_replace('.', '', $request->pemasukan) : null,
+            'pemasukan' => $request->pemasukan ? str_replace('.', '', $request->pemasukan) : null,
             'pengeluaran' => $request->pengeluaran ? str_replace('.', '', $request->pengeluaran) : null,
         ]);
 
@@ -50,9 +64,12 @@ class AnggaranController extends Controller
             'file.mimes' => 'Format file harus PDF, DOC, DOCX, XLSX, PNG, JPG, JPEG, atau WEBP'
         ]);
 
-        // Upload file jika ada
+        // Upload file ke public jika ada
         if ($request->hasFile('file')) {
-            $data['file'] = $request->file('file')->store('uploads/transparansi_anggaran', 'public');
+            $file = $request->file('file');
+            $filename = time() . '_' . Str::slug($request->judul) . '.' . $file->getClientOriginalExtension();
+            $file->move($this->path, $filename);
+            $data['file'] = $filename;
         }
 
         TransparansiAnggaran::create($data);
@@ -76,7 +93,7 @@ class AnggaranController extends Controller
     {
         // Hapus titik ribuan
         $request->merge([
-            'pemasukan'   => $request->pemasukan ? str_replace('.', '', $request->pemasukan) : $anggaran->pemasukan,
+            'pemasukan' => $request->pemasukan ? str_replace('.', '', $request->pemasukan) : $anggaran->pemasukan,
             'pengeluaran' => $request->pengeluaran ? str_replace('.', '', $request->pengeluaran) : $anggaran->pengeluaran,
         ]);
 
@@ -93,7 +110,7 @@ class AnggaranController extends Controller
             'file.mimes' => 'Format file harus PDF, DOC, DOCX, XLSX, PNG, JPG, JPEG, atau WEBP'
         ]);
 
-        // Hanya update field yang diisi
+        // Update field yang ada
         foreach ($data as $key => $value) {
             if ($value !== null) {
                 $anggaran->$key = $value;
@@ -102,11 +119,15 @@ class AnggaranController extends Controller
 
         // Upload file baru jika ada
         if ($request->hasFile('file')) {
-            // Hapus file lama
-            if ($anggaran->file && Storage::disk('public')->exists($anggaran->file)) {
-                Storage::disk('public')->delete($anggaran->file);
+            // Hapus file lama jika ada
+            if ($anggaran->file && File::exists($this->path . '/' . $anggaran->file)) {
+                File::delete($this->path . '/' . $anggaran->file);
             }
-            $anggaran->file = $request->file('file')->store('uploads/transparansi_anggaran', 'public');
+
+            $file = $request->file('file');
+            $filename = time() . '_' . Str::slug($request->judul) . '.' . $file->getClientOriginalExtension();
+            $file->move($this->path, $filename);
+            $anggaran->file = $filename;
         }
 
         $anggaran->save();
@@ -120,8 +141,8 @@ class AnggaranController extends Controller
     // ==========================
     public function destroy(TransparansiAnggaran $anggaran)
     {
-        if ($anggaran->file && Storage::disk('public')->exists($anggaran->file)) {
-            Storage::disk('public')->delete($anggaran->file);
+        if ($anggaran->file && File::exists($this->path . '/' . $anggaran->file)) {
+            File::delete($this->path . '/' . $anggaran->file);
         }
 
         $anggaran->delete();

@@ -21,6 +21,17 @@
             @enderror
         </div>
 
+        {{-- Deskripsi --}}
+        <div class="mb-3">
+            <label for="deskripsi" class="form-label fw-semibold">Deskripsi Laporan</label>
+            <textarea id="deskripsi" name="deskripsi" rows="4"
+                class="form-control @error('deskripsi') is-invalid @enderror" required>{{ old('deskripsi') }}</textarea>
+            <small class="text-muted d-block">Tuliskan keterangan lengkap terkait laporan kegiatan.</small>
+            @error('deskripsi')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
         {{-- Lokasi --}}
         <div class="mb-3">
             <label for="lokasi" class="form-label fw-semibold">Lokasi</label>
@@ -62,11 +73,11 @@
             @enderror
         </div>
 
-        {{-- File PDF --}}
+        {{-- File PDF/DOC --}}
         <div class="mb-3">
-            <label for="file_path" class="form-label fw-semibold">Upload Berkas PDF (Opsional)</label>
-            <input type="file" id="file_path" name="file_path" class="form-control @error('file_path') is-invalid @enderror" accept=".pdf">
-            <small class="text-muted d-block">Abaikan jika tidak ingin menambahkan berkas PDF.</small>
+            <label for="file_path" class="form-label fw-semibold">Upload Berkas PDF/DOC (Opsional)</label>
+            <input type="file" id="file_path" name="file_path" class="form-control @error('file_path') is-invalid @enderror" accept=".pdf,.doc,.docx">
+            <small class="text-muted d-block">Abaikan jika tidak ingin menambahkan berkas.</small>
             @error('file_path')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror

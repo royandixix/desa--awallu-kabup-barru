@@ -24,14 +24,15 @@
             @if (isset($laporanKegiatan) && $laporanKegiatan->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach ($laporanKegiatan as $laporan)
-                        <div class="overflow-hidden">
+                        <div class="overflow-hidden rounded-md shadow-md bg-white">
                             <!-- Image -->
                             <div class="relative h-64">
                                 @if ($laporan->foto)
-                                    <img src="{{ asset('storage/' . $laporan->foto) }}" alt="{{ $laporan->judul }}"
-                                        class="w-full h-full object-cover rounded-md">
+                                    <img src="{{ asset('uploads/laporan/foto/' . $laporan->foto) }}" 
+                                        alt="{{ $laporan->judul }}"
+                                        class="w-full h-full object-cover rounded-t-md">
                                 @else
-                                    <div class="w-full h-full flex items-center justify-center bg-gray-200 rounded-md">
+                                    <div class="w-full h-full flex items-center justify-center bg-gray-200 rounded-t-md">
                                         <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -43,7 +44,7 @@
                             </div>
 
                             <!-- Content -->
-                            <div class="mt-4 text-left text-gray-800">
+                            <div class="p-4 text-left text-gray-800">
                                 <h3 class="text-xl font-bold mb-2">{{ $laporan->judul }}</h3>
 
                                 <div class="space-y-1 text-sm text-gray-700">
@@ -78,30 +79,27 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
-                                        <span>Tanggal:
-                                            {{ \Carbon\Carbon::parse($laporan->tanggal)->format('Y-m-d') }}</span>
+                                        <span>Tanggal: {{ \Carbon\Carbon::parse($laporan->tanggal)->format('Y-m-d') }}</span>
                                     </p>
                                 </div>
 
                                 <!-- Action Buttons -->
                                 <div class="flex gap-2 mt-3">
-                                    <!-- Lihat Berkas -->
+                                    <!-- Lihat Detail -->
                                     <a href="{{ route('user.laporan.detail', $laporan->id) }}"
                                         class="flex items-center gap-2 px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 transition-colors duration-200">
-                                        <!-- Heroicon: Document -->
                                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M7 7h10M7 11h10M7 15h7m-4 4h4a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                         </svg>
-                                            lihat lanjut 
+                                        Lihat Lanjut
                                     </a>
 
-                                    <!-- Download -->
+                                    <!-- Download File -->
                                     @if ($laporan->file_path)
-                                        <a href="{{ asset('storage/' . $laporan->file_path) }}" download
+                                        <a href="{{ asset('uploads/laporan/file/' . $laporan->file_path) }}" download
                                             class="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white font-semibold rounded hover:bg-teal-700 transition-colors duration-200">
-                                            <!-- Heroicon: Download -->
                                             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

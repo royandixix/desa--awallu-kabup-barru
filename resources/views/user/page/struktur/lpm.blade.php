@@ -21,7 +21,7 @@
         @forelse($lpms ?? [] as $item)
             <div class="mb-14">
                 <img 
-                    src="{{ asset('storage/' . ($item->gambar ?? 'default.png')) }}" 
+                    src="{{ asset($item->gambar ?? 'uploads/lpm/default.png') }}" 
                     alt="Struktur LPM"
                     class="w-full h-auto rounded-none shadow-lg"
                 />

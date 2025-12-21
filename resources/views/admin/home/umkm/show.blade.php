@@ -12,7 +12,7 @@
         {{-- Foto Usaha --}}
         <div>
             @if($umkm->foto)
-                <img src="{{ asset('images/' . $umkm->foto) }}" alt="{{ $umkm->nama_usaha }}" class="w-full h-80 object-cover rounded shadow-md">
+                <img src="{{ asset('uploads/' . $umkm->foto) }}" alt="{{ $umkm->nama_usaha }}" class="w-full h-80 object-cover rounded shadow-md">
             @else
                 <div class="w-full h-80 flex items-center justify-center bg-gray-100 text-gray-400 rounded shadow-md">
                     Tidak ada gambar

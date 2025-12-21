@@ -36,12 +36,18 @@
                 
                 <!-- Image Container -->
                 <div class="relative aspect-[4/3] overflow-hidden bg-gray-100">
-                    <img src="{{ $umkm->foto ? asset('storage/'.$umkm->foto) : asset('images/default.png') }}" 
+                    <img src="{{ $umkm->foto ? asset($umkm->foto) : asset('images/default.png') }}" 
                          alt="{{ $umkm->nama_usaha ?? 'UMKM Desa' }}"
                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    
-                    <!-- Overlay on Hover -->
-                    
+
+                    {{-- Optional: foto pengusaha kecil di pojok --}}
+                    @if($umkm->foto_pengusaha)
+                        <div class="absolute top-2 right-2">
+                            <img src="{{ asset($umkm->foto_pengusaha) }}"
+                                 alt="{{ $umkm->nama_pengusaha }}"
+                                 class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-md">
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Content Container -->
@@ -52,7 +58,7 @@
                     </h3>
 
                     <!-- Harga -->
-                    @if(isset($umkm->harga))
+                    @if(!empty($umkm->harga))
                         <p class="text-lg font-semibold text-gray-800 mb-3">
                             Rp{{ number_format($umkm->harga, 0, ',', '.') }}
                         </p>

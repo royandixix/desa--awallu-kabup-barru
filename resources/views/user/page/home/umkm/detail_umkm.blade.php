@@ -3,7 +3,7 @@
 
 {{-- Optional: Header khusus untuk UMKM --}}
 @section('header_layanan')
-    @include('user.partials.header_umkm') {{-- pastikan kamu punya partial ini --}}
+    @include('user.partials.header_umkm')
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
             <!-- Left Side: Foto UMKM -->
             <div class="flex justify-center lg:justify-start" data-aos="fade-right">
                 <div class="relative w-80 h-96 bg-white rounded-2xl shadow-2xl overflow-hidden hover:scale-105 transition-transform duration-300">
-                    <img src="{{ $umkm->foto ? asset('storage/' . $umkm->foto) : asset('images/default.png') }}"
+                    <img src="{{ $umkm->foto ? asset($umkm->foto) : asset('images/default.png') }}"
                         alt="{{ $umkm->nama_usaha }}" class="w-full h-full object-cover">
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 <a href="https://wa.me/{{ $umkm->kontak }}" target="_blank"
                    class="inline-flex items-center px-6 py-3 mb-4 rounded-full bg-green-500 hover:bg-green-600 text-white font-semibold shadow-lg transition duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12.04 2C6.48 2 2 6.48 2 12.04c0 2.13.63 4.1 1.71 5.74L2 22l4.44-1.69c1.58 1.05 3.53 1.69 5.6 1.69C17.6 22 22 17.52 22 12.04S17.6 2 12.04 2zm6.57 15.6c-.28.77-1.65 1.44-2.27 1.52-.6.08-1.34.11-2.48-.22-3.02-.83-4.96-3.66-5.12-3.85-.16-.18-1.3-1.66-1.3-3.17 0-1.5.78-2.24 1.05-2.55.28-.31.6-.38.8-.38.2 0 .38 0 .55.01.18.01.4-.07.63.48.23.54.78 1.86.85 1.99.07.13.12.29.02.46-.1.17-.15.28-.3.44-.15.15-.32.34-.46.45-.15.12-.3.27-.12.53.18.27.8 1.33 1.72 2.15 1.18 1.13 2.16 1.5 2.47 1.67.31.17.49.14.67-.09.18-.23.77-.9.97-1.21.2-.31.4-.26.66-.16.26.1 1.63.77 1.91.91.28.14.46.21.53.33.08.12.08.68-.2 1.45z"/>
+                        <path d="M12.04 2C6.48 2 2 6.48 2 12.04c0 2.13.63 4.10 1.71 5.74L2 22l4.44-1.69c1.58 1.05 3.53 1.69 5.60 1.69C17.60 22 22 17.52 22 12.04S17.60 2 12.04 2zm6.57 15.60c-.28.77-1.65 1.44-2.27 1.52-.60.08-1.34.11-2.48-.22-3.02-.83-4.96-3.66-5.12-3.85-.16-.18-1.30-1.66-1.30-3.17 0-1.50.78-2.24 1.05-2.55.28-.31.60-.38.80-.38.20 0 .38 0 .55.01.18.01.40-.07.63.48.23.54.78 1.86.85 1.99.07.13.12.29.02.46-.10.17-.15.28-.30.44-.15.15-.32.34-.46.45-.15.12-.30.27-.12.53.18.27.80 1.33 1.72 2.15 1.18 1.13 2.16 1.50 2.47 1.67.31.17.49.14.67-.09.18-.23.77-.90.97-1.21.20-.31.40-.26.66-.16.26.10 1.63.77 1.91.91.28.14.46.21.53.33.08.12.08.68-.20 1.45z"/>
                     </svg>
                     Hubungi via WhatsApp
                 </a>
@@ -51,5 +51,4 @@
         </div>
     </div>
 </div>
-
 @endsection

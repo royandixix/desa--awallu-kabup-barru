@@ -22,37 +22,34 @@ class LaporanController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'judul'     => 'required|string|max:255',
-            'lokasi'    => 'required|string|max:255',
-            'anggaran'  => 'nullable|string', // ubah jadi string dulu
-            'tanggal'   => 'required|date',
-            'foto'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'file_path' => 'nullable|mimes:pdf,doc,docx|max:4096',
-        ], [
-            'judul.required'     => 'Judul wajib diisi.',
-            'lokasi.required'    => 'Lokasi wajib diisi.',
-            'tanggal.required'   => 'Tanggal wajib diisi.',
-            'tanggal.date'       => 'Tanggal tidak valid.',
-            'foto.image'         => 'Foto harus berupa gambar.',
-            'foto.mimes'         => 'Foto harus berekstensi: jpg, jpeg, png, webp.',
-            'foto.max'           => 'Ukuran foto maksimal 2MB.',
-            'file_path.mimes'    => 'File harus berekstensi: pdf, doc, docx.',
-            'file_path.max'      => 'Ukuran file maksimal 4MB.',
+            'judul'       => 'required|string|max:255',
+            'deskripsi'   => 'required|string',
+            'lokasi'      => 'required|string|max:255',
+            'anggaran'    => 'nullable|string',
+            'tanggal'     => 'required|date',
+            'foto'        => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'file_path'   => 'nullable|mimes:pdf,doc,docx|max:4096',
         ]);
 
-        // Konversi anggaran dari format Rupiah ke angka murni
+        // Konversi anggaran
         if (!empty($validated['anggaran'])) {
             $validated['anggaran'] = preg_replace('/[^\d]/', '', $validated['anggaran']);
         }
 
         // Upload foto
         if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('laporan/foto', 'public');
+            $foto = $request->file('foto');
+            $fotoName = time() . '_' . $foto->getClientOriginalName();
+            $foto->move(public_path('uploads/laporan/foto'), $fotoName);
+            $validated['foto'] = $fotoName;
         }
 
-        // Upload file PDF/DOC
+        // Upload file
         if ($request->hasFile('file_path')) {
-            $validated['file_path'] = $request->file('file_path')->store('laporan/file', 'public');
+            $file = $request->file('file_path');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/laporan/file'), $fileName);
+            $validated['file_path'] = $fileName;
         }
 
         LaporanKegiatan::create($validated);
@@ -73,34 +70,33 @@ class LaporanController extends Controller
         $laporan = LaporanKegiatan::findOrFail($id);
 
         $validated = $request->validate([
-            'judul'     => 'required|string|max:255',
-            'lokasi'    => 'required|string|max:255',
-            'anggaran'  => 'nullable|string',
-            'tanggal'   => 'required|date',
-            'foto'      => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'file_path' => 'nullable|mimes:pdf,doc,docx|max:4096',
-        ], [
-            'judul.required'     => 'Judul wajib diisi.',
-            'lokasi.required'    => 'Lokasi wajib diisi.',
-            'tanggal.required'   => 'Tanggal wajib diisi.',
-            'tanggal.date'       => 'Tanggal tidak valid.',
-            'foto.image'         => 'Foto harus berupa gambar.',
-            'foto.mimes'         => 'Foto harus berekstensi: jpg, jpeg, png, webp.',
-            'foto.max'           => 'Ukuran foto maksimal 2MB.',
-            'file_path.mimes'    => 'File harus berekstensi: pdf, doc, docx.',
-            'file_path.max'      => 'Ukuran file maksimal 4MB.',
+            'judul'       => 'required|string|max:255',
+            'deskripsi'   => 'required|string',
+            'lokasi'      => 'required|string|max:255',
+            'anggaran'    => 'nullable|string',
+            'tanggal'     => 'required|date',
+            'foto'        => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'file_path'   => 'nullable|mimes:pdf,doc,docx|max:4096',
         ]);
 
         if (!empty($validated['anggaran'])) {
             $validated['anggaran'] = preg_replace('/[^\d]/', '', $validated['anggaran']);
         }
 
+        // Upload foto baru jika ada
         if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('laporan/foto', 'public');
+            $foto = $request->file('foto');
+            $fotoName = time() . '_' . $foto->getClientOriginalName();
+            $foto->move(public_path('uploads/laporan/foto'), $fotoName);
+            $validated['foto'] = $fotoName;
         }
 
+        // Upload file baru jika ada
         if ($request->hasFile('file_path')) {
-            $validated['file_path'] = $request->file('file_path')->store('laporan/file', 'public');
+            $file = $request->file('file_path');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/laporan/file'), $fileName);
+            $validated['file_path'] = $fileName;
         }
 
         $laporan->update($validated);
@@ -113,6 +109,17 @@ class LaporanController extends Controller
     public function destroy($id)
     {
         $laporan = LaporanKegiatan::findOrFail($id);
+
+        // Hapus foto jika ada
+        if ($laporan->foto && file_exists(public_path('uploads/laporan/foto/' . $laporan->foto))) {
+            unlink(public_path('uploads/laporan/foto/' . $laporan->foto));
+        }
+
+        // Hapus file jika ada
+        if ($laporan->file_path && file_exists(public_path('uploads/laporan/file/' . $laporan->file_path))) {
+            unlink(public_path('uploads/laporan/file/' . $laporan->file_path));
+        }
+
         $laporan->delete();
 
         return back()->with('success', 'Data laporan berhasil dihapus!');

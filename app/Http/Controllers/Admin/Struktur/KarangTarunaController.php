@@ -30,7 +30,6 @@ class KarangTarunaController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            // Buat folder jika belum ada
             $path = public_path('karang_taruna');
             if (!File::exists($path)) {
                 File::makeDirectory($path, 0777, true);
@@ -38,8 +37,6 @@ class KarangTarunaController extends Controller
 
             $file = $request->file('gambar');
             $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            
-            // Simpan langsung ke public/karang_taruna
             $file->move($path, $filename);
 
             KarangTaruna::create(['gambar' => $filename]);
@@ -65,7 +62,6 @@ class KarangTarunaController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            // Hapus file lama jika ada
             $oldFile = public_path('karang_taruna/' . $karangTaruna->gambar);
             if ($karangTaruna->gambar && File::exists($oldFile)) {
                 File::delete($oldFile);
@@ -73,8 +69,6 @@ class KarangTarunaController extends Controller
 
             $file = $request->file('gambar');
             $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            
-            // Simpan file baru
             $path = public_path('karang_taruna');
             $file->move($path, $filename);
 

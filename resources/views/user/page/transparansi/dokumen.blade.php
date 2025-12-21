@@ -11,11 +11,6 @@
     <div class="bg-gray-50 py-16 text-[18px]" x-data="{ tahun: '2025' }">
         <div class="container mx-auto px-8 max-w-7xl">
 
-            <!-- LAPORAN TRANSPARANSI ANGGARAN -->
-            <div class="mb-12" data-aos="fade-up" data-aos-delay="200">
-                <!-- Card Transparansi Anggaran -->
-            </div>
-
             <!-- DAFTAR DOKUMEN -->
             <section class="mb-20" data-aos="fade-up" data-aos-delay="400">
                 <h2 class="text-3xl text-gray-800 mb-2 text-center">
@@ -41,17 +36,23 @@
                             </div>
 
                             <div class="flex gap-3 mt-4 md:mt-0">
-                                @if($dokumen->file)
-                                    @php $ext = pathinfo($dokumen->file, PATHINFO_EXTENSION); @endphp
+                                @if ($dokumen->file)
+                                    @php
+                                        $ext = strtolower(pathinfo($dokumen->file, PATHINFO_EXTENSION));
+                                        $icon =
+                                            $ext === 'pdf'
+                                                ? 'bi-file-earmark-pdf-fill text-lg'
+                                                : 'bi-file-earmark-text-fill text-lg';
+                                    @endphp
 
-                                    <a href="{{ asset('storage/' . $dokumen->file) }}" target="_blank"
-                                       class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
-                                        <i class="bi bi-file-earmark-pdf-fill text-lg"></i>
+                                    <a href="{{ asset('uploads/dokumen/' . $dokumen->file) }}" target="_blank"
+                                        class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
+                                        <i class="bi {{ $icon }}"></i>
                                         <span>Lihat</span>
                                     </a>
 
-                                    <a href="{{ asset('storage/' . $dokumen->file) }}" download
-                                       class="px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-600 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
+                                    <a href="{{ asset('uploads/dokumen/' . $dokumen->file) }}" download
+                                        class="px-4 py-2 border border-green-600 text-green-600 rounded-lg hover:bg-green-600 hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm">
                                         <i class="bi bi-download text-lg"></i>
                                         <span>Download</span>
                                     </a>
@@ -65,13 +66,14 @@
                     @endforelse
                 </div>
 
-                <!-- PAGINATION (HTML BIASA) -->
+                <!-- PAGINATION -->
                 <div class="flex justify-center mt-8 space-x-2">
                     {{ $dokumens->links('pagination::tailwind') }}
                 </div>
             </section>
         </div>
     </div>
+
 
     <!-- SCRIPT -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
@@ -136,16 +138,24 @@
                             ticks: {
                                 callback: (v) => 'Rp ' + (v / 1e9).toFixed(1) + ' M',
                                 color: '#6b7280',
-                                font: { size: 12 },
+                                font: {
+                                    size: 12
+                                },
                             },
-                            grid: { color: 'rgba(229, 231, 235, 0.4)' },
+                            grid: {
+                                color: 'rgba(229, 231, 235, 0.4)'
+                            },
                         },
                         x: {
                             ticks: {
                                 color: '#374151',
-                                font: { size: 13 },
+                                font: {
+                                    size: 13
+                                },
                             },
-                            grid: { display: false },
+                            grid: {
+                                display: false
+                            },
                         },
                     },
                 },

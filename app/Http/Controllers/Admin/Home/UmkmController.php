@@ -39,24 +39,40 @@ class UmkmController extends Controller
             'produk.foto.*' => 'nullable|image|max:2048',
         ]);
 
-        // Format harga ke decimal
+        // Format harga
         if(isset($data['harga'])){
             $data['harga'] = preg_replace('/[^\d]/','',$data['harga']);
         }
 
         // Upload foto UMKM
-        $data['foto'] = $request->hasFile('foto_umkm') ? $request->file('foto_umkm')->store('umkm', 'public') : null;
+        if($request->hasFile('foto_umkm')){
+            $file = $request->file('foto_umkm');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('uploads/umkm'), $filename);
+            $data['foto'] = 'uploads/umkm/'.$filename; // sesuaikan kolom DB 'foto'
+        }
 
         // Upload foto pengusaha
-        $data['foto_pengusaha'] = $request->hasFile('foto_pengusaha') ? $request->file('foto_pengusaha')->store('umkm', 'public') : null;
+        if($request->hasFile('foto_pengusaha')){
+            $file = $request->file('foto_pengusaha');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('uploads/pengusaha'), $filename);
+            $data['foto_pengusaha'] = 'uploads/pengusaha/'.$filename;
+        }
 
         $umkm = Umkm::create($data);
 
         // Upload produk multiple
         if($request->has('produk')){
             foreach($request->produk['nama'] as $i => $nama){
-                if($nama || $request->produk['foto'][$i] ?? null){
-                    $path = $request->hasFile("produk.foto.$i") ? $request->file("produk.foto.$i")->store('umkm/produk','public') : null;
+                if($nama || ($request->produk['foto'][$i] ?? null)){
+                    $path = null;
+                    if($request->hasFile("produk.foto.$i")){
+                        $file = $request->file("produk.foto.$i");
+                        $filename = time().'_'.$file->getClientOriginalName();
+                        $file->move(public_path('uploads/produk'), $filename);
+                        $path = 'uploads/produk/'.$filename;
+                    }
 
                     UmkmProduk::create([
                         'umkm_id' => $umkm->id,
@@ -92,26 +108,54 @@ class UmkmController extends Controller
             'harga' => 'nullable|string',
         ]);
 
+        // Format harga
         if(isset($data['harga'])){
             $data['harga'] = preg_replace('/[^\d]/','',$data['harga']);
         }
 
+        // Update foto UMKM
         if($request->hasFile('foto_umkm')){
-            $data['foto'] = $request->file('foto_umkm')->store('umkm','public');
+            $file = $request->file('foto_umkm');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('uploads/umkm'), $filename);
+            $data['foto'] = 'uploads/umkm/'.$filename;
         }
 
+        // Update foto pengusaha
         if($request->hasFile('foto_pengusaha')){
-            $data['foto_pengusaha'] = $request->file('foto_pengusaha')->store('umkm','public');
+            $file = $request->file('foto_pengusaha');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('uploads/pengusaha'), $filename);
+            $data['foto_pengusaha'] = 'uploads/pengusaha/'.$filename;
         }
 
         $umkm->update($data);
+
+        // Optional: Update produk bisa ditambahkan disini jika perlu
 
         return redirect()->route('admin.home.umkm.index')->with('success','UMKM berhasil diperbarui');
     }
 
     public function destroy(Umkm $umkm)
     {
+        // Hapus file foto jika ingin otomatis
+        if($umkm->foto && file_exists(public_path($umkm->foto))){
+            unlink(public_path($umkm->foto));
+        }
+        if($umkm->foto_pengusaha && file_exists(public_path($umkm->foto_pengusaha))){
+            unlink(public_path($umkm->foto_pengusaha));
+        }
+
+        // Hapus produk terkait
+        foreach($umkm->produk as $produk){
+            if($produk->foto && file_exists(public_path($produk->foto))){
+                unlink(public_path($produk->foto));
+            }
+            $produk->delete();
+        }
+
         $umkm->delete();
+
         return redirect()->route('admin.home.umkm.index')->with('success','UMKM berhasil dihapus');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ProfilDesa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProfilDesaController extends Controller
 {
@@ -54,7 +55,7 @@ class ProfilDesaController extends Controller
     }
 
     // ============================
-    // STORE (TAMBAH)
+    // STORE
     // ============================
     public function store(Request $request)
     {
@@ -84,20 +85,26 @@ class ProfilDesaController extends Controller
             $data['koordinat'] = $this->convertToEmbedUrl($request->koordinat);
         }
 
-        // Upload multi gambar
+        // Upload multi gambar ke public/uploads/profil_desa
         if ($request->hasFile('gambar_header')) {
+
+            $folder = public_path('uploads/profil_desa');
+            if (!file_exists($folder)) {
+                mkdir($folder, 0755, true);
+            }
+
             $paths = [];
             foreach ($request->file('gambar_header') as $file) {
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('uploads/profil_desa'), $filename);
+                $filename = time() . '_' . Str::random(8) . '.' . $file->getClientOriginalExtension();
+                $file->move($folder, $filename);
                 $paths[] = $filename;
             }
+
             $data['gambar_header'] = json_encode($paths);
         }
 
         ProfilDesa::create($data);
 
-        // ALERT SUKSES
         return redirect()->route('admin.profil_desa.index')
             ->with('success', 'Profil Desa berhasil ditambahkan!');
     }
@@ -144,7 +151,7 @@ class ProfilDesaController extends Controller
             $data['koordinat'] = $this->convertToEmbedUrl($request->koordinat);
         }
 
-        // Jika upload gambar baru
+        // Upload gambar baru
         if ($request->hasFile('gambar_header')) {
 
             // Hapus gambar lama
@@ -155,11 +162,15 @@ class ProfilDesaController extends Controller
                 }
             }
 
-            // Upload gambar baru
+            $folder = public_path('uploads/profil_desa');
+            if (!file_exists($folder)) {
+                mkdir($folder, 0755, true);
+            }
+
             $paths = [];
             foreach ($request->file('gambar_header') as $file) {
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('uploads/profil_desa'), $filename);
+                $filename = time() . '_' . Str::random(8) . '.' . $file->getClientOriginalExtension();
+                $file->move($folder, $filename);
                 $paths[] = $filename;
             }
 
@@ -168,19 +179,17 @@ class ProfilDesaController extends Controller
 
         $item->update($data);
 
-        // ALERT SUKSES
         return redirect()->route('admin.profil_desa.index')
             ->with('success', 'Profil Desa berhasil diupdate!');
     }
 
     // ============================
-    // DESTROY (HAPUS)
+    // DESTROY
     // ============================
     public function destroy($id)
     {
         $item = ProfilDesa::findOrFail($id);
 
-        // Hapus semua gambar
         if ($item->gambar_header) {
             foreach (json_decode($item->gambar_header) as $old) {
                 $file = public_path('uploads/profil_desa/' . $old);
@@ -190,7 +199,6 @@ class ProfilDesaController extends Controller
 
         $item->delete();
 
-        // ALERT SUKSES
         return redirect()->route('admin.profil_desa.index')
             ->with('success', 'Profil Desa berhasil dihapus!');
     }

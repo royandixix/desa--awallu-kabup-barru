@@ -63,15 +63,18 @@
                             <td>{{ $loop->iteration }}</td>
 
                             <td>
-                                <img src="{{ asset('storage/' . $bpd->foto) }}" 
-                                    class="img-fluid rounded shadow-sm" 
-                                    style="max-width: 150px">
+                                @if($bpd->foto && file_exists(public_path($bpd->foto)))
+                                    <img src="{{ asset($bpd->foto) }}" 
+                                        class="img-fluid rounded shadow-sm" 
+                                        style="max-width: 150px">
+                                @else
+                                    <span class="text-muted">Foto tidak tersedia</span>
+                                @endif
                             </td>
 
                             <td>{{ $bpd->created_at->format('d/m/Y H:i') }}</td>
 
                             <td class="text-center">
-                                
                                 {{-- EDIT --}}
                                 <a href="{{ route('admin.struktur.bpd.edit', $bpd->id) }}" 
                                     class="btn btn-dark btn-sm me-1 btn-edit">
@@ -89,11 +92,12 @@
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
-
                             </td>
                         </tr>
                         @empty
-                        {{-- Optional row kosong --}}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">Belum ada gambar BPD.</td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>

@@ -24,10 +24,9 @@
         {{-- Jenis --}}
         <div class="mb-3">
             <label class="form-label">Jenis</label>
-            <select class="form-select @error('jenis') is-invalid @enderror" 
-                    name="jenis" required>
-                <option value="POKOK" {{ $anggaran->jenis == 'POKOK' ? 'selected' : '' }}>POKOK</option>
-                <option value="PERUBAHAN" {{ $anggaran->jenis == 'PERUBAHAN' ? 'selected' : '' }}>PERUBAHAN</option>
+            <select class="form-select @error('jenis') is-invalid @enderror" name="jenis" required>
+                <option value="POKOK" {{ old('jenis', $anggaran->jenis) == 'POKOK' ? 'selected' : '' }}>POKOK</option>
+                <option value="PERUBAHAN" {{ old('jenis', $anggaran->jenis) == 'PERUBAHAN' ? 'selected' : '' }}>PERUBAHAN</option>
             </select>
             @error('jenis') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
@@ -72,15 +71,15 @@
         <div class="mb-3">
             <label class="form-label">Upload Dokumen (Opsional)</label>
             <input type="file" class="form-control @error('file') is-invalid @enderror" 
-                   name="file" accept=".pdf,.doc,.docx,.xlsx,.png,.jpg,.jpeg">
+                   name="file" accept=".pdf,.doc,.docx,.xlsx,.png,.jpg,.jpeg,.webp">
 
-            <small class="text-muted">Format: pdf, doc, docx, xlsx, png, jpg | Max 10MB</small>
+            <small class="text-muted">Format: pdf, doc, docx, xlsx, png, jpg, jpeg, webp | Max 20MB</small>
             @error('file') <div class="invalid-feedback">{{ $message }}</div> @enderror
 
             @if($anggaran->file)
                 <p class="mt-2">
                     <strong>File saat ini:</strong> 
-                    <a href="{{ asset('storage/'.$anggaran->file) }}" target="_blank">Lihat Dokumen</a>
+                    <a href="{{ asset('uploads/transparansi_anggaran/'.$anggaran->file) }}" target="_blank">Lihat Dokumen</a>
                 </p>
             @endif
         </div>
@@ -96,8 +95,8 @@
     // Format Rupiah otomatis
     document.addEventListener('input', function(e) {
         if (e.target.classList.contains('rupiah')) {
-            let angka = e.target.value.replace(/\./g, '');
-            e.target.value = angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            let angka = e.target.value.replace(/\D/g, '');
+            e.target.value = new Intl.NumberFormat('id-ID').format(angka);
         }
     });
 

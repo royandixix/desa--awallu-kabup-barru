@@ -12,7 +12,6 @@
           action="{{ route('admin.struktur.pemerintahan_desa.anggota.store') }}"
           method="POST"
           enctype="multipart/form-data">
-
         @csrf
 
         {{-- Nama --}}
@@ -21,7 +20,6 @@
             <input type="text" name="nama"
                    class="form-control @error('nama') is-invalid @enderror"
                    value="{{ old('nama') }}" required>
-
             @error('nama')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -33,7 +31,6 @@
             <input type="text" name="jabatan"
                    class="form-control @error('jabatan') is-invalid @enderror"
                    value="{{ old('jabatan') }}" required>
-
             @error('jabatan')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -56,9 +53,11 @@
             @enderror
 
             {{-- Preview Foto --}}
-            <img id="previewFoto"
-                 class="rounded mt-2 shadow-sm"
-                 style="width: 120px; display:none;">
+            <div class="mt-2">
+                <img id="previewFoto"
+                     class="rounded shadow-sm"
+                     style="width: 120px; display:none;">
+            </div>
         </div>
 
         {{-- Tombol --}}
@@ -74,46 +73,59 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-@if (session('success'))
 <script>
-Swal.fire({
-    icon: 'success',
-    title: 'Berhasil!',
-    text: '{{ session("success") }}',
-});
-</script>
-@endif
+document.addEventListener('DOMContentLoaded', function () {
 
-<script>
-document.getElementById('fotoInput').addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (!file) return;
+    // Preview foto sebelum submit
+    const fotoInput = document.getElementById('fotoInput');
+    const preview = document.getElementById('previewFoto');
 
-    const reader = new FileReader();
-    reader.onload = function (event) {
-        const img = document.getElementById('previewFoto');
-        img.src = event.target.result;
-        img.style.display = 'block';
-    }
-    reader.readAsDataURL(file);
-});
-
-// SWEETALERT SIMPAN
-document.getElementById('btnSimpan').addEventListener('click', function () {
-    Swal.fire({
-        title: 'Simpan Data Anggota?',
-        text: "Pastikan semua informasi sudah benar.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya, Simpan!',
-        cancelButtonText: 'Batal'
-    }).then(result => {
-        if (result.isConfirmed) {
-            document.getElementById('formTambahAnggota').submit();
+    fotoInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (!file) {
+            preview.style.display = 'none';
+            preview.src = '';
+            return;
         }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
     });
+
+    // SweetAlert konfirmasi simpan
+    const btnSimpan = document.getElementById('btnSimpan');
+    btnSimpan.addEventListener('click', function () {
+        Swal.fire({
+            title: 'Simpan Data Anggota?',
+            text: "Pastikan semua informasi sudah benar.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Simpan!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('formTambahAnggota').submit();
+            }
+        });
+    });
+
+    // SweetAlert notifikasi sukses
+    @if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session("success") }}',
+            timer: 1600,
+            showConfirmButton: false
+        });
+    @endif
+
 });
 </script>
 @endpush

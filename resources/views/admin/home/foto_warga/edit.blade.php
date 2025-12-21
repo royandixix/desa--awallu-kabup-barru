@@ -17,7 +17,8 @@
 
     <div class="mb-3">
         <label>Foto Saat Ini</label><br>
-        <img src="{{ asset('storage/' . $fotoWarga->gambar) }}" width="150">
+        <img src="{{ asset($fotoWarga->gambar) }}" width="150" 
+             style="object-fit:cover; border-radius:4px;">
     </div>
 
     <button type="submit" class="btn btn-success">Update</button>

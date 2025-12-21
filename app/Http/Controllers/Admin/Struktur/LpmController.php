@@ -26,7 +26,10 @@ class LpmController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('lpm', 'public');
+            $file = $request->file('gambar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/lpm'), $filename);
+            $data['gambar'] = 'uploads/lpm/' . $filename;
         }
 
         Lpm::create($data);
@@ -50,7 +53,15 @@ class LpmController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('lpm', 'public');
+            // Hapus file lama jika ada
+            if ($lpm->gambar && file_exists(public_path($lpm->gambar))) {
+                unlink(public_path($lpm->gambar));
+            }
+
+            $file = $request->file('gambar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/lpm'), $filename);
+            $data['gambar'] = 'uploads/lpm/' . $filename;
         }
 
         $lpm->update($data);
@@ -62,6 +73,12 @@ class LpmController extends Controller
     public function destroy(string $id)
     {
         $lpm = Lpm::findOrFail($id);
+
+        // Hapus file lama jika ada
+        if ($lpm->gambar && file_exists(public_path($lpm->gambar))) {
+            unlink(public_path($lpm->gambar));
+        }
+
         $lpm->delete();
 
         return redirect()->route('admin.struktur.lpm.index')

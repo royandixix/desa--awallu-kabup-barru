@@ -5,33 +5,23 @@ namespace App\Http\Controllers\Admin\Struktur;
 use App\Http\Controllers\Controller;
 use App\Models\Posyandu;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class PosyanduController extends Controller
 {
-    /**
-     * Menampilkan daftar gambar Posyandu dengan pagination.
-     */
     public function index()
     {
         $posyandus = Posyandu::latest()->paginate(10);
         return view('admin.page.struktur.posyandu.index', compact('posyandus'));
     }
 
-    /**
-     * Menampilkan form untuk upload gambar baru.
-     */
     public function create()
     {
         return view('admin.page.struktur.posyandu.create');
     }
 
-    /**
-     * Menyimpan gambar baru ke database dan storage.
-     */
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ], [
@@ -41,28 +31,29 @@ class PosyanduController extends Controller
             'gambar.max' => 'Ukuran gambar maksimal 2MB.',
         ]);
 
-        // Simpan file ke storage
-        $gambarPath = $request->file('gambar')->store('posyandu', 'public');
+        $file = $request->file('gambar');
 
-        // Simpan ke database
-        Posyandu::create(['gambar' => $gambarPath]);
+        // Pastikan folder uploads/posyandu ada
+        $folder = public_path('uploads/posyandu');
+        if (!File::exists($folder)) {
+            File::makeDirectory($folder, 0755, true);
+        }
+
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move($folder, $filename);
+
+        Posyandu::create(['gambar' => $filename]);
 
         return redirect()->route('admin.struktur.posyandu.index')
                          ->with('success', 'Gambar berhasil diunggah.');
     }
 
-    /**
-     * Menampilkan form edit untuk satu gambar Posyandu.
-     */
     public function edit($id)
     {
         $posyandu = Posyandu::findOrFail($id);
         return view('admin.page.struktur.posyandu.edit', compact('posyandu'));
     }
 
-    /**
-     * Memperbarui gambar Posyandu.
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -75,12 +66,21 @@ class PosyanduController extends Controller
 
         $posyandu = Posyandu::findOrFail($id);
 
-        // Hapus gambar lama jika ada
         if ($request->hasFile('gambar')) {
-            if ($posyandu->gambar) {
-                Storage::disk('public')->delete($posyandu->gambar);
+            $folder = public_path('uploads/posyandu');
+
+            // Hapus file lama jika ada
+            $oldFile = $folder . '/' . $posyandu->gambar;
+            if (File::exists($oldFile)) {
+                @unlink($oldFile);
             }
-            $posyandu->gambar = $request->file('gambar')->store('posyandu', 'public');
+
+            // Upload file baru
+            $file = $request->file('gambar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move($folder, $filename);
+
+            $posyandu->gambar = $filename;
         }
 
         $posyandu->save();
@@ -89,15 +89,13 @@ class PosyanduController extends Controller
                          ->with('success', 'Gambar berhasil diperbarui.');
     }
 
-    /**
-     * Menghapus gambar Posyandu beserta file di storage.
-     */
     public function destroy($id)
     {
         $posyandu = Posyandu::findOrFail($id);
 
-        if ($posyandu->gambar) {
-            Storage::disk('public')->delete($posyandu->gambar);
+        $file = public_path('uploads/posyandu/' . $posyandu->gambar);
+        if (File::exists($file)) {
+            @unlink($file);
         }
 
         $posyandu->delete();

@@ -55,10 +55,12 @@
                         <tr>
                             <th>No</th>
                             <th>Judul</th>
+                            <th>Deskripsi</th>
                             <th>Lokasi</th>
                             <th>Anggaran</th>
                             <th>Tanggal</th>
                             <th>Foto</th>
+                            <th>File</th>
                             <th class="text-center" style="width: 140px;">Aksi</th>
                         </tr>
                     </thead>
@@ -67,15 +69,27 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $row->judul }}</td>
+                            <td>{{ Str::limit($row->deskripsi, 50, '...') }}</td>
                             <td>{{ $row->lokasi }}</td>
-                            <td>Rp {{ number_format($row->anggaran,0,',','.') }}</td>
-                            <td>{{ $row->tanggal }}</td>
+                            <td>Rp {{ number_format($row->anggaran ?? 0,0,',','.') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($row->tanggal)->format('d-m-Y') }}</td>
 
                             {{-- Foto --}}
                             <td>
-                                @if($row->foto)
-                                    <a href="{{ asset('storage/' . $row->foto) }}" target="_blank">
-                                        <img src="{{ asset('storage/' . $row->foto) }}" width="60" class="rounded">
+                                @if($row->foto && file_exists(public_path('uploads/laporan/foto/' . $row->foto)))
+                                    <a href="{{ asset('uploads/laporan/foto/' . $row->foto) }}" target="_blank">
+                                        <img src="{{ asset('uploads/laporan/foto/' . $row->foto) }}" width="60" class="rounded">
+                                    </a>
+                                @else
+                                    <span class="text-muted">Tidak ada</span>
+                                @endif
+                            </td>
+
+                            {{-- File --}}
+                            <td>
+                                @if($row->file_path && file_exists(public_path('uploads/laporan/file/' . $row->file_path)))
+                                    <a href="{{ asset('uploads/laporan/file/' . $row->file_path) }}" target="_blank">
+                                        <i class="fas fa-file-pdf text-danger"></i> Lihat
                                     </a>
                                 @else
                                     <span class="text-muted">Tidak ada</span>
@@ -98,7 +112,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="7" class="text-center text-muted">Belum ada data laporan</td>
+                            <td colspan="9" class="text-center text-muted">Belum ada data laporan</td>
                         </tr>
                         @endforelse
                     </tbody>

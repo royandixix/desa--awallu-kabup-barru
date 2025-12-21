@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Transparansi;
 use App\Http\Controllers\Controller;
 use App\Models\TransparansiDokumen;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class DokumenController extends Controller
 {
@@ -37,23 +36,17 @@ class DokumenController extends Controller
             'tahun'   => 'required|digits:4',
             'tanggal' => 'required|date',
             'file'    => 'required|file|mimes:pdf,jpg,jpeg,png,webp|max:20480', // 20MB
-        ], [
-            'judul.required'   => 'Judul dokumen wajib diisi.',
-            'jenis.required'   => 'Jenis dokumen wajib dipilih.',
-            'jenis.in'         => 'Jenis dokumen harus POKOK atau PERUBAHAN.',
-            'tahun.required'   => 'Tahun dokumen wajib diisi.',
-            'tahun.digits'     => 'Tahun dokumen harus 4 digit.',
-            'tanggal.required' => 'Tanggal dokumen wajib diisi.',
-            'tanggal.date'     => 'Format tanggal tidak valid.',
-            'file.required'    => 'File dokumen wajib diupload.',
-            'file.mimes'       => 'Format file harus PDF, JPG, JPEG, PNG, atau WEBP.',
-            'file.max'         => 'Ukuran file maksimal 20MB.',
         ]);
 
         $data = $request->only(['judul', 'jenis', 'tahun', 'tanggal']);
 
-        // Upload file
-        $data['file'] = $request->file('file')->store('dokumen', 'public');
+        // Upload file ke public/uploads/dokumen
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/dokumen'), $fileName);
+            $data['file'] = $fileName;
+        }
 
         TransparansiDokumen::create($data);
 
@@ -83,27 +76,21 @@ class DokumenController extends Controller
             'tahun'   => 'required|digits:4',
             'tanggal' => 'required|date',
             'file'    => 'nullable|file|mimes:pdf,jpg,jpeg,png,webp|max:20480', // 20MB
-        ], [
-            'judul.required'   => 'Judul dokumen wajib diisi.',
-            'jenis.required'   => 'Jenis dokumen wajib dipilih.',
-            'jenis.in'         => 'Jenis dokumen harus POKOK atau PERUBAHAN.',
-            'tahun.required'   => 'Tahun dokumen wajib diisi.',
-            'tahun.digits'     => 'Tahun dokumen harus 4 digit.',
-            'tanggal.required' => 'Tanggal dokumen wajib diisi.',
-            'tanggal.date'     => 'Format tanggal tidak valid.',
-            'file.mimes'       => 'Format file harus PDF, JPG, JPEG, PNG, atau WEBP.',
-            'file.max'         => 'Ukuran file maksimal 20MB.',
         ]);
 
         $data = $request->only(['judul', 'jenis', 'tahun', 'tanggal']);
 
         if ($request->hasFile('file')) {
             // Hapus file lama jika ada
-            if ($dokumen->file && Storage::disk('public')->exists($dokumen->file)) {
-                Storage::disk('public')->delete($dokumen->file);
+            if ($dokumen->file && file_exists(public_path('uploads/dokumen/' . $dokumen->file))) {
+                unlink(public_path('uploads/dokumen/' . $dokumen->file));
             }
+
             // Upload file baru
-            $data['file'] = $request->file('file')->store('dokumen', 'public');
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/dokumen'), $fileName);
+            $data['file'] = $fileName;
         }
 
         $dokumen->update($data);
@@ -120,8 +107,8 @@ class DokumenController extends Controller
         $dokumen = TransparansiDokumen::findOrFail($id);
 
         // Hapus file lama jika ada
-        if ($dokumen->file && Storage::disk('public')->exists($dokumen->file)) {
-            Storage::disk('public')->delete($dokumen->file);
+        if ($dokumen->file && file_exists(public_path('uploads/dokumen/' . $dokumen->file))) {
+            unlink(public_path('uploads/dokumen/' . $dokumen->file));
         }
 
         $dokumen->delete();

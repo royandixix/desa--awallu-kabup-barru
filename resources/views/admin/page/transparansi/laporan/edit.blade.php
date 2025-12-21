@@ -28,6 +28,17 @@
             @enderror
         </div>
 
+        {{-- Deskripsi --}}
+        <div class="mb-3">
+            <label for="deskripsi" class="form-label fw-semibold">Deskripsi Laporan</label>
+            <textarea id="deskripsi" name="deskripsi" rows="4"
+                class="form-control @error('deskripsi') is-invalid @enderror" required>{{ old('deskripsi', $laporan->deskripsi) }}</textarea>
+            <small class="text-muted d-block">Tuliskan keterangan lengkap terkait laporan kegiatan.</small>
+            @error('deskripsi')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
         {{-- Lokasi --}}
         <div class="mb-3">
             <label for="lokasi" class="form-label fw-semibold">Lokasi</label>
@@ -66,8 +77,8 @@
         <div class="mb-3">
             <label class="form-label fw-semibold d-block">Foto Saat Ini</label>
             @if($laporan->foto)
-                <a href="{{ asset('storage/' . $laporan->foto) }}" target="_blank">
-                    <img src="{{ asset('storage/' . $laporan->foto) }}" width="100" class="rounded mb-2">
+                <a href="{{ asset('uploads/laporan/foto/' . $laporan->foto) }}" target="_blank">
+                    <img src="{{ asset('uploads/laporan/foto/' . $laporan->foto) }}" width="100" class="rounded mb-2">
                 </a>
             @else
                 <p class="text-muted">Tidak ada foto.</p>
@@ -95,7 +106,7 @@
                         default => 'Lihat Berkas',
                     };
                 @endphp
-                <a href="{{ asset('storage/' . $laporan->file_path) }}" target="_blank" class="btn btn-outline-primary btn-sm">{{ $fileLabel }}</a>
+                <a href="{{ asset('uploads/laporan/file/' . $laporan->file_path) }}" target="_blank" class="btn btn-outline-primary btn-sm">{{ $fileLabel }}</a>
             @else
                 <p class="text-muted">Tidak ada berkas.</p>
             @endif
@@ -104,8 +115,8 @@
         {{-- Upload Berkas Baru --}}
         <div class="mb-3">
             <label for="file_path" class="form-label fw-semibold">Ganti Berkas (Opsional)</label>
-            <input type="file" id="file_path" name="file_path" class="form-control @error('file_path') is-invalid @enderror" accept=".pdf">
-            <small class="text-muted d-block">Abaikan jika tidak ingin mengganti berkas. Format: PDF • Max: 10MB</small>
+            <input type="file" id="file_path" name="file_path" class="form-control @error('file_path') is-invalid @enderror" accept=".pdf,.doc,.docx">
+            <small class="text-muted d-block">Abaikan jika tidak ingin mengganti berkas. Format: PDF/DOC • Max: 10MB</small>
             @error('file_path')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror

@@ -32,8 +32,8 @@
                 <p class="fw-bold mb-1">Preview Foto</p>
                 <img id="previewFoto" class="rounded mt-2 shadow-sm"
                      style="width: 200px;"
-                     src="{{ $bagan->foto && file_exists(public_path('uploads/' . $bagan->foto)) ? asset('uploads/' . $bagan->foto) : '' }}"
-                     {{ $bagan->foto && file_exists(public_path('uploads/' . $bagan->foto)) ? '' : 'style=display:none;' }}>
+                     src="{{ $bagan->foto && file_exists(public_path('uploads/struktur/' . $bagan->foto)) ? asset('uploads/struktur/' . $bagan->foto) : '' }}"
+                     {{ $bagan->foto && file_exists(public_path('uploads/struktur/' . $bagan->foto)) ? '' : 'style=display:none;' }}>
             </div>
         </div>
 
@@ -57,8 +57,8 @@
         const file = this.files[0];
         if (!file) {
             // Jika tidak ada file baru, tampilkan gambar lama atau sembunyikan
-            preview.style.display = "{{ $bagan->foto && file_exists(public_path('uploads/' . $bagan->foto)) ? 'block' : 'none' }}";
-            preview.src = "{{ $bagan->foto && file_exists(public_path('uploads/' . $bagan->foto)) ? asset('uploads/' . $bagan->foto) : '' }}";
+            preview.style.display = "{{ $bagan->foto && file_exists(public_path('uploads/struktur/' . $bagan->foto)) ? 'block' : 'none' }}";
+            preview.src = "{{ $bagan->foto && file_exists(public_path('uploads/struktur/' . $bagan->foto)) ? asset('uploads/struktur/' . $bagan->foto) : '' }}";
             return;
         }
         const reader = new FileReader();

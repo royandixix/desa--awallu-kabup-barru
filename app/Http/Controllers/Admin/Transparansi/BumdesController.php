@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Transparansi;
 use App\Http\Controllers\Controller;
 use App\Models\TransparansiBumdes;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class BumdesController extends Controller
 {
@@ -52,15 +51,18 @@ class BumdesController extends Controller
             'judul'    => 'required|string|max:255',
             'kategori' => 'required|in:BUMDes,KOPDes',
             'tanggal'  => 'required|date',
-            'file'     => 'required|file|mimes:pdf,jpg,jpeg,png,webp,xls,xlsx|max:10240', // Excel support
+            'file'     => 'required|file|mimes:pdf,jpg,jpeg,png,webp,xls,xlsx|max:10240',
         ], [
             'file.max'   => 'Ukuran file maksimal 10 MB.',
             'file.mimes' => 'Format file tidak didukung.'
         ]);
 
-        // Upload file
+        // Upload file ke public/uploads/bumdes
         if ($request->hasFile('file')) {
-            $data['file'] = $request->file('file')->store('bumdes', 'public');
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/bumdes'), $fileName);
+            $data['file'] = $fileName;
         }
 
         TransparansiBumdes::create($data);
@@ -76,6 +78,9 @@ class BumdesController extends Controller
         return view('admin.page.transparansi.bumdes.edit', compact('bumde'));
     }
 
+    // ==========================
+    // UPDATE
+    // ==========================
     public function update(Request $request, TransparansiBumdes $bumde)
     {
         $data = $request->validate([
@@ -89,10 +94,16 @@ class BumdesController extends Controller
         ]);
 
         if ($request->hasFile('file')) {
-            if ($bumde->file && Storage::disk('public')->exists($bumde->file)) {
-                Storage::disk('public')->delete($bumde->file);
+            // Hapus file lama jika ada
+            if ($bumde->file && file_exists(public_path('uploads/bumdes/' . $bumde->file))) {
+                unlink(public_path('uploads/bumdes/' . $bumde->file));
             }
-            $data['file'] = $request->file('file')->store('bumdes', 'public');
+
+            // Upload file baru
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/bumdes'), $fileName);
+            $data['file'] = $fileName;
         }
 
         $bumde->update($data);
@@ -101,10 +112,13 @@ class BumdesController extends Controller
             ->with('success', 'Data berhasil diperbarui!');
     }
 
+    // ==========================
+    // DELETE
+    // ==========================
     public function destroy(TransparansiBumdes $bumde)
     {
-        if ($bumde->file && Storage::disk('public')->exists($bumde->file)) {
-            Storage::disk('public')->delete($bumde->file);
+        if ($bumde->file && file_exists(public_path('uploads/bumdes/' . $bumde->file))) {
+            unlink(public_path('uploads/bumdes/' . $bumde->file));
         }
 
         $bumde->delete();

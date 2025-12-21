@@ -14,21 +14,34 @@
         @csrf
         @method('PUT')
 
+        <!-- Foto Lama -->
         <div class="mb-3">
             <label class="form-label fw-semibold d-block">Foto Saat Ini</label>
-            @if($posyandu->gambar)
-                <img src="{{ asset('storage/'.$posyandu->gambar) }}" alt="Foto Posyandu" class="img-fluid rounded mb-2" style="max-height: 250px;">
+            @php
+                $oldPath = public_path('uploads/posyandu/'.$posyandu->gambar);
+            @endphp
+            @if($posyandu->gambar && file_exists($oldPath))
+                <img id="oldImage" src="{{ asset('uploads/posyandu/'.$posyandu->gambar) }}" alt="Foto Posyandu" class="img-fluid rounded mb-2" style="max-height: 250px;">
             @else
                 <p class="text-muted">Tidak ada foto.</p>
             @endif
         </div>
 
+        <!-- Ganti Foto -->
         <div class="mb-3">
             <label for="gambar" class="form-label fw-semibold">Ganti Foto (Opsional)</label>
             <input type="file" id="gambar" name="gambar" class="form-control @error('gambar') is-invalid @enderror" accept=".jpg,.jpeg,.png,.webp">
             @error('gambar')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
+        </div>
+
+        <!-- Preview Gambar Baru -->
+        <div class="mb-3 d-none" id="previewContainer">
+            <label class="form-label fw-semibold">Preview Gambar Baru</label>
+            <div>
+                <img id="previewImage" src="#" alt="Preview Gambar" class="img-fluid rounded" style="max-height: 250px;">
+            </div>
         </div>
 
         <div class="mt-4 d-flex gap-2">
@@ -42,16 +55,39 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-document.getElementById('btnUpdatePosyandu').addEventListener('click', function() {
-    Swal.fire({
-        title: 'Update Foto?',
-        text: "Pastikan semua data sudah benar.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Ya, Update!',
-        cancelButtonText: 'Batal'
-    }).then((result) => {
-        if (result.isConfirmed) document.getElementById('formEditPosyandu').submit();
+document.addEventListener('DOMContentLoaded', function() {
+    const inputGambar = document.getElementById('gambar');
+    const previewContainer = document.getElementById('previewContainer');
+    const previewImage = document.getElementById('previewImage');
+
+    // Preview Gambar Baru
+    inputGambar.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewContainer.classList.remove('d-none');
+            }
+            reader.readAsDataURL(file);
+        } else {
+            previewContainer.classList.add('d-none');
+            previewImage.src = '#';
+        }
+    });
+
+    // Konfirmasi Update
+    document.getElementById('btnUpdatePosyandu').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Update Foto?',
+            text: "Pastikan semua data sudah benar.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Update!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) document.getElementById('formEditPosyandu').submit();
+        });
     });
 });
 </script>

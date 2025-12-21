@@ -78,20 +78,23 @@
                             {{-- FILE --}}
                             <td>
                                 @if ($item->file)
-                                    @php $ext = strtolower(pathinfo($item->file, PATHINFO_EXTENSION)); @endphp
+                                    @php
+                                        $ext = strtolower(pathinfo($item->file, PATHINFO_EXTENSION));
+                                        $filePath = asset('uploads/bumdes/'.$item->file);
+                                    @endphp
 
                                     @if($ext === 'pdf')
-                                        <a href="{{ asset('storage/'.$item->file) }}" target="_blank" class="btn btn-info btn-sm">
+                                        <a href="{{ $filePath }}" target="_blank" class="btn btn-info btn-sm">
                                             <i class="fas fa-file-pdf"></i> PDF
                                         </a>
                                     @elseif(in_array($ext, ['jpg','jpeg','png','webp']))
-                                        <a href="{{ asset('storage/'.$item->file) }}" target="_blank" class="btn btn-success btn-sm">
+                                        <a href="{{ $filePath }}" target="_blank" class="btn btn-success btn-sm">
                                             <i class="fas fa-image"></i> Gambar
                                         </a>
                                     @elseif(in_array($ext, ['xls','xlsx']))
-                                        <a href="https://view.officeapps.live.com/op/embed.aspx?src={{ urlencode(asset('storage/'.$item->file)) }}"
+                                        <a href="https://view.officeapps.live.com/op/embed.aspx?src={{ urlencode($filePath) }}"
                                            target="_blank" class="btn btn-success btn-sm">
-                                            <i class="fas fa-file-excel"></i> 
+                                            <i class="fas fa-file-excel"></i> Excel
                                         </a>
                                     @else
                                         <span class="text-muted">Tidak dapat pratinjau</span>

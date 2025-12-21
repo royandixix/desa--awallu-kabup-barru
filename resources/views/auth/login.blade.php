@@ -141,6 +141,14 @@
                     </div>
                 </form>
 
+                <div class="mt-4">
+    <a href="{{ route('user.home') }}"
+       class="w-full inline-block text-center bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 shadow-md">
+        Kembali ke Beranda
+    </a>
+</div>
+
+
                 <i class="fa fa-chrome" aria-hidden="true" class=" btnlap">
 
                 </i>

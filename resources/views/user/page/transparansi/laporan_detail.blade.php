@@ -24,7 +24,7 @@
             <!-- Foto / Gambar -->
             @if($laporan->foto)
                 <div class="h-96 bg-gray-100">
-                    <img src="{{ asset('storage/' . $laporan->foto) }}" 
+                    <img src="{{ asset('uploads/laporan/foto/' . $laporan->foto) }}" 
                          alt="{{ $laporan->judul }}"
                          class="w-full h-full object-cover">
                 </div>
@@ -43,10 +43,9 @@
             @if($laporan->file_path)
                 <div class="p-6 border-t flex gap-3 bg-white">
                     <!-- Lihat Berkas (PDF terbuka di browser) -->
-                    <a href="{{ asset('storage/' . $laporan->file_path) }}" 
+                    <a href="{{ asset('uploads/laporan/file/' . $laporan->file_path) }}" 
                        target="_blank"
                        class="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 transition-colors duration-200">
-                        <!-- Heroicon Document -->
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h10M7 11h10M7 15h7m-4 4h4a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
@@ -54,10 +53,9 @@
                     </a>
 
                     <!-- Download -->
-                    <a href="{{ asset('storage/' . $laporan->file_path) }}" 
+                    <a href="{{ asset('uploads/laporan/file/' . $laporan->file_path) }}" 
                        download
                        class="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-teal-600 text-white font-semibold rounded hover:bg-teal-700 transition-colors duration-200">
-                        <!-- Heroicon Download -->
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
                         </svg>

@@ -5,56 +5,68 @@ namespace App\Http\Controllers\Admin\Home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FotoWarga;
-use Illuminate\Support\Facades\Storage;
 
 class FotoWargaController extends Controller
 {
+    // Tampilkan semua foto
     public function index()
     {
         $fotos = FotoWarga::latest()->get();
         return view('admin.home.foto_warga.index', compact('fotos'));
     }
 
+    // Form tambah foto
     public function create()
     {
         return view('admin.home.foto_warga.create');
     }
 
+    // Simpan foto baru
     public function store(Request $request)
     {
         $request->validate([
             'file' => 'required|image|max:2048',
         ]);
 
-        $filePath = $request->file('file')->store('foto_warga', 'public');
+        $file = $request->file('file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+
+        // Simpan langsung ke public/uploads/foto_warga
+        $file->move(public_path('uploads/foto_warga'), $filename);
 
         FotoWarga::create([
-            'gambar' => $filePath,
+            'gambar' => 'uploads/foto_warga/' . $filename,
         ]);
 
         return redirect()->route('admin.home.foto_warga.index')
                          ->with('success', 'Foto berhasil ditambahkan.');
     }
 
+    // Form edit foto
     public function edit(FotoWarga $fotoWarga)
     {
         return view('admin.home.foto_warga.edit', compact('fotoWarga'));
     }
 
+    // Update foto
     public function update(Request $request, FotoWarga $fotoWarga)
     {
         $request->validate([
             'file' => 'nullable|image|max:2048',
         ]);
 
-        // jika upload file baru
         if ($request->hasFile('file')) {
-            // hapus file lama
-            Storage::disk('public')->delete($fotoWarga->gambar);
+            // Hapus file lama
+            if ($fotoWarga->gambar && file_exists(public_path($fotoWarga->gambar))) {
+                unlink(public_path($fotoWarga->gambar));
+            }
 
-            // upload file baru
-            $filePath = $request->file('file')->store('foto_warga', 'public');
-            $fotoWarga->gambar = $filePath;
+            // Upload file baru
+            $file = $request->file('file');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/foto_warga'), $filename);
+
+            $fotoWarga->gambar = 'uploads/foto_warga/' . $filename;
         }
 
         $fotoWarga->save();
@@ -63,12 +75,13 @@ class FotoWargaController extends Controller
                          ->with('success', 'Foto berhasil diperbarui.');
     }
 
+    // Hapus foto
     public function destroy(FotoWarga $fotoWarga)
     {
-        // hapus file dari storage
-        Storage::disk('public')->delete($fotoWarga->gambar);
+        if ($fotoWarga->gambar && file_exists(public_path($fotoWarga->gambar))) {
+            unlink(public_path($fotoWarga->gambar));
+        }
 
-        // hapus dari database
         $fotoWarga->delete();
 
         return redirect()->route('admin.home.foto_warga.index')

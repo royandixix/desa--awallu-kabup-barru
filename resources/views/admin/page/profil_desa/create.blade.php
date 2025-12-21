@@ -62,17 +62,14 @@
             <label for="batas_utara" class="form-label">Batas Utara</label>
             <input type="text" class="form-control" id="batas_utara" name="batas_utara" value="{{ old('batas_utara') }}">
         </div>
-
         <div class="mb-3">
             <label for="batas_selatan" class="form-label">Batas Selatan</label>
             <input type="text" class="form-control" id="batas_selatan" name="batas_selatan" value="{{ old('batas_selatan') }}">
         </div>
-
         <div class="mb-3">
             <label for="batas_timur" class="form-label">Batas Timur</label>
             <input type="text" class="form-control" id="batas_timur" name="batas_timur" value="{{ old('batas_timur') }}">
         </div>
-
         <div class="mb-3">
             <label for="batas_barat" class="form-label">Batas Barat</label>
             <input type="text" class="form-control" id="batas_barat" name="batas_barat" value="{{ old('batas_barat') }}">
@@ -96,12 +93,10 @@
     </form>
 </div>
 
-<!-- SCRIPT -->
 <script>
-
-    /* =======================================================
-       PREVIEW GAMBAR SEBELUM UPLOAD
-    ========================================================== */
+    // ===============================
+    // PREVIEW GAMBAR SEBELUM UPLOAD
+    // ===============================
     document.getElementById('gambar_header').addEventListener('change', function(event) {
         const preview = document.getElementById('preview');
         preview.innerHTML = '';
@@ -121,60 +116,38 @@
         });
     });
 
-
-    /* =======================================================
-       KONVERSI LINK GOOGLE MAPS BIASA → EMBED
-    ========================================================== */
+    // ===============================
+    // KONVERSI LINK GOOGLE MAPS → EMBED
+    // ===============================
     function convertToEmbed(url) {
-
-        if (url.includes("google.com/maps/embed")) {
-            return url;
-        }
-
-        if (url.includes("maps.app.goo.gl")) {
-            return url.replace("maps.app.goo.gl", "www.google.com/maps");
-        }
+        if (!url) return '';
+        if (url.includes("google.com/maps/embed")) return url;
+        if (url.includes("maps.app.goo.gl")) return url.replace("maps.app.goo.gl", "www.google.com/maps");
 
         const regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
         const match = url.match(regex);
-
         if (match) {
             const lat = match[1];
             const lng = match[2];
-
             return `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d0!2d${lng}!3d${lat}!2m3!1f0!2f0!3f0`;
         }
-
         return url;
     }
 
-
-    /* =======================================================
-       PREVIEW PETA GOOGLE MAPS OTOMATIS
-    ========================================================== */
+    // ===============================
+    // PREVIEW PETA GOOGLE MAPS
+    // ===============================
     const koordinatInput = document.getElementById('koordinat');
     const previewMaps = document.getElementById('preview-maps');
 
     koordinatInput.addEventListener('input', function() {
         let url = this.value.trim();
-
         if (url.length > 0) {
             let embedUrl = convertToEmbed(url);
-
-            previewMaps.innerHTML = `
-                <iframe src="${embedUrl}"
-                    width="100%"
-                    height="250"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy">
-                </iframe>
-            `;
+            previewMaps.innerHTML = `<iframe src="${embedUrl}" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
         } else {
             previewMaps.innerHTML = '';
         }
     });
-
 </script>
-
 @endsection

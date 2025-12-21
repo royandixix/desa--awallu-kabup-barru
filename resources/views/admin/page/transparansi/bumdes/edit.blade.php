@@ -66,8 +66,8 @@
                         default => 'Lihat File',
                     };
                     $fileUrl = ($ext == 'xls' || $ext == 'xlsx')
-                        ? 'https://view.officeapps.live.com/op/embed.aspx?src='.urlencode(asset('storage/' . $bumde->file))
-                        : asset('storage/' . $bumde->file);
+                        ? 'https://view.officeapps.live.com/op/embed.aspx?src='.urlencode(asset('uploads/bumdes/' . $bumde->file))
+                        : asset('uploads/bumdes/' . $bumde->file);
                 @endphp
                 <a href="{{ $fileUrl }}" target="_blank" class="btn btn-outline-primary btn-sm">{{ $fileLabel }}</a>
             @else
