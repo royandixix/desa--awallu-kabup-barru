@@ -20,7 +20,7 @@
       <!-- Gambar Kepala Desa (muncul di tengah teks versi mobile) -->
       <div class="block lg:hidden mt-8">
         <div class="overflow-hidden shadow-2xl border border-gray-200 relative">
-          <img src="{{ asset('img/DESA_LAWALLU/FOTO KEPALA DESA DAN IBU KEPALA DESA/foto kepala desa dan ibu kepala desa.jpg') }}" 
+          <img src="{{ asset('img/user/WhatsApp Image 2025-12-22 at 13.29.46.jpeg') }}" 
                alt="Foto Kepala Desa"
                class="w-full h-[450px] object-cover">
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
@@ -49,14 +49,14 @@
     <!-- Gambar Kepala Desa (khusus untuk desktop) -->
     <div class="hidden lg:block order-2">
       <div class="overflow-hidden shadow-2xl border border-gray-200 relative">
-        <img src="{{ asset('img/DESA_LAWALLU/FOTO KEPALA DESA DAN IBU KEPALA DESA/foto kepala desa dan ibu kepala desa.jpg') }}" 
+        <img src="{{ asset('img/user/WhatsApp Image 2025-12-22 at 13.29.46.jpeg') }}" 
              alt="Foto Kepala Desa"
              class="w-full h-[550px] object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
           <h3 class="text-2xl font-bold">Bapak Kepala Desa Lawallu</h3>
-          <p class="text-gray-300 text-sm">Bersama Ibu Ketua PKK</p>
+          <p class="text-gray-300 text-sm"> Ketua PKK</p>
         </div>
       </div>
     </div>

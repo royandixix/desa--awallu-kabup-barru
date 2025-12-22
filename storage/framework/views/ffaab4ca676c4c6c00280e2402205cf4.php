@@ -20,7 +20,7 @@
       <!-- Gambar Kepala Desa (muncul di tengah teks versi mobile) -->
       <div class="block lg:hidden mt-8">
         <div class="overflow-hidden shadow-2xl border border-gray-200 relative">
-          <img src="<?php echo e(asset('img/DESA_LAWALLU/FOTO KEPALA DESA DAN IBU KEPALA DESA/foto kepala desa dan ibu kepala desa.jpg')); ?>" 
+          <img src="<?php echo e(asset('img/user/WhatsApp Image 2025-12-22 at 13.29.46.jpeg')); ?>" 
                alt="Foto Kepala Desa"
                class="w-full h-[450px] object-cover">
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
@@ -49,7 +49,7 @@
     <!-- Gambar Kepala Desa (khusus untuk desktop) -->
     <div class="hidden lg:block order-2">
       <div class="overflow-hidden shadow-2xl border border-gray-200 relative">
-        <img src="<?php echo e(asset('img/DESA_LAWALLU/FOTO KEPALA DESA DAN IBU KEPALA DESA/foto kepala desa dan ibu kepala desa.jpg')); ?>" 
+        <img src="<?php echo e(asset('img/user/WhatsApp Image 2025-12-22 at 13.29.46.jpeg')); ?>" 
              alt="Foto Kepala Desa"
              class="w-full h-[550px] object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
