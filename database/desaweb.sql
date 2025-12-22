@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 19, 2025 at 01:35 PM
+-- Generation Time: Dec 22, 2025 at 08:44 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -39,16 +39,6 @@ CREATE TABLE `administrasi_penduduks` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `administrasi_penduduks`
---
-
-INSERT INTO `administrasi_penduduks` (`id`, `kategori`, `jumlah`, `nama`, `nik`, `alamat`, `jenis_kelamin`, `created_at`, `updated_at`) VALUES
-(1, 'Jumlah Penduduk', 10000, NULL, NULL, NULL, NULL, '2025-12-19 01:39:22', '2025-12-19 01:39:49'),
-(2, 'Laki-laki', 20000, NULL, NULL, NULL, NULL, '2025-12-19 01:39:33', '2025-12-19 01:39:33'),
-(3, 'Perempuan', 3000, NULL, NULL, NULL, NULL, '2025-12-19 01:39:38', '2025-12-19 01:39:38'),
-(4, 'Kepala Keluarga', 9000, NULL, NULL, NULL, NULL, '2025-12-19 01:39:43', '2025-12-19 01:39:43');
-
 -- --------------------------------------------------------
 
 --
@@ -64,13 +54,6 @@ CREATE TABLE `appras` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `appras`
---
-
-INSERT INTO `appras` (`id`, `nama_anak`, `umur`, `nama_ortu`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'muhamad cindy', 10, 'muh. rexaaa abdul tahir', 'desa lawaluuu', '2025-12-19 03:55:56', '2025-12-19 03:55:56');
 
 -- --------------------------------------------------------
 
@@ -90,13 +73,6 @@ CREATE TABLE `balitas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `balitas`
---
-
-INSERT INTO `balitas` (`id`, `nama_balita`, `tanggal_lahir`, `jenis_kelamin`, `umur`, `nama_ibu`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'JOKMO', '2025-12-19', 'L', '3', 'nurul azazara', 'lawallu', '2025-12-19 03:55:16', '2025-12-19 03:55:16');
-
 -- --------------------------------------------------------
 
 --
@@ -114,13 +90,6 @@ CREATE TABLE `bayis` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `bayis`
---
-
-INSERT INTO `bayis` (`id`, `nama_bayi`, `tanggal_lahir`, `jenis_kelamin`, `nama_ibu`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'gaza', '2025-12-19', 'L', 'komang', 'lawallu', '2025-12-19 03:54:42', '2025-12-19 03:54:42');
-
 -- --------------------------------------------------------
 
 --
@@ -134,18 +103,10 @@ CREATE TABLE `beritas` (
   `konten` text NOT NULL,
   `kategori` varchar(255) DEFAULT NULL,
   `author` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `gambar` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `beritas`
---
-
-INSERT INTO `beritas` (`id`, `judul`, `slug`, `konten`, `kategori`, `author`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'Kegiatan Gotong Royong di Desa Lawaluu Baru', 'kegiatan-gotong-royong-di-desa-lawaluu-baru', 'Pada tanggal 19 Desember 2025, seluruh warga Desa Lawaluu Baru secara antusias melaksanakan kegiatan gotong royong membersihkan lingkungan desa.  \r\nKegiatan ini meliputi pembersihan jalan, saluran air, taman desa, serta area umum lainnya yang sering digunakan warga.  \r\nKehadiran semua lapisan masyarakat, mulai dari anak-anak, remaja, hingga orang tua, menunjukkan semangat kebersamaan yang tinggi.  \r\nSelain menjaga kebersihan, kegiatan ini juga menjadi momen untuk mempererat tali persaudaraan antarwarga, saling bertukar cerita, dan menumbuhkan rasa memiliki terhadap lingkungan desa.  \r\nDengan partisipasi aktif warga, Desa Lawaluu Baru semakin terlihat rapi, nyaman, dan harmonis, sekaligus menjadi contoh nyata semangat gotong royong yang masih terjaga hingga saat ini.', 'Kegiatan Desa', 'Admin', 'uploads/berita/1766143742_1750296419.webp', '2025-12-19 03:28:34', '2025-12-19 03:29:02'),
-(2, 'Kegiatan Gotong Royong Warga Desa Lawaluu Baru', 'kegiatan-gotong-royong-warga-desa-lawaluu-baru', 'Pada tanggal 19 Desember 2025, warga Desa Lawaluu Baru melaksanakan kegiatan gotong royong membersihkan lingkungan desa.  \r\nKegiatan ini meliputi pembersihan jalan, saluran air, dan area umum lainnya.  \r\nSelain menjaga kebersihan, kegiatan ini menjadi momen untuk mempererat kebersamaan warga dan menumbuhkan rasa memiliki terhadap desa.  \r\nSemua lapisan masyarakat, mulai dari anak-anak hingga orang tua, turut aktif berpartisipasi, sehingga suasana kebersamaan terasa sangat kental.  \r\nDengan partisipasi warga, Desa Lawaluu Baru menjadi lingkungan yang bersih, rapi, dan harmonis.', 'Kegiatan Desa', 'Admin Desa', 'uploads/berita/1766144264_1749777830.webp', '2025-12-19 03:37:44', '2025-12-19 03:37:44');
 
 -- --------------------------------------------------------
 
@@ -161,13 +122,6 @@ CREATE TABLE `bpds` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `bpds`
---
-
-INSERT INTO `bpds` (`id`, `nama`, `jabatan`, `foto`, `created_at`, `updated_at`) VALUES
-(1, NULL, NULL, 'struktural/bpd/ouCcBPhkgaAZ9NMUcL0fSQzebvQXa0lF4LFvLpBg.png', '2025-12-19 02:45:37', '2025-12-19 02:45:37');
 
 -- --------------------------------------------------------
 
@@ -206,13 +160,6 @@ CREATE TABLE `foto_wargas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `foto_wargas`
---
-
-INSERT INTO `foto_wargas` (`id`, `gambar`, `created_at`, `updated_at`) VALUES
-(2, 'foto_warga/NnXOavoKDY3AEl0SqvDWye0qBWwtB31L1m1dxozo.webp', '2025-12-19 01:41:00', '2025-12-19 01:41:00');
-
 -- --------------------------------------------------------
 
 --
@@ -221,22 +168,15 @@ INSERT INTO `foto_wargas` (`id`, `gambar`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `galeris` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `judul` varchar(255) NOT NULL,
+  `judul` varchar(255) DEFAULT NULL,
   `desc` text DEFAULT NULL,
   `lokasi` varchar(255) DEFAULT NULL,
   `kategori` varchar(255) DEFAULT NULL,
-  `file` varchar(255) NOT NULL,
-  `tanggal` datetime DEFAULT NULL,
+  `file` varchar(255) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `galeris`
---
-
-INSERT INTO `galeris` (`id`, `judul`, `desc`, `lokasi`, `kategori`, `file`, `tanggal`, `created_at`, `updated_at`) VALUES
-(2, 'pemandangan Sawah Desa Lawaluu Baru', 'Hamparan sawah hijau Desa Lawaluu Baru yang subur, dikelilingi perbukitan dan sungai yang jernih. Tempat ini menjadi ikon keindahan alam desa dan sumber penghidupan warga.', 'Desa Lawaluu Baru, Kecamatan Barru, Kabupaten Barru', 'Alam / Pemandangan / Wisata Desa', '1766139459_pemandangan-sawah-desa-lawaluu-baru.webp', '2025-12-19 18:17:00', '2025-12-19 02:17:39', '2025-12-19 02:17:39');
 
 -- --------------------------------------------------------
 
@@ -255,13 +195,6 @@ CREATE TABLE `ibu_hamil` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `ibu_hamil`
---
-
-INSERT INTO `ibu_hamil` (`id`, `nama_ibu`, `umur_kehamilan`, `nama_suami`, `alamat`, `no_hp`, `created_at`, `updated_at`) VALUES
-(1, 'Siti Aminah', 28, 'yayatt', 'desa lawaallu', '081347019334', '2025-12-19 03:53:47', '2025-12-19 03:53:52');
-
 -- --------------------------------------------------------
 
 --
@@ -278,13 +211,6 @@ CREATE TABLE `ibu_menyusuis` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `ibu_menyusuis`
---
-
-INSERT INTO `ibu_menyusuis` (`id`, `nama`, `umur`, `alamat`, `dusun`, `created_at`, `updated_at`) VALUES
-(1, 'mukartasir', 30, 'desa lawallu', 'barru', '2025-12-19 03:54:25', '2025-12-19 03:54:25');
-
 -- --------------------------------------------------------
 
 --
@@ -299,13 +225,6 @@ CREATE TABLE `karang_tarunas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `karang_tarunas`
---
-
-INSERT INTO `karang_tarunas` (`id`, `nama`, `jabatan`, `gambar`, `created_at`, `updated_at`) VALUES
-(1, NULL, NULL, '1766142122_694530aa54587.png', '2025-12-19 03:02:02', '2025-12-19 03:02:02');
 
 -- --------------------------------------------------------
 
@@ -338,14 +257,6 @@ CREATE TABLE `lansia` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `lansia`
---
-
-INSERT INTO `lansia` (`id`, `nama`, `umur`, `alamat`, `no_hp`, `created_at`, `updated_at`) VALUES
-(1, 'Suyanto Widodo', 65, 'Jl. Melati No. 3, Desa Sukamaju', '0812-3456-7890', '2025-12-19 04:02:22', '2025-12-19 04:02:22'),
-(2, 'Maimunah', 68, 'Jl. Kenanga No. 8, Desa Harapan', '0813-9876-5432', '2025-12-19 04:02:43', '2025-12-19 04:02:43');
-
 -- --------------------------------------------------------
 
 --
@@ -366,13 +277,6 @@ CREATE TABLE `laporan_kegiatan` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `laporan_kegiatan`
---
-
-INSERT INTO `laporan_kegiatan` (`id`, `judul`, `lokasi`, `anggaran`, `foto`, `file_path`, `deskripsi`, `tanggal`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'Laporan Kegiatan Pembangunan Jalan Desa Lawaluu Baru', 'Desa Lawaluu Baru, Kecamatan Barru, Kabupaten Barru', 200000000, 'laporan/foto/JKMppcItrdwimKCkKMk8Ah0g66uPp5Eh2J8MjJGI.webp', 'laporan/file/QP8QqqO9vvB5oMMMtzHE9Qgj9WHTmDm6qsealkbN.pdf', NULL, '2025-12-19', NULL, '2025-12-19 02:22:49', '2025-12-19 02:23:10');
-
 -- --------------------------------------------------------
 
 --
@@ -387,13 +291,6 @@ CREATE TABLE `lpms` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `lpms`
---
-
-INSERT INTO `lpms` (`id`, `nama`, `jabatan`, `gambar`, `created_at`, `updated_at`) VALUES
-(1, NULL, NULL, 'lpm/AjWtwQ28KdJY0A8XP97dzjhq1ufSFMKIGvgcZUds.png', '2025-12-19 03:01:37', '2025-12-19 03:01:37');
 
 -- --------------------------------------------------------
 
@@ -443,15 +340,15 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (29, '2025_12_19_093435_create_posyandus_table', 1),
 (30, '2025_12_19_093500_create_beritas_table', 1),
 (31, '2025_12_19_093741_add_kategori_jumlah_to_administrasi_penduduks_table', 1),
-(32, '2025_12_19_094000_make_nama_nullable_in_struktur_desa_table', 1),
-(33, '2025_12_19_093859_make_nama_nullable_in_administrasi_penduduks_table', 2),
-(34, '2025_12_19_100856_create_galeris_table', 3),
-(35, '2025_12_19_102226_add_missing_columns_to_laporan_kegiatan_table', 4),
-(36, '2025_12_19_112609_add_author_to_beritas_table', 5),
-(37, '2025_12_19_112756_rename_gambar_to_image_in_beritas_table', 6),
-(38, '2025_12_19_113946_create_pengaduans_table', 7),
-(39, '2025_12_19_114047_create_kontak_saran_table', 8),
-(40, '2025_12_19_122328_create_cache_table', 9);
+(32, '2025_12_19_093859_make_nama_nullable_in_administrasi_penduduks_table', 1),
+(33, '2025_12_19_094000_make_nama_nullable_in_struktur_desa_table', 1),
+(34, '2025_12_19_102226_add_missing_columns_to_laporan_kegiatan_table', 1),
+(35, '2025_12_19_112609_add_author_to_beritas_table', 1),
+(36, '2025_12_19_113946_create_pengaduans_table', 1),
+(37, '2025_12_19_114047_create_kontak_saran_table', 1),
+(38, '2025_12_19_122328_create_cache_table', 1),
+(39, '2025_12_22_072730_add_desc_to_galeris_table', 1),
+(40, '2025_12_22_073737_add_lokasi_kategori_to_galeris_table', 1);
 
 -- --------------------------------------------------------
 
@@ -471,13 +368,6 @@ CREATE TABLE `pengaduans` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `pengaduans`
---
-
-INSERT INTO `pengaduans` (`id`, `nama`, `no_hp`, `kategori`, `pesan`, `foto`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'akbal', '081347018611', 'Kependudukan', 'ini bnyk masalah di web nyh ada bnyak. bug cuman suda bagus wkwkwkw', 'uploads/pengaduan/1766144582_1751194574.webp', 'pending', '2025-12-19 03:43:02', '2025-12-19 03:43:02');
-
 -- --------------------------------------------------------
 
 --
@@ -492,13 +382,6 @@ CREATE TABLE `pkk` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `pkk`
---
-
-INSERT INTO `pkk` (`id`, `nama`, `jabatan`, `gambar`, `created_at`, `updated_at`) VALUES
-(5, NULL, NULL, '1766142081_69453081a96bc.png', '2025-12-19 03:01:21', '2025-12-19 03:01:21');
 
 -- --------------------------------------------------------
 
@@ -515,13 +398,6 @@ CREATE TABLE `posyandus` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `posyandus`
---
-
-INSERT INTO `posyandus` (`id`, `nama`, `jabatan`, `gambar`, `created_at`, `updated_at`) VALUES
-(1, NULL, NULL, 'posyandu/2E32EOC80ZwYuh223LkFze3ZaTTnW4nKBhV8ZMtJ.png', '2025-12-19 03:16:45', '2025-12-19 03:18:33');
-
 -- --------------------------------------------------------
 
 --
@@ -536,17 +412,6 @@ CREATE TABLE `pra_lansias` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `pra_lansias`
---
-
-INSERT INTO `pra_lansias` (`id`, `nama`, `umur`, `alamat`, `created_at`, `updated_at`) VALUES
-(1, 'Bambang Sutanto', 52, 'Jl. Melati No. 3, Desa Sukamaju', '2025-12-19 04:00:17', '2025-12-19 04:00:17'),
-(2, 'Sari Wulandari', 55, 'Jl. Kenanga No. 8, Desa Harapan', '2025-12-19 04:00:30', '2025-12-19 04:00:30'),
-(3, 'Agus Santoso', 50, 'Jl. Mawar No. 12, Desa Makmur', '2025-12-19 04:00:48', '2025-12-19 04:00:48'),
-(4, 'Ratna Lestari', 57, 'Jl. Anggrek No. 5, Desa Sejahtera', '2025-12-19 04:01:02', '2025-12-19 04:01:02'),
-(5, 'Dedi Prasetya', 54, 'Jl. Sakura No. 10, Desa Maju', '2025-12-19 04:01:24', '2025-12-19 04:01:24');
 
 -- --------------------------------------------------------
 
@@ -574,13 +439,6 @@ CREATE TABLE `profil_desa` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `profil_desa`
---
-
-INSERT INTO `profil_desa` (`id`, `judul`, `deskripsi_singkat`, `gambar_header`, `sejarah`, `wilayah_administratif`, `nama_desa`, `kecamatan`, `kabupaten`, `batas_utara`, `batas_selatan`, `batas_timur`, `batas_barat`, `koordinat`, `jarak_kabupaten`, `created_at`, `updated_at`) VALUES
-(1, 'Selamat Datang di Desa Lawaluu Baru', 'esa Lawaluu Baru adalah sebuah desa yang memadukan keindahan alam dan kearifan lokal di Kabupaten [Barru]. Dikelilingi perbukitan hijau dan sungai yang jernih, desa ini menjadi tempat tinggal yang nyaman dan damai bagi warganya. Desa Lawaluu Baru terkenal dengan kehidupan sosial yang erat, budaya yang masih terjaga, serta kegiatan ekonomi berbasis pertanian dan kerajinan lokal.', '[\"1766137918_WhatsApp Image 2025-12-08 at 15.38.26.jpeg\"]', 'Desa Lawaluu Baru terbentuk dari pemekaran wilayah desa lama untuk mempermudah pemerintahan dan pelayanan masyarakat. Sejak awal berdirinya, desa ini dikenal sebagai pusat kerukunan masyarakat dan pelestarian budaya lokal. Nama “Lawaluu Baru” menandakan semangat baru warganya dalam membangun desa yang lebih maju dan harmonis.', 'Nama Desa: Lawaluu Baru\r\n\r\nKecamatan: Barru\r\n\r\nKabupaten: Barru', 'Lawallu', 'Barru', 'Barru', 'Desa Mallusetasi', 'Desa Sumpang Binangae', 'Desa Tanete Rilau', 'Desa Balusu', 'https://www.google.com/maps/place/Desa+Lawaluu+Baru,+Barru,+Sulawesi+Selatan', 'Jarak ke Kabupaten: ± 10 km dari pusat Kabupaten Barru, dapat ditempuh sekitar 20–25 menit dengan kendaraan bermotor.', '2025-12-19 01:51:58', '2025-12-19 01:51:58');
-
 -- --------------------------------------------------------
 
 --
@@ -597,13 +455,6 @@ CREATE TABLE `pus` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `pus`
---
-
-INSERT INTO `pus` (`id`, `nama`, `alamat`, `no_hp`, `umur`, `created_at`, `updated_at`) VALUES
-(1, 'Fitri Handayani', 'Jl. Kenanga No. 5, Desa Sejahtera, Kec. Makmur', '0812‑9876‑5432', 29, '2025-12-19 03:56:33', '2025-12-19 03:56:33');
-
 -- --------------------------------------------------------
 
 --
@@ -618,13 +469,6 @@ CREATE TABLE `sessions` (
   `payload` longtext NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('q4bzZipoEjkU4AhnUB5nbj6fByGlqnwynpvrwUC4', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiV0NjeXlRZnhZSFUwY0Q2c0NkQTBXV0oyWW1TR0xxbWhBRTUybXVjRyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMi9hZG1pbi9nYWxlcmkiO3M6NToicm91dGUiO3M6MTg6ImFkbWluLmdhbGVyaS5pbmRleCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1766147520);
 
 -- --------------------------------------------------------
 
@@ -641,14 +485,6 @@ CREATE TABLE `struktur_desa` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `struktur_desa`
---
-
-INSERT INTO `struktur_desa` (`id`, `kategori`, `nama`, `jabatan`, `foto`, `created_at`, `updated_at`) VALUES
-(1, 'pemerintahan_desa_bagan', NULL, NULL, 'struktur/VAwRSBC9jFkdUllpumavFUAy8GdR6mYnWJGEmSum.png', '2025-12-19 02:31:33', '2025-12-19 02:31:33'),
-(2, 'pemerintahan_desa', 'Kadus Tanra Balana', 'AKKAS', 'struktur/DG7CNrt39pi0fB1sFHfg6ZkLaG65nNzeCXyRlOkB.jpg', '2025-12-19 02:34:35', '2025-12-19 02:44:02');
 
 -- --------------------------------------------------------
 
@@ -669,13 +505,6 @@ CREATE TABLE `transparansi_anggaran` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `transparansi_anggaran`
---
-
-INSERT INTO `transparansi_anggaran` (`id`, `judul`, `jenis`, `tahun`, `pemasukan`, `pengeluaran`, `tanggal`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'Anggaran Pembangunan Infrastruktur dan Kesejahteraan Desa 2025', 'POKOK', '2025', 1000000000, 5000000, '2025-12-19', 'uploads/transparansi_anggaran/LQGPh9TtcrX3nRVkzVXZpd3FHRGQpY5SK6IJKKTj.pdf', '2025-12-19 02:19:49', '2025-12-19 02:19:49');
-
 -- --------------------------------------------------------
 
 --
@@ -694,15 +523,6 @@ CREATE TABLE `transparansi_bumdes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `transparansi_bumdes`
---
-
-INSERT INTO `transparansi_bumdes` (`id`, `judul`, `kategori`, `bulan`, `tahun`, `tanggal`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'Laporan Keuangan BUMDes Lawaluu Baru 2025', 'KOPDES', NULL, NULL, '2025-12-20', 'bumdes/17gJGfr7fyXXmwjaMlmKHowlLWIxJekrGkxuRRSa.pdf', '2025-12-19 02:23:50', '2025-12-19 02:24:11'),
-(2, 'Foto Kegiatan Pelatihan UMKM BUMDes', 'KOPDES', NULL, NULL, '2025-12-19', 'bumdes/s4xYBVINMYuTmNF7YFeivxFIIUd9HaPiDoxSddwl.pdf', '2025-12-19 02:24:41', '2025-12-19 02:24:41'),
-(3, 'Rencana Usaha Tahunan KOPDes Lawaluu Baru 2025', 'BUMDES', NULL, NULL, '2025-12-19', 'bumdes/pDkNi2hozvIfZjEJkWpNwGaNYLMEP5mtAzqc7kDZ.pdf', '2025-12-19 02:25:02', '2025-12-19 02:25:02');
-
 -- --------------------------------------------------------
 
 --
@@ -719,13 +539,6 @@ CREATE TABLE `transparansi_dokumen` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `transparansi_dokumen`
---
-
-INSERT INTO `transparansi_dokumen` (`id`, `judul`, `jenis`, `tahun`, `tanggal`, `file`, `created_at`, `updated_at`) VALUES
-(1, 'Dokumen Rencana Kerja Pemerintah Desa 2025', 'POKOK', '2024', '2025-12-19', 'dokumen/ZKkpq3ar8qTUnxWbmjObDr6IMiyTUl1B5Obr6ro3.pdf', '2025-12-19 02:26:05', '2025-12-19 02:26:05');
 
 -- --------------------------------------------------------
 
@@ -765,13 +578,6 @@ CREATE TABLE `umkms` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `umkms`
---
-
-INSERT INTO `umkms` (`id`, `nama_pengusaha`, `nama_usaha`, `jenis_usaha`, `deskripsi`, `alamat`, `kontak`, `foto`, `foto_pengusaha`, `kode_umkm`, `harga`, `created_at`, `updated_at`) VALUES
-(1, 'Ibu Marwah', 'Kios Marwah 55', 'Jagung Rebus', 'Usaha pembuatanpisang goreng enak skli makanyh di beli sekarang', 'jalan desa lawallu barru', '082291328385', 'umkm/JK0k9eDgBJOgmzky8Ytzp70Bb6tMpcyXslp1NkDL.jpg', 'umkm/l353pFgJPEh6bGN6pJqLkRx8HwnQvu3s6MQl8BJ2.jpg', '0023 OR1NG', 200000.00, '2025-12-19 01:42:36', '2025-12-19 01:42:36');
-
 -- --------------------------------------------------------
 
 --
@@ -807,14 +613,6 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'desa', 'desa123', 'desa@gmail.com', '$2y$12$O3OFi8R2z7gBL5iWawNkaO.ol9IOQKJZ8XyE.w9nTvuqO6MW2jrqW', 'admin', NULL, '2025-12-19 01:38:23', '2025-12-19 01:38:23'),
-(2, 'pos', 'pos123', 'pos@gmail.com', '$2y$12$KxCvtr0r2vV6vNU5.BNQf.H3/6jfkrhq0L8e1Ej92g7wjTgU0BDge', 'posyandu', NULL, '2025-12-19 03:50:58', '2025-12-19 03:50:58');
-
 -- --------------------------------------------------------
 
 --
@@ -829,17 +627,6 @@ CREATE TABLE `wus` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `wus`
---
-
-INSERT INTO `wus` (`id`, `nama`, `alamat`, `umur`, `created_at`, `updated_at`) VALUES
-(1, 'Siti Aulia', 'Jl. Melati No. 12, Desa Sukamaju', 27, '2025-12-19 03:57:08', '2025-12-19 03:57:08'),
-(2, 'Rina Kusuma', 'Jl. Mawar No. 7, Desa Harapan', 32, '2025-12-19 03:57:27', '2025-12-19 03:57:27'),
-(3, 'Dewi Lestari', 'Jl. Anggrek No. 15, Desa Makmur', 24, '2025-12-19 03:57:42', '2025-12-19 03:57:42'),
-(4, 'Fitri Handayani', 'Jl. Kenanga No. 5, Desa Sejahtera', 30, '2025-12-19 03:58:00', '2025-12-19 03:58:00'),
-(5, 'Maya Prasetya', 'Jl. Sakura No. 9, Desa Maju', 29, '2025-12-19 03:58:16', '2025-12-19 03:58:16');
 
 --
 -- Indexes for dumped tables
@@ -1066,67 +853,67 @@ ALTER TABLE `wus`
 -- AUTO_INCREMENT for table `administrasi_penduduks`
 --
 ALTER TABLE `administrasi_penduduks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `appras`
 --
 ALTER TABLE `appras`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `balitas`
 --
 ALTER TABLE `balitas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `bayis`
 --
 ALTER TABLE `bayis`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `beritas`
 --
 ALTER TABLE `beritas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `bpds`
 --
 ALTER TABLE `bpds`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `foto_wargas`
 --
 ALTER TABLE `foto_wargas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `galeris`
 --
 ALTER TABLE `galeris`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ibu_hamil`
 --
 ALTER TABLE `ibu_hamil`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ibu_menyusuis`
 --
 ALTER TABLE `ibu_menyusuis`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `karang_tarunas`
 --
 ALTER TABLE `karang_tarunas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kontak_saran`
@@ -1138,19 +925,19 @@ ALTER TABLE `kontak_saran`
 -- AUTO_INCREMENT for table `lansia`
 --
 ALTER TABLE `lansia`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `laporan_kegiatan`
 --
 ALTER TABLE `laporan_kegiatan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `lpms`
 --
 ALTER TABLE `lpms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1162,61 +949,61 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pengaduans`
 --
 ALTER TABLE `pengaduans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pkk`
 --
 ALTER TABLE `pkk`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `posyandus`
 --
 ALTER TABLE `posyandus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pra_lansias`
 --
 ALTER TABLE `pra_lansias`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `profil_desa`
 --
 ALTER TABLE `profil_desa`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pus`
 --
 ALTER TABLE `pus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `struktur_desa`
 --
 ALTER TABLE `struktur_desa`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transparansi_anggaran`
 --
 ALTER TABLE `transparansi_anggaran`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transparansi_bumdes`
 --
 ALTER TABLE `transparansi_bumdes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transparansi_dokumen`
 --
 ALTER TABLE `transparansi_dokumen`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transparansi_laporan`
@@ -1228,7 +1015,7 @@ ALTER TABLE `transparansi_laporan`
 -- AUTO_INCREMENT for table `umkms`
 --
 ALTER TABLE `umkms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `umkm_produks`
@@ -1240,13 +1027,13 @@ ALTER TABLE `umkm_produks`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `wus`
 --
 ALTER TABLE `wus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
