@@ -31,7 +31,7 @@
                                 'description' =>
                                     'Aktivitas warga desa dalam berbagai kegiatan sosial dan budaya yang memperkuat solidaritas dan kebersamaan.',
                                 'icon' => 'K',
-                                'image' => asset('img/user/galeri/1749784567.webp'),
+                                'image' => asset('img/user/WhatsApp Image 2025-12-22 at 15.36.52 (1).jpeg'),
                             ],
                             [
                                 'title' => 'Transparansi',
@@ -45,7 +45,7 @@
                                 'description' =>
                                     'Proses pembangunan sarana dan prasarana umum yang mendukung pertumbuhan ekonomi dan kesejahteraan warga desa.',
                                 'icon' => 'P',
-                                'image' => asset('img/user/berita/nWSaOHU1k0p8uuegwfRshZuveN6a6dnLOeb2CeuF.webp'),
+                                'image' => asset('img/user/WhatsApp Image 2025-12-22 at 15.42.20.jpeg'),
                             ],
                             [
                                 'title' => 'Struktur Organisasi',

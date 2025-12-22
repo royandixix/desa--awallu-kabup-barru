@@ -60,10 +60,10 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/', fn() => redirect()->route('user.home'));
+Route::get('/', fn () => redirect()->route('user.home'));
 Route::get('/home', [AdministrasiPendudukController::class, 'administrasiPenduduk'])->name('user.home');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('home/umkm', [UmkmController::class, 'index'])->name('home.umkm.index');
     Route::get('home/umkm/create', [UmkmController::class, 'create'])->name('home.umkm.create');
@@ -112,15 +112,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('umkm', UmkmAdminController::class);
         });
     });
-
-   
     Route::get('pengaduan', [AdminPengaduanController::class, 'index'])->name('pengaduan.index');
     Route::get('pengaduan/{id}', [AdminPengaduanController::class, 'show'])->name('pengaduan.show');
     Route::post('pengaduan/{id}/status', [AdminPengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
     Route::delete('pengaduan/{id}', [AdminPengaduanController::class, 'destroy'])->name('pengaduan.destroy');
 });
 
-Route::prefix('admin-posyandu')->name('admin_posyandu.')->group(function () {
+Route::prefix('admin-posyandu')->name('admin_posyandu.')->middleware(['auth', 'role:posyandu'])->group(function () {
     Route::get('/dashboard', [PosyanduDashboardController::class, 'index'])->name('dashboard');
     Route::get('/ibu-hamil', [IbuHamilController::class, 'index'])->name('ibu-hamil.index');
     Route::get('/ibu-hamil/create', [IbuHamilController::class, 'create'])->name('ibu-hamil.create');
@@ -160,8 +158,6 @@ Route::prefix('admin-posyandu')->name('admin_posyandu.')->group(function () {
     Route::delete('/apras/{id}', [ApprasController::class, 'destroy'])->name('apras.destroy');
 });
 
-Route::resource('appras', ApprasController::class);
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -188,9 +184,9 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/galeri/{filename}', [UserGaleriController::class, 'show'])->name('galeri.detail');
     Route::get('/berita', [UserBeritaController::class, 'index'])->name('berita');
     Route::get('/berita/{slug}', [UserBeritaController::class, 'detail'])->name('berita.detail');
-    Route::get('/keuangan', fn() => view('user.page.home.administrasipenduduk'))->name('keuangan');
-    Route::get('/pembangunan', fn() => view('user.page.home.layanan_kami'))->name('pembangunan');
-    Route::get('/kontak', fn() => view('user.page.home.kontak_saran'))->name('kontak');
+    Route::get('/keuangan', fn () => view('user.page.home.administrasipenduduk'))->name('keuangan');
+    Route::get('/pembangunan', fn () => view('user.page.home.layanan_kami'))->name('pembangunan');
+    Route::get('/kontak', fn () => view('user.page.home.kontak_saran'))->name('kontak');
     Route::post('/kontak', [KontakSaranController::class, 'store'])->name('kontak.store');
     Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.index');
     Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
@@ -199,16 +195,14 @@ Route::prefix('user')->name('user.')->group(function () {
     Route::get('/umkm/selengkap', [\App\Http\Controllers\User\UserUmkmController::class, 'selengkap'])->name('umkm.umkm_selengkap_nyh');
     Route::get('/umkm/{id}', [\App\Http\Controllers\User\UserUmkmController::class, 'show'])->name('umkm.detail');
     Route::prefix('struktur')->name('struktur.')->group(function () {
-        Route::get('/', fn() => view('user.page.struktur.struktur', ['halaman' => 'default']))->name('index');
+        Route::get('/', fn () => view('user.page.struktur.struktur', ['halaman' => 'default']))->name('index');
         Route::get('/pemerintahan-desa', [PemerintahanDesaController::class, 'index'])->name('pemerintahan_desa');
         Route::get('/bpd', [BpdUserController::class, 'index'])->name('bpd');
-        Route::get('/pkk', fn() => view('user.page.struktur.struktur', ['halaman' => 'pkk']))->name('pkk');
+        Route::get('/pkk', fn () => view('user.page.struktur.struktur', ['halaman' => 'pkk']))->name('pkk');
         Route::get('/lpm', [UserLpmController::class, 'index'])->name('lpm');
         Route::get('/karang-taruna', [KarangTarunaController::class, 'index'])->name('karang_taruna');
         Route::get('/posyandu', [UserPosyanduController::class, 'index'])->name('posyandu');
     });
-
-   
 });
 
 Route::prefix('layanan')->name('layanan.')->group(function () {
@@ -221,6 +215,6 @@ Route::prefix('layanan')->name('layanan.')->group(function () {
         'aspirasi' => 'user.page.home.layanan_kami.aspirasi_pengaduan'
     ];
     foreach ($layanan as $route => $view) {
-        Route::get("/$route", fn() => view($view, ['halaman' => $route]))->name($route);
+        Route::get("/$route", fn () => view($view, ['halaman' => $route]))->name($route);
     }
 });
